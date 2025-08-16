@@ -1,11 +1,16 @@
 # watchyFace250815-2300
 
-System setup: 
+Experiments in creating watchy faces
+
+---
+
+## SYSTEM SETUP: 
 - Linux: Fedora 42 + Gnome desktop
 - Arduino IDE 2.3.6 downloaded through ZIP file
     - see: https://www.arduino.cc/en/software/
 
-Watchy setup: https://watchy.sqfmi.com/docs/getting-started/
+## WATCHY SETUP:
+    https://watchy.sqfmi.com/docs/getting-started/
 ```
 ## ARDUINO SETUP
 
