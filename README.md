@@ -42,5 +42,24 @@ Watchy comes pre-loaded with firmware that demonstrates all the basic features. 
 1. Press and hold the top 2 buttons (Back & Up) for more than 4 seconds, then release the Up button first, before releasing the Back button
 2. Watchy should now reset, wait a few seconds for it to boot up and refresh the screen
 
+---
+
+## Wifi Setup
+
+1. Click 'Setup Wifi' from main menu on the watch.
+2. Connect to 'Watchy Ap' wifi from another device such as phone or computer / laptop.
+3. Open 192.168.4.1 in the browser. (Note: on iphone this page will open automatically.)
+4. Click 'Configure WiFi'
+5. Enter SSID and password. (Note: SSID can be prefilled from the list of networks at the top of this screen)
+6. Hit 'Save' button and wait for Watchy.
+7. If connection fails, the watchy will display 'Setup failed & timed out!', otherwise it will display the local ip address and SSID of the connected network with confirmation.
+
+### Troubleshoot Wifi Setup:
+
+1. Click 'Info' from 192.168.4.1 page.
+2. Check your router setting to make sure the listed mac address is allowed.
+3. If there is still a problem, try clicking 'Erase Wifi Config' from the 'Info' page and wait for Watchy to restart itself. Then try the wifi setup again and it should hopefully work.
+
+
 ```
 
