@@ -10,7 +10,8 @@ Experiments in creating watchy faces
     - see: https://www.arduino.cc/en/software/
 
 ## WATCHY SETUP:
-    https://watchy.sqfmi.com/docs/getting-started/
+- see: https://watchy.sqfmi.com/docs/getting-started/
+
 ```
 ## ARDUINO SETUP
 
