@@ -65,6 +65,7 @@ Watchy comes pre-loaded with firmware that demonstrates all the basic features. 
 ```
 
 ## SYSTEM SETUP: 
+- Hardware: Framework Laptop 13 AMD Ryzen 5 7060
 - Linux: Fedora 42 + Gnome desktop
 - Arduino IDE 2.3.6 downloaded through ZIP file
     - see: https://www.arduino.cc/en/software/
