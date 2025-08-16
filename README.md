@@ -69,3 +69,39 @@ Watchy comes pre-loaded with firmware that demonstrates all the basic features. 
 
 ```
 
+## SETUP ISSUES FIXED:
+
+### ISSUE: Arduino IDE / system unable to recognize the Watchy in bootloader mode
+- because of Linux Fedor 42
+- SOLUTION:
+    - need to load the kernel modules to enable USB-to-serial adapters 
+        - cp210x
+        - ch341
+    - check to see if they are loaded on the kernel
+        - `lsmod | grep cp210x`
+        - `lsmod | grep ch341`
+    - to load the kernel module
+        - `sudo modprobe cp210x`
+        - `sudo modprobe ch341`
+
+### ISSUE: permissions error when trying to upload the new watchface firmware
+- because of Linux Fedor 42
+- SOLUTION:
+    - need to change permissions on the port when possible
+    - `sudo chmod 666 /dev/ttyACM0`
+- full error message:
+```
+WARNING: library Rtc_Pcf8563 claims to run on avr architecture(s) and may be incompatible with your current board which runs on esp32 architecture(s).
+Sketch uses 1267919 bytes (37%) of program storage space. Maximum is 3342336 bytes.
+Global variables use 52876 bytes (16%) of dynamic memory, leaving 274804 bytes for local variables. Maximum is 327680 bytes.
+
+ Usage: esptool [OPTIONS] COMMAND [ARGS]...
+
+ Try 'esptool -h' for help
+╭─ Error ──────────────────────────────────────────────────────────────────────╮
+│ Invalid value for '--port' / '-p': Path '/dev/ttyACM0' is not readable.      │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Failed uploading: uploading error: exit status 2
+```
+
