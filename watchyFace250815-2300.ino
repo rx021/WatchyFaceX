@@ -1,5 +1,8 @@
 #include <Watchy.h> // include Watchy library
-#include <Fonts/FreeMonoOblique24pt7b.h> // font to use
+
+// font to use
+#include <Fonts/FreeMonoOblique24pt7b.h>
+                                         
 #include "settings.h"
 
 class WatchyFace2508152300 : public Watchy{
