@@ -65,7 +65,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
   display.setCursor(BATTERY_X_OFFSET, lastY);
   display.print(dateString);
-  lastY += -20;
+  lastY += -40;
 
   // draw date
   dateString = monthShortStr(currentTime.Month);
@@ -75,7 +75,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
   display.setCursor(BATTERY_X_OFFSET, lastY);
   display.print(dateString);
-  lastY += -20;
+  lastY += -40;
 
    // draw year
   dateString = currentTime.Year + 1970;
@@ -83,7 +83,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
   display.setCursor(BATTERY_X_OFFSET, lastY);
   display.print(dateString);
-  lastY += -40;
+  lastY += -80;
 
 }
 
