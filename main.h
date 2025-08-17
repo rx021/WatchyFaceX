@@ -53,7 +53,6 @@ void WatchyFaceX::handleButtonPress() {
 }
 
 void WatchyFaceX::drawWatchFace() {
-  // TODO: extract this logic to separte watchface
   drawFace0(isDarkMode);
 }                                         
 

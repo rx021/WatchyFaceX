@@ -1,5 +1,7 @@
 void WatchyFaceX::drawFace0(bool enableDarkMode) {
+  // TODO: test that you use black and white instead
   display.fillScreen(enableDarkMode ? GxEPD_DARKGREY : GxEPD_LIGHTGREY);
+
   display.setTextColor(enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
   display.setFont(&DSEG7_Classic_Bold_25);
   display.setCursor(5, 110);
