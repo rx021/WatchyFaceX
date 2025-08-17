@@ -7,6 +7,24 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   display.setTextColor(textColor);
   display.setFont(&DSEG7_Classic_Bold_25);
 
+  uint8_t myHour;
+  uint8_t myMinute;
+  uint8_t radius;
+  float angle_hourScale;
+  float angle_minuteScale;
+  float angle_hourHand;
+  float angle_minuteHand;
+  float pi = 3.1415926535897932384626433832795;
+
+  myHour = currentTime.Hour > 12 ? currentTime.Hour - 12 : currentTime.Hour;
+  myMinute = currentTime.Minute;
+  
+  angle_hourScale = 2 * pi / 12;
+  angle_minuteScale = 2 * pi / 60;
+  angle_hourHand = angle_hourScale * (myHour-3) + 2*pi/720 * myMinute;
+  angle_minuteHand = angle_minuteScale * (myMinute-15);
+
+
 
 }
 
