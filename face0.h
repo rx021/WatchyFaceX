@@ -13,7 +13,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
 
   #ifdef ARDUINO_ESP32S3_DEV
   if(USB_PLUGGED_IN){
-    uint8_t chargeXPosn = BATTERY_X_OFFSET + 18;
+    uint8_t chargeXPosn = BATTERY_X_OFFSET + BATTERY_WIDTH + 18;
     uint8_t chargeYPosn = BATTERY_Y_OFFSET + 2;
     display.drawBitmap(chargeXPosn, chargeYPosn, charge, 16, 18, enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
   }
