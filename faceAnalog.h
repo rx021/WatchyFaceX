@@ -7,22 +7,42 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   display.setTextColor(textColor);
   display.setFont(&DSEG7_Classic_Bold_25);
 
-  uint8_t myHour;
-  uint8_t myMinute;
-  uint8_t radius;
-  float angle_hourScale;
-  float angle_minuteScale;
-  float angle_hourHand;
-  float angle_minuteHand;
-  float pi = 3.1415926535897932384626433832795;
+  uint8_t myHour = currentTime.Hour > 12 ? currentTime.Hour - 12 : currentTime.Hour;
+  uint8_t myMinute = currentTime.Minute;
 
-  myHour = currentTime.Hour > 12 ? currentTime.Hour - 12 : currentTime.Hour;
-  myMinute = currentTime.Minute;
-  
-  angle_hourScale = 2 * pi / 12;
-  angle_minuteScale = 2 * pi / 60;
-  angle_hourHand = angle_hourScale * (myHour-3) + 2*pi/720 * myMinute;
-  angle_minuteHand = angle_minuteScale * (myMinute-15);
+  float pi = 3.1415926535897932384626433832795;
+  float angle_hourScale = 2 * pi / 12;
+  float angle_minuteScale = 2 * pi / 60;
+  float angle_hourHand = angle_hourScale * (myHour-3) + 2*pi/720 * myMinute;
+  float angle_minuteHand = angle_minuteScale * (myMinute-15);
+
+  uint8_t radius;
+
+  // draw minute scale
+  radius = 98;
+  for (uint8_t i=0; i<60; i++) {
+    display.drawLine(100, 100, 100+radius*cos(angle_minuteScale*i), 100+radius*sin(angle_minuteScale*i), light ? GxEPD_BLACK : GxEPD_WHITE);
+  }
+  display.fillCircle(100, 100, 93, light ? GxEPD_WHITE : GxEPD_BLACK);
+
+  // draw hour scale
+  radius = 98;
+  for (uint8_t i=0; i<12; i++) {
+    drawHand (radius, angle_hourScale*i, light);
+  }
+  display.fillCircle(100, 100, 88, light ? GxEPD_WHITE : GxEPD_BLACK);
+
+  // draw hour hand
+  //radius = 45;
+  //drawHand (radius, angle_hourHand, light);
+
+  // draw minute hand
+  radius = 98;
+  drawHand (radius, angle_minuteHand, light);
+
+  // draw center point
+  display.fillCircle(100, 100, 45, light ? GxEPD_WHITE : GxEPD_BLACK);
+
 
 
 
