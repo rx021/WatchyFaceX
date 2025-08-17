@@ -14,9 +14,11 @@ class WatchyFaceX : public Watchy{
   public: 
     void drawWatchFace();
     void drawFace0(bool enableDarkMode);
+    void drawBattery(bool enableDarkMode);
     virtual void handleButtonPress(); // Must be virtual in Watchy.h too
 };
 
+#include "icons.h"
 #include "face0.h"
 
 void WatchyFaceX::handleButtonPress() {
