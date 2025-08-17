@@ -85,7 +85,7 @@ void WatchyFaceX::drawWatchFace() {
   }
 
   if (faceIndex == 1) {
-    drawFace0(isDarkMode);
+    drawFaceAnalog(isDarkMode);
   }
 }                                         
 
