@@ -3,7 +3,7 @@
 #include "settings.h"
 
 #include <WiFi.h>
-#include <RTClib.h>
+// #include <RTClib.h>
 #include <time.h>
 
 // define time zone
