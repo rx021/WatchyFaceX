@@ -66,7 +66,7 @@ void WatchyFaceX::drawBattery(bool enableDarkMode){
   for(int8_t batterySegments = 0; batterySegments < batteryLevel; batterySegments++){
     xPosn = BATTERY_X_OFFSET + (batterySegments * BATTERY_SEGMENT_SPACING);
 
-      display.fillRect(xPosn, BATTERY_Y_OFFSET, BATTERY_SEGMENT_WIDTH, BATTERY_SEGMENT_HEIGHT, enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
+    display.fillRect(xPosn, BATTERY_Y_OFFSET, BATTERY_SEGMENT_WIDTH, BATTERY_SEGMENT_HEIGHT, enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
   }
 }
 
