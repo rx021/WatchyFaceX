@@ -38,14 +38,17 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
 
 void WatchyFaceX::drawBattery(bool enableDarkMode){
   // battery IMAGE
-  display.drawBitmap(15, 15, battery, 37, 21, enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
+  uint8_t batteryXOffset = 15; // pixels
+  uint8_t batteryYOffset = 15;
+  uint8_t batterWidth = batteryXOffset + 22;
+  uint8_t batteryHeight = batteryYOffset + 6;
+  display.drawBitmap(batteryXOffset, batteryYOffset, battery, batterWidth, batteryHeight, enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
 
-  uint8_t segmentXOffset = 20; // pixels
-  uint8_t segmentYOffset = 20;
+  uint8_t segmentXOffset = batteryXOffset + 5;
+  uint8_t segmentYOffset = batteryYOffset + 5;
 
   uint8_t segmentWidth = 7;
   uint8_t segmentHeight = 11;
-  uint8_t segmentSpacing = 9;
 
   // battery clear segments
   display.fillRect(segmentXOffset, segmentYOffset, 27, segmentHeight, enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE);
@@ -66,6 +69,7 @@ void WatchyFaceX::drawBattery(bool enableDarkMode){
   }
 
   uint8_t xPosn = 0; // x position
+  uint8_t segmentSpacing = 9;
 
   for(int8_t batterySegments = 0; batterySegments < batteryLevel; batterySegments++){
     xPosn = segmentXOffset + (batterySegments * segmentSpacing);
