@@ -90,6 +90,8 @@ Watchy comes pre-loaded with firmware that demonstrates all the basic features. 
 - SOLUTION:
     - using a USB hub
     - OR using USB C connection to micro USB
+    - what works even better is to have the wire detached until we need to upload
+    - if it is already wired in then detach first then re-attach
 
 ### ISSUE: permissions error when trying to upload the new watchface firmware
 - because of Linux Fedor 42
