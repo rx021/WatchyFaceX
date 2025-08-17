@@ -4,12 +4,9 @@
 #include "secrets.h"
 
 #include <WiFi.h>
-// #include <RTClib.h>
+//#include <RTClib.h>
+#include <TimeLib.h>
 #include <time.h>
-
-// define time zone
-#define TIMEZONE "CET-1CEST,M3.5.0,M10.5.0/3" // Europe/Berlin
-// find yours: https://github.com/nayarsystems/posix_tz_db/blob/master/zones.csv
 
 WatchyFaceX watchy(settings); //instantiate watch face
 
@@ -18,6 +15,9 @@ void setup() {
   const char* ntp_server = "pool.ntp.org";
   struct tm timeinfo;
   String datetime;
+  String timezone = "PST8PDT,M3.2.0,M11.1.0"; // America/Vancouver
+  // find yours:
+  // https://github.com/nayarsystems/posix_tz_db/blob/master/zones.csv
 
   // trying to connect to WiFi and obtain current date and time from ntp time server
   WiFi.begin(ssid, password);
@@ -26,7 +26,7 @@ void setup() {
   if (WiFi.status() == WL_CONNECTED) {
     char timeStringBuff[50];
     configTime(0, 0, ntp_server);
-    setenv("TZ", TIMEZONE, 1);
+    setenv("TZ", timezone, 1);
     getLocalTime(&timeinfo);
 
     WiFi.disconnect(true);
