@@ -7,7 +7,9 @@ const uint8_t BATTERY_Y_OFFSET = 15;
 const uint8_t BATTERY_WIDTH = 37;
 
 void WatchyFaceX::drawFace0(bool enableDarkMode) {
-  display.fillScreen(enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE);
+  uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
+  uint16_t textColor = enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK; 
+  display.fillScreen(bgColor);
 
   drawBattery(
     enableDarkMode,
@@ -29,7 +31,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
       charge,
       chargeWidth,
       18,
-      enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK
+      textColor
     );
   }
   #endif
@@ -42,7 +44,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
     WIFI_CONFIGURED ? wifi : wifioff,
     wifiWidth,
     18,
-    enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK
+    textColor
   );
 
   uint8_t bluetoothXPosn = wifiXPosn + wifiWidth + iconSpacing;
@@ -53,7 +55,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
       bluetooth,
       13,
       21,
-      enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK
+      textColor
     );
   }
 
@@ -63,7 +65,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   int16_t  x1, y1;
   uint16_t w, h;
 
-  display.setTextColor(enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
+  display.setTextColor(textColor);
 
   // TIME:
   String timeString = "";
@@ -127,6 +129,8 @@ void WatchyFaceX::drawBattery(
     uint8_t batteryYOffset,
     uint8_t batteryWidth
 ){
+  uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
+  uint16_t textColor = enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK; 
   // battery IMAGE
   display.drawBitmap(
     batteryXOffset,
@@ -134,7 +138,7 @@ void WatchyFaceX::drawBattery(
     battery,
     batteryWidth,
     21,
-    enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK
+    textColor
   );
 
   uint8_t segmentXOffset = batteryXOffset + 5;
@@ -148,7 +152,7 @@ void WatchyFaceX::drawBattery(
     segmentYOffset,
     27,
     segmentHeight,
-    enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE
+    bgColor
   );
 
   uint8_t batteryLevel = 0;
@@ -179,7 +183,7 @@ void WatchyFaceX::drawBattery(
       segmentYOffset,
       segmentWidth,
       segmentHeight,
-      enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK
+      textColor
     );
   }
 }
