@@ -8,14 +8,15 @@
 
 #define DARKMODE false
 
-RTC_DATA_ATTR int darkmode = 0
+RTC_DATA_ATTR int darkmode = 0;
 
 class WatchyFace2508152300 : public Watchy{
   public: 
     WatchyFace2508152300(const watchySettings& s) : Watchy(s) {}
     void drawWatchFace(){
-      display.fillScreen(darkmode == 1 ? GxEPD_DARKGREY : GxEPD_LIGHTGREY);
-      display.setTextColor(darkmode == 1 ? GxEPD_WHITE : GxEPD_BLACK);
+      bool isDarkmode = (darkmode == 1);
+      display.fillScreen(isDarkmode ? GxEPD_DARKGREY : GxEPD_LIGHTGREY);
+      display.setTextColor(isDarkmode ? GxEPD_WHITE : GxEPD_BLACK);
       display.setFont(&DSEG7_Classic_Bold_25);
       display.setCursor(25, 110);
       if (currentTime.Hour < 10){
@@ -36,28 +37,35 @@ void WatchyFace2508152300::handleButtonPress() {
     uint64_t wakeupBit = esp_sleep_get_ext1_wakeup_status();
 
     if (wakeupBit && UP_BTN_MASK) {
+      display.print("_UP");
       Watchy::handleButtonPress();
       return;
     }
 
     if (wakeupBit && DOWN_BTN_MASK) {
+      display.print("_DWN");
       Watchy::handleButtonPress();
       return;
     }
 
     if (wakeupBit && BACK_BTN_MASK) {
-      darkmode = (darkmode == 0) ? 1 : 0;
-      RTC.read(currentTime)
+      display.print("_BK");
+      bool isDarkmode = (darkmode == 0);
+      darkmode = (isDarkmode ? 0 : 1);
+      RTC.read(currentTime);
       showWatchFace(true);
       return;
     }
 
     if (wakeupBit && MENU_BTN_MASK) {
+      display.print("_MN");
       Watchy::handleButtonPress();
       return;
     }
 
-  } else {Watchy::handleButtonPress();}
+  }
+
+  Watchy::handleButtonPress();
 
   return;
 }
