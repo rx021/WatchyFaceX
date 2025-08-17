@@ -43,12 +43,12 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   display.fillCircle(100, 100, 88, bgColor);
 
   // draw hour hand
-  //radius = 45;
-  //drawHand(radius, angle_hourHand, textColor);
+  //uint8_t hourHandRadius = 45;
+  //drawHand(hourHandRadius, angle_hourHand, textColor);
 
   // draw minute hand
-  radius = 98;
-  drawHand(radius, angle_minuteHand, textColor);
+  uint8_t minuteHandRadius = 98;
+  drawHand(minuteHandRadius, angle_minuteHand, textColor);
 
   // draw center point
   display.fillCircle(100, 100, 45, bgColor);
@@ -73,12 +73,12 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
 
 // helper function for hands drawing
 void WatchyFaceX::drawHand(
-    uint8_t radius,
+    uint8_t handRadius,
     float angle,
     uint16_t handColor
 ) {
-  float x = radius * cos(angle);
-  float y = radius * sin(angle);
+  float x = handRadius * cos(angle);
+  float y = handRadius * sin(angle);
   display.drawLine(99, 99, 99+x, 99+y, handColor);
   display.drawLine(99, 100, 99+x, 100+y, handColor);
   display.drawLine(99, 101, 99+x, 101+y, handColor);

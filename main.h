@@ -23,7 +23,7 @@ class WatchyFaceX : public Watchy{
     );
     void drawFaceAnalog(bool enableDarkMode);
     void drawHand(
-      uint8_t radius,
+      uint8_t handRadius,
       float angle,
       uint16_t handColor
     );
