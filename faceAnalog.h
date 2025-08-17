@@ -11,8 +11,12 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   uint8_t myMinute = currentTime.Minute;
 
   float pi = 3.1415926535897932384626433832795;
-  float angle_hourScale = 2 * pi / 12;
-  float angle_minuteScale = 2 * pi / 60;
+  float circumference = 2 * pi;
+
+  float angle_quaterHourScale = circumference / 4;
+  float angle_hourScale = circumference / 12;
+  float angle_minuteScale = circumference / 60;
+
   float angle_hourHand = angle_hourScale * (myHour-3) + 2*pi/720 * myMinute;
   float angle_minuteHand = angle_minuteScale * (myMinute-15);
 
@@ -20,12 +24,12 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
 
   // draw minute scale
   radius = 98;
-  for (uint8_t i=0; i<60; i++) {
+  for (uint8_t tick = 0; tick < 60; tick++) {
     display.drawLine(
       100,
       100,
-      100+radius*cos(angle_minuteScale*i),
-      100+radius*sin(angle_minuteScale*i),
+      100 + radius * cos(angle_minuteScale * tick),
+      100 + radius * sin(angle_minuteScale * tick),
       textColor
     );
   }
@@ -34,13 +38,13 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   // draw hour scale
   radius = 98;
   for (uint8_t i=0; i<12; i++) {
-    drawHand(radius, angle_hourScale*i, textColor);
+    drawHand(radius, (angle_hourScale * i), textColor);
   }
   display.fillCircle(100, 100, 88, bgColor);
 
   // draw hour hand
-  radius = 45;
-  drawHand(radius, angle_hourHand, textColor);
+  //radius = 45;
+  //drawHand(radius, angle_hourHand, textColor);
 
   // draw minute hand
   radius = 98;
@@ -78,9 +82,11 @@ void WatchyFaceX::drawHand(
   display.drawLine(99, 99, 99+x, 99+y, handColor);
   display.drawLine(99, 100, 99+x, 100+y, handColor);
   display.drawLine(99, 101, 99+x, 101+y, handColor);
+
   display.drawLine(100, 99, 100+x, 99+y, handColor);
   display.drawLine(100, 100, 100+x, 100+y, handColor);
   display.drawLine(100, 101, 100+x, 101+y, handColor);
+
   display.drawLine(101, 99, 101+x, 99+y, handColor);
   display.drawLine(101, 100, 101+x, 100+y, handColor);
   display.drawLine(101, 101, 101+x, 101+y, handColor);
