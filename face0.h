@@ -35,10 +35,10 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
 
 void WatchyFaceX::drawBattery(bool enableDarkMode){
   // battery IMAGE
-  display.drawBitmap(158, 73, battery, 37, 21, enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
+  display.drawBitmap(15, 15, battery, 37, 21, enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
 
-  uint8_t segmentXOffset = 163; // pixels
-  uint8_t segmentYOffset = 78;
+  uint8_t segmentXOffset = 20; // pixels
+  uint8_t segmentYOffset = 20;
 
   uint8_t segmentWidth = 7;
   uint8_t segmentHeight = 11;
