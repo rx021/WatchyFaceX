@@ -24,32 +24,33 @@ void setup() {
   delay(3000);
 
   if (WiFi.status() == WL_CONNECTED) {
-    char timeStringBuff[50];
+    //char timeStringBuff[50];
     configTime(0, 0, ntp_server);
     setenv("TZ", timezone, 1);
-    getLocalTime(&timeinfo);
+    //getLocalTime(&timeinfo);
 
     WiFi.disconnect(true);
     WiFi.mode(WIFI_OFF);
-    strftime(
-      timeStringBuff,
-      sizeof(timeStringBuff),
-      "%Y:%m:%d:%H:%M:%S",
-      &timeinfo
-    );
+    //strftime(
+      //timeStringBuff,
+      //sizeof(timeStringBuff),
+      //"%Y:%m:%d:%H:%M:%S",
+      //&timeinfo
+    //);
 
-    datetime = timeStringBuff;
+    //datetime = timeStringBuff;
 
   // otherwise take compile date and time
   } else {
-    char timeStringBuff[] = "YYYY:MM:DD:hh:mm:ss";
-    DateTime compileTime = DateTime(F(__DATE__), F(__TIME__));  
+    //char timeStringBuff[] = "YYYY:MM:DD:hh:mm:ss";
+    //DateTime compileTime = DateTime(F(__DATE__), F(__TIME__));  
 
-    datetime = compileTime.toString(timeStringBuff);
+    //datetime = compileTime.toString(timeStringBuff);
   }
 
   // initialising watchy with date and time as "Year:Month:Day:Hour:Minute:Second" on reset
-  watchy.init(datetime);
+  //watchy.init(datetime);
+  watchy.init();
 }
 
 void loop() {
