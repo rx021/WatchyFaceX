@@ -1,6 +1,7 @@
 
 #include "main.h"
 #include "settings.h"
+#include "secrets.h"
 
 #include <WiFi.h>
 // #include <RTClib.h>
