@@ -54,15 +54,27 @@ void WatchyFaceX::drawWatchFace() {
   display.setTextColor(isDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
   display.setFont(&DSEG7_Classic_Bold_25);
   display.setCursor(25, 110);
+
+  String timeString = "";
+
   if (currentTime.Hour < 10){
-    display.print("0");
+    timeString += "0"
+    //display.print("0");
   }
-  display.print(currentTime.Hour);
-  display.print(":");
+  timeString += currentTime.Hour;
+  //display.print(currentTime.Hour);
+
+  timeString += ":";
+  //display.print(":");
+
   if (currentTime.Minute < 10){
-    display.print("0");
+    //display.print("0");
+    timeString += "0";
   }
-  display.print(currentTime.Minute);
+  timeString += currentTime.Minute;
+  timeString += "_";
+
+  display.println(timeString);
 }                                         
 
 #endif
