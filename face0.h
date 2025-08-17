@@ -24,16 +24,12 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   int16_t  x1, y1;
   uint16_t w, h;
 
-  // TODO: import this font for it to work better
-  //display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
-  display.setFont(&DSEG7_Classic_Bold_25);
   display.setTextColor(enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
 
-
   // TIME:
-  display.setTextWrap(false);
-
   String timeString = "";
+  display.setFont(&DIN_1451_Engschrift_Regular64pt7b);
+  display.setTextWrap(false);
 
   //draw hours
   timeString = currentTime.Hour;
@@ -54,10 +50,9 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
 
 
   // DATE from bottom-up: 
-
-  int16_t lastY = 200 - 16;
-
   String dateString;
+  int16_t lastY = 200 - 16;
+  display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
 
   // draw weekday
   dateString = dayStr(currentTime.Wday);
