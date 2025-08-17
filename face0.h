@@ -1,4 +1,7 @@
 
+// NOTE: top left is X=0, Y=0
+// NOTE: bottom right is X=200, Y=200
+
 void WatchyFaceX::drawFace0(bool enableDarkMode) {
   // toggle appears to work now; but greys don't work
   // test black and white instead
