@@ -2,6 +2,10 @@
 // NOTE: top left is X=0, Y=0
 // NOTE: bottom right is X=200, Y=200
 
+const uint8_t BATTERY_X_OFFSET = 15; // pixels
+const uint8_t BATTERY_Y_OFFSET = 15;
+const uint8_t BATTERY_WIDTH = 37;
+
 void WatchyFaceX::drawFace0(bool enableDarkMode) {
   // toggle appears to work now; but greys don't work
   // test black and white instead
@@ -29,7 +33,9 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
 
   #ifdef ARDUINO_ESP32S3_DEV
   if(USB_PLUGGED_IN){
-    display.drawBitmap(140, 75, charge, 16, 18, enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
+    uint8_t chargeXPosn = BATTERY_X_OFFSET + 18;
+    uint8_t chargeYPosn = BATTERY_Y_OFFSET + 2;
+    display.drawBitmap(chargeXPosn, chargeYPosn, charge, 16, 18, enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
   }
   #endif
 
@@ -38,16 +44,11 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
 
 void WatchyFaceX::drawBattery(bool enableDarkMode){
   // battery IMAGE
-  uint8_t batteryXOffset = 15; // pixels
-  uint8_t batteryYOffset = 15;
-  uint8_t batterWidth = batteryXOffset + 22;
-  uint8_t batteryHeight = batteryYOffset + 6;
-  display.drawBitmap(batteryXOffset, batteryYOffset, battery, batterWidth, batteryHeight, enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
+  display.drawBitmap(BATTERY_X_OFFSET, BATTERY_Y_OFFSET, battery, BATTERY_WIDTH, 21, enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
 
-  uint8_t segmentXOffset = batteryXOffset + 5;
-  uint8_t segmentYOffset = batteryYOffset + 5;
+  uint8_t segmentXOffset = BATTERY_X_OFFSET + 5;
+  uint8_t segmentYOffset = BATTERY_Y_OFFSET + 5;
 
-  uint8_t segmentWidth = 7;
   uint8_t segmentHeight = 11;
 
   // battery clear segments
@@ -69,6 +70,7 @@ void WatchyFaceX::drawBattery(bool enableDarkMode){
   }
 
   uint8_t xPosn = 0; // x position
+  uint8_t segmentWidth = 7;
   uint8_t segmentSpacing = 9;
 
   for(int8_t batterySegments = 0; batterySegments < batteryLevel; batterySegments++){
