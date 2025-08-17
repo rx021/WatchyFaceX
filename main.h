@@ -59,7 +59,7 @@ void WatchyFaceX::drawWatchFace() {
   String timeString = "";
 
   if (currentTime.Hour < 10){
-    timeString += "0"
+    timeString += "0";
     //display.print("0");
   }
   timeString += currentTime.Hour;
