@@ -9,12 +9,11 @@
 
 #define DARKMODE false
 
-RTC_DATA_ATTR int darkmode = 0;
+RTC_DATA_ATTR bool isDarkMode = false;
 
 class WatchyFaceX : public Watchy{
   using Watchy::Watchy;
   public: 
-    WatchyFaceX(const watchySettings& s) : Watchy(s) {}
     void drawWatchFace();
     virtual void handleButtonPress(); // Must be virtual in Watchy.h too
 };
@@ -24,28 +23,23 @@ void WatchyFaceX::handleButtonPress() {
     uint64_t wakeupBit = esp_sleep_get_ext1_wakeup_status();
 
     if (wakeupBit && UP_BTN_MASK) {
-      display.print("_UP");
       Watchy::handleButtonPress();
       return;
     }
 
     if (wakeupBit && DOWN_BTN_MASK) {
-      display.print("_DWN");
       Watchy::handleButtonPress();
       return;
     }
 
     if (wakeupBit && BACK_BTN_MASK) {
-      display.print("_BK");
-      bool isDarkmode = (darkmode == 0);
-      darkmode = (isDarkmode ? 0 : 1);
+      isDarkMode = (isDarkMode ? false : true);
       RTC.read(currentTime);
       showWatchFace(true);
       return;
     }
 
     if (wakeupBit && MENU_BTN_MASK) {
-      display.print("_MN");
       Watchy::handleButtonPress();
       return;
     }
@@ -58,9 +52,8 @@ void WatchyFaceX::handleButtonPress() {
 }
 
 void WatchyFaceX::drawWatchFace() {
-  bool isDarkmode = (darkmode == 1);
-  display.fillScreen(isDarkmode ? GxEPD_DARKGREY : GxEPD_LIGHTGREY);
-  display.setTextColor(isDarkmode ? GxEPD_WHITE : GxEPD_BLACK);
+  display.fillScreen(isDarkMode ? GxEPD_DARKGREY : GxEPD_LIGHTGREY);
+  display.setTextColor(isDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
   display.setFont(&DSEG7_Classic_Bold_25);
   display.setCursor(25, 110);
   if (currentTime.Hour < 10){
