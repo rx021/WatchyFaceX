@@ -86,6 +86,11 @@ Watchy comes pre-loaded with firmware that demonstrates all the basic features. 
         - `sudo modprobe cp210x`
         - `sudo modprobe ch341`
 
+### ISSUE: Board still not being recognized by the OS
+- SOLUTION:
+    - using a USB hub
+    - OR using USB C connection to micro USB
+
 ### ISSUE: permissions error when trying to upload the new watchface firmware
 - because of Linux Fedor 42
 - SOLUTION:
