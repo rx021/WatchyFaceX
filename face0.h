@@ -32,7 +32,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   }
   #endif
 
-  drawBattery(bool enableDarkMode);
+  drawBattery(enableDarkMode);
 }
 
 void WatchyFaceX::drawBattery(bool enableDarkMode){

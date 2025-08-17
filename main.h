@@ -57,7 +57,7 @@ void WatchyFaceX::handleButtonPress() {
 }
 
 void WatchyFaceX::drawWatchFace() {
-  // this doesn't work
+  // boolean doesn't work? might be buttons don't work
   // TODO: try int toggle rather than boolean
   if (isDarkMode) {
     drawFace0(true);
