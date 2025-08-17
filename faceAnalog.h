@@ -14,44 +14,44 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   float circumference = 2 * pi;
 
   float angle_quaterHourScale = circumference / 4;
-  float angle_hourScale = circumference / 12;
+
+
+  // DRAW MINUTE SCALE
+  uint8_t minuteRadius = 98;
   float angle_minuteScale = circumference / 60;
-
-  float angle_hourHand = angle_hourScale * (myHour-3) + 2*pi/720 * myMinute;
-  float angle_minuteHand = angle_minuteScale * (myMinute-15);
-
-  uint8_t radius;
-
-  // draw minute scale
-  radius = 98;
-  for (uint8_t tick = 0; tick < 60; tick++) {
+  for (uint8_t minuteIndex = 0; minuteIndex < 60; minuteIndex++) {
     display.drawLine(
       100,
       100,
-      100 + radius * cos(angle_minuteScale * tick),
-      100 + radius * sin(angle_minuteScale * tick),
+      100 + minuteRadius * cos(angle_minuteScale * minuteIndex),
+      100 + minuteRadius * sin(angle_minuteScale * minuteIndex),
       textColor
     );
   }
   display.fillCircle(100, 100, 93, bgColor);
 
-  // draw hour scale
-  radius = 98;
-  for (uint8_t i=0; i<12; i++) {
-    drawHand(radius, (angle_hourScale * i), textColor);
+  // DRAW HOUR SCALE
+  uint8_t hourRadius = 98;
+  float angle_hourScale = circumference / 12;
+  for (uint8_t hourIndex = 0; hourIndex < 12; hourIndex++) {
+    drawHand(hourRadius, (angle_hourScale * hourIndex), textColor);
   }
   display.fillCircle(100, 100, 88, bgColor);
 
-  // draw hour hand
+  // DRAW HOUR HAND
   //uint8_t hourHandRadius = 45;
+  //float angle_hourHand = angle_hourScale * (myHour-3) + 2*pi/720 * myMinute;
   //drawHand(hourHandRadius, angle_hourHand, textColor);
 
-  // draw minute hand
+  // DRAW MINUTE HAND
   uint8_t minuteHandRadius = 98;
+  float angle_minuteHand = angle_minuteScale * (myMinute-15);
   drawHand(minuteHandRadius, angle_minuteHand, textColor);
 
-  // draw center point
+  // DRAW CENTER POINT
   display.fillCircle(100, 100, 45, bgColor);
+
+
 
   // positioning of hour display for DSEG7_Classic_Regular_39 font
   uint8_t hourYPosn = 120;
