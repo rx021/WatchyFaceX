@@ -15,7 +15,7 @@ void setup() {
   const char* ntp_server = "pool.ntp.org";
   //struct tm timeinfo;
   //String datetime;
-  char timezone = "PST8PDT,M3.2.0,M11.1.0"; // America/Vancouver
+  const char* timezone = "PST8PDT,M3.2.0,M11.1.0"; // America/Vancouver
   // find yours:
   // https://github.com/nayarsystems/posix_tz_db/blob/master/zones.csv
 
