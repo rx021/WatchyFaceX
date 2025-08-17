@@ -19,44 +19,15 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   }
   #endif
 
-  // DATE 
+  // DATETIME SETUP:
   
-  int16_t  x1, y1, lasty;
+  int16_t  x1, y1;
   uint16_t w, h;
 
-  lasty = 200 - 16;
-
-  //draw steps
+  // TODO: import this font for it to work better
   //display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
   display.setFont(&DSEG7_Classic_Bold_25);
   display.setTextColor(enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
-
-  lasty += -8 - h;
-
-  String dateString;
-
-   // draw year
-  dateString = currentTime.Year + 1970;
-  display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
-  display.setCursor(16, lasty);
-  display.print(dateString);
-  lasty += -20;
-
-  // draw date
-  dateString = monthShortStr(currentTime.Month);
-  dateString += " ";
-  dateString += currentTime.Day;
-  display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
-  display.setCursor(16, lasty);
-  display.print(dateString);
-  lasty += -20;
-
-  // draw day
-  dateString = dayStr(currentTime.Wday);
-  display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
-  display.setCursor(16, lasty);
-  display.print(dateString);
-  lasty += -40;
 
 
   // TIME:
@@ -80,6 +51,40 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   display.getTextBounds(timeString, 0, 0, &x1, &y1, &w, &h);
   display.setCursor(183 - w, 100 + 3 + h);
   display.print(timeString);
+
+
+  // DATE from bottom-up: 
+
+  int16_t lastY = 200 - 16;
+
+  String dateString;
+
+  // draw weekday
+  dateString = dayStr(currentTime.Wday);
+
+  display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
+  display.setCursor(BATTERY_X_OFFSET, lastY);
+  display.print(dateString);
+  lastY += -20;
+
+  // draw date
+  dateString = monthShortStr(currentTime.Month);
+  dateString += " ";
+  dateString += currentTime.Day;
+
+  display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
+  display.setCursor(BATTERY_X_OFFSET, lastY);
+  display.print(dateString);
+  lastY += -20;
+
+   // draw year
+  dateString = currentTime.Year + 1970;
+
+  display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
+  display.setCursor(BATTERY_X_OFFSET, lastY);
+  display.print(dateString);
+  lastY += -40;
+
 }
 
 void WatchyFaceX::drawBattery(bool enableDarkMode){
