@@ -1,6 +1,9 @@
-const uint8_t BATTERY_SEGMENT_WIDTH = 7;
+
+const uint8_t BATTERY_SEGMENT_WIDTH = 7; // pixels
 const uint8_t BATTERY_SEGMENT_HEIGHT = 11;
 const uint8_t BATTERY_SEGMENT_SPACING = 9;
+const uint8_t BATTERY_X_OFFSET = 163;
+const uint8_t BATTERY_Y_OFFSET = 78;
 
 void WatchyFaceX::drawFace0(bool enableDarkMode) {
   // toggle appears to work now; but greys don't work
@@ -37,8 +40,11 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
 }
 
 void WatchyFaceX::drawBattery(bool enableDarkMode){
+  // battery IMAGE
   display.drawBitmap(158, 73, battery, 37, 21, enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
-  display.fillRect(163, 78, 27, BATTERY_SEGMENT_HEIGHT, enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE);//clear battery segments
+
+  // battery clear segments
+  display.fillRect(BATTERY_X_OFFSET, BATTERY_Y_OFFSET, 27, BATTERY_SEGMENT_HEIGHT, enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE);
 
   int8_t batteryLevel = 0;
   float VBAT = getBatteryVoltage();
@@ -55,8 +61,12 @@ void WatchyFaceX::drawBattery(bool enableDarkMode){
       batteryLevel = 0;
   }
 
+  int8_t xPosn = 0; // x position
+
   for(int8_t batterySegments = 0; batterySegments < batteryLevel; batterySegments++){
-      display.fillRect(163 + (batterySegments * BATTERY_SEGMENT_SPACING), 78, BATTERY_SEGMENT_WIDTH, BATTERY_SEGMENT_HEIGHT, enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
+    xPosn = BATTERY_X_OFFSET + (batterySegments * BATTERY_SEGMENT_SPACING);
+
+      display.fillRect(xPosn, BATTERY_Y_OFFSET, BATTERY_SEGMENT_WIDTH, BATTERY_SEGMENT_HEIGHT, enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
   }
 }
 
