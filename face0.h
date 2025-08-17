@@ -121,7 +121,12 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
 
 }
 
-void WatchyFaceX::drawBattery(bool enableDarkMode, uint8_t batteryXOffset, uint8_t batteryYOffset, uint8_t batteryWidth){
+void WatchyFaceX::drawBattery(
+    bool enableDarkMode,
+    uint8_t batteryXOffset,
+    uint8_t batteryYOffset,
+    uint8_t batteryWidth
+){
   // battery IMAGE
   display.drawBitmap(
     batteryXOffset,
