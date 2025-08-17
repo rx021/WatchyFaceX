@@ -50,6 +50,7 @@ void WatchyFaceX::handleButtonPress() {
 }
 
 void WatchyFaceX::drawWatchFace() {
+  // TODO: extract this logic to separte watchface
   display.fillScreen(isDarkMode ? GxEPD_DARKGREY : GxEPD_LIGHTGREY);
   display.setTextColor(isDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
   display.setFont(&DSEG7_Classic_Bold_25);
