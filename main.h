@@ -66,7 +66,7 @@ void WatchyFaceX::handleButtonPress() {
 
     if (wakeupBit & DOWN_BTN_MASK) {
       faceIndex++;
-      if (faceCount =< faceIndex) {
+      if (faceCount <= faceIndex) {
         // go to first
         faceIndex = 0;
       }
