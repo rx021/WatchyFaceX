@@ -40,14 +40,12 @@ void WatchyFaceX::handleButtonPress() {
     }
 
     if (wakeupBit & UP_BTN_MASK) {
-      RTC.read(currentTime);
-      showWatchFace(true);
+      Watchy::handleButtonPress();
       return;
     }
 
     if (wakeupBit & DOWN_BTN_MASK) {
-      RTC.read(currentTime);
-      showWatchFace(true);
+      Watchy::handleButtonPress();
       return;
     }
 
