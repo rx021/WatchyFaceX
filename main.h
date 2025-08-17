@@ -6,6 +6,8 @@
 #include <Fonts/FreeMonoOblique24pt7b.h>
 #include "DSEG7_Classic_Bold_25.h"
 
+RTC_DATA_ATTR int faceIndex = 0;
+RTC_DATA_ATTR int faceCount = 2;
 RTC_DATA_ATTR bool isDarkMode = false;
 
 class WatchyFaceX : public Watchy{
@@ -46,12 +48,24 @@ void WatchyFaceX::handleButtonPress() {
     }
 
     if (wakeupBit & UP_BTN_MASK) {
-      Watchy::handleButtonPress();
+      faceIndex--;
+      if (faceIndex < 0 ) {
+        // go back to last
+        faceIndex = faceCount - 1;
+      }
+      RTC.read(currentTime);
+      showWatchFace(true);
       return;
     }
 
     if (wakeupBit & DOWN_BTN_MASK) {
-      Watchy::handleButtonPress();
+      faceIndex++;
+      if (faceCount =< faceIndex) {
+        // go to first
+        faceIndex = 0;
+      }
+      RTC.read(currentTime);
+      showWatchFace(true);
       return;
     }
 
@@ -60,7 +74,13 @@ void WatchyFaceX::handleButtonPress() {
 }
 
 void WatchyFaceX::drawWatchFace() {
-  drawFace0(isDarkMode);
+  if (faceIndex == 0) {
+    drawFace0(isDarkMode);
+  }
+
+  if (faceIndex == 1) {
+    drawFace0(isDarkMode);
+  }
 }                                         
 
 #endif
