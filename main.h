@@ -2,7 +2,6 @@
 #define MAIN_H
 
 #include <Watchy.h> // include Watchy library
-
 // font to use
 #include <Fonts/FreeMonoOblique24pt7b.h>
 #include "DSEG7_Classic_Bold_25.h"
