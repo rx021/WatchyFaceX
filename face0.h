@@ -66,7 +66,6 @@ void WatchyFaceX::drawBattery(bool enableDarkMode){
   }
 
   uint8_t xPosn = 0; // x position
-  // TODO: fix batter segmets now broken
 
   for(int8_t batterySegments = 0; batterySegments < batteryLevel; batterySegments++){
     xPosn = segmentXOffset + (batterySegments * segmentSpacing);
