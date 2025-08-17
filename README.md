@@ -92,6 +92,9 @@ Watchy comes pre-loaded with firmware that demonstrates all the basic features. 
     - OR using USB C connection to micro USB
     - what works even better is to have the wire detached until we need to upload
     - if it is already wired in then detach first then re-attach
+    - also cycle through the menu 3 times
+    - then go back to the menu screen
+        - from there trigger bootloader mode when the board looks to be attached already
 
 ### ISSUE: permissions error when trying to upload the new watchface firmware
 - because of Linux Fedor 42
