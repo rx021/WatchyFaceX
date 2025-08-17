@@ -11,13 +11,47 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
 
   drawBattery(enableDarkMode);
 
+  uint8_t iconSpacing = 15;
+  uint8_t chargeXPosn = BATTERY_X_OFFSET + BATTERY_WIDTH + iconSpacing;
+  uint8_t chargeYPosn = BATTERY_Y_OFFSET + 2;
+  uint8_t chargeWidth = 16;
+
   #ifdef ARDUINO_ESP32S3_DEV
   if(USB_PLUGGED_IN){
-    uint8_t chargeXPosn = BATTERY_X_OFFSET + BATTERY_WIDTH + 18;
-    uint8_t chargeYPosn = BATTERY_Y_OFFSET + 2;
-    display.drawBitmap(chargeXPosn, chargeYPosn, charge, 16, 18, enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
+    display.drawBitmap(
+      chargeXPosn,
+      chargeYPosn,
+      charge,
+      chargeWidth,
+      18,
+      enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK
+    );
   }
   #endif
+
+  uint8_t wifiXPosn = chargeXPosn + chargeWidth + iconSpacing;
+  uint8_t wifiWidth = 26;
+  display.drawBitmap(
+    116,
+    chargeYPosn,
+    WIFI_CONFIGURED ? wifi : wifioff,
+    wifiWidth,
+    18,
+    enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK
+  );
+
+  uint8_t bluetoothXPosn = wifiXPosn + wifiWidth + iconSpacing;
+  if(BLE_CONFIGURED){
+    display.drawBitmap(
+      bluetoothXPosn,
+      chargeYPosn,
+      bluetooth,
+      13,
+      21,
+      enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK
+    );
+  }
+
 
   // DATETIME SETUP:
   
