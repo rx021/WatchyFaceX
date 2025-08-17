@@ -48,7 +48,24 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
 
   // draw center point
   display.fillCircle(100, 100, 45, bgColor);
+
+  // positioning of hour display for DSEG7_Classic_Regular_39 font
+  uint8_t hourYPosn = 120;
+  if (currentTime.Hour > 9 && currentTime.Hour < 20) {
+    display.setCursor(58, hourYPosn);
+  } else {
+    display.setCursor(68, hourYPosn);
+  }
+
+  // display hour (with a leading zero, if necessary)
+  if(currentTime.Hour < 10){
+      display.print("0");
+  }
+  display.print(currentTime.Hour);
+
 }
+
+
 
 // helper function for hands drawing
 void WatchyFaceX::drawHand(
