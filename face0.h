@@ -11,7 +11,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
 
   drawBattery(enableDarkMode);
 
-  uint8_t iconSpacing = 15;
+  uint8_t iconSpacing = 5;
   uint8_t chargeXPosn = BATTERY_X_OFFSET + BATTERY_WIDTH + iconSpacing;
   uint8_t chargeYPosn = BATTERY_Y_OFFSET + 2;
   uint8_t chargeWidth = 16;
@@ -118,7 +118,14 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
 
 void WatchyFaceX::drawBattery(bool enableDarkMode){
   // battery IMAGE
-  display.drawBitmap(BATTERY_X_OFFSET, BATTERY_Y_OFFSET, battery, BATTERY_WIDTH, 21, enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
+  display.drawBitmap(
+    BATTERY_X_OFFSET,
+    BATTERY_Y_OFFSET,
+    battery,
+    BATTERY_WIDTH,
+    21,
+    enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK
+  );
 
   uint8_t segmentXOffset = BATTERY_X_OFFSET + 5;
   uint8_t segmentYOffset = BATTERY_Y_OFFSET + 5;
@@ -126,7 +133,13 @@ void WatchyFaceX::drawBattery(bool enableDarkMode){
   uint8_t segmentHeight = 11;
 
   // battery clear segments
-  display.fillRect(segmentXOffset, segmentYOffset, 27, segmentHeight, enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE);
+  display.fillRect(
+    segmentXOffset,
+    segmentYOffset,
+    27,
+    segmentHeight,
+    enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE
+  );
 
   uint8_t batteryLevel = 0;
   float VBAT = getBatteryVoltage();
@@ -150,7 +163,13 @@ void WatchyFaceX::drawBattery(bool enableDarkMode){
   for(int8_t batterySegments = 0; batterySegments < batteryLevel; batterySegments++){
     xPosn = segmentXOffset + (batterySegments * segmentSpacing);
 
-    display.fillRect(xPosn, segmentYOffset, segmentWidth, segmentHeight, enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
+    display.fillRect(
+      xPosn,
+      segmentYOffset,
+      segmentWidth,
+      segmentHeight,
+      enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK
+    );
   }
 }
 
