@@ -27,32 +27,31 @@ void WatchyFaceX::handleButtonPress() {
     // - hypothesis: buttons not working
     uint64_t wakeupBit = esp_sleep_get_ext1_wakeup_status();
 
-    if (wakeupBit && BACK_BTN_MASK) {
+    if (wakeupBit & BACK_BTN_MASK) {
       isDarkMode = (isDarkMode ? false : true);
       RTC.read(currentTime);
       showWatchFace(true);
       return;
     }
 
-    if (wakeupBit && MENU_BTN_MASK) {
+    if (wakeupBit & MENU_BTN_MASK) {
       Watchy::handleButtonPress();
       return;
     }
 
-    if (wakeupBit && UP_BTN_MASK) {
-      Watchy::handleButtonPress();
+    if (wakeupBit & UP_BTN_MASK) {
+      RTC.read(currentTime);
+      showWatchFace(true);
       return;
     }
 
-    if (wakeupBit && DOWN_BTN_MASK) {
-      Watchy::handleButtonPress();
+    if (wakeupBit & DOWN_BTN_MASK) {
+      RTC.read(currentTime);
+      showWatchFace(true);
       return;
     }
 
-  }
-
-  Watchy::handleButtonPress();
-
+  } else {Watchy::handleButtonPress();}
   return;
 }
 
