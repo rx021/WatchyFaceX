@@ -26,7 +26,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
     timeString += "0";
   }
   timeString += currentTime.Minute;
-  timeString += "-:.";
+  // timeString += "-:."; // only special characters that render
 
   display.println(timeString);
 
