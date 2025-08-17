@@ -5,10 +5,14 @@
                                          
 #include "settings.h"
 
+#define DARKMODE false
+
+
 class WatchyFace2508152300 : public Watchy{
   public: 
     WatchyFace2508152300(const watchySettings& s) : Watchy(s) {}
     void drawWatchFace(){
+      display.fillScreen(DARKMODE ? GxEPD_DARKGREY : GxEPD_LIGHTGREY);
       display.setFont(&FreeMonoOblique24pt7b);
       display.setCursor(25, 110);
       if (currentTime.Hour < 10){
