@@ -122,6 +122,7 @@ Watchy comes pre-loaded with firmware that demonstrates all the basic features. 
     - we will create our own udev rule
         ```
         // in new file /etc/udev/rules.d/70-esp32.rules
+        // may need to run sudo vim /etc/udev/rules.d/70-esp32.rules
 
         SUBSYSTEM=="tty", ATTRS{idVendor}=="303a", ATTRS{idProduct}=="1001", TAG+="uaccess", MODE="0660"
         // - make sure to change `303a` to one that matches your vendor id
