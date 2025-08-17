@@ -21,6 +21,8 @@ class WatchyFaceX : public Watchy{
 
 void WatchyFaceX::handleButtonPress() {
   if (guiState == WATCHFACE_STATE) {
+    // TODO: try different faces for up and down
+    // - hypothesis: buttons not working
     uint64_t wakeupBit = esp_sleep_get_ext1_wakeup_status();
 
     if (wakeupBit && UP_BTN_MASK) {
@@ -53,6 +55,8 @@ void WatchyFaceX::handleButtonPress() {
 }
 
 void WatchyFaceX::drawWatchFace() {
+  // this doesn't work
+  // TODO: try int toggle rather than boolean
   if (isDarkMode) {
     drawFace0(true);
   } else {
