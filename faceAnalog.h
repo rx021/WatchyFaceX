@@ -34,17 +34,17 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   // draw hour scale
   radius = 98;
   for (uint8_t i=0; i<12; i++) {
-    drawHand(radius, angle_hourScale*i, light);
+    drawHand(radius, angle_hourScale*i, textColor);
   }
   display.fillCircle(100, 100, 88, bgColor);
 
   // draw hour hand
   radius = 45;
-  drawHand(radius, angle_hourHand, light);
+  drawHand(radius, angle_hourHand, textColor);
 
   // draw minute hand
   radius = 98;
-  drawHand(radius, angle_minuteHand, light);
+  drawHand(radius, angle_minuteHand, textColor);
 
   // draw center point
   display.fillCircle(100, 100, 45, bgColor);
@@ -54,18 +54,18 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
 void WatchyFaceX::drawHand(
     uint8_t _radius_,
     float _angle_,
-    bool _light_
+    uint16_t handColor
 ) {
   float x = _radius_*cos(_angle_);
   float y = _radius_*sin(_angle_);
-  display.drawLine(99, 99, 99+x, 99+y, _light_ ? GxEPD_BLACK : GxEPD_WHITE);
-  display.drawLine(99, 100, 99+x, 100+y, _light_ ? GxEPD_BLACK : GxEPD_WHITE);
-  display.drawLine(99, 101, 99+x, 101+y, _light_ ? GxEPD_BLACK : GxEPD_WHITE);
-  display.drawLine(100, 99, 100+x, 99+y, _light_ ? GxEPD_BLACK : GxEPD_WHITE);
-  display.drawLine(100, 100, 100+x, 100+y, _light_ ? GxEPD_BLACK : GxEPD_WHITE);
-  display.drawLine(100, 101, 100+x, 101+y, _light_ ? GxEPD_BLACK : GxEPD_WHITE);
-  display.drawLine(101, 99, 101+x, 99+y, _light_ ? GxEPD_BLACK : GxEPD_WHITE);
-  display.drawLine(101, 100, 101+x, 100+y, _light_ ? GxEPD_BLACK : GxEPD_WHITE);
-  display.drawLine(101, 101, 101+x, 101+y, _light_ ? GxEPD_BLACK : GxEPD_WHITE);
+  display.drawLine(99, 99, 99+x, 99+y, handColor);
+  display.drawLine(99, 100, 99+x, 100+y, handColor);
+  display.drawLine(99, 101, 99+x, 101+y, handColor);
+  display.drawLine(100, 99, 100+x, 99+y, handColor);
+  display.drawLine(100, 100, 100+x, 100+y, handColor);
+  display.drawLine(100, 101, 100+x, 101+y, handColor);
+  display.drawLine(101, 99, 101+x, 99+y, handColor);
+  display.drawLine(101, 100, 101+x, 100+y, handColor);
+  display.drawLine(101, 101, 101+x, 101+y, handColor);
 }
 
