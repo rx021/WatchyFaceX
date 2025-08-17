@@ -13,7 +13,12 @@ class WatchyFaceX : public Watchy{
   using Watchy::Watchy;
   public: 
     void drawWatchFace();
-    void drawFace0(bool enableDarkMode);
+    void drawFace0(
+      bool enableDarkMode,
+      uint8_t batteryXOffset,
+      uint8_t batteryYOffset,
+      uint8_t batteryWidth
+    );
     void drawBattery(bool enableDarkMode);
     virtual void handleButtonPress(); // Must be virtual in Watchy.h too
 };
