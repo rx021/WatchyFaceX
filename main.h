@@ -68,7 +68,7 @@ void WatchyFaceX::drawWatchFace() {
     timeString += "0";
   }
   timeString += currentTime.Minute;
-  timeString += "!@#$%^&*()_-=+[]{}\|:;"'<,>.?/";
+  timeString += "!@#$%^&*()_-=+[]{}\\|:;'<,>.?/";
 
   display.println(timeString);
 }                                         
