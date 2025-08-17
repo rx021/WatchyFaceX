@@ -7,8 +7,6 @@
 #include <Fonts/FreeMonoOblique24pt7b.h>
 #include "DSEG7_Classic_Bold_25.h"
 
-#define DARKMODE false
-
 RTC_DATA_ATTR bool isDarkMode = false;
 
 class WatchyFaceX : public Watchy{
