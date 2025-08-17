@@ -23,9 +23,9 @@ class WatchyFaceX : public Watchy{
     );
     void drawFaceAnalog(bool enableDarkMode);
     void drawHand(
-      uint8_t _radius_,
-      float _angle_,
-      bool _light_
+      uint8_t radius,
+      float angle,
+      uint16_t handColor
     );
     virtual void handleButtonPress(); // Must be virtual in Watchy.h too
 };

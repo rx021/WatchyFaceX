@@ -69,12 +69,12 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
 
 // helper function for hands drawing
 void WatchyFaceX::drawHand(
-    uint8_t _radius_,
-    float _angle_,
+    uint8_t radius,
+    float angle,
     uint16_t handColor
 ) {
-  float x = _radius_*cos(_angle_);
-  float y = _radius_*sin(_angle_);
+  float x = radius * cos(angle);
+  float y = radius * sin(angle);
   display.drawLine(99, 99, 99+x, 99+y, handColor);
   display.drawLine(99, 100, 99+x, 100+y, handColor);
   display.drawLine(99, 101, 99+x, 101+y, handColor);
