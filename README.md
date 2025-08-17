@@ -97,23 +97,34 @@ Watchy comes pre-loaded with firmware that demonstrates all the basic features. 
         - from there trigger bootloader mode when the board looks to be attached already
 
 ### ISSUE: permissions error when trying to upload the new watchface firmware
-- because of Linux Fedor 42
+- because of Linux Fedora 42
 - SOLUTION:
     - need to change permissions on the port when possible
     - `sudo chmod 666 /dev/ttyACM0`
 - full error message:
-```
-WARNING: library Rtc_Pcf8563 claims to run on avr architecture(s) and may be incompatible with your current board which runs on esp32 architecture(s).
-Sketch uses 1267919 bytes (37%) of program storage space. Maximum is 3342336 bytes.
-Global variables use 52876 bytes (16%) of dynamic memory, leaving 274804 bytes for local variables. Maximum is 327680 bytes.
+    ```
+    WARNING: library Rtc_Pcf8563 claims to run on avr architecture(s) and may be incompatible with your current board which runs on esp32 architecture(s).
+    Sketch uses 1267919 bytes (37%) of program storage space. Maximum is 3342336 bytes.
+    Global variables use 52876 bytes (16%) of dynamic memory, leaving 274804 bytes for local variables. Maximum is 327680 bytes.
 
- Usage: esptool [OPTIONS] COMMAND [ARGS]...
+     Usage: esptool [OPTIONS] COMMAND [ARGS]...
 
- Try 'esptool -h' for help
-╭─ Error ──────────────────────────────────────────────────────────────────────╮
-│ Invalid value for '--port' / '-p': Path '/dev/ttyACM0' is not readable.      │
-╰──────────────────────────────────────────────────────────────────────────────╯
+     Try 'esptool -h' for help
+    ╭─ Error ──────────────────────────────────────────────────────────────────────╮
+    │ Invalid value for '--port' / '-p': Path '/dev/ttyACM0' is not readable.      │
+    ╰──────────────────────────────────────────────────────────────────────────────╯
 
-Failed uploading: uploading error: exit status 2
-```
+    Failed uploading: uploading error: exit status 2
+    ```
 
+- IMPROVED SOLUTION:
+    - since the other one requires you change permissions each time it connects
+    - we will create our own udev rule
+        ```
+        // in new file /etc/udev/rules.d/70-esp32.rules
+
+        SUBSYSTEM=="tty", ATTRS{idVendor}=="303a", ATTRS{idProduct}=="1001", TAG+="uaccess", MODE="0660"
+        // - make sure to change `303a` to one that matches your vendor id
+        // - make sure to change `1001` to one that matches your product id
+        ```
+    - to get your vendor and product IDs you need to connect to the board in bootloader mode and then run `lsusb` to find your new device
