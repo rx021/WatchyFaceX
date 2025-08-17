@@ -54,7 +54,7 @@ void WatchyFaceX::drawWatchFace() {
   display.fillScreen(isDarkMode ? GxEPD_DARKGREY : GxEPD_LIGHTGREY);
   display.setTextColor(isDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
   display.setFont(&DSEG7_Classic_Bold_25);
-  display.setCursor(25, 110);
+  display.setCursor(5, 110);
 
   String timeString = "";
 
