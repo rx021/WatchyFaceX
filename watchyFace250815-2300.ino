@@ -3,10 +3,10 @@
 #include "settings.h"
 #include "secrets.h"
 
-#include <WiFi.h>
+//#include <WiFi.h>
 //#include <RTClib.h>
-#include <TimeLib.h>
-#include <time.h>
+//#include <TimeLib.h>
+//#include <time.h>
 
 WatchyFaceX watchy(settings); //instantiate watch face
 
