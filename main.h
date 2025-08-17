@@ -19,6 +19,7 @@ class WatchyFaceX : public Watchy{
 };
 
 #include "icons.h"
+#include "fonts.h"
 #include "face0.h"
 
 void WatchyFaceX::handleButtonPress() {
