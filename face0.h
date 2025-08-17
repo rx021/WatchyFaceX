@@ -7,29 +7,9 @@ const uint8_t BATTERY_Y_OFFSET = 15;
 const uint8_t BATTERY_WIDTH = 37;
 
 void WatchyFaceX::drawFace0(bool enableDarkMode) {
-  // toggle appears to work now; but greys don't work
-  // test black and white instead
   display.fillScreen(enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE);
 
-  display.setTextColor(enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
-  display.setFont(&DSEG7_Classic_Bold_25);
-  display.setCursor(5, 110);
-
-  String timeString = "";
-
-  if (currentTime.Hour < 10){
-    timeString += "0";
-  }
-  timeString += currentTime.Hour;
-  timeString += ":";
-
-  if (currentTime.Minute < 10){
-    timeString += "0";
-  }
-  timeString += currentTime.Minute;
-  // timeString += "-:."; // only special characters that render
-
-  display.println(timeString);
+  drawBattery(enableDarkMode);
 
   #ifdef ARDUINO_ESP32S3_DEV
   if(USB_PLUGGED_IN){
@@ -39,7 +19,67 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   }
   #endif
 
-  drawBattery(enableDarkMode);
+  // DATE 
+  
+  int16_t  x1, y1, lasty;
+  uint16_t w, h;
+
+  lasty = 200 - 16;
+
+  //draw steps
+  //display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
+  display.setFont(&DSEG7_Classic_Bold_25);
+  display.setTextColor(enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK);
+
+  lasty += -8 - h;
+
+  String dateString;
+
+   // draw year
+  dateString = currentTime.Year + 1970;
+  display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
+  display.setCursor(16, lasty);
+  display.print(dateString);
+  lasty += -20;
+
+  // draw date
+  dateString = monthShortStr(currentTime.Month);
+  dateString += " ";
+  dateString += currentTime.Day;
+  display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
+  display.setCursor(16, lasty);
+  display.print(dateString);
+  lasty += -20;
+
+  // draw day
+  dateString = dayStr(currentTime.Wday);
+  display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
+  display.setCursor(16, lasty);
+  display.print(dateString);
+  lasty += -40;
+
+
+  // TIME:
+  display.setTextWrap(false);
+
+  String timeString = "";
+
+  //draw hours
+  timeString = currentTime.Hour;
+  display.getTextBounds(timeString, 0, 0, &x1, &y1, &w, &h);
+  display.setCursor(183 - w, 100 - 5);
+  display.print(timeString);
+
+  //draw minutes
+  if (currentTime.Minute < 10) {
+    timeString = "0";
+  } else {
+    timeString = "";
+  }
+  timeString += currentTime.Minute;
+  display.getTextBounds(timeString, 0, 0, &x1, &y1, &w, &h);
+  display.setCursor(183 - w, 100 + 3 + h);
+  display.print(timeString);
 }
 
 void WatchyFaceX::drawBattery(bool enableDarkMode){
