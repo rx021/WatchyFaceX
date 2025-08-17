@@ -33,6 +33,7 @@ class WatchyFaceX : public Watchy{
 #include "icons.h"
 #include "fonts.h"
 #include "face0.h"
+#include "faceAnalog.h"
 
 void WatchyFaceX::handleButtonPress() {
   if (guiState == WATCHFACE_STATE) {
