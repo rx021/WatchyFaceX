@@ -60,20 +60,15 @@ void WatchyFaceX::drawWatchFace() {
 
   if (currentTime.Hour < 10){
     timeString += "0";
-    //display.print("0");
   }
   timeString += currentTime.Hour;
-  //display.print(currentTime.Hour);
-
   timeString += ":";
-  //display.print(":");
 
   if (currentTime.Minute < 10){
-    //display.print("0");
     timeString += "0";
   }
   timeString += currentTime.Minute;
-  timeString += "_";
+  timeString += "!@#$%^&*()_-=+[]{}\|:;"'<,>.?/";
 
   display.println(timeString);
 }                                         
