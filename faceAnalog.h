@@ -90,7 +90,6 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
     lineThickness,
     textColor
   );
-  uint8_t hourHandOverlayRadius = 45;
   display.fillCircle(centerX, centerY, hourHandOverlayRadius, bgColor);
 
 
