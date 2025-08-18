@@ -78,8 +78,6 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
     4, // lineThickness must be even number
     textColor
   );
-  uint8_t minuteHandOverlayRadius = 45;
-  display.fillCircle(centerX, centerY, minuteHandOverlayRadius, bgColor);
 
   // DRAW HOUR HAND
   uint8_t hourHandOverlayRadius = 45;
@@ -120,8 +118,6 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   display.print(currentTime.Hour);
 
 }
-
-
 
 // HELPER FUNCTION FOR HANDS DRAWING
 //     99 100 101
