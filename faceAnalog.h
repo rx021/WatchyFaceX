@@ -47,7 +47,7 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   for (uint8_t tickIndex = 0; tickIndex < tickCount; tickIndex++) {
     drawHand(tickOuterRadius, (angle_tickScale * tickIndex), textColor);
   }
-  uint8_t quarterHourCircleOverlayRadius = hourCircleOverlayRadius - 5;
+  uint8_t quarterHourCircleOverlayRadius = hourCircleOverlayRadius - 15;
   display.fillCircle(centerX, centerY, quarterHourCircleOverlayRadius, bgColor);
 
   // CLOCK HANDS
