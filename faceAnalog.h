@@ -56,18 +56,22 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   uint8_t myHour = isAfternoon ? currentTime.Hour - 12 : currentTime.Hour;
   uint8_t myMinute = currentTime.Minute;
 
-  // DRAW HOUR HAND
-  //uint8_t hourHandRadius = 45;
-  //float angle_hourHand = angle_hourScale * (myHour-3) + 2*pi/720 * myMinute;
-  //drawHand(hourHandRadius, angle_hourHand, textColor);
-
   // DRAW MINUTE HAND
   float angle_minuteHand = angle_minuteScale * (myMinute - 15);
   drawHand(tickOuterRadius, angle_minuteHand, textColor);
+  uint8_t minuteHandOverlayRadius = 45;
+  display.fillCircle(centerX, centerY, minuteHandOverlayRadius, bgColor);
 
-  // DRAW CENTER POINT
-  uint8_t centerCircleOverlayRadius = 45;
-  display.fillCircle(centerX, centerY, centerCircleOverlayRadius, bgColor);
+  // DRAW HOUR HAND
+  uint8_t hourHandOuterRadius = 45;
+  //float angle_hourHand = angle_hourScale * (myHour-3) + 2*pi/720 * myMinute;
+  uint8_t lineThickness = 2; // must be even
+  drawHandX(
+    hourHandOuterRadius,
+    angle_hourHand,
+    lineThickness,
+    textColor
+  );
 
 
 
@@ -113,5 +117,35 @@ void WatchyFaceX::drawHand(
   display.drawLine(101, 99, 101+x, 99+y, handColor);
   display.drawLine(101, 100, 101+x, 100+y, handColor);
   display.drawLine(101, 101, 101+x, 101+y, handColor);
+}
+
+void WatchyFaceX::drawHandX(
+    uint8_t handRadius,
+    float angle,
+    uint8_t lineThickness,
+    uint16_t handColor
+) {
+  uint8_t halfThickness = lineThickness / 2 ;
+
+  uint8_t centerX = 100;
+  uint8_t startX = centerX - halfThickness;
+  uint8_t endX = centerX + halfThickness;
+
+  uint8_t centerY = 100;
+  uint8_t startY = centerY - halfThickness;
+  uint8_t endY = centerY + halfThickness;
+
+  float x = handRadius * cos(angle);
+  float y = handRadius * sin(angle);
+
+  for (uint8_t lineX1 = startX; lineX1 < endX; lineX1++) {
+    for (uint8_t lineY1 = startY; lineY1 < endY; lineY1++) {
+      display.drawLine(
+        lineX1, lineY1,
+        (lineX1 + x), (lineY1 + y),
+        handColor
+      );
+    }
+  }
 }
 

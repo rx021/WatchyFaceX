@@ -27,6 +27,12 @@ class WatchyFaceX : public Watchy{
       float angle,
       uint16_t handColor
     );
+    void drawHandX(
+      uint8_t handRadius,
+      float angle,
+      uint8_t lineThickness,
+      uint16_t handColor
+    );
     virtual void handleButtonPress(); // Must be virtual in Watchy.h too
 };
 
