@@ -125,7 +125,6 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   uint8_t dateY = centerY - 5;
   display.setCursor(dateX, dateY);
   display.print(dateString);
-  lastY += -40;
 
   // DRAW WEEKDAY
   dateString = dayShortStr(currentTime.Wday);
