@@ -83,11 +83,11 @@ void WatchyFaceX::handleButtonPress() {
 
 void WatchyFaceX::drawWatchFace() {
   if (faceIndex == 0) {
-    drawFace0(isDarkMode);
+    drawFaceAnalog(isDarkMode);
   }
 
   if (faceIndex == 1) {
-    drawFaceAnalog(isDarkMode);
+    drawFace0(isDarkMode);
   }
 }                                         
 
