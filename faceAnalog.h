@@ -60,7 +60,11 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
 
   // DRAW MINUTE HAND
   float angle_minuteHand = angle_minuteScale * (myMinute - 15);
-  drawHand(tickOuterRadius, angle_minuteHand, textColor);
+  drawHand(
+    tickOuterRadius,
+    angle_minuteHand,
+    textColor
+  );
   uint8_t minuteHandOverlayRadius = 45;
   display.fillCircle(centerX, centerY, minuteHandOverlayRadius, bgColor);
 
