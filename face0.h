@@ -42,31 +42,34 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   #endif
 
   // WIFI ICON
-  uint8_t wifiX = chargeXPosn + chargeWidth + iconSpacing;
-  uint8_t wifiY = chargeXPosn + chargeWidth + iconSpacing;
+  uint8_t wifiX = PADDING_X;
+  uint8_t wifiY = PADDING_Y + batteryHeight + iconSpacing;
   uint8_t wifiWidth = 26;
+  uint8_t wifiHeight = 18;
   display.drawBitmap(
     wifiX,
-    chargeYPosn,
+    wifiY,
     WIFI_CONFIGURED ? wifi : wifioff,
     wifiWidth,
-    18,
+    wifiHeight,
     textColor
   );
 
   // BLUETOOTH ICON
-  uint8_t bluetoothXPosn = wifiX + wifiWidth + iconSpacing;
+  uint8_t bluetoothX = wifiX + wifiWidth + iconSpacing;
+  uint8_t bluetoothY = chargeYPosn;
+  uint8_t bluetoothWidth = 13;
+  uint8_t bluetoothHeight = 21;
   if(BLE_CONFIGURED){
     display.drawBitmap(
-      bluetoothXPosn,
-      chargeYPosn,
+      bluetoothX,
+      bluetoothY,
       bluetooth,
-      13,
-      21,
+      bluetoothWidth,
+      bluetoothHeight,
       textColor
     );
   }
-
 
   // DATETIME SETUP:
   
@@ -145,7 +148,7 @@ void WatchyFaceX::drawBattery(
   uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
   uint16_t textColor = enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK; 
 
-  // battery IMAGE
+  // BATTERY IMAGE
   display.drawBitmap(
     batteryXOffset,
     batteryYOffset,
@@ -157,7 +160,6 @@ void WatchyFaceX::drawBattery(
 
   uint8_t segmentXOffset = batteryXOffset + 5;
   uint8_t segmentYOffset = batteryYOffset + 5;
-
   uint8_t segmentHeight = 11;
 
   // BATTERY CLEAR SEGMENTS
