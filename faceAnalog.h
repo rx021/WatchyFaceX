@@ -122,7 +122,7 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   uint8_t dateHalfWidth = w / 2;
   uint8_t dateHalfHeight = h / 2;
   uint8_t dateX = centerX - dateHalfWidth; // to center
-  uint8_t dateY = centerY - dateHalfHeight; // to center
+  uint8_t dateY = centerY + dateHalfHeight; // to center
   display.setCursor(dateX, dateY);
   display.print(dateString);
 
