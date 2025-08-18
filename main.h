@@ -5,6 +5,7 @@
 // font to use
 #include <Fonts/FreeMonoOblique24pt7b.h>
 #include "DSEG7_Classic_Bold_25.h"
+#include "Fonts/Seven_Segment10pt7b.h"
 
 RTC_DATA_ATTR int faceIndex = 0;
 RTC_DATA_ATTR int faceCount = 2;

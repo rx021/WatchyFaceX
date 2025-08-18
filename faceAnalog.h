@@ -126,6 +126,8 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   display.setCursor(dateX, dateY);
   display.print(dateString);
 
+  display.setFont(&Seven_Segment10pt7b);
+
   // DRAW YEAR
   dateString = currentTime.Year + 1970;
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
