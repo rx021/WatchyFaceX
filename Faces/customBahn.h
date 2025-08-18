@@ -2,6 +2,7 @@
 // NOTE: top left is X=0, Y=0
 // NOTE: bottom right is X=200, Y=200
 
+const uint8_t SCREEN_WIDTH = 200; // pixels
 const uint8_t SCREEN_HEIGHT = 200; // pixels
 const uint8_t PADDING_X = 15; // pixels
 const uint8_t PADDING_Y = 15; // pixels
@@ -84,15 +85,18 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
   uint8_t centerY = 100;
 
   // TIME:
-  String timeString = "";
+  
   display.setFont(&DIN_1451_Engschrift_Regular64pt7b);
   display.setTextWrap(false);
+  uint8_t timeSpacing = 6; // must be even number
 
   //draw hours
-  timeString = currentTime.Hour;
+  String timeString = currentTime.Hour;
   display.getTextBounds(timeString, 0, 0, &x1, &y1, &w, &h);
-  uint8_t hourX = 183 - w;
-  uint8_t hourY = centerY - 5;
+  uint8_t hourWidth = w;
+  uint8_t hourHeight = h;
+  uint8_t hourX = SCREEN_WIDTH - PADDING_X - hourWidth;
+  uint8_t hourY = centerY - (timeSpacing / 2);
   display.setCursor(hourX, hourY);
   display.print(timeString);
 
@@ -101,14 +105,15 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
   if (currentTime.Minute < 10) {timeString += "0";}
   timeString += currentTime.Minute;
   display.getTextBounds(timeString, 0, 0, &x1, &y1, &w, &h);
-  uint8_t minuteY = centerY + 3 + h;
-  display.setCursor(hourX, minuteY);
+  uint8_t minuteWidth = w;
+  uint8_t minuteHeight = h;
+  uint8_t minuteX = SCREEN_WIDTH - PADDING_X - minuteWidth;
+  uint8_t minuteY = centerY - (timeSpacing / 2) + minuteHeight;
+  display.setCursor(minuteX, minuteY);
   display.print(timeString);
-
 
   // DATE from bottom-up: 
 
-  int16_t lastY = SCREEN_HEIGHT - PADDING_Y;
   int8_t dateSpacing = 20;
 
   // DRAW WEEKDAY
@@ -117,7 +122,7 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
 
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
   uint8_t weekdayX = PADDING_X;
-  uint8_t weekdayY = lastY;
+  uint8_t weekdayY = SCREEN_HEIGHT - PADDING_Y;
   uint8_t weekdayWidth = w;
   uint8_t weekdayHeight = h;
   display.setCursor(weekdayX, weekdayY);
