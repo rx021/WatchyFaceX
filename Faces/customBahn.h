@@ -116,9 +116,12 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
   String dateString = dayStr(currentTime.Wday);
 
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
-  display.setCursor(PADDING_X, lastY);
+  uint8_t weekdayX = PADDING_X;
+  uint8_t weekdayY = lastY;
+  uint8_t weekdayWidth = w;
+  uint8_t weekdayHeight = h;
+  display.setCursor(weekdayX, weekdayY);
   display.print(dateString);
-  lastY -= dateSpacing;
 
   // DRAW DATE
   display.setFont(&Technology18pt7b);
@@ -127,16 +130,23 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
   dateString += currentTime.Day;
 
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
-  display.setCursor(PADDING_X, lastY);
+  uint8_t dateX = PADDING_X;
+  uint8_t dateY = weekdayY - weekdayHeight - dateSpacing;
+  uint8_t dateWidth = w;
+  uint8_t dateHeight = h;
+  display.setCursor(dateX, dateY);
   display.print(dateString);
-  lastY -= dateSpacing;
 
   // DRAW YEAR
   display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
   dateString = currentTime.Year + 1970;
 
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
-  display.setCursor(PADDING_X, lastY);
+  uint8_t yearX = PADDING_X;
+  uint8_t yearY = dateY - dateHeight - dateSpacing;
+  uint8_t yearWidth = w;
+  uint8_t yearHeight = h;
+  display.setCursor(yearX, yearY);
   display.print(dateString);
 }
 
