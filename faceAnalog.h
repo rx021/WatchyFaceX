@@ -19,12 +19,14 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   // DRAW MINUTE SCALE
   uint8_t minuteCount = 60;
   float angle_minuteScale = circumference / minuteCount;
+  float minuteAngle;
   for (uint8_t minuteIndex = 0; minuteIndex < minuteCount; minuteIndex++) {
+    minuteAngle = angle_minuteScale * minuteIndex;
     display.drawLine(
       centerX,
       centerY,
-      centerX + tickOuterRadius * cos(angle_minuteScale * minuteIndex),
-      centerY + tickOuterRadius * sin(angle_minuteScale * minuteIndex),
+      centerX + tickOuterRadius * cos(minuteAngle),
+      centerY + tickOuterRadius * sin(minuteAngle),
       textColor
     );
   }
