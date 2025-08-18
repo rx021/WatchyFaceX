@@ -12,9 +12,6 @@
 #include "Fonts/Technology18pt7b.h"
 #include "icons.h"
 
-#include "Faces/customBahn.h"
-#include "Faces/analog.h"
-
 RTC_DATA_ATTR int faceIndex = 0;
 RTC_DATA_ATTR int faceCount = 2;
 RTC_DATA_ATTR bool isDarkMode = false;
@@ -40,6 +37,10 @@ class WatchyFaceX : public Watchy{
     );
     virtual void handleButtonPress(); // Must be virtual in Watchy.h too
 };
+
+// needs to be included after class declared
+#include "Faces/customBahn.h"
+#include "Faces/analog.h"
 
 void WatchyFaceX::handleButtonPress() {
   if (guiState == WATCHFACE_STATE) {
