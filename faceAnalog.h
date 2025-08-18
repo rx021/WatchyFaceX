@@ -139,8 +139,8 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   dateString = dayShortStr(currentTime.Wday);
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
   uint8_t weekdayHalfWidth = w / 2;
-  uint8_t weekdayX = centerX - weekdayHalfWidth;
-  uint8_t weekdayY = centerY + dateHalfHeight + dateSpacing + h;
+  uint8_t weekdayX = centerX - weekdayHalfWidth; // to center
+  uint8_t weekdayY = centerY + dateHalfHeight + dateSpacing + h; // to center below date
   display.setCursor(weekdayX, weekdayY);
   display.print(dateString);
 }
