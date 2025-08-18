@@ -4,8 +4,11 @@
 #include <Watchy.h> // include Watchy library
 // font to use
 #include <Fonts/FreeMonoOblique24pt7b.h>
-#include "DSEG7_Classic_Bold_25.h"
+#include "Fonts/DSEG7_Classic_Bold_25.h"
+#include "Fonts/DIN_1451_Engschrift_Regular12pt7b.h"
+#include "Fonts/DIN_1451_Engschrift_Regular64pt7b.h"
 #include "Fonts/Seven_Segment10pt7b.h"
+#include "Fonts/Technology18pt7b.h"
 
 RTC_DATA_ATTR int faceIndex = 0;
 RTC_DATA_ATTR int faceCount = 2;
@@ -34,7 +37,6 @@ class WatchyFaceX : public Watchy{
 };
 
 #include "icons.h"
-#include "fonts.h"
 #include "face0.h"
 #include "faceAnalog.h"
 
