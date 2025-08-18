@@ -145,8 +145,11 @@ void WatchyFaceX::drawHandX(
   uint8_t startY = centerY - halfThickness;
   uint8_t endY = centerY + halfThickness;
 
-  float handX = handRadius * cos(angle);
-  float handY = handRadius * sin(angle);
+  // SOH CAH TOA
+  // O = opposite (y); A = adjacent (x); H = hypotenuse (radius)
+  // sin = O/H; cos = A/H
+  float handX = handRadius * cos(angle); // A = H * cos
+  float handY = handRadius * sin(angle); // O = H * sin
 
   for (uint8_t lineX1 = startX; lineX1 < endX; lineX1++) {
     for (uint8_t lineY1 = startY; lineY1 < endY; lineY1++) {
