@@ -5,7 +5,7 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
 
   display.fillScreen(bgColor);
   display.setTextColor(textColor);
-  display.setFont(&FreeMonoOblique24pt7b);
+  display.setFont(&DSEG7_Classic_Bold_25);
 
   float pi = 3.1415926535897932384626433832795;
   float circumference = 2 * pi;

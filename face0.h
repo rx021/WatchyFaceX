@@ -69,7 +69,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
 
   // TIME:
   String timeString = "";
-  display.setFont(&DSEG7_Classic_Bold_25);
+  display.setFont(&DIN_1451_Engschrift_Regular64pt7b);
   display.setTextWrap(false);
 
   //draw hours
