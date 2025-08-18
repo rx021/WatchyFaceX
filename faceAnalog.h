@@ -13,7 +13,7 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   uint8_t centerX = 100;
   uint8_t centerY = 100;
 
-  // CLOCK TICK SCALE
+  // CLOCK TICK SCALE:
   uint8_t tickOuterRadius = 98;
 
   // DRAW MINUTE SCALE
@@ -62,7 +62,7 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   uint8_t quarterHourCircleOverlayRadius = hourCircleOverlayRadius - 15;
   display.fillCircle(centerX, centerY, quarterHourCircleOverlayRadius, bgColor);
 
-  // CLOCK HANDS
+  // CLOCK HANDS:
 
   bool isAfternoon = currentTime.Hour > 12;
   uint8_t myHour = isAfternoon ? currentTime.Hour - 12 : currentTime.Hour;
@@ -102,21 +102,53 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   display.fillCircle(centerX, centerY, hourHandOverlayRadius, bgColor);
 
 
+  // CENTER DATETIME DISPLAY:
+  int16_t  x1, y1;
+  uint16_t w, h;
+
+  String dateString;
+
+  // DRAW DATE
+  dateString = currentTime.Year + 1970;
+  dateString += "-";
+
+  uint8_t currMonth = currentTime.Month;
+  if (currMonth < 10) {dateString += "0";}
+  dateString += currMonth;
+  
+  uint8_t currDay = currentTime.Day;
+  if (currDay < 10) {dateString += "0";}
+  dateString += currDay;
+
+  display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
+  uint8_t dateX = centerX - (w / 2);
+  uint8_t dateY = centerY - 5;
+  display.setCursor(dateX, dateY);
+  display.print(dateString);
+  lastY += -40;
+
+  // DRAW WEEKDAY
+  dateString = dayShortStr(currentTime.Wday);
+  display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
+  uint8_t weekdayX = centerX - (w / 2);
+  uint8_t weekdayY = centerY + 5;
+  display.setCursor(weekdayX, weekdayY);
+  display.print(dateString);
+
 
   // positioning of hour display for DSEG7_Classic_Regular_39 font
-  uint8_t hourYPosn = 120;
-  if (currentTime.Hour > 9 && currentTime.Hour < 20) {
-    display.setCursor(58, hourYPosn);
-  } else {
-    display.setCursor(68, hourYPosn);
-  }
+  //uint8_t hourYPosn = 120;
+  //if (currentTime.Hour > 9 && currentTime.Hour < 20) {
+    //display.setCursor(58, hourYPosn);
+  //} else {
+    //display.setCursor(68, hourYPosn);
+  //}
 
   // display hour (with a leading zero, if necessary)
-  if(currentTime.Hour < 10){
-      display.print("0");
-  }
-  display.print(currentTime.Hour);
-
+  //if(currentTime.Hour < 10){
+      //display.print("0");
+  //}
+  //display.print(currentTime.Hour);
 }
 
 // HELPER FUNCTION FOR HANDS DRAWING
