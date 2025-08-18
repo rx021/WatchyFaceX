@@ -2,15 +2,16 @@
 #define MAIN_H
 
 #include <Watchy.h> // include Watchy library
-// font to use
+
+// used in faces
 #include <Fonts/FreeMonoOblique24pt7b.h>
 #include "Fonts/DSEG7_Classic_Bold_25.h"
 #include "Fonts/DIN_1451_Engschrift_Regular12pt7b.h"
 #include "Fonts/DIN_1451_Engschrift_Regular64pt7b.h"
 #include "Fonts/Seven_Segment10pt7b.h"
 #include "Fonts/Technology18pt7b.h"
-
 #include "icons.h"
+
 #include "Faces/customBahn.h"
 #include "Faces/analog.h"
 
