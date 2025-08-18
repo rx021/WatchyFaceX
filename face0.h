@@ -3,9 +3,8 @@
 // NOTE: bottom right is X=200, Y=200
 
 const uint8_t SCREEN_HEIGHT = 200; // pixels
-const uint8_t PADDING = 15; // pixels
-const uint8_t BATTERY_X_OFFSET = PADDING;
-const uint8_t BATTERY_Y_OFFSET = PADDING;
+const uint8_t PADDING_X = 15; // pixels
+const uint8_t PADDING_Y = 15; // pixels
 
 void WatchyFaceX::drawFace0(bool enableDarkMode) {
   uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
@@ -15,14 +14,14 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   uint8_t batteryWidth = 37;
   drawBattery(
     enableDarkMode,
-    PADDING,
-    BATTERY_Y_OFFSET,
+    PADDING_X,
+    PADDING_Y,
     batteryWidth
   );
 
   uint8_t iconSpacing = 5;
-  uint8_t chargeXPosn = PADDING + batteryWidth + iconSpacing;
-  uint8_t chargeYPosn = BATTERY_Y_OFFSET + 2;
+  uint8_t chargeXPosn = PADDING_X + batteryWidth + iconSpacing;
+  uint8_t chargeYPosn = PADDING_Y + 2;
   uint8_t chargeWidth = 16;
 
   #ifdef ARDUINO_ESP32S3_DEV
@@ -97,7 +96,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
 
   // DATE from bottom-up: 
 
-  int16_t lastY = SCREEN_HEIGHT - PADDING;
+  int16_t lastY = SCREEN_HEIGHT - PADDING_Y;
   int8_t dateSpacing = 20;
 
   // DRAW WEEKDAY
@@ -105,7 +104,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   String dateString = dayStr(currentTime.Wday);
 
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
-  display.setCursor(PADDING, lastY);
+  display.setCursor(PADDING_X, lastY);
   display.print(dateString);
   lastY -= dateSpacing;
 
@@ -116,7 +115,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   dateString += currentTime.Day;
 
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
-  display.setCursor(PADDING, lastY);
+  display.setCursor(PADDING_X, lastY);
   display.print(dateString);
   lastY -= dateSpacing;
 
@@ -125,7 +124,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   dateString = currentTime.Year + 1970;
 
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
-  display.setCursor(PADDING, lastY);
+  display.setCursor(PADDING_X, lastY);
   display.print(dateString);
 }
 
