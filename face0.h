@@ -11,6 +11,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   uint16_t textColor = enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK; 
   display.fillScreen(bgColor);
 
+  // BATTERY ICON
   uint8_t batteryWidth = 37;
   drawBattery(
     enableDarkMode,
@@ -19,6 +20,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
     batteryWidth
   );
 
+  // CHARGE ICON
   uint8_t iconSpacing = 5;
   uint8_t chargeXPosn = PADDING_X + batteryWidth + iconSpacing;
   uint8_t chargeYPosn = PADDING_Y + 2;
@@ -37,6 +39,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   }
   #endif
 
+  // WIFI ICON
   uint8_t wifiXPosn = chargeXPosn + chargeWidth + iconSpacing;
   uint8_t wifiWidth = 26;
   display.drawBitmap(
@@ -48,6 +51,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
     textColor
   );
 
+  // BLUETOOTH ICON
   uint8_t bluetoothXPosn = wifiXPosn + wifiWidth + iconSpacing;
   if(BLE_CONFIGURED){
     display.drawBitmap(
