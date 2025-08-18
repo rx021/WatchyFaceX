@@ -22,11 +22,6 @@ class WatchyFaceX : public Watchy{
       uint8_t batteryWidth
     );
     void drawFaceAnalog(bool enableDarkMode);
-    void drawHand(
-      uint8_t handRadius,
-      float angle,
-      uint16_t handColor
-    );
     void drawHandX(
       uint8_t handRadius,
       float angle,
