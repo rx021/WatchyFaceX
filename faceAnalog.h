@@ -89,6 +89,11 @@ void WatchyFaceX::drawHand(
 ) {
   float x = handRadius * cos(angle);
   float y = handRadius * sin(angle);
+  //     99 100 101
+  //  99  .   .   .        
+  // 100  .   .   .        
+  // 101  .   .   .        
+  // draws from center spots to tickOuterRadius
   display.drawLine(99, 99, 99+x, 99+y, handColor);
   display.drawLine(99, 100, 99+x, 100+y, handColor);
   display.drawLine(99, 101, 99+x, 101+y, handColor);
