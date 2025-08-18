@@ -121,7 +121,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   lastY -= dateSpacing;
 
   // DRAW DATE
-  display.setFont(&DSEG7_Classic_Bold_25);
+  display.setFont(&Technology18pt7b);
   dateString = monthShortStr(currentTime.Month);
   dateString += " ";
   dateString += currentTime.Day;
