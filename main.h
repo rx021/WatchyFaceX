@@ -63,7 +63,7 @@ void WatchyFaceX::handleButtonPress() {
     if (wakeupBit & UP_BTN_MASK) {
       faceIndex--;
       if (faceIndex < 0 ) {
-        // go back to last
+        // go back to last if beyond list
         faceIndex = faceCount - 1;
       }
       RTC.read(currentTime);
@@ -74,7 +74,7 @@ void WatchyFaceX::handleButtonPress() {
     if (wakeupBit & DOWN_BTN_MASK) {
       faceIndex++;
       if (faceCount <= faceIndex) {
-        // go to first
+        // go to first if beyond list
         faceIndex = 0;
       }
       RTC.read(currentTime);
