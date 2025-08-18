@@ -18,7 +18,7 @@ class WatchyFaceX : public Watchy{
   using Watchy::Watchy;
   public: 
     void drawWatchFace();
-    void drawFace0(bool enableDarkMode);
+    void drawFaceCustomBahn(bool enableDarkMode);
     void drawBattery(
       bool enableDarkMode,
       uint8_t batteryXOffset,
@@ -37,7 +37,7 @@ class WatchyFaceX : public Watchy{
 };
 
 #include "icons.h"
-#include "face0.h"
+#include "Faces/customBahn.h"
 #include "Faces/analog.h"
 
 void WatchyFaceX::handleButtonPress() {
@@ -87,7 +87,7 @@ void WatchyFaceX::handleButtonPress() {
 
 void WatchyFaceX::drawWatchFace() {
   if (faceIndex == 0) {
-    drawFace0(isDarkMode);
+    drawFaceCustomBahn(isDarkMode);
   }
 
   if (faceIndex == 1) {
