@@ -13,7 +13,7 @@
 #include "Icons/battery.h"
 #include "Icons/charge.h"
 #include "Icons/bluetooth.h"
-#include "icons.h"
+#include "Icons/wifi.h"
 
 RTC_DATA_ATTR int faceIndex = 0;
 RTC_DATA_ATTR int faceCount = 2;
