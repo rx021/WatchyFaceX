@@ -67,6 +67,9 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
 
   display.setTextColor(textColor);
 
+  uint8_t centerX = 100;
+  uint8_t centerY = 100;
+
   // TIME:
   String timeString = "";
   display.setFont(&DIN_1451_Engschrift_Regular64pt7b);
@@ -75,18 +78,18 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   //draw hours
   timeString = currentTime.Hour;
   display.getTextBounds(timeString, 0, 0, &x1, &y1, &w, &h);
-  display.setCursor(183 - w, 100 - 5);
+  uint8_t hourX = 183 - w;
+  uint8_t hourY = centerY - 5;
+  display.setCursor(hourX, hourY);
   display.print(timeString);
 
   //draw minutes
-  if (currentTime.Minute < 10) {
-    timeString = "0";
-  } else {
-    timeString = "";
-  }
+  timeString = "";
+  if (currentTime.Minute < 10) {timeString += "0";}
   timeString += currentTime.Minute;
   display.getTextBounds(timeString, 0, 0, &x1, &y1, &w, &h);
-  display.setCursor(183 - w, 100 + 3 + h);
+  uint8_t minuteY = centerY + 3 + h;
+  display.setCursor(hourX, minuteY);
   display.print(timeString);
 
 
