@@ -12,30 +12,32 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   display.fillScreen(bgColor);
 
   // BATTERY ICON
+  uint8_t batteryX = PADDING_X;
+  uint8_t batteryY = PADDING_Y;
   uint8_t batteryWidth = 37;
   uint8_t batteryHeight = 21;
   drawBattery(
     enableDarkMode,
-    PADDING_X,
-    PADDING_Y,
+    batteryX,
+    batteryY,
     batteryWidth,
     batteryHeight
   );
 
   // CHARGE ICON
   uint8_t iconSpacing = 5;
-  uint8_t chargeXPosn = PADDING_X + batteryWidth + iconSpacing;
-  uint8_t chargeYPosn = PADDING_Y + 2;
+  uint8_t chargeX = PADDING_X + batteryWidth + iconSpacing;
+  uint8_t chargeY = PADDING_Y + 2;
   uint8_t chargeWidth = 16;
-
+  uint8_t chargeHeight = 18;
   #ifdef ARDUINO_ESP32S3_DEV
   if(USB_PLUGGED_IN){
     display.drawBitmap(
-      chargeXPosn,
-      chargeYPosn,
+      chargeX,
+      chargeY,
       charge,
       chargeWidth,
-      18,
+      chargeHeight,
       textColor
     );
   }
@@ -57,7 +59,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
 
   // BLUETOOTH ICON
   uint8_t bluetoothX = wifiX + wifiWidth + iconSpacing;
-  uint8_t bluetoothY = chargeYPosn;
+  uint8_t bluetoothY = wifiY;
   uint8_t bluetoothWidth = 13;
   uint8_t bluetoothHeight = 21;
   if(BLE_CONFIGURED){
