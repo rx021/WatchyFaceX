@@ -110,10 +110,9 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   uint8_t dateSpacing = 5;
 
   // DRAW DATE
-  uint8_t currMonth = currentTime.Month;
-  if (currMonth < 10) {dateString += "0";}
+  uint8_t currMonth = monthShortStr(currentTime.Month);
   dateString += currMonth;
-  dateString += "-";
+  dateString += " ";
   uint8_t currDay = currentTime.Day;
   if (currDay < 10) {dateString += "0";}
   dateString += currDay;
