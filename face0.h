@@ -13,11 +13,13 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
 
   // BATTERY ICON
   uint8_t batteryWidth = 37;
+  uint8_t batteryHeight = 21;
   drawBattery(
     enableDarkMode,
     PADDING_X,
     PADDING_Y,
-    batteryWidth
+    batteryWidth,
+    batteryHeight
   );
 
   // CHARGE ICON
@@ -40,10 +42,11 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   #endif
 
   // WIFI ICON
-  uint8_t wifiXPosn = chargeXPosn + chargeWidth + iconSpacing;
+  uint8_t wifiX = chargeXPosn + chargeWidth + iconSpacing;
+  uint8_t wifiY = chargeXPosn + chargeWidth + iconSpacing;
   uint8_t wifiWidth = 26;
   display.drawBitmap(
-    116,
+    wifiX,
     chargeYPosn,
     WIFI_CONFIGURED ? wifi : wifioff,
     wifiWidth,
@@ -52,7 +55,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   );
 
   // BLUETOOTH ICON
-  uint8_t bluetoothXPosn = wifiXPosn + wifiWidth + iconSpacing;
+  uint8_t bluetoothXPosn = wifiX + wifiWidth + iconSpacing;
   if(BLE_CONFIGURED){
     display.drawBitmap(
       bluetoothXPosn,
@@ -136,17 +139,19 @@ void WatchyFaceX::drawBattery(
     bool enableDarkMode,
     uint8_t batteryXOffset,
     uint8_t batteryYOffset,
-    uint8_t batteryWidth
+    uint8_t batteryWidth,
+    uint8_t batteryHeight
 ){
   uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
   uint16_t textColor = enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK; 
+
   // battery IMAGE
   display.drawBitmap(
     batteryXOffset,
     batteryYOffset,
     battery,
     batteryWidth,
-    21,
+    batteryHeight,
     textColor
   );
 
@@ -155,7 +160,7 @@ void WatchyFaceX::drawBattery(
 
   uint8_t segmentHeight = 11;
 
-  // battery clear segments
+  // BATTERY CLEAR SEGMENTS
   display.fillRect(
     segmentXOffset,
     segmentYOffset,
@@ -186,7 +191,7 @@ void WatchyFaceX::drawBattery(
   for(int8_t batterySegments = 0; batterySegments < batteryLevel; batterySegments++){
     xPosn = segmentXOffset + (batterySegments * segmentSpacing);
 
-    // battery filled segments
+    // BATTERY FILLED SEGMENTS
     display.fillRect(
       xPosn,
       segmentYOffset,

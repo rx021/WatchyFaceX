@@ -20,7 +20,8 @@ class WatchyFaceX : public Watchy{
       bool enableDarkMode,
       uint8_t batteryXOffset,
       uint8_t batteryYOffset,
-      uint8_t batteryWidth
+      uint8_t batteryWidth,
+      uint8_t batteryHeight
     );
     void drawFaceAnalog(bool enableDarkMode);
     void drawHandX(
