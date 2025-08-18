@@ -11,6 +11,7 @@
 #include "Fonts/Seven_Segment10pt7b.h"
 #include "Fonts/Technology18pt7b.h"
 #include "Icons/battery.h"
+#include "Icons/charge.h"
 #include "icons.h"
 
 RTC_DATA_ATTR int faceIndex = 0;
