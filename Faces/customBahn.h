@@ -115,7 +115,7 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
 
   // DATE from bottom-up: 
 
-  int8_t dateSpacing = 20;
+  int8_t dateSpacing = 10;
 
   // DRAW WEEKDAY
   display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
