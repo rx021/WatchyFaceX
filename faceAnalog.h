@@ -106,12 +106,10 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   int16_t  x1, y1;
   uint16_t w, h;
 
-  String dateString;
+  String dateString = "";
+  uint8_t dateSpacing = 5;
 
   // DRAW DATE
-  dateString = currentTime.Year + 1970;
-  dateString += "-";
-
   uint8_t currMonth = currentTime.Month;
   if (currMonth < 10) {dateString += "0";}
   dateString += currMonth;
@@ -121,33 +119,30 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   dateString += currDay;
 
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
-  uint8_t dateX = centerX - (w / 2);
-  uint8_t dateY = centerY - 5;
+  uint8_t dateHalfWidth = w / 2;
+  uint8_t dateHalfHeight = h / 2;
+  uint8_t dateX = centerX - dateHalfWidth; // to center
+  uint8_t dateY = centerY - dateHalfHeight; // to center
   display.setCursor(dateX, dateY);
+  display.print(dateString);
+
+  // DRAW YEAR
+  dateString = currentTime.Year + 1970;
+  display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
+  uint8_t yearHalfWidth = w / 2;
+  uint8_t yearX = centerX - yearHalfWidth; // to center
+  uint8_t yearY = centerY - dateHalfHeight - dateSpacing; // to center above date
+  display.setCursor(yearX, yearY);
   display.print(dateString);
 
   // DRAW WEEKDAY
   dateString = dayShortStr(currentTime.Wday);
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
-  uint8_t weekdayX = centerX - (w / 2);
-  uint8_t weekdayY = centerY + 5;
+  uint8_t weekdayHalfWidth = w / 2;
+  uint8_t weekdayX = centerX - weekdayHalfWidth;
+  uint8_t weekdayY = centerY + dateHalfHeight + dateSpacing + h;
   display.setCursor(weekdayX, weekdayY);
   display.print(dateString);
-
-
-  // positioning of hour display for DSEG7_Classic_Regular_39 font
-  //uint8_t hourYPosn = 120;
-  //if (currentTime.Hour > 9 && currentTime.Hour < 20) {
-    //display.setCursor(58, hourYPosn);
-  //} else {
-    //display.setCursor(68, hourYPosn);
-  //}
-
-  // display hour (with a leading zero, if necessary)
-  //if(currentTime.Hour < 10){
-      //display.print("0");
-  //}
-  //display.print(currentTime.Hour);
 }
 
 // HELPER FUNCTION FOR HANDS DRAWING
