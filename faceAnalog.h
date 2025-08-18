@@ -109,24 +109,24 @@ void WatchyFaceX::drawHand(
     float angle,
     uint16_t handColor
 ) {
-  float x = handRadius * cos(angle);
-  float y = handRadius * sin(angle);
+  float handX = handRadius * cos(angle);
+  float handY = handRadius * sin(angle);
   //     99 100 101
   //  99  .   .   .        
   // 100  .   .   .        
   // 101  .   .   .        
   // draws from center spots to tickOuterRadius
-  display.drawLine(99, 99, 99+x, 99+y, handColor);
-  display.drawLine(99, 100, 99+x, 100+y, handColor);
-  display.drawLine(99, 101, 99+x, 101+y, handColor);
+  display.drawLine(99, 99, 99+handX, 99+handY, handColor);
+  display.drawLine(99, 100, 99+handX, 100+handY, handColor);
+  display.drawLine(99, 101, 99+handX, 101+handY, handColor);
 
-  display.drawLine(100, 99, 100+x, 99+y, handColor);
-  display.drawLine(100, 100, 100+x, 100+y, handColor);
-  display.drawLine(100, 101, 100+x, 101+y, handColor);
+  display.drawLine(100, 99, 100+handX, 99+handY, handColor);
+  display.drawLine(100, 100, 100+handX, 100+handY, handColor);
+  display.drawLine(100, 101, 100+handX, 101+handY, handColor);
 
-  display.drawLine(101, 99, 101+x, 99+y, handColor);
-  display.drawLine(101, 100, 101+x, 100+y, handColor);
-  display.drawLine(101, 101, 101+x, 101+y, handColor);
+  display.drawLine(101, 99, 101+handX, 99+handY, handColor);
+  display.drawLine(101, 100, 101+handX, 100+handY, handColor);
+  display.drawLine(101, 101, 101+handX, 101+handY, handColor);
 }
 
 void WatchyFaceX::drawHandX(
@@ -145,14 +145,14 @@ void WatchyFaceX::drawHandX(
   uint8_t startY = centerY - halfThickness;
   uint8_t endY = centerY + halfThickness;
 
-  float x = handRadius * cos(angle);
-  float y = handRadius * sin(angle);
+  float handX = handRadius * cos(angle);
+  float handY = handRadius * sin(angle);
 
   for (uint8_t lineX1 = startX; lineX1 < endX; lineX1++) {
     for (uint8_t lineY1 = startY; lineY1 < endY; lineY1++) {
       display.drawLine(
         lineX1, lineY1,
-        (lineX1 + x), (lineY1 + y),
+        (lineX1 + handX), (lineY1 + handY),
         handColor
       );
     }
