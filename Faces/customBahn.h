@@ -89,9 +89,10 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
   display.setFont(&DIN_1451_Engschrift_Regular64pt7b);
   display.setTextWrap(false);
   uint8_t timeSpacing = 6; // must be even number
+  String timeString = ""; // must declare first to concat numbers
 
   //draw hours
-  String timeString = currentTime.Hour;
+  timeString += currentTime.Hour; // can add number to string
   display.getTextBounds(timeString, 0, 0, &x1, &y1, &w, &h);
   uint8_t hourWidth = w;
   uint8_t hourHeight = h;
