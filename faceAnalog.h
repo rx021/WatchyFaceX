@@ -37,7 +37,12 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   uint8_t hourCount = 12;
   float angle_hourScale = circumference / hourCount;
   for (uint8_t hourIndex = 0; hourIndex < hourCount; hourIndex++) {
-    drawHand(tickOuterRadius, (angle_hourScale * hourIndex), textColor);
+    drawHandX(
+      tickOuterRadius,
+      (angle_hourScale * hourIndex),
+      2, // lineThickness must be even number
+      textColor
+    );
   }
   uint8_t hourCircleOverlayRadius = minuteCircleOverlayRadius - 5;
   display.fillCircle(centerX, centerY, hourCircleOverlayRadius, bgColor);
@@ -47,7 +52,12 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   uint8_t tickCount = 4;
   float angle_tickScale = circumference / tickCount;
   for (uint8_t tickIndex = 0; tickIndex < tickCount; tickIndex++) {
-    drawHand(tickOuterRadius, (angle_tickScale * tickIndex), textColor);
+    drawHandX(
+      tickOuterRadius,
+      (angle_tickScale * tickIndex),
+      2, // lineThickness must be even number
+      textColor
+    );
   }
   uint8_t quarterHourCircleOverlayRadius = hourCircleOverlayRadius - 15;
   display.fillCircle(centerX, centerY, quarterHourCircleOverlayRadius, bgColor);
@@ -61,6 +71,7 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   // DRAW MINUTE HAND
   uint8_t minuteCountQuarter = minuteCount / 4;
   float angle_minuteHand = angle_minuteScale * (myMinute - minuteCountQuarter);
+
   drawHandX(
     tickOuterRadius,
     angle_minuteHand,
@@ -112,32 +123,12 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
 
 
 
-// helper function for hands drawing
-void WatchyFaceX::drawHand(
-    uint8_t handRadius,
-    float angle,
-    uint16_t handColor
-) {
-  float handX = handRadius * cos(angle);
-  float handY = handRadius * sin(angle);
-  //     99 100 101
-  //  99  .   .   .        
-  // 100  .   .   .        
-  // 101  .   .   .        
-  // draws from center spots to tickOuterRadius
-  display.drawLine(99, 99, 99+handX, 99+handY, handColor);
-  display.drawLine(99, 100, 99+handX, 100+handY, handColor);
-  display.drawLine(99, 101, 99+handX, 101+handY, handColor);
-
-  display.drawLine(100, 99, 100+handX, 99+handY, handColor);
-  display.drawLine(100, 100, 100+handX, 100+handY, handColor);
-  display.drawLine(100, 101, 100+handX, 101+handY, handColor);
-
-  display.drawLine(101, 99, 101+handX, 99+handY, handColor);
-  display.drawLine(101, 100, 101+handX, 100+handY, handColor);
-  display.drawLine(101, 101, 101+handX, 101+handY, handColor);
-}
-
+// HELPER FUNCTION FOR HANDS DRAWING
+//     99 100 101
+//  99  .   .   .        
+// 100  .   .   .        
+// 101  .   .   .        
+// draws from center spots to tickOuterRadius
 void WatchyFaceX::drawHandX(
     uint8_t handRadius,
     float angle,
