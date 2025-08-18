@@ -2,6 +2,7 @@
 // NOTE: top left is X=0, Y=0
 // NOTE: bottom right is X=200, Y=200
 
+const uint8_t SCREEN_HEIGHT = 200; // pixels
 const uint8_t PADDING = 15; // pixels
 const uint8_t BATTERY_X_OFFSET = PADDING;
 const uint8_t BATTERY_Y_OFFSET = PADDING;
@@ -14,13 +15,13 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   uint8_t batteryWidth = 37;
   drawBattery(
     enableDarkMode,
-    BATTERY_X_OFFSET,
+    PADDING,
     BATTERY_Y_OFFSET,
     batteryWidth
   );
 
   uint8_t iconSpacing = 5;
-  uint8_t chargeXPosn = BATTERY_X_OFFSET + batteryWidth + iconSpacing;
+  uint8_t chargeXPosn = PADDING + batteryWidth + iconSpacing;
   uint8_t chargeYPosn = BATTERY_Y_OFFSET + 2;
   uint8_t chargeWidth = 16;
 
@@ -96,16 +97,15 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
 
   // DATE from bottom-up: 
 
-  String dateString;
-  int16_t lastY = 200 - 16;
-  int8_t dateSpacing = 40;
-  display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
+  int16_t lastY = SCREEN_HEIGHT - PADDING;
+  int8_t dateSpacing = 20;
 
   // DRAW WEEKDAY
-  dateString = dayStr(currentTime.Wday);
+  display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
+  String dateString = dayStr(currentTime.Wday);
 
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
-  display.setCursor(BATTERY_X_OFFSET, lastY);
+  display.setCursor(PADDING, lastY);
   display.print(dateString);
   lastY -= dateSpacing;
 
@@ -116,7 +116,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   dateString += currentTime.Day;
 
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
-  display.setCursor(BATTERY_X_OFFSET, lastY);
+  display.setCursor(PADDING, lastY);
   display.print(dateString);
   lastY -= dateSpacing;
 
@@ -125,7 +125,7 @@ void WatchyFaceX::drawFace0(bool enableDarkMode) {
   dateString = currentTime.Year + 1970;
 
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
-  display.setCursor(BATTERY_X_OFFSET, lastY);
+  display.setCursor(PADDING, lastY);
   display.print(dateString);
 }
 
