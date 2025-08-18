@@ -59,7 +59,8 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   uint8_t myMinute = currentTime.Minute;
 
   // DRAW MINUTE HAND
-  float angle_minuteHand = angle_minuteScale * (myMinute - 15);
+  uint8_t minuteCountQuarter = minuteCount / 4;
+  float angle_minuteHand = angle_minuteScale * (myMinute - minuteCountQuarter);
   drawHand(
     tickOuterRadius,
     angle_minuteHand,
@@ -75,10 +76,13 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   uint8_t hourHandLength = (tickOuterRadius - hourHandOverlayRadius) / 2;
   uint8_t hourHandOuterRadius = hourHandOverlayRadius + hourHandLength;
 
-  float halfMinuteIncrementCount = 720; // 360 * 2
-  float halfMinuteIncrements = circumference / halfMinuteIncrementCount;
-  float minuteIncrements = halfMinuteIncrements * myMinute;
-  float angle_hourHand = angle_hourScale * (myHour - 3) + minuteIncrements;
+  //float halfMinuteIncrementCount = 720; // 360 * 2 ~ in degrees
+  //float halfMinuteIncrements = circumference / halfMinuteIncrementCount;
+  //float minuteIncrements = halfMinuteIncrements * myMinute;
+  //float angle_hourHand = angle_hourScale * (myHour - 3) + minuteIncrements;
+  uint8_t hourCountQuarter = hourCount / 4;
+  float angle_hourHand = angle_hourScale * (myHour - hourCountQuarter);
+
   uint8_t lineThickness = 2; // must be even number
   drawHandX(
     hourHandOuterRadius,
