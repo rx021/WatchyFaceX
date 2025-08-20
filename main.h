@@ -49,6 +49,8 @@ class WatchyFaceX : public Watchy{
 
 // needs to be included after class declared
 #include "Faces/customBahn.h"
+#include "Faces/messages.h"
+#include "Faces/calendar.h"
 #include "Faces/analog.h"
 
 void WatchyFaceX::drawWatchFace() {
