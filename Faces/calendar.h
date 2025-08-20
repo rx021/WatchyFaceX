@@ -10,11 +10,26 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
   display.fillScreen(bgColor);
 
   // CALENDAR
-  display.setTextColor(textColor);
+  //display.setTextColor(textColor);
+  //display.setFont(&FreeSans9pt7b);
+  //String textString = ""; // must declare first to concat numbers
 
-  display.setFont(&DIN_1451_Engschrift_Regular64pt7b);
-  String timeString = ""; // must declare first to concat numbers
+  uint8_t totalRows = DISPLAY_HEIGHT / CELL_Y_HEIGHT;
+  uint8_t totalCols = DISPLAY_WIDTH / CELL_X_WIDTH;
+  uint8_t cellX = 0;
+  uint8_t cellY = 0;
 
-  display.setCursor(hourX, hourY);
-  display.print(timeString);
+  for (uint8_t rowIndex = 0; rowIndex < totalRows; rowIndex++) {
+    for (uint8_t colIndex = 0; colIndex < totalCols; colIndex++) {
+      cellX = (rowIndex * CELL_Y_GAP) + (rowIndex * CELL_Y_HEIGHT) + CELL_Y_HEIGHT;
+      cellY = (colIndex * CELL_X_GAP) + (colIndex * CELL_X_WIDTH) + CELL_X_WIDTH;
+      display.fillRect(
+        cellX,
+        cellY,
+        CELL_X_WIDTH,
+        CELL_X_HEIGHT,
+        textColor
+      );
+    }
+  }
 }
