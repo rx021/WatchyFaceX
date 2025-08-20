@@ -52,13 +52,10 @@ class WatchyFaceX : public Watchy{
 #include "Faces/analog.h"
 
 void WatchyFaceX::drawWatchFace() {
-  if (faceIndex == 0) {
-    drawFaceCustomBahn(isDarkMode);
-  }
-
-  if (faceIndex == 1) {
-    drawFaceAnalog(isDarkMode);
-  }
+  if (faceIndex == 0) {drawFaceCustomBahn(isDarkMode);}
+  if (faceIndex == 1) {drawFaceMessages(isDarkMode);}
+  if (faceIndex == 2) {drawFaceCalendar(isDarkMode);}
+  if (faceIndex == 3) {drawFaceAnalog(isDarkMode);}
 }                                         
 
 void WatchyFaceX::handleButtonPress() {
