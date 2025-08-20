@@ -34,11 +34,18 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   // DRAW DATE from bottom-up: 
   display.setFont(&Technology18pt7b);
 
+  String dateString = "";
   uint8_t year = currentTime.Year + 1970;
   uint8_t month = monthShortStr(currentTime.Month);
   uint8_t day = currentTime.Day;
   uint8_t weekday = dayShortStr(currentTime.Wday);
-  String dateString = "" + year + " " + month + " " + day + " " + weekday;
+  dateString += year;
+  dateString += " ";
+  dateString += month;
+  dateString += " ";
+  dateString += day;
+  dateString += " ";
+  dateString += weekday;
 
   uint8_t dateX = PADDING_X;
   uint8_t dateY = DISPLAY_HEIGHT - PADDING_Y;
