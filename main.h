@@ -20,7 +20,7 @@
 #include "Icons/wifi.h"
 
 RTC_DATA_ATTR int faceIndex = 0;
-RTC_DATA_ATTR int faceCount = 2;
+RTC_DATA_ATTR int faceCount = 4;
 RTC_DATA_ATTR bool isDarkMode = false;
 
 class WatchyFaceX : public Watchy{
