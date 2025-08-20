@@ -1,5 +1,6 @@
 
-// NOTE: fillRect - top left is X=0, Y=0
+// NOTE: fillRect() - top left is X=0, Y=0
+// NOTE: setCursor() - bottom left is needed for TEXT to print properly
 
 const uint8_t CELL_X_WIDTH = 26; // pixels
 const uint8_t CELL_X_GAP = 3; // pixels
