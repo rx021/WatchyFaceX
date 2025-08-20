@@ -4,10 +4,10 @@
 
 const uint8_t SCREEN_WIDTH = 200; // pixels
 const uint8_t SCREEN_HEIGHT = 200; // pixels
-const uint8_t PADDING_X = 15; // pixels
-const uint8_t PADDING_Y = 15; // pixels
 
 void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
+  uint8_t PADDING_X = 15; // pixels
+  uint8_t PADDING_Y = 15; // pixels
   uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
   uint16_t textColor = enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK; 
   display.fillScreen(bgColor);

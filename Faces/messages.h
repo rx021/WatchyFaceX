@@ -1,8 +1,8 @@
 
-const uint8_t PADDING_X = 5; // pixels
-const uint8_t PADDING_Y = 5; // pixels
 
 void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
+  uint8_t PADDING_X = 5; // pixels
+  uint8_t PADDING_Y = 5; // pixels
   uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
   uint16_t textColor = enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK; 
   display.fillScreen(bgColor);
