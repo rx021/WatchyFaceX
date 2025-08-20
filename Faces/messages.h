@@ -38,7 +38,7 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   uint8_t month = monthShortStr(currentTime.Month);
   uint8_t day = currentTime.Day;
   uint8_t weekday = dayShortStr(currentTime.Wday);
-  String dateString = ""+year+" "+month+" "+day+" "+weekday;
+  String dateString = "" + year + " " + month + " " + day + " " + weekday;
 
   uint8_t dateX = PADDING_X;
   uint8_t dateY = DISPLAY_HEIGHT - PADDING_Y;
