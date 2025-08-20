@@ -129,3 +129,21 @@ Watchy comes pre-loaded with firmware that demonstrates all the basic features. 
         // - make sure to change `1001` to one that matches your product id
         ```
     - to get your vendor and product IDs you need to connect to the board in bootloader mode and then run `lsusb` to find your new device
+
+
+
+## ARDUINO CLI
+
+
+```shell
+watch -n 10 arduino-cli core list
+watch -n 10 arduino-cli board list
+
+arduino-cli board listall |grep atchy
+
+arduino-cli config init
+
+arduino-cli compile --fqbn esp32:esp32:watchy WatchyFaceX
+// failing need to rename the folder as well as the .ino file
+
+```
