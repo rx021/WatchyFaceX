@@ -2,8 +2,8 @@
 const uint8_t CELL_X_WIDTH = 26; // pixels
 const uint8_t CELL_X_GAP = 3; // pixels
 const uint8_t CELL_Y_HEIGHT = 18; // pixels
-//const uint8_t CELL_Y_GAP = 8; // pixels
-const uint8_t CELL_Y_GAP = 4; // pixels
+const uint8_t CELL_Y_GAP = 8; // pixels
+//const uint8_t CELL_Y_GAP = 4; // pixels
 
 void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
   uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
@@ -15,8 +15,8 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
   //display.setFont(&FreeSans9pt7b);
   //String textString = ""; // must declare first to concat numbers
 
-  uint8_t totalRows = DISPLAY_HEIGHT / (CELL_Y_HEIGHT + CELL_Y_GAP);
-  uint8_t totalCols = DISPLAY_WIDTH / (CELL_X_WIDTH + CELL_X_GAP);
+  uint8_t totalRows = (DISPLAY_HEIGHT - CELL_Y_GAP) / (CELL_Y_HEIGHT + CELL_Y_GAP);
+  uint8_t totalCols = (DISPLAY_WIDTH - CELL_X_GAP) / (CELL_X_WIDTH + CELL_X_GAP);
   uint8_t cellX = 0;
   uint8_t cellY = 0;
   uint8_t textX = 0;
