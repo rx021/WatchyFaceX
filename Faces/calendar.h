@@ -1,4 +1,6 @@
 
+// NOTE: fillRect - top left is X=0, Y=0
+
 const uint8_t CELL_X_WIDTH = 26; // pixels
 const uint8_t CELL_X_GAP = 3; // pixels
 const uint8_t CELL_Y_HEIGHT = 18; // pixels
