@@ -43,7 +43,7 @@ class WatchyFaceX : public Watchy{
       uint8_t lineThickness,
       uint16_t handColor
     );
-    drawFaceMessages(bool enableDarkMode);
+    void drawFaceMessages(bool enableDarkMode);
     virtual void handleButtonPress(); // Must be virtual in Watchy.h too
 };
 
