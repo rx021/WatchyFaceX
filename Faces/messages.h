@@ -64,7 +64,7 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
   dateString = currentTime.Year + 1970;
 
-  display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
+  display.getTextBounds(dateString, 0, 0, &x1, &y1, &width, &height);
   uint8_t yearX = PADDING_X;
   uint8_t yearY = dateY - dateHeight - dateSpacing;
   uint8_t yearWidth = width;
