@@ -148,4 +148,8 @@ arduino-cli compile --fqbn esp32:esp32:watchy WatchyFaceX
 // better command if you are in the folder
 arduino-cli compile --fqbn esp32:esp32:watchy .
 
+
+
 ```
+NOTE: had to install older esp32 core to match the IDE 
+`arduino-cli core install esp32:esp32@2.0.17`
