@@ -157,7 +157,10 @@ arduino-cli lib list
 
 
 // to upload
-arduino-cli upload -p /dev/cu.usbmodem101 --fqbn esp32:esp32:watchy .
+// arduino-cli upload -p /dev/cu.usbmodem101 --fqbn esp32:esp32:watchy .
+// BETTER UPLOAD
+arduino-cli upload -p /dev/cu.usbmodem101 --fqbn esp32:esp32:esp32s3 .
+
 
 ```
 - NOTE: had to install older esp32 core to match the IDE 
