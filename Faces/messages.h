@@ -36,9 +36,9 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
 
   String dateString = "";
   uint8_t year = currentTime.Year + 1970;
-  uint8_t month = monthShortStr(currentTime.Month);
+  char* month = monthShortStr(currentTime.Month);
   uint8_t day = currentTime.Day;
-  uint8_t weekday = dayShortStr(currentTime.Wday);
+  char* weekday = dayShortStr(currentTime.Wday);
   dateString += year;
   dateString += " ";
   dateString += month;
