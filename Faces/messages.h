@@ -33,25 +33,28 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
 
   // DRAW WEEKDAY
   display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
-  String dateString = dayStr(currentTime.Wday);
+  String dateString = "";
+  String weekdayString = dayShortStr(currentTime.Wday);
 
-  display.getTextBounds(dateString, 0, 0, &x1, &y1, &width, &height);
+  display.getTextBounds(weekdayString, 0, 0, &x1, &y1, &width, &height);
   uint8_t weekdayX = PADDING_X;
   uint8_t weekdayY = DISPLAY_HEIGHT - PADDING_Y;
   uint8_t weekdayWidth = width;
   uint8_t weekdayHeight = height;
   display.setCursor(weekdayX, weekdayY);
-  display.print(dateString);
+  //display.print(weekdayString);
 
   // DRAW DATE
   display.setFont(&Technology18pt7b);
   dateString = monthShortStr(currentTime.Month);
   dateString += " ";
   dateString += currentTime.Day;
+  dateString += " " + weekdayString;
 
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &width, &height);
   uint8_t dateX = PADDING_X;
-  uint8_t dateY = weekdayY - weekdayHeight - dateSpacing;
+  //uint8_t dateY = weekdayY - weekdayHeight - dateSpacing;
+  uint8_t dateY = weekdayY;
   uint8_t dateWidth = width;
   uint8_t dateHeight = height;
   display.setCursor(dateX, dateY);
