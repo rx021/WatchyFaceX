@@ -25,7 +25,7 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
   for (uint8_t rowIndex = 0; rowIndex < totalRows; rowIndex++) {
     for (uint8_t colIndex = 0; colIndex < totalCols; colIndex++) {
       message += (rowIndex * 7) + colIndex + 1;
-      cellX = (colIndex * (CELL_X_WIDTH + CELL_X_GAP);
+      cellX = (colIndex * (CELL_X_WIDTH + CELL_X_GAP));
       cellY = (rowIndex * (CELL_Y_HEIGHT + CELL_Y_GAP)) + CELL_Y_HEIGHT;
       display.fillRect(
         cellX,
