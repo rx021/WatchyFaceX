@@ -145,5 +145,7 @@ arduino-cli config init
 
 arduino-cli compile --fqbn esp32:esp32:watchy WatchyFaceX
 // failing need to rename the folder as well as the .ino file
+// better command if you are in the folder
+arduino-cli compile --fqbn esp32:esp32:watchy .
 
 ```
