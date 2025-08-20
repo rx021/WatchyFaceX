@@ -5,6 +5,10 @@
 
 // used in faces
 #include <Fonts/FreeMonoOblique24pt7b.h>
+#include <Fonts/FreeSans9pt7b.h>
+#include <Fonts/FreeSans12pt7b.h>
+#include <Fonts/FreeSans18pt7b.h>
+#include <Fonts/FreeSans24pt7b.h>
 #include "Fonts/DSEG7_Classic_Bold_25.h"
 #include "Fonts/DIN_1451_Engschrift_Regular12pt7b.h"
 #include "Fonts/DIN_1451_Engschrift_Regular64pt7b.h"
@@ -23,6 +27,7 @@ class WatchyFaceX : public Watchy{
   using Watchy::Watchy;
   public: 
     void drawWatchFace();
+    void drawFaceCalendar(bool enableDarkMode);
     void drawFaceCustomBahn(bool enableDarkMode);
     void drawBattery(
       bool enableDarkMode,
@@ -38,12 +43,23 @@ class WatchyFaceX : public Watchy{
       uint8_t lineThickness,
       uint16_t handColor
     );
+    drawFaceMessages(bool enableDarkMode);
     virtual void handleButtonPress(); // Must be virtual in Watchy.h too
 };
 
 // needs to be included after class declared
 #include "Faces/customBahn.h"
 #include "Faces/analog.h"
+
+void WatchyFaceX::drawWatchFace() {
+  if (faceIndex == 0) {
+    drawFaceCustomBahn(isDarkMode);
+  }
+
+  if (faceIndex == 1) {
+    drawFaceAnalog(isDarkMode);
+  }
+}                                         
 
 void WatchyFaceX::handleButtonPress() {
   if (guiState == WATCHFACE_STATE) {
@@ -89,15 +105,5 @@ void WatchyFaceX::handleButtonPress() {
   } else {Watchy::handleButtonPress();}
   return;
 }
-
-void WatchyFaceX::drawWatchFace() {
-  if (faceIndex == 0) {
-    drawFaceCustomBahn(isDarkMode);
-  }
-
-  if (faceIndex == 1) {
-    drawFaceAnalog(isDarkMode);
-  }
-}                                         
 
 #endif
