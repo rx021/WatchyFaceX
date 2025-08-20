@@ -27,7 +27,7 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
         cellX,
         cellY,
         CELL_X_WIDTH,
-        CELL_X_HEIGHT,
+        CELL_Y_HEIGHT,
         textColor
       );
     }
