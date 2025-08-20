@@ -19,11 +19,15 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   message = "Kinesthete? Explorer? Creator?";
   display.getTextBounds(message, 0, 0, &x1, &y1, &width, &height);
   uint8_t msg2x = PADDING_X;
-  uint8_t msg2y = PADDING_Y + height;
+  uint8_t msg2y = height;
   display.setCursor(msg2x, msg2y);
   display.println(message);
+
+  display.setFont(&FreeSansBold12pt7b);
   message = "How can I play?";
   display.println(message);
+
+  display.setFont(&FreeSans12pt7b);
   message = "What's blocking me?";
   display.println(message);
 
