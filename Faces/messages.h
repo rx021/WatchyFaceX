@@ -17,7 +17,7 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   // QUESTIONS:
   display.setFont(&FreeSans12pt7b);
   message = "Kinesthete? Explorer? Creator?";
-  //display.getTextBounds(message, 0, 0, &x1, &y1, &width, &height);
+  display.getTextBounds(message, 0, 0, &x1, &y1, &width, &height);
   //uint8_t msg2x = DISPLAY_WIDTH - PADDING_X;
   //uint8_t msg2y = msg1y + PADDING_Y + height;
   //display.setCursor(msg2x, msg2y);
@@ -26,6 +26,48 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   display.print(message);
   message = "What's blocking me?";
   display.print(message);
+
+  // DATE from bottom-up: 
+
+  uint8_t dateSpacing = 10;
+
+  // DRAW WEEKDAY
+  display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
+  String dateString = dayStr(currentTime.Wday);
+
+  display.getTextBounds(dateString, 0, 0, &x1, &y1, &width, &height);
+  uint8_t weekdayX = PADDING_X;
+  uint8_t weekdayY = DISPLAY_HEIGHT - PADDING_Y;
+  uint8_t weekdayWidth = width;
+  uint8_t weekdayHeight = height;
+  display.setCursor(weekdayX, weekdayY);
+  display.print(dateString);
+
+  // DRAW DATE
+  display.setFont(&Technology18pt7b);
+  dateString = monthShortStr(currentTime.Month);
+  dateString += " ";
+  dateString += currentTime.Day;
+
+  display.getTextBounds(dateString, 0, 0, &x1, &y1, &width, &height);
+  uint8_t dateX = PADDING_X;
+  uint8_t dateY = weekdayY - weekdayHeight - dateSpacing;
+  uint8_t dateWidth = width;
+  uint8_t dateHeight = height;
+  display.setCursor(dateX, dateY);
+  display.print(dateString);
+
+  // DRAW YEAR
+  display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
+  dateString = currentTime.Year + 1970;
+
+  display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
+  uint8_t yearX = PADDING_X;
+  uint8_t yearY = dateY - dateHeight - dateSpacing;
+  uint8_t yearWidth = width;
+  uint8_t yearHeight = height;
+  display.setCursor(yearX, yearY);
+  display.print(dateString);
   
   // TEST 01 - [' ]
   //display.setFont(&FreeSans9pt7b);
