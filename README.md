@@ -151,5 +151,7 @@ arduino-cli compile --fqbn esp32:esp32:watchy .
 
 
 ```
-NOTE: had to install older esp32 core to match the IDE 
-`arduino-cli core install esp32:esp32@2.0.17`
+- NOTE: had to install older esp32 core to match the IDE 
+    `arduino-cli core install esp32:esp32@2.0.17`
+- also had to install a bunch of other dependencies to make the compilation work
+- installed each one that came up on the compilation errors
