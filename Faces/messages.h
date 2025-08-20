@@ -17,9 +17,9 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   // QUESTIONS:
   display.setFont(&FreeSans12pt7b);
   message = "Kinesthete? Explorer? Creator?";
-  //display.getTextBounds(message, 0, 0, &x1, &y1, &width, &height);
+  display.getTextBounds(message, 0, 0, &x1, &y1, &width, &height);
   uint8_t msg2x = PADDING_X;
-  uint8_t msg2y = PADDING_Y;
+  uint8_t msg2y = PADDING_Y + height;
   display.setCursor(msg2x, msg2y);
   display.println(message);
 
@@ -35,17 +35,13 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   display.setFont(&Technology18pt7b);
 
   String dateString = "";
-  uint8_t year = currentTime.Year + 1970;
-  char* month = monthShortStr(currentTime.Month);
-  uint8_t day = currentTime.Day;
-  char* weekday = dayShortStr(currentTime.Wday);
-  dateString += year;
+  dateString += currentTime.Year + 1970; 
   dateString += " ";
-  dateString += month;
+  dateString += monthShortStr(currentTime.Month);
   dateString += " ";
-  dateString += day;
+  dateString += currentTime.Day;
   dateString += " ";
-  dateString += weekday;
+  dateString += dayShortStr(currentTime.Wday);
 
   uint8_t dateX = PADDING_X;
   uint8_t dateY = DISPLAY_HEIGHT - PADDING_Y;
