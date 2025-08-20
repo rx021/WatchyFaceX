@@ -28,7 +28,7 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
       message += (rowIndex * 7) + (colIndex + 1);
       cellX = (colIndex * (CELL_X_WIDTH + CELL_X_GAP));
       cellY = (rowIndex * (CELL_Y_HEIGHT + CELL_Y_GAP)) + CELL_Y_HEIGHT;
-      display.fillRect(
+      display.drawRect(
         cellX,
         cellY,
         CELL_X_WIDTH,
@@ -36,7 +36,7 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
         textColor
       );
       display.setCursor(cellX, cellY);
-      display.setTextColor(bgColor);
+      display.setTextColor(textColor);
       display.print(message);
       message = ""; // reset message
     }
