@@ -19,8 +19,12 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
   uint8_t cellX = 0;
   uint8_t cellY = 0;
 
+  display.setFont(&FreeSans9pt7b);
+  String message = "";
+
   for (uint8_t rowIndex = 0; rowIndex < totalRows; rowIndex++) {
     for (uint8_t colIndex = 0; colIndex < totalCols; colIndex++) {
+      message += (rowIndex * 7) + colIndex + 1;
       cellX = (rowIndex * CELL_Y_GAP) + (rowIndex * CELL_Y_HEIGHT) + CELL_Y_HEIGHT;
       cellY = (colIndex * CELL_X_GAP) + (colIndex * CELL_X_WIDTH) + CELL_X_WIDTH;
       display.fillRect(
@@ -30,6 +34,10 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
         CELL_Y_HEIGHT,
         textColor
       );
+      display.setCursor(cellX, cellY);
+      display.setTextColor(bgColor);
+      display.print(message);
+      message = ""; // reset message
     }
   }
 }
