@@ -51,7 +51,7 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
 
   uint8_t testX = 0;
   uint8_t testY = DISPLAY_HEIGHT;
-  String test = "totalRows,totalCols=";
+  String test = "tRows,tCols=";
   test += totalRows;
   test += ",";
   test += totalCols;
