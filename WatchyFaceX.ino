@@ -13,7 +13,7 @@ void setup() {
 
   watchy.init();
 
-  watchy.ensureCorrectTimeOnFreshBoot(); // one-time sync (or build-time fallback)
+  // watchy.ensureCorrectTimeOnFreshBoot(); // one-time sync (or build-time fallback)
 }
 
 void loop() {
