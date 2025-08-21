@@ -20,7 +20,7 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   display.getTextBounds(message, 0, 0, &x1, &y1, &width, &height);
   uint8_t mX = PADDING_X;//5
   //uint8_t mY = PADDING_Y + height;//52 >> 23 with better test text
-  int8_t mY = PADDING_Y + (-1 *  y1);//?
+  int8_t mY = PADDING_Y + (-1 *  y1);//23... weird I thought it'd be 17
   String posn = "mX,mY=";
   posn += mX;
   posn += ",";
