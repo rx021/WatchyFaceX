@@ -13,10 +13,6 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
   display.fillScreen(bgColor);
 
   // CALENDAR
-  //display.setTextColor(textColor);
-  //display.setFont(&FreeSans9pt7b);
-  //String textString = ""; // must declare first to concat numbers
-
   uint8_t totalRows = (DISPLAY_HEIGHT - CELL_Y_GAP) / (CELL_Y_HEIGHT + CELL_Y_GAP);
   uint8_t totalCols = (DISPLAY_WIDTH - CELL_X_GAP) / (CELL_X_WIDTH + CELL_X_GAP);
   uint8_t cellX = 0;
