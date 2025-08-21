@@ -30,8 +30,8 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
   display.setFont(&FreeSans9pt7b);
   String message = "";
 
-  for (uint8_t rowIndex = 0; rowIndex < (totalRows / 2); rowIndex++) {
-    for (uint8_t colIndex = 0; colIndex < (totalCols / 2); colIndex++) {
+  for (uint8_t rowIndex = 0; rowIndex < (totalRows); rowIndex++) {
+    for (uint8_t colIndex = 0; colIndex < (totalCols); colIndex++) {
       message += (rowIndex * 7) + (colIndex + 1);
       cellX = (colIndex * (CELL_X_WIDTH + CELL_X_GAP));
       cellY = (rowIndex * (CELL_Y_HEIGHT + CELL_Y_GAP));
@@ -51,17 +51,18 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
     }
   }
 
-  int16_t  x1, y1;
-  uint16_t width, height;
-  String m2 = "tRows,tCols=";
-  m2 += totalRows;
-  m2 += ",";
-  m2 += totalCols;
-  display.getTextBounds(m2, 0, 0, &x1, &y1, &width, &height);
+  // ok it looks like the new call ratios work better
+  //int16_t  x1, y1;
+  //uint16_t width, height;
+  //String m2 = "tRows,tCols=";
+  //m2 += totalRows;
+  //m2 += ",";
+  //m2 += totalCols;
+  //display.getTextBounds(m2, 0, 0, &x1, &y1, &width, &height);
 
-  uint8_t tX = x1;
-  uint8_t tY = DISPLAY_HEIGHT + y1;
-  display.setCursor(tX, tY);
-  display.setTextColor(textColor);
-  display.println(m2);
+  //uint8_t tX = x1;
+  //uint8_t tY = DISPLAY_HEIGHT + y1;
+  //display.setCursor(tX, tY);
+  //display.setTextColor(textColor);
+  //display.println(m2);
 }
