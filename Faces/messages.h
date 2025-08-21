@@ -24,11 +24,11 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   posn += mX;
   posn += ",";
   posn += mY;
-  posn +=";x1,y1="
+  posn +=";x1,y1=";
   posn += x1;
   posn += ",";
   posn += y1;
-  posn +=";W,H="
+  posn +=";W,H=";
   posn += width;
   posn += ",";
   posn += height;
