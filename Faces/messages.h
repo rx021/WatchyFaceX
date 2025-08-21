@@ -18,15 +18,23 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   display.setFont(&FreeSans12pt7b);
   message = "Kinesthete? Explorer? Creator?";
   display.getTextBounds(message, 0, 0, &x1, &y1, &width, &height);
-  uint8_t msg2x = PADDING_X;
-  uint8_t msg2y = PADDING_Y + height;
-  String posn = "x,y=";
-  posn += msg2x;
+  uint8_t mX = PADDING_X;
+  uint8_t mY = PADDING_Y + height;
+  String posn = "mX,mY=";
+  posn += mX;
   posn += ",";
-  posn += msg2y;
+  posn += mY;
+  posn +=";x1,y1="
+  posn += x1;
+  posn += ",";
+  posn += y1;
+  posn +=";W,H="
+  posn += width;
+  posn += ",";
+  posn += height;
+  display.setCursor(mX, mY);
   display.println(posn);
-  display.setCursor(msg2x, msg2y);
-  display.println(message);
+  //display.println(message);
 
   display.setFont(&FreeSansBold12pt7b);
   message = "How can I play?";
