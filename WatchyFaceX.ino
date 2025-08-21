@@ -39,7 +39,7 @@ void setRTCFromBuildTime() {
 
 // Try to bring up Wi-Fi using whatever your project typically uses.
 // If you already have a "connectWiFi()" helper from Watchy lib, call that instead.
-bool firstBootSyncNTP(const char* ntpServer) {
+bool firstBootSyncNTP() {
   // 1) Turn Wi-Fi on and connect as your project normally does.
   //    If you use WiFiManager or Watchy’s built-ins, call those here.
   WiFi.mode(WIFI_STA);
@@ -54,7 +54,7 @@ bool firstBootSyncNTP(const char* ntpServer) {
   }
 
   // 2) Configure local timezone rules + NTP
-  configTzTime(TZ_VANCOUVER, ntpServer);
+  configTzTime(TZ_VANCOUVER, NTP_SERVER);
 
   // 3) Wait for time
   struct tm localTime;
@@ -70,12 +70,12 @@ bool firstBootSyncNTP(const char* ntpServer) {
   return true;
 }
 
-void ensureCorrectTimeOnFreshBoot(const char* ntpServer) {
+void ensureCorrectTimeOnFreshBoot() {
   if (s_firstBootNtpDone) {
     return; // Already synced at least once since flashing
   }
 
-  if (firstBootSyncNTP(ntpServer)) {
+  if (firstBootSyncNTP()) {
     s_firstBootNtpDone = true;
     return;
   }
@@ -96,7 +96,7 @@ void setup() {
 
   watchy.init();
 
-  ensureCorrectTimeOnFreshBoot(settings.ntpServer);
+  ensureCorrectTimeOnFreshBoot();
 }
 
 void loop() {
