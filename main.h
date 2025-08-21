@@ -51,8 +51,8 @@ class WatchyFaceX : public Watchy{
     // ---- Added: first-boot time setup helpers ----
     void ensureCorrectTimeOnFreshBoot();
   private:
-    bool firstBootSyncNTP_();
-    void setRTCFromBuildTime_();
+    bool firstBootSyncNTP();
+    void setRTCFromBuildTime();
 };
 
 // needs to be included after class declared

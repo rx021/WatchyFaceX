@@ -1,7 +1,7 @@
 
 //#include "secrets.h"
+#include "main.h" // should come before settings.h
 #include "settings.h"
-#include "main.h"
 
 WatchyFaceX watchy(settings); //instantiate watch face
 
