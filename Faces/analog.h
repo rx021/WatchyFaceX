@@ -71,6 +71,10 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   // DRAW MINUTE HAND
   uint8_t minuteCountQuarter = minuteCount / 4;
   float angle_minuteHand = angle_minuteScale * (myMinute - minuteCountQuarter);
+  // NOTE: if myMinute was 0 then angle_minuteHand would be 0 radians
+  // - this would have myMinute 0 pointing to the right
+  // - but to point myMinute 0 to the top, 
+  //   we need to subtract by 15 minutes which is 90 degrees
 
   drawHandX(
     tickOuterRadius,
