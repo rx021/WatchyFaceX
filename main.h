@@ -49,10 +49,12 @@ class WatchyFaceX : public Watchy{
     virtual void handleButtonPress(); // Must be virtual in Watchy.h too
 
     // ---- Added: first-boot time setup helpers ----
+    /**
     void ensureCorrectTimeOnFreshBoot();
   private:
     bool firstBootSyncNTP();
     void setRTCFromBuildTime();
+     */
 };
 
 // needs to be included after class declared
@@ -62,6 +64,7 @@ class WatchyFaceX : public Watchy{
 #include "Faces/analog.h"
 
 // ---- Added includes/flag for time sync ----
+/**
 #include <WiFi.h>
 #include <time.h>
 
@@ -71,6 +74,7 @@ RTC_DATA_ATTR bool s_firstBootNtpDone = false;
 // Vancouver, with DST rules:
 // "PST8PDT,M3.2.0,M11.1.0" = switch on 2nd Sunday in March and 1st Sunday in November.
 static const char* TZ_VANCOUVER = "PST8PDT,M3.2.0,M11.1.0";
+ */
 
 void WatchyFaceX::drawWatchFace() {
   if (faceIndex == 0) {drawFaceCustomBahn(isDarkMode);}
@@ -124,6 +128,7 @@ void WatchyFaceX::handleButtonPress() {
   return;
 }
 
+/**
 // --- Fallback: set RTC from firmware build time (UTC-agnostic; just "close enough") ---
 void WatchyFaceX::setRTCFromBuildTime() {
   // Parse __DATE__ "Mmm dd yyyy" and __TIME__ "hh:mm:ss"
@@ -196,5 +201,6 @@ void WatchyFaceX::ensureCorrectTimeOnFreshBoot() {
   // We’ll mark it done, but the next time Wi-Fi is available you can re-sync explicitly if you want.
   s_firstBootNtpDone = true;
 }
+ */
 
 #endif
