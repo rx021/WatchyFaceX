@@ -32,6 +32,12 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   message = "What is blocking me?";
   display.println(message);
 
+  display.setFont(&FreeSans9pt7b);
+  message = "-friction +focus";
+  display.println(message);
+  message = "+locality -distraction";
+  display.println(message);
+
   // DRAW DATE from bottom-up: 
 
   uint8_t dateX = PADDING_X;
