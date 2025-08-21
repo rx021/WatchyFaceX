@@ -3,12 +3,9 @@
 // NOTE: setCursor() - bottom left is needed for TEXT to print properly
 
 const uint8_t CELL_X_WIDTH = 26; // pixels
-//const uint8_t CELL_X_GAP = 3; // pixels
 const uint8_t CELL_X_GAP = 1; // pixels
 const uint8_t CELL_Y_HEIGHT = 18; // pixels
-//const uint8_t CELL_Y_GAP = 8; // pixels
 const uint8_t CELL_Y_GAP = 6; // pixels
-//const uint8_t CELL_Y_GAP = 4; // pixels
 
 void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
   uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
