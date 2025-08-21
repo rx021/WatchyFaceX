@@ -26,7 +26,7 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   message = "Kinesthete? Explorer? Creator?";
   display.println(message);
 
-  display.setFont(&FreeSansBold12pt7b);
+  display.setFont(&FreeSansBold9pt7b);
   message = "How can I play?";
   display.println(message);
 
