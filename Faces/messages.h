@@ -16,11 +16,11 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
 
   // QUESTIONS:
   display.setFont(&FreeSans12pt7b);
-  message = "height?"; // we can then just use the height of the one line
+  message = "fontheight?"; // we can then just use the height of the one line
   display.getTextBounds(message, 0, 0, &x1, &y1, &width, &height);
   uint8_t mX = PADDING_X;//5
-  uint8_t mY = PADDING_Y + height;//52
-  //int8_t mY = PADDING_Y + (-1 *  y1);//52
+  //uint8_t mY = PADDING_Y + height;//52 >> 23 with better test text
+  int8_t mY = PADDING_Y + (-1 *  y1);//?
   String posn = "mX,mY=";
   posn += mX;
   posn += ",";
@@ -66,7 +66,7 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
 
   display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
   dateString = " ";
-  dateString += dayShortStr(currentTime.Wday);
+  dateString += dayStr(currentTime.Wday);
   display.print(dateString);
   
   // TEST 01 - [' ]
