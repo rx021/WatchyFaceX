@@ -3,9 +3,11 @@
 // NOTE: setCursor() - bottom left is needed for TEXT to print properly
 
 const uint8_t CELL_X_WIDTH = 26; // pixels
-const uint8_t CELL_X_GAP = 3; // pixels
+//const uint8_t CELL_X_GAP = 3; // pixels
+const uint8_t CELL_X_GAP = 1; // pixels
 const uint8_t CELL_Y_HEIGHT = 18; // pixels
-const uint8_t CELL_Y_GAP = 8; // pixels
+//const uint8_t CELL_Y_GAP = 8; // pixels
+const uint8_t CELL_Y_GAP = 6; // pixels
 //const uint8_t CELL_Y_GAP = 4; // pixels
 
 void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
@@ -49,13 +51,17 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
     }
   }
 
-  uint8_t testX = 0;
-  uint8_t testY = DISPLAY_HEIGHT;
-  String test = "tRows,tCols=";
-  test += totalRows;
-  test += ",";
-  test += totalCols;
-  display.setCursor(testX, testY);
+  int16_t  x1, y1;
+  uint16_t width, height;
+  String message = "tRows,tCols=";
+  message += totalRows;
+  message += ",";
+  message += totalCols;
+  display.getTextBounds(message, 0, 0, &x1, &y1, &width, &height);
+
+  uint8_t tX = x1;
+  uint8_t tY = DISPLAY_HEIGHT + y1;
+  display.setCursor(tX, tY);
   display.setTextColor(textColor);
-  display.println(test);
+  display.println(message);
 }
