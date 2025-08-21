@@ -49,9 +49,13 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
     }
   }
 
+  uint8_t testX = 0;
+  uint8_t testY = DISPLAY_HEIGHT;
   String test = "totalRows,totalCols=";
   test += totalRows;
   test += ",";
   test += totalCols;
+  display.setCursor(testX, testY);
+  display.setTextColor(textColor);
   display.println(test);
 }
