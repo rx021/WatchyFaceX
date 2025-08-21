@@ -53,15 +53,15 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
 
   int16_t  x1, y1;
   uint16_t width, height;
-  String message = "tRows,tCols=";
-  message += totalRows;
-  message += ",";
-  message += totalCols;
-  display.getTextBounds(message, 0, 0, &x1, &y1, &width, &height);
+  String m2 = "tRows,tCols=";
+  m2 += totalRows;
+  m2 += ",";
+  m2 += totalCols;
+  display.getTextBounds(m2, 0, 0, &x1, &y1, &width, &height);
 
   uint8_t tX = x1;
   uint8_t tY = DISPLAY_HEIGHT + y1;
   display.setCursor(tX, tY);
   display.setTextColor(textColor);
-  display.println(message);
+  display.println(m2);
 }
