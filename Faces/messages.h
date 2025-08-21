@@ -43,7 +43,7 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   dateString += currentTime.Year + 1970; 
   display.print(dateString);
 
-  display.setFont(&FreeSans9pt7b);
+  display.setFont(&FreeSans12pt7b);
   dateString = monthShortStr(currentTime.Month);
   dateString += ".";
   dateString += currentTime.Day;
@@ -53,7 +53,7 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   dateString = dayShortStr(currentTime.Wday);
   display.print(dateString);
 
-  display.setFont(&FreeSans9pt7b);
+  display.setFont(&FreeSans12pt7b);
   String timeString = ""; // must declare first to concat numbers
   if (currentTime.Hour < 10) {timeString += "0";}
   timeString += currentTime.Hour; // can add number to string
