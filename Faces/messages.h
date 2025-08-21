@@ -29,8 +29,6 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   display.setFont(&FreeSansBold9pt7b);
   message = "How can I play?";
   display.println(message);
-
-  display.setFont(&FreeSansBold9pt7b);
   message = "What is blocking me?";
   display.println(message);
 
