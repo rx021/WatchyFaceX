@@ -2,11 +2,11 @@
 #define SETTINGS_H
 
 //Weather Settings
-#define CITY_ID "5128581" //New York City https://openweathermap.org/current#cityid
+#define CITY_ID "6173331" //Vancouver, CANADA https://openweathermap.org/current#cityid
 
 //You can also use LAT,LON for your location instead of CITY_ID, but not both
-//#define LAT "40.7127" //New York City, Looked up on https://www.latlong.net/
-//#define LON "-74.0059"
+//#define LAT "49.2827" //Vancouver, Looked up on https://www.latlong.net/
+//#define LON "-123.1207"
 
 #ifdef CITY_ID
     #define OPENWEATHERMAP_URL "http://api.openweathermap.org/data/2.5/weather?id={cityID}&lang={lang}&units={units}&appid={apiKey}" //open weather api using city ID
