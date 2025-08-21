@@ -35,8 +35,8 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   // DRAW DATE from bottom-up: 
 
   String dateString = "";
-  uint8_t dateX = PADDING_X;
-  uint8_t dateY = DISPLAY_HEIGHT - PADDING_Y;
+  uint8_t dateX = 0;
+  uint8_t dateY = DISPLAY_HEIGHT;
   display.setCursor(dateX, dateY);
 
   display.setFont(&Seven_Segment10pt7b);
