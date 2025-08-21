@@ -50,8 +50,8 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
   }
 
   String test = "totalRows,totalCols=";
-  test += totalRows:
-  test += ",":
-  test += totalCols:
+  test += totalRows;
+  test += ",";
+  test += totalCols;
   display.println(test);
 }
