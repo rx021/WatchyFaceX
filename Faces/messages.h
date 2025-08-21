@@ -20,6 +20,11 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   display.getTextBounds(message, 0, 0, &x1, &y1, &width, &height);
   uint8_t msg2x = PADDING_X;
   uint8_t msg2y = PADDING_Y + height;
+  String posn = "x,y=";
+  posn += msg2x;
+  posn += ",";
+  posn += msg2y;
+  display.println(posn);
   display.setCursor(msg2x, msg2y);
   display.println(message);
 
@@ -28,7 +33,7 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   display.println(message);
 
   display.setFont(&FreeSans12pt7b);
-  message = "What's blocking me?";
+  message = "What is blocking me?";
   display.println(message);
 
   // DRAW DATE from bottom-up: 
