@@ -90,12 +90,12 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   uint8_t hourHandLength = (tickOuterRadius - hourHandOverlayRadius) / 2;
   uint8_t hourHandOuterRadius = hourHandOverlayRadius + hourHandLength;
 
-  //float halfMinuteIncrementCount = 720; // 360*2? ~ in degrees
-  //float halfMinuteIncrements = circumference / halfMinuteIncrementCount;
-  //float minuteIncrements = halfMinuteIncrements * myMinute;
-  //float angle_hourHand = angle_hourScale * (myHour - 3) + minuteIncrements;
+  uint8_t myHour12 = myHour % 12;
+  float hourFraction = myMinute / minuteCount;
+  float hourValue = myHour12 + hourFraction;
+
   uint8_t hourCountQuarter = hourCount / 4;
-  float angle_hourHand = angle_hourScale * (myHour - hourCountQuarter);
+  float angle_hourHand = angle_hourScale * (hourValue - hourCountQuarter);
 
   drawHandX(
     hourHandOuterRadius,
