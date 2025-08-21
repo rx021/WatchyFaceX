@@ -21,7 +21,7 @@
 //NTP Settings
 #define NTP_SERVER "pool.ntp.org"
 #define GMT_OFFSET_SEC (3600 * -8) // Van, CA is UTC -8 (Standard Time)
-#define DAYLIGHT_OFFSET_SEC 3600 // Add 1 hour when DST is active
+//#define DAYLIGHT_OFFSET_SEC 3600 // Add 1 hour when DST is active
 
 watchySettings settings{
     #ifdef CITY_ID
@@ -38,7 +38,7 @@ watchySettings settings{
     .weatherUpdateInterval = WEATHER_UPDATE_INTERVAL,
     .ntpServer = NTP_SERVER,
     .gmtOffset = GMT_OFFSET_SEC,
-    .dstOffset = DAYLIGHT_OFFSET_SEC,
+    //.dstOffset = DAYLIGHT_OFFSET_SEC,
     .vibrateOClock = true,
 };
 
