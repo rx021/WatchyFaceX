@@ -22,6 +22,7 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   uint8_t mX = PADDING_X;//5
   //uint8_t mY = PADDING_Y + height;//52 >> 23 with better test text
   int8_t mY = PADDING_Y + (-1 *  y1);//23... weird I thought it'd be 17
+  // y1 is better to use instead of height here if we want the height of the font
   String posn = "mX,mY=";
   posn += mX;
   posn += ",";
