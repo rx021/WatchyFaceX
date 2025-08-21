@@ -134,34 +134,45 @@ Watchy comes pre-loaded with firmware that demonstrates all the basic features. 
 
 ## ARDUINO CLI
 
-
+TL;DR
 ```shell
+// TO WATCH THE BOARD BE CONNECTED
 watch -n 10 arduino-cli core list
 watch -n 10 arduino-cli board list
 
-// to get fqbn
-arduino-cli board listall |grep atchy
+// TO COMPILE
+arduino-cli compile --fqbn esp32:esp32:esp32s3 .
+// TO UPLOAD
+arduino-cli upload -p /dev/cu.usbmodem101 --fqbn esp32:esp32:esp32s3 .
+```
+
+### NOTES:
+```shell
+// TO WATCH THE BOARD BE CONNECTED
+watch -n 10 arduino-cli core list
+watch -n 10 arduino-cli board list
+
+// TO GET FQBN
+<!--arduino-cli board listall |grep atchy-->
+arduino-cli board listall |grep esp32s3
 
 arduino-cli config init
 
+// TO COMPILE
 // arduino-cli compile --fqbn esp32:esp32:watchy WatchyFaceX
-// failing need to rename the folder as well as the .ino file
-// better command if you are in the folder
+// FAILING NEED TO RENAME THE FOLDER AS WELL AS THE .INO FILE
+// BETTER COMMAND IF YOU ARE IN THE FOLDER
 // arduino-cli compile --fqbn esp32:esp32:watchy .
 // BETTER COMPILE
 arduino-cli compile --fqbn esp32:esp32:esp32s3 .
 
-
+// TO CHECK LIBRARIES INSTALLED
 arduino-cli lib list
 
-
-
-// to upload
+// TO UPLOAD
 // arduino-cli upload -p /dev/cu.usbmodem101 --fqbn esp32:esp32:watchy .
 // BETTER UPLOAD
 arduino-cli upload -p /dev/cu.usbmodem101 --fqbn esp32:esp32:esp32s3 .
-
-
 ```
 - NOTE: had to install older esp32 core to match the IDE 
     `arduino-cli core install esp32:esp32@2.0.17`

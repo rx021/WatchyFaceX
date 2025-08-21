@@ -3,10 +3,9 @@
 // NOTE: setCursor() - bottom left is needed for TEXT to print properly
 
 const uint8_t CELL_X_WIDTH = 26; // pixels
-const uint8_t CELL_X_GAP = 3; // pixels
+const uint8_t CELL_X_GAP = 1; // pixels
 const uint8_t CELL_Y_HEIGHT = 18; // pixels
-const uint8_t CELL_Y_GAP = 8; // pixels
-//const uint8_t CELL_Y_GAP = 4; // pixels
+const uint8_t CELL_Y_GAP = 6; // pixels
 
 void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
   uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
@@ -14,10 +13,6 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
   display.fillScreen(bgColor);
 
   // CALENDAR
-  //display.setTextColor(textColor);
-  //display.setFont(&FreeSans9pt7b);
-  //String textString = ""; // must declare first to concat numbers
-
   uint8_t totalRows = (DISPLAY_HEIGHT - CELL_Y_GAP) / (CELL_Y_HEIGHT + CELL_Y_GAP);
   uint8_t totalCols = (DISPLAY_WIDTH - CELL_X_GAP) / (CELL_X_WIDTH + CELL_X_GAP);
   uint8_t cellX = 0;
@@ -28,8 +23,8 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
   display.setFont(&FreeSans9pt7b);
   String message = "";
 
-  for (uint8_t rowIndex = 0; rowIndex < totalRows; rowIndex++) {
-    for (uint8_t colIndex = 0; colIndex < totalCols; colIndex++) {
+  for (uint8_t rowIndex = 0; rowIndex < (totalRows); rowIndex++) {
+    for (uint8_t colIndex = 0; colIndex < (totalCols); colIndex++) {
       message += (rowIndex * 7) + (colIndex + 1);
       cellX = (colIndex * (CELL_X_WIDTH + CELL_X_GAP));
       cellY = (rowIndex * (CELL_Y_HEIGHT + CELL_Y_GAP));
@@ -48,4 +43,19 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
       message = ""; // reset message
     }
   }
+
+  // ok it looks like the new call ratios work better
+  //int16_t  x1, y1;
+  //uint16_t width, height;
+  //String m2 = "tRows,tCols=";
+  //m2 += totalRows;
+  //m2 += ",";
+  //m2 += totalCols;
+  //display.getTextBounds(m2, 0, 0, &x1, &y1, &width, &height);
+
+  //uint8_t tX = x1;
+  //uint8_t tY = DISPLAY_HEIGHT + y1;
+  //display.setCursor(tX, tY);
+  //display.setTextColor(textColor);
+  //display.println(m2);
 }
