@@ -1,8 +1,8 @@
 
 
 void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
-  uint8_t PADDING_X = 5; // pixels
-  uint8_t PADDING_Y = 5; // pixels
+  uint8_t PADDING_X = 1; // pixels
+  uint8_t PADDING_Y = 1; // pixels
   uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
   uint16_t textColor = enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK; 
   display.fillScreen(bgColor);
@@ -35,8 +35,8 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   // DRAW DATE from bottom-up: 
 
   String dateString = "";
-  uint8_t dateX = 0;
-  uint8_t dateY = DISPLAY_HEIGHT;
+  uint8_t dateX = PADDING_X;
+  uint8_t dateY = DISPLAY_HEIGHT - PADDING_Y;
   display.setCursor(dateX, dateY);
 
   display.setFont(&Seven_Segment10pt7b);
