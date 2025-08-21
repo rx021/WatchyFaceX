@@ -41,7 +41,6 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
 
   display.setFont(&Seven_Segment10pt7b);
   dateString += currentTime.Year + 1970; 
-  dateString += " ";
   display.print(dateString);
 
   display.setFont(&Technology18pt7b);
@@ -51,7 +50,6 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   display.print(dateString);
 
   display.setFont(&Seven_Segment10pt7b);
-  dateString = " ";
   dateString += dayShortStr(currentTime.Wday);
   display.print(dateString);
 
@@ -59,7 +57,6 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   String timeString = ""; // must declare first to concat numbers
   if (currentTime.Hour < 10) {timeString += "0";}
   timeString += currentTime.Hour; // can add number to string
-  timeString += ":";
   if (currentTime.Minute < 10) {timeString += "0";}
   timeString += currentTime.Minute;
   display.print(timeString);
