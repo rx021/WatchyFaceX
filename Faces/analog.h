@@ -14,7 +14,7 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   uint8_t centerY = DISPLAY_HEIGHT / 2;
 
   // CLOCK TICK SCALE:
-  uint8_t tickOuterRadius = 98;
+  uint8_t tickOuterRadius = centerX - 2;
 
   // DRAW MINUTE SCALE
   uint8_t minuteCount = 60;
