@@ -91,7 +91,7 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   uint8_t hourHandOuterRadius = hourHandOverlayRadius + hourHandLength;
 
   uint8_t myHour12 = myHour % 12;
-  float hourFraction = myMinute / minuteCount;
+  float hourFraction = myMinute / (float) minuteCount;
   float hourValue = myHour12 + hourFraction;
 
   uint8_t hourCountQuarter = hourCount / 4;
