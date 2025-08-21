@@ -32,22 +32,27 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   display.println(message);
 
   // DRAW DATE from bottom-up: 
-  display.setFont(&Technology18pt7b);
 
   String dateString = "";
-  dateString += currentTime.Year + 1970; 
-  dateString += " ";
-  dateString += monthShortStr(currentTime.Month);
-  dateString += " ";
-  dateString += currentTime.Day;
-  dateString += " ";
-  dateString += dayShortStr(currentTime.Wday);
-
   uint8_t dateX = PADDING_X;
   uint8_t dateY = DISPLAY_HEIGHT - PADDING_Y;
   display.setCursor(dateX, dateY);
+
+  display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
+  dateString += currentTime.Year + 1970; 
+  dateString += " ";
   display.print(dateString);
 
+  display.setFont(&Technology18pt7b);
+  dateString = monthShortStr(currentTime.Month);
+  dateString += " ";
+  dateString += currentTime.Day;
+  display.print(dateString);
+
+  display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
+  dateString = " ";
+  dateString += dayShortStr(currentTime.Wday);
+  display.print(dateString);
   
   // TEST 01 - [' ]
   //display.setFont(&FreeSans9pt7b);
