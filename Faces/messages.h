@@ -16,28 +16,13 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
 
   // QUESTIONS:
   display.setFont(&FreeSans12pt7b);
-  //message = "fontheight?"; // we can then just use the height of the one line
   message = "Kinesthete? Explorer? Creator?";
   display.getTextBounds(message, 0, 0, &x1, &y1, &width, &height);
-  uint8_t mX = PADDING_X;//5
-  //uint8_t mY = PADDING_Y + height;//52 >> 23 with better test text
-  int8_t mY = PADDING_Y + (-1 *  y1);//23... weird I thought it'd be 17
+  uint8_t mX = PADDING_X;
+  int8_t mY = PADDING_Y + (-1 *  y1);
   // y1 is better to use instead of height here if we want the height of the font
-  String posn = "mX,mY=";
-  posn += mX;
-  posn += ",";
-  posn += mY;
-  posn +=";x1,y1=";
-  posn += x1;//1
-  posn += ",";
-  posn += y1;//-17
-  posn +=";W,H=";
-  posn += width;//194
-  posn += ",";
-  posn += height;//47
   display.setCursor(mX, mY);
-  display.println(posn);
-  //display.println(message);
+  display.println(message);
 
   display.setFont(&FreeSansBold12pt7b);
   message = "How can I play?";
