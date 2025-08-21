@@ -16,7 +16,8 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
 
   // QUESTIONS:
   display.setFont(&FreeSans12pt7b);
-  message = "fontheight?"; // we can then just use the height of the one line
+  //message = "fontheight?"; // we can then just use the height of the one line
+  message = "Kinesthete? Explorer? Creator?";
   display.getTextBounds(message, 0, 0, &x1, &y1, &width, &height);
   uint8_t mX = PADDING_X;//5
   //uint8_t mY = PADDING_Y + height;//52 >> 23 with better test text
@@ -35,7 +36,6 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   posn += height;//47
   display.setCursor(mX, mY);
   display.println(posn);
-  message = "Kinesthete? Explorer? Creator?";
   //display.println(message);
 
   display.setFont(&FreeSansBold12pt7b);
