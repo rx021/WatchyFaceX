@@ -28,8 +28,8 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
   display.setFont(&FreeSans9pt7b);
   String message = "";
 
-  for (uint8_t rowIndex = 0; rowIndex < totalRows; rowIndex++) {
-    for (uint8_t colIndex = 0; colIndex < totalCols; colIndex++) {
+  for (uint8_t rowIndex = 0; rowIndex < (totalRows / 2); rowIndex++) {
+    for (uint8_t colIndex = 0; colIndex < (totalCols / 2); colIndex++) {
       message += (rowIndex * 7) + (colIndex + 1);
       cellX = (colIndex * (CELL_X_WIDTH + CELL_X_GAP));
       cellY = (rowIndex * (CELL_Y_HEIGHT + CELL_Y_GAP));
@@ -48,4 +48,10 @@ void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
       message = ""; // reset message
     }
   }
+
+  String test = "totalRows,totalCols=";
+  test += totalRows:
+  test += ",":
+  test += totalCols:
+  display.println(test);
 }
