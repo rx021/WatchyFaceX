@@ -16,24 +16,26 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
 
   // QUESTIONS:
   display.setFont(&FreeSans12pt7b);
-  message = "Kinesthete? Explorer? Creator?";
+  message = "height?"; // we can then just use the height of the one line
   display.getTextBounds(message, 0, 0, &x1, &y1, &width, &height);
-  uint8_t mX = PADDING_X;
-  uint8_t mY = PADDING_Y + height;
+  uint8_t mX = PADDING_X;//5
+  uint8_t mY = PADDING_Y + height;//52
+  //int8_t mY = PADDING_Y + (-1 *  y1);//52
   String posn = "mX,mY=";
   posn += mX;
   posn += ",";
   posn += mY;
   posn +=";x1,y1=";
-  posn += x1;
+  posn += x1;//1
   posn += ",";
-  posn += y1;
+  posn += y1;//-17
   posn +=";W,H=";
-  posn += width;
+  posn += width;//194
   posn += ",";
-  posn += height;
+  posn += height;//47
   display.setCursor(mX, mY);
   display.println(posn);
+  message = "Kinesthete? Explorer? Creator?";
   //display.println(message);
 
   display.setFont(&FreeSansBold12pt7b);
