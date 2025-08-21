@@ -46,14 +46,23 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
 
   display.setFont(&Technology18pt7b);
   dateString = monthShortStr(currentTime.Month);
-  dateString += " ";
+  dateString += ".";
   dateString += currentTime.Day;
   display.print(dateString);
 
   display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
   dateString = " ";
-  dateString += dayStr(currentTime.Wday);
+  dateString += dayShortStr(currentTime.Wday);
   display.print(dateString);
+
+  display.setFont(&Technology18pt7b);
+  String timeString = " "; // must declare first to concat numbers
+  if (currentTime.Hour < 10) {timeString += "0";}
+  timeString += currentTime.Hour; // can add number to string
+  timeString += ":";
+  if (currentTime.Minute < 10) {timeString += "0";}
+  timeString += currentTime.Minute;
+  display.print(timeString);
   
   // TEST 01 - [' ]
   //display.setFont(&FreeSans9pt7b);
