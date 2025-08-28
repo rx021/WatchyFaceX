@@ -2,11 +2,11 @@
 #define SETTINGS_H
 
 //Weather Settings
-#define CITY_ID "5128581" //New York City https://openweathermap.org/current#cityid
+#define CITY_ID "6173331" //Vancouver, CANADA https://openweathermap.org/current#cityid
 
 //You can also use LAT,LON for your location instead of CITY_ID, but not both
-//#define LAT "40.7127" //New York City, Looked up on https://www.latlong.net/
-//#define LON "-74.0059"
+//#define LAT "49.2827" //Vancouver, Looked up on https://www.latlong.net/
+//#define LON "-123.1207"
 
 #ifdef CITY_ID
     #define OPENWEATHERMAP_URL "http://api.openweathermap.org/data/2.5/weather?id={cityID}&lang={lang}&units={units}&appid={apiKey}" //open weather api using city ID
@@ -20,7 +20,8 @@
 #define WEATHER_UPDATE_INTERVAL 30 //must be greater than 5, measured in minutes
 //NTP Settings
 #define NTP_SERVER "pool.ntp.org"
-#define GMT_OFFSET_SEC 3600 * -5 //New York is UTC -5 EST, -4 EDT, will be overwritten by weather data
+#define GMT_OFFSET_SEC (3600 * -8) // Van, CA is UTC -8 (Standard Time)
+//#define DAYLIGHT_OFFSET_SEC 3600 // Add 1 hour when DST is active
 
 watchySettings settings{
     #ifdef CITY_ID
@@ -37,6 +38,7 @@ watchySettings settings{
     .weatherUpdateInterval = WEATHER_UPDATE_INTERVAL,
     .ntpServer = NTP_SERVER,
     .gmtOffset = GMT_OFFSET_SEC,
+    //.dstOffset = DAYLIGHT_OFFSET_SEC,
     .vibrateOClock = true,
 };
 

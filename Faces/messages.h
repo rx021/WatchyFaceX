@@ -15,21 +15,27 @@ void WatchyFaceX::drawFaceMessages(bool enableDarkMode) {
   String message = "";
 
   // QUESTIONS:
-  display.setFont(&FreeSans12pt7b);
-  message = "Kinesthete? Explorer? Creator?";
+  display.setFont(&FreeSans9pt7b);
+  message = "player? persona? mantra?";
   display.getTextBounds(message, 0, 0, &x1, &y1, &width, &height);
   uint8_t mX = PADDING_X;
   int8_t mY = PADDING_Y + (-1 *  y1);
   // y1 is better to use instead of height here if we want the height of the font
   display.setCursor(mX, mY);
   display.println(message);
-
-  display.setFont(&FreeSansBold12pt7b);
-  message = "How can I play?";
+  message = "Kinesthete? Explorer? Creator?";
   display.println(message);
 
-  display.setFont(&FreeSans12pt7b);
+  display.setFont(&FreeSansBold9pt7b);
+  message = "How can I play?";
+  display.println(message);
   message = "What is blocking me?";
+  display.println(message);
+
+  display.setFont(&FreeSans9pt7b);
+  message = "-friction +focus";
+  display.println(message);
+  message = "+locality -distraction";
   display.println(message);
 
   // DRAW DATE from bottom-up: 

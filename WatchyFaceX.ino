@@ -1,7 +1,7 @@
 
-#include "main.h"
-#include "settings.h"
 //#include "secrets.h"
+#include "main.h" // should come before settings.h
+#include "settings.h"
 
 WatchyFaceX watchy(settings); //instantiate watch face
 
@@ -12,8 +12,12 @@ void setup() {
   setenv("TZ", timezone, 1);
 
   watchy.init();
+
+  // watchy.ensureCorrectTimeOnFreshBoot(); // one-time sync (or build-time fallback)
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 }
+
+

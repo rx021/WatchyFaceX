@@ -10,11 +10,11 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   float pi = 3.1415926535897932384626433832795;
   float circumference = 2 * pi;
 
-  uint8_t centerX = 100;
-  uint8_t centerY = 100;
+  uint8_t centerX = DISPLAY_WIDTH / 2;
+  uint8_t centerY = DISPLAY_HEIGHT / 2;
 
   // CLOCK TICK SCALE:
-  uint8_t tickOuterRadius = 98;
+  uint8_t tickOuterRadius = centerX - 2;
 
   // DRAW MINUTE SCALE
   uint8_t minuteCount = 60;
@@ -71,6 +71,10 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   // DRAW MINUTE HAND
   uint8_t minuteCountQuarter = minuteCount / 4;
   float angle_minuteHand = angle_minuteScale * (myMinute - minuteCountQuarter);
+  // NOTE: if myMinute was 0 then angle_minuteHand would be 0 radians
+  // - this would have myMinute 0 pointing to the right
+  // - but to point myMinute 0 to the top, 
+  //   we need to subtract by 15 minutes which is 90 degrees
 
   drawHandX(
     tickOuterRadius,
@@ -86,12 +90,12 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   uint8_t hourHandLength = (tickOuterRadius - hourHandOverlayRadius) / 2;
   uint8_t hourHandOuterRadius = hourHandOverlayRadius + hourHandLength;
 
-  //float halfMinuteIncrementCount = 720; // 360 * 2 ~ in degrees
-  //float halfMinuteIncrements = circumference / halfMinuteIncrementCount;
-  //float minuteIncrements = halfMinuteIncrements * myMinute;
-  //float angle_hourHand = angle_hourScale * (myHour - 3) + minuteIncrements;
+  uint8_t myHour12 = myHour % 12;
+  float hourFraction = myMinute / (float) minuteCount;
+  float hourValue = myHour12 + hourFraction;
+
   uint8_t hourCountQuarter = hourCount / 4;
-  float angle_hourHand = angle_hourScale * (myHour - hourCountQuarter);
+  float angle_hourHand = angle_hourScale * (hourValue - hourCountQuarter);
 
   drawHandX(
     hourHandOuterRadius,
