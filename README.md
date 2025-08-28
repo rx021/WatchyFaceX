@@ -142,6 +142,7 @@ watch -n 10 arduino-cli board list
 
 // TO COMPILE
 arduino-cli compile --fqbn esp32:esp32:esp32s3 .
+
 // TO UPLOAD
 arduino-cli upload -p /dev/cu.usbmodem101 --fqbn esp32:esp32:esp32s3 .
 ```
