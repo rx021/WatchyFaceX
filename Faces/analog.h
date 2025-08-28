@@ -39,6 +39,8 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   }
   uint8_t minuteCircleOverlayRadius = 93;
   display.fillCircle(centerX, centerY, minuteCircleOverlayRadius, bgColor);
+  
+  uint8_t hourLineThickness = 4;
 
   // DRAW HOUR SCALE
   uint8_t hourCount = 12;
@@ -47,7 +49,7 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
     drawHandX(
       tickOuterRadius,
       (angle_hourScale * hourIndex),
-      2, // lineThickness must be even number
+      hourLineThickness, // lineThickness must be even number
       textColor
     );
   }
@@ -62,7 +64,7 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
     drawHandX(
       tickOuterRadius,
       (angle_tickScale * tickIndex),
-      2, // lineThickness must be even number
+      hourLineThickness, // lineThickness must be even number
       textColor
     );
   }
@@ -86,7 +88,7 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   drawHandX(
     tickOuterRadius,
     angle_minuteHand,
-    4, // lineThickness must be even number
+    6, // lineThickness must be even number
     textColor
   );
 
@@ -107,7 +109,7 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   drawHandX(
     hourHandOuterRadius,
     angle_hourHand,
-    6, // lineThickness must be even number
+    8, // lineThickness must be even number
     textColor
   );
   display.fillCircle(centerX, centerY, hourHandOverlayRadius, bgColor);
