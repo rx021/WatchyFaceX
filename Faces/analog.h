@@ -28,14 +28,6 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
       2, // lineThickness
       textColor
     );
-    /*
-    display.drawLine(
-      centerX, centerY,
-      centerX + tickOuterRadius * cos(minuteAngle),
-      centerY + tickOuterRadius * sin(minuteAngle),
-      textColor
-    );
-    */
   }
   uint8_t minuteCircleOverlayRadius = 93;
   display.fillCircle(centerX, centerY, minuteCircleOverlayRadius, bgColor);
