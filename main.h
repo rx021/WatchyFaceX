@@ -22,7 +22,7 @@
 #include "Icons/wifi.h"
 
 RTC_DATA_ATTR int faceIndex = 0;
-RTC_DATA_ATTR int faceCount = 4;
+RTC_DATA_ATTR int faceCount = 5;
 RTC_DATA_ATTR bool isDarkMode = false;
 
 class WatchyFaceX : public Watchy{
@@ -46,6 +46,7 @@ class WatchyFaceX : public Watchy{
       uint16_t handColor
     );
     void drawFaceMessages(bool enableDarkMode);
+    void drawFaceNorthStar(bool enableDarkMode);
     virtual void handleButtonPress(); // Must be virtual in Watchy.h too
 
     // ---- Added: first-boot time setup helpers ----
@@ -60,6 +61,7 @@ class WatchyFaceX : public Watchy{
 // needs to be included after class declared
 #include "Faces/customBahn.h"
 #include "Faces/messages.h"
+#include "Faces/northstar.h"
 #include "Faces/calendar.h"
 #include "Faces/analog.h"
 
@@ -79,8 +81,9 @@ static const char* TZ_VANCOUVER = "PST8PDT,M3.2.0,M11.1.0";
 void WatchyFaceX::drawWatchFace() {
   if (faceIndex == 0) {drawFaceCustomBahn(isDarkMode);}
   if (faceIndex == 1) {drawFaceMessages(isDarkMode);}
-  if (faceIndex == 2) {drawFaceCalendar(isDarkMode);}
-  if (faceIndex == 3) {drawFaceAnalog(isDarkMode);}
+  if (faceIndex == 2) {drawFaceNorthStar(isDarkMode);}
+  if (faceIndex == 3) {drawFaceCalendar(isDarkMode);}
+  if (faceIndex == 4) {drawFaceAnalog(isDarkMode);}
 }                                         
 
 void WatchyFaceX::handleButtonPress() {
