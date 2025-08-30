@@ -3,8 +3,8 @@
 // NOTE: bottom right is X=200, Y=200
 
 void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
-  uint8_t PADDING_X = 15; // pixels
-  uint8_t PADDING_Y = 15; // pixels
+  uint8_t PADDING_X = 5; // pixels
+  uint8_t PADDING_Y = 5; // pixels
   uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
   uint16_t textColor = enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK; 
   display.fillScreen(bgColor);
@@ -74,8 +74,8 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
   #endif
 
   // WIFI ICON
-  uint8_t wifiX = PADDING_X;
-  uint8_t wifiY = PADDING_Y + batteryHeight + iconSpacing;
+  uint8_t wifiX = batteryX;
+  uint8_t wifiY = batteryY + batteryHeight + iconSpacing;
   uint8_t wifiWidth = 26;
   uint8_t wifiHeight = 18;
   display.drawBitmap(
@@ -162,7 +162,7 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
   dateString += currentTime.Day;
 
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
-  uint8_t dateX = PADDING_X;
+  uint8_t dateX = weekdayX;
   uint8_t dateY = weekdayY - weekdayHeight - dateSpacing;
   uint8_t dateWidth = w;
   uint8_t dateHeight = h;
@@ -174,7 +174,7 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
   dateString = currentTime.Year + 1970;
 
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
-  uint8_t yearX = PADDING_X;
+  uint8_t yearX = dateX;
   uint8_t yearY = dateY - dateHeight - dateSpacing;
   uint8_t yearWidth = w;
   uint8_t yearHeight = h;
