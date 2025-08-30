@@ -25,10 +25,10 @@ void WatchyFaceX::drawFaceNorthStar(bool enableDarkMode) {
 
   display.setFont(&FreeSansBold9pt7b);
   display.println("dy-MDW_tests");
-  display.println("dy-4hBuild_4hPromote_4hDeliver");
+  display.println("dy-444_BldPrmtDlvr");
   display.println("dy-show_your_work");
   display.println("wk-write_newsletter");
-  display.println("wk-meetups_hacknights");
+  display.println("wk-meetps_hcknghts");
   display.println("qr-12+1_wk_yr_exp");
   display.println("yr-DR_checkup");
 }
