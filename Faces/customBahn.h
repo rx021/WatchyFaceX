@@ -25,6 +25,8 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
   int16_t  x1, y1;
   uint16_t w, h;
 
+  uint8_t iconSpacing = 5;
+
   // BATTERY PERCENT
   uint8_t batteryPercent = 0;
   float VBAT = getBatteryVoltage();
@@ -43,7 +45,6 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
   uint8_t percentY = batteryY + h;
 
   // CHARGE ICON
-  uint8_t iconSpacing = 5;
   uint8_t chargeX = percentX + iconSpacing;
   uint8_t chargeY = percentY + 2;
   uint8_t chargeWidth = 16;
