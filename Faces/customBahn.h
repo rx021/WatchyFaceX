@@ -46,9 +46,8 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
   uint8_t percentWidth = w;
   uint8_t percentHeight = h;
   uint8_t halfPercentHeight = percentHeight / 2;
-
   uint8_t percentX = batteryX + batteryWidth + iconSpacing;
-  uint8_t percentY = batteryY + halfBatteryHeight - halfPercentHeight;
+  uint8_t percentY = batteryY + halfBatteryHeight + halfPercentHeight;
   display.setCursor(percentX, percentY);
   display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
   display.setTextColor(textColor);
