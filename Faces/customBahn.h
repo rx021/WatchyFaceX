@@ -41,7 +41,7 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
   }
   String percentString = "";
   percentString += batteryPercent;
-  percentString += "%";
+  percentString += "% ";
   display.getTextBounds(percentString, 0, 0, &x1, &y1, &w, &h);
   uint8_t percentWidth = w;
   uint8_t percentHeight = h;
