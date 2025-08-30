@@ -48,17 +48,18 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
   uint8_t halfPercentHeight = percentHeight / 2;
 
   uint8_t percentX = batteryX + batteryWidth + iconSpacing;
-  uint8_t percentY = batteryY + halfBatteryHeight + halfPercentHeight;
+  uint8_t percentY = batteryY + halfBatteryHeight - halfPercentHeight;
   display.setCursor(percentX, percentY);
-  display.setFont(&FreeSans9pt7b);
+  display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
   display.setTextColor(textColor);
   display.print(percentString);
 
   // CHARGE ICON
   uint8_t chargeWidth = 16;
   uint8_t chargeHeight = 18;
+  uint8_t halfChargeHeight = chargeHeight / 2;
   uint8_t chargeX = percentX + percentWidth + iconSpacing;
-  uint8_t chargeY = batteryY + halfBatteryHeight - (chargeHeight/2);
+  uint8_t chargeY = batteryY + halfBatteryHeight - halfChargeHeight;
   #ifdef ARDUINO_ESP32S3_DEV
   if(USB_PLUGGED_IN){
     display.drawBitmap(
