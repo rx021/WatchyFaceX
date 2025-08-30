@@ -22,7 +22,7 @@ void WatchyFaceX::drawFaceNorthStar(bool enableDarkMode) {
   // y1 is better to use instead of height here if we want the height of the font
   display.setCursor(mX, mY);
   display.println(message);
-  display.println("350TDI 1730TWI 90kTYI");
+  display.println("tyi96k twi1850 tdi370");
 
   display.setFont(&FreeSansBold9pt7b);
   display.println("dy-MDW_tests");
