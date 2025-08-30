@@ -43,6 +43,9 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
   display.getTextBounds(percentString, 0, 0, &x1, &y1, &w, &h);
   uint8_t percentX = batteryX + batteryWidth + iconSpacing;
   uint8_t percentY = batteryY + h;
+  display.setCursor(percentX, percentY);
+  display.setTextColor(textColor);
+  display.print(percentString);
 
   // CHARGE ICON
   uint8_t chargeX = percentX + iconSpacing;
