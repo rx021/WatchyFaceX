@@ -58,15 +58,19 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
       break;
     case DIRECTION_BOTTOM_EDGE:
       display.println("BOTTOM EDGE");
+      ballY--;
       break;
     case DIRECTION_TOP_EDGE:
       display.println("TOP EDGE");
+      ballY++;
       break;
     case DIRECTION_RIGHT_EDGE:
       display.println("RIGHT EDGE");
+      ballX++;
       break;
     case DIRECTION_LEFT_EDGE:
       display.println("LEFT EDGE");
+      ballX--;
       break;
     default:
       display.println("ERROR!!!");
@@ -79,7 +83,6 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
       ballR,
       textColor
     );
-
 
     display.display(true); // full refresh
   }
