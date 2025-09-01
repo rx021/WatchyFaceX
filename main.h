@@ -29,12 +29,15 @@ RTC_DATA_ATTR int faceTypeIndex = 0;
 RTC_DATA_ATTR int faceTypeCount = 3;
 
 // FACE TYPES
-RTC_DATA_ATTR int datetimeFacesIndex = 0;
-// (WIP) calendar, event, alarms, timer, countdown
 RTC_DATA_ATTR int clockFacesIndex = 0;
+RTC_DATA_ATTR int clockFacesCount = 2;
 // bahn, analog
 RTC_DATA_ATTR int noteFacesIndex = 0;
+RTC_DATA_ATTR int noteFacesCount = 2;
 // why (WIP), northstar, messages
+RTC_DATA_ATTR int datetimeFacesIndex = 0;
+RTC_DATA_ATTR int datetimeFacesCount = 1;
+// (WIP) calendar, event, alarms, timer, countdown
 
 
 class WatchyFaceX : public Watchy{
@@ -124,6 +127,28 @@ void WatchyFaceX::handleButtonPress() {
     // for buttons to work
     if (wakeupBit & BACK_BTN_MASK) {
       //isDarkMode = (isDarkMode ? false : true);
+      if (faceTypeIndex == 0) {
+        clockFacesIndex++;
+        // go to first if beyond list
+        if (clockFacesCount <= clockFacesIndex) {
+          clockFacesIndex = 0;
+        }
+      }
+      if (faceTypeIndex == 1) {
+        noteFacesIndex++;
+        // go to first if beyond list
+        if (noteFacesCount <= noteFacesIndex) {
+          noteFacesIndex = 0;
+        }
+      }
+      if (faceTypeIndex == 2) {
+        datetimeFacesIndex++;
+        // go to first if beyond list
+        if (datetimeFacesCount <= datetimeFacesIndex) {
+          datetimeFacesIndex = 0;
+        }
+      }
+
       RTC.read(currentTime);
       showWatchFace(true);
       return;
