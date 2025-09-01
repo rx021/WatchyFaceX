@@ -25,6 +25,18 @@ RTC_DATA_ATTR int faceIndex = 0;
 RTC_DATA_ATTR int faceCount = 5;
 RTC_DATA_ATTR bool isDarkMode = false;
 
+RTC_DATA_ATTR int faceTypeIndex = 0;
+RTC_DATA_ATTR int faceTypeCount = 3;
+
+// FACE TYPES
+RTC_DATA_ATTR int datetimeFacesIndex = 0;
+// (WIP) calendar, event, alarms, timer, countdown
+RTC_DATA_ATTR int clockFacesIndex = 0;
+// bahn, analog
+RTC_DATA_ATTR int noteFacesIndex = 0;
+// why (WIP), northstar, messages
+
+
 class WatchyFaceX : public Watchy{
   using Watchy::Watchy;
   public: 
@@ -79,11 +91,28 @@ static const char* TZ_VANCOUVER = "PST8PDT,M3.2.0,M11.1.0";
  */
 
 void WatchyFaceX::drawWatchFace() {
+  /**
   if (faceIndex == 0) {drawFaceCustomBahn(isDarkMode);}
-  if (faceIndex == 1) {drawFaceMessages(isDarkMode);}
-  if (faceIndex == 2) {drawFaceNorthStar(isDarkMode);}
-  if (faceIndex == 3) {drawFaceCalendar(isDarkMode);}
   if (faceIndex == 4) {drawFaceAnalog(isDarkMode);}
+
+  if (faceIndex == 2) {drawFaceNorthStar(isDarkMode);}
+  if (faceIndex == 1) {drawFaceMessages(isDarkMode);}
+
+  if (faceIndex == 3) {drawFaceCalendar(isDarkMode);}
+  **/
+
+  if (faceTypeIndex == 0) {
+    if (clockFacesIndex == 0) {drawFaceCustomBahn(isDarkMode);}
+    if (clockFacesIndex == 1) {drawFaceAnalog(isDarkMode);}
+  }
+  if (faceTypeIndex == 1) {
+    if (noteFacesIndex == 0) {drawFaceNorthStar(isDarkMode);}
+    if (noteFacesIndex == 1) {drawFaceMessages(isDarkMode);}
+  }
+  if (faceTypeIndex == 2) {
+    if (datetimeFacesIndex == 0) {drawFaceCalendar(isDarkMode);}
+  }
+
 }                                         
 
 void WatchyFaceX::handleButtonPress() {
@@ -94,7 +123,7 @@ void WatchyFaceX::handleButtonPress() {
     // careful of this condition 
     // for buttons to work
     if (wakeupBit & BACK_BTN_MASK) {
-      isDarkMode = (isDarkMode ? false : true);
+      //isDarkMode = (isDarkMode ? false : true);
       RTC.read(currentTime);
       showWatchFace(true);
       return;
@@ -106,10 +135,16 @@ void WatchyFaceX::handleButtonPress() {
     }
 
     if (wakeupBit & UP_BTN_MASK) {
+      /**
       faceIndex--;
       if (faceIndex < 0 ) {
         // go back to last if beyond list
         faceIndex = faceCount - 1;
+      }
+      **/
+      faceTypeIndex--;
+      if (faceTypeIndex < 0) {
+        faceTypeIndex = faceTypeCount - 1;
       }
       RTC.read(currentTime);
       showWatchFace(true);
@@ -117,10 +152,17 @@ void WatchyFaceX::handleButtonPress() {
     }
 
     if (wakeupBit & DOWN_BTN_MASK) {
+      /**
       faceIndex++;
       if (faceCount <= faceIndex) {
         // go to first if beyond list
         faceIndex = 0;
+      }
+      **/
+      faceTypeIndex++;
+      if (faceTypeCount <= faceTypeIndex) {
+        // go to first if beyond list
+        faceTypeIndex = 0;
       }
       RTC.read(currentTime);
       showWatchFace(true);
