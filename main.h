@@ -126,27 +126,23 @@ void WatchyFaceX::handleButtonPress() {
     // careful of this condition 
     // for buttons to work
     if (wakeupBit & BACK_BTN_MASK) {
+      bool isOutOfBounds = false;
       //isDarkMode = (isDarkMode ? false : true);
       if (faceTypeIndex == 0) {
         clockFacesIndex++;
-        // go to first if beyond list
-        if (clockFacesCount <= clockFacesIndex) {
-          clockFacesIndex = 0;
-        }
+        isOutOfBounds = (clockFacesCount <= clockFacesIndex);
+        if (isOutOfBounds) {clockFacesIndex = 0;}
       }
       if (faceTypeIndex == 1) {
         noteFacesIndex++;
-        // go to first if beyond list
-        if (noteFacesCount <= noteFacesIndex) {
-          noteFacesIndex = 0;
-        }
+        isOutOfBounds = (noteFacesCount <= noteFacesIndex);
+        if (isOutOfBounds) {noteFacesIndex = 0;}
       }
       if (faceTypeIndex == 2) {
         datetimeFacesIndex++;
         // go to first if beyond list
-        if (datetimeFacesCount <= datetimeFacesIndex) {
-          datetimeFacesIndex = 0;
-        }
+        isOutOfBounds = (datetimeFacesCount <= datetimeFacesIndex);
+        if (isOutOfBounds) {datetimeFacesIndex = 0;}
       }
 
       RTC.read(currentTime);
@@ -160,35 +156,17 @@ void WatchyFaceX::handleButtonPress() {
     }
 
     if (wakeupBit & UP_BTN_MASK) {
-      /**
-      faceIndex--;
-      if (faceIndex < 0 ) {
-        // go back to last if beyond list
-        faceIndex = faceCount - 1;
-      }
-      **/
       faceTypeIndex--;
-      if (faceTypeIndex < 0) {
-        faceTypeIndex = faceTypeCount - 1;
-      }
+      if (faceTypeIndex < 0) {faceTypeIndex = faceTypeCount - 1;}
       RTC.read(currentTime);
       showWatchFace(true);
       return;
     }
 
     if (wakeupBit & DOWN_BTN_MASK) {
-      /**
-      faceIndex++;
-      if (faceCount <= faceIndex) {
-        // go to first if beyond list
-        faceIndex = 0;
-      }
-      **/
       faceTypeIndex++;
-      if (faceTypeCount <= faceTypeIndex) {
-        // go to first if beyond list
-        faceTypeIndex = 0;
-      }
+      // go to first if beyond list
+      if (faceTypeCount <= faceTypeIndex) {faceTypeIndex = 0;}
       RTC.read(currentTime);
       showWatchFace(true);
       return;
