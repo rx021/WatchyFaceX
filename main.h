@@ -76,10 +76,11 @@ class WatchyFaceX : public Watchy{
 
 // needs to be included after class declared
 #include "Faces/customBahn.h"
-#include "Faces/messages.h"
-#include "Faces/northstar.h"
-#include "Faces/calendar.h"
 #include "Faces/analog.h"
+#include "Faces/why.h"
+#include "Faces/northstar.h"
+#include "Faces/messages.h"
+#include "Faces/calendar.h"
 
 // ---- Added includes/flag for time sync ----
 /**
