@@ -27,9 +27,9 @@ void WatchyFaceX::drawFaceWhy(bool enableDarkMode) {
   display.setFont(&FreeSansBold9pt7b);
   display.println("to Explr Love Give");
   display.println("moralDutyOPTIMISM");
-  display.println("ROIspeedFdbkLoopSync");
+  display.println("ROIspeed Fdbk Sync");
   display.println("WuWei ESC 80/20");
   display.println("lack clarity");
-  display.println("antifrgl essntl");
+  display.println("antifrgl essntl gratefl");
 }
 
