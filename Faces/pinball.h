@@ -16,7 +16,8 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
   while (1) {
     unsigned long currentMillis = millis();
 
-    if (digitalRead(BACK_BTN_PIN) == ACTIVE_LOW) {
+    if (digitalRead(BACK_BTN_PIN) == 0) {
+      // ACITVE_LOW (0,1) taken from Watchy github
       break;
     }
 
