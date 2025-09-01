@@ -5,6 +5,7 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
 
   display.setFullWindow();
   display.fillScreen(bgColor);
+  display.setFont(&FreeSans9pt7b);
   display.setTextColor(textColor);
 
   Accel acc;
@@ -19,9 +20,27 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
       break;
     }
 
-    if (currentMillis - previousMillis > interval) {
-
+    if ((currentMillis - previousMillis) <= interval) {
+      continue;
     }
+
+    // ACTION PER INTERVAL
+    
+    previousMillis = currentMillis;
+
+    // Get acceleration data
+    bool res = sensor.getAccel(acc);
+    uint8_t direction = sensor.getDirection();
+    display.fillScreen(bgColor);
+    display.setCursor(0, 30);
+
+    if (res == false) {
+      display.println("getAccel FAIL");
+      display.display(true); // full refresh
+      continue;
+    }
+
+    display.display(true); // full refresh
   }
 
 }
