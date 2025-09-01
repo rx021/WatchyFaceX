@@ -23,19 +23,22 @@
 
 RTC_DATA_ATTR bool isDarkMode = false;
 
+// FACE TYPES: clocks, notes, datetime, toys
 RTC_DATA_ATTR int faceTypeIndex = 0;
-RTC_DATA_ATTR int faceTypeCount = 3;
+RTC_DATA_ATTR int faceTypeCount = 4;
 
-// FACE TYPES: clocks, notes, datetime
+// bahn, analog
 RTC_DATA_ATTR int clockFacesIndex = 0;
 RTC_DATA_ATTR int clockFacesCount = 2;
-// bahn, analog
+// why, northstar, messages
 RTC_DATA_ATTR int noteFacesIndex = 0;
 RTC_DATA_ATTR int noteFacesCount = 3;
-// why, northstar, messages
+// (WIP) calendar, event, alarms, timer, countdown
 RTC_DATA_ATTR int datetimeFacesIndex = 0;
 RTC_DATA_ATTR int datetimeFacesCount = 1;
-// (WIP) calendar, event, alarms, timer, countdown
+// pinball
+RTC_DATA_ATTR int toyFacesIndex = 0;
+RTC_DATA_ATTR int toyFacesCount = 1;
 
 
 class WatchyFaceX : public Watchy{
@@ -62,6 +65,7 @@ class WatchyFaceX : public Watchy{
     void drawFaceWhy(bool enableDarkMode);
     void drawFaceNorthStar(bool enableDarkMode);
     void drawFaceMessages(bool enableDarkMode);
+    void drawFacePinball(bool enableDarkMode);
     virtual void handleButtonPress(); // Must be virtual in Watchy.h too
 
     // ---- Added: first-boot time setup helpers ----
@@ -74,12 +78,13 @@ class WatchyFaceX : public Watchy{
 };
 
 // needs to be included after class declared
+#include "Faces/calendar.h"
 #include "Faces/customBahn.h"
 #include "Faces/analog.h"
 #include "Faces/why.h"
 #include "Faces/northstar.h"
 #include "Faces/messages.h"
-#include "Faces/calendar.h"
+#include "Faces/pinball.h"
 
 // ---- Added includes/flag for time sync ----
 /**
@@ -97,15 +102,18 @@ static const char* TZ_VANCOUVER = "PST8PDT,M3.2.0,M11.1.0";
 void WatchyFaceX::drawWatchFace() {
   if (faceTypeIndex == 0) {
     if (clockFacesIndex == 0) {drawFaceCustomBahn(isDarkMode);}
-    if (clockFacesIndex == 1) {drawFaceAnalog(isDarkMode);}
+    else if (clockFacesIndex == 1) {drawFaceAnalog(isDarkMode);}
   }
-  if (faceTypeIndex == 1) {
+  else if (faceTypeIndex == 1) {
     if (noteFacesIndex == 0) {drawFaceWhy(isDarkMode);}
-    if (noteFacesIndex == 1) {drawFaceNorthStar(isDarkMode);}
-    if (noteFacesIndex == 2) {drawFaceMessages(isDarkMode);}
+    else if (noteFacesIndex == 1) {drawFaceNorthStar(isDarkMode);}
+    else if (noteFacesIndex == 2) {drawFaceMessages(isDarkMode);}
   }
-  if (faceTypeIndex == 2) {
+  else if (faceTypeIndex == 2) {
     if (datetimeFacesIndex == 0) {drawFaceCalendar(isDarkMode);}
+  }
+  else if (faceTypeIndex == 3) {
+    if (toyFacesIndex == 0) {drawFacePinball(isDarkMode);}
   }
 
 }                                         
