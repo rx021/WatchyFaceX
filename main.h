@@ -33,8 +33,8 @@ RTC_DATA_ATTR int clockFacesIndex = 0;
 RTC_DATA_ATTR int clockFacesCount = 2;
 // bahn, analog
 RTC_DATA_ATTR int noteFacesIndex = 0;
-RTC_DATA_ATTR int noteFacesCount = 2;
-// why (WIP), northstar, messages
+RTC_DATA_ATTR int noteFacesCount = 3;
+// why, northstar, messages
 RTC_DATA_ATTR int datetimeFacesIndex = 0;
 RTC_DATA_ATTR int datetimeFacesCount = 1;
 // (WIP) calendar, event, alarms, timer, countdown
