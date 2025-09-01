@@ -13,6 +13,13 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
   long previousMillis = 0;
   long interval = 200;
 
+  uint8_t centerX = DISPLAY_WIDTH / 2;
+  uint8_t centerY = DISPLAY_HEIGHT / 2;
+
+  uint8_t ballR = 4;
+  uint8_t ballX = centerX - ballR;
+  uint8_t ballY = centerY - ballR;
+
   while (1) {
     unsigned long currentMillis = millis();
 
@@ -42,7 +49,6 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
       continue;
     }
 
-    display.setCursor(30, 130);
     switch (direction) {
     case DIRECTION_DISP_DOWN:
       display.println("FACE DOWN");
@@ -66,6 +72,14 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
       display.println("ERROR!!!");
       break;
     }
+
+    display.fillCircle(
+      ballX,
+      ballY,
+      ballR,
+      textColor
+    );
+
 
     display.display(true); // full refresh
   }
