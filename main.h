@@ -21,14 +21,12 @@
 #include "Icons/bluetooth.h"
 #include "Icons/wifi.h"
 
-RTC_DATA_ATTR int faceIndex = 0;
-RTC_DATA_ATTR int faceCount = 5;
 RTC_DATA_ATTR bool isDarkMode = false;
 
 RTC_DATA_ATTR int faceTypeIndex = 0;
 RTC_DATA_ATTR int faceTypeCount = 3;
 
-// FACE TYPES
+// FACE TYPES: clocks, notes, datetime
 RTC_DATA_ATTR int clockFacesIndex = 0;
 RTC_DATA_ATTR int clockFacesCount = 2;
 // bahn, analog
