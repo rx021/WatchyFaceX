@@ -31,6 +31,7 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
     // Get acceleration data
     bool res = sensor.getAccel(acc);
     uint8_t direction = sensor.getDirection();
+
     display.fillScreen(bgColor);
     display.setCursor(0, 30);
 
@@ -38,6 +39,31 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
       display.println("getAccel FAIL");
       display.display(true); // full refresh
       continue;
+    }
+
+    display.setCursor(30, 130);
+    switch (direction) {
+    case DIRECTION_DISP_DOWN:
+      display.println("FACE DOWN");
+      break;
+    case DIRECTION_DISP_UP:
+      display.println("FACE UP");
+      break;
+    case DIRECTION_BOTTOM_EDGE:
+      display.println("BOTTOM EDGE");
+      break;
+    case DIRECTION_TOP_EDGE:
+      display.println("TOP EDGE");
+      break;
+    case DIRECTION_RIGHT_EDGE:
+      display.println("RIGHT EDGE");
+      break;
+    case DIRECTION_LEFT_EDGE:
+      display.println("LEFT EDGE");
+      break;
+    default:
+      display.println("ERROR!!!");
+      break;
     }
 
     display.display(true); // full refresh
