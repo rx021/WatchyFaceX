@@ -94,16 +94,6 @@ static const char* TZ_VANCOUVER = "PST8PDT,M3.2.0,M11.1.0";
  */
 
 void WatchyFaceX::drawWatchFace() {
-  /**
-  if (faceIndex == 0) {drawFaceCustomBahn(isDarkMode);}
-  if (faceIndex == 4) {drawFaceAnalog(isDarkMode);}
-
-  if (faceIndex == 2) {drawFaceNorthStar(isDarkMode);}
-  if (faceIndex == 1) {drawFaceMessages(isDarkMode);}
-
-  if (faceIndex == 3) {drawFaceCalendar(isDarkMode);}
-  **/
-
   if (faceTypeIndex == 0) {
     if (clockFacesIndex == 0) {drawFaceCustomBahn(isDarkMode);}
     if (clockFacesIndex == 1) {drawFaceAnalog(isDarkMode);}
