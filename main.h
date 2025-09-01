@@ -60,8 +60,9 @@ class WatchyFaceX : public Watchy{
       uint8_t lineThickness,
       uint16_t handColor
     );
-    void drawFaceMessages(bool enableDarkMode);
+    void drawFaceWhy(bool enableDarkMode);
     void drawFaceNorthStar(bool enableDarkMode);
+    void drawFaceMessages(bool enableDarkMode);
     virtual void handleButtonPress(); // Must be virtual in Watchy.h too
 
     // ---- Added: first-boot time setup helpers ----
@@ -99,8 +100,9 @@ void WatchyFaceX::drawWatchFace() {
     if (clockFacesIndex == 1) {drawFaceAnalog(isDarkMode);}
   }
   if (faceTypeIndex == 1) {
-    if (noteFacesIndex == 0) {drawFaceNorthStar(isDarkMode);}
-    if (noteFacesIndex == 1) {drawFaceMessages(isDarkMode);}
+    if (noteFacesIndex == 0) {drawFaceWhy(isDarkMode);}
+    if (noteFacesIndex == 1) {drawFaceNorthStar(isDarkMode);}
+    if (noteFacesIndex == 2) {drawFaceMessages(isDarkMode);}
   }
   if (faceTypeIndex == 2) {
     if (datetimeFacesIndex == 0) {drawFaceCalendar(isDarkMode);}
