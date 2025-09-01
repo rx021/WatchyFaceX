@@ -149,6 +149,42 @@ void WatchyFaceX::drawFaceAnalog(bool enableDarkMode) {
   uint8_t weekdayY = centerY + dateHalfHeight + dateSpacing + h; // to center below date
   display.setCursor(weekdayX, weekdayY);
   display.print(dateString);
+
+  // DRAW BATTERY PERCENT
+  uint8_t PADDING_X = 1; // pixels
+  uint8_t PADDING_Y = 1; // pixels
+  String percentString = getBatteryPercent();
+
+  display.getTextBounds(percentString, 0, 0, &x1, &y1, &w, &h);
+  uint8_t percentWidth = w;
+  uint8_t percentHeight = h;
+  uint8_t halfPercentHeight = percentHeight / 2;
+
+  uint8_t percentX = PADDING_X;
+  uint8_t percentY = PADDING_Y + halfPercentHeight;
+  display.setCursor(percentX, percentY);
+  display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
+  display.setTextColor(textColor);
+  display.print(percentString);
+}
+
+String WatchyFaceX::getBatteryPercent() {
+  String percentString = "";
+
+  uint8_t batteryPercent = 0;
+  float VBAT = getBatteryVoltage();
+
+  if (4.2 <= VBAT){
+    batteryPercent = 100.0;
+  }
+  else if (3.3 <= VBAT) {
+    batteryPercent = 100.0 * (VBAT - 3.3) / 0.9;
+  }
+
+  percentString += batteryPercent;
+  percentString += "% ";
+
+  return percentString;
 }
 
 // HELPER FUNCTION FOR HANDS DRAWING
