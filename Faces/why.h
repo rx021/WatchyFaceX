@@ -22,13 +22,13 @@ void WatchyFaceX::drawFaceWhy(bool enableDarkMode) {
   // y1 is better to use instead of height here if we want the height of the font
   display.setCursor(mX, mY);
   display.println(message);
-  display.println("why do we go on?");
+  display.println("why go on?");
 
   display.setFont(&FreeSansBold9pt7b);
-  display.println("to experience; give; love");
-  display.println("MORAL_DUTY; OPTIMISM");
-  display.println("ROI~SPEED~fdbkLOOP~sync");
-  display.println("WuWei; ESC; 80/20");
+  display.println("to Explr Love Give");
+  display.println("moralDutyOPTIMISM");
+  display.println("ROIspeedFdbkLoopSync");
+  display.println("WuWei ESC 80/20");
   display.println("lack clarity");
   display.println("antifrgl essntl");
 }
