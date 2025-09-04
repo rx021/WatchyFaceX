@@ -140,11 +140,11 @@ void WatchyFaceX::drawWatchFace() {
   }
   else if (faceTypeIndex == 2) {
     currFace = PLANNER_FACES[plannerFacesIndex];
-    currFace(isDarkMode);
+    (this->*currFace)(isDarkMode);
   }
   else if (faceTypeIndex == 3) {
     currFace = TOY_FACES[toyFacesIndex];
-    currFace(isDarkMode);
+    (this->*currFace)(isDarkMode);
   }
 }                                         
 
