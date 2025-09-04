@@ -125,27 +125,6 @@ static FaceType FACE_TYPES[] = {
 };
 static constexpr size_t FACE_TYPE_COUNT = sizeof(FACE_TYPES) / sizeof(FACE_TYPES[0]);
 
-void WatchyFaceX::drawWatchFace() {
-  FaceFn currFace;
-
-  if (faceTypeIndex == 0) {
-    currFace = CLOCK_FACES[clockFacesIndex];
-    (this->*currFace)(isDarkMode);
-  }
-  else if (faceTypeIndex == 1) {
-    currFace = NOTE_FACES[noteFacesIndex];
-    (this->*currFace)(isDarkMode);
-  }
-  else if (faceTypeIndex == 2) {
-    currFace = TOY_FACES[toyFacesIndex];
-    (this->*currFace)(isDarkMode);
-  }
-  else if (faceTypeIndex == 3) {
-    currFace = PLANNER_FACES[plannerFacesIndex];
-    (this->*currFace)(isDarkMode);
-  }
-}                                         
-
 void WatchyFaceX::handleButtonPress() {
   if (guiState == WATCHFACE_STATE) {
     uint64_t wakeupBit = esp_sleep_get_ext1_wakeup_status();
@@ -196,6 +175,27 @@ void WatchyFaceX::handleButtonPress() {
   } else {Watchy::handleButtonPress();}
   return;
 }
+
+void WatchyFaceX::drawWatchFace() {
+  FaceFn currFace;
+
+  if (faceTypeIndex == 0) {
+    currFace = CLOCK_FACES[clockFacesIndex];
+    (this->*currFace)(isDarkMode);
+  }
+  else if (faceTypeIndex == 1) {
+    currFace = NOTE_FACES[noteFacesIndex];
+    (this->*currFace)(isDarkMode);
+  }
+  else if (faceTypeIndex == 2) {
+    currFace = TOY_FACES[toyFacesIndex];
+    (this->*currFace)(isDarkMode);
+  }
+  else if (faceTypeIndex == 3) {
+    currFace = PLANNER_FACES[plannerFacesIndex];
+    (this->*currFace)(isDarkMode);
+  }
+}                                         
 
 /**
 // --- Fallback: set RTC from firmware build time (UTC-agnostic; just "close enough") ---
