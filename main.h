@@ -116,8 +116,8 @@ static constexpr FaceFn TOY_FACES[] = {
 };
 static constexpr size_t TOY_COUNT = sizeof(TOY_FACES) / sizeof(TOY_FACES[0]);
 
-struct FaceType{
-  const FaceFn& list;
+struct FaceType {
+  const FaceFn* list;
 };
 
 static FaceType FACE_TYPES[] = {
