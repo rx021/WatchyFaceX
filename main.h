@@ -27,15 +27,6 @@ RTC_DATA_ATTR bool isDarkMode = false;
 RTC_DATA_ATTR int faceTypeIndex = 0;
 RTC_DATA_ATTR int faceTypeCount = 4;
 
-// Type alias for a WatchyFaceX member function: void f(bool)
-using FaceFn = void (WatchyFaceX::*)(bool);
-
-static constexpr FaceFn CLOCK_FACES[] = {
-  &WatchyFaceX::drawFaceCustomBahn,
-  &WatchyFaceX::drawFaceAnalog,
-};
-
-static constexpr size_t CLOCK_COUNT = sizeof(CLOCK_FACES) / sizeof(CLOCK_FACES[0]);
 
 // bahn, analog
 RTC_DATA_ATTR int clockFacesIndex = 0;
@@ -108,6 +99,17 @@ RTC_DATA_ATTR bool s_firstBootNtpDone = false;
 // "PST8PDT,M3.2.0,M11.1.0" = switch on 2nd Sunday in March and 1st Sunday in November.
 static const char* TZ_VANCOUVER = "PST8PDT,M3.2.0,M11.1.0";
  */
+
+// Type alias for a WatchyFaceX member function: void f(bool)
+using FaceFn = void (WatchyFaceX::*)(bool);
+
+static constexpr FaceFn CLOCK_FACES[] = {
+  &WatchyFaceX::drawFaceCustomBahn,
+  &WatchyFaceX::drawFaceAnalog,
+};
+
+static constexpr size_t CLOCK_COUNT = sizeof(CLOCK_FACES) / sizeof(CLOCK_FACES[0]);
+
 
 void WatchyFaceX::drawWatchFace() {
   if (faceTypeIndex == 0) {
