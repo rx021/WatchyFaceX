@@ -19,7 +19,7 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
   uint8_t ballR = 4;
   uint8_t ballX = centerX - ballR;
   uint8_t ballY = centerY - ballR;
-  uint8_t ballIncrements = 8;
+  uint8_t ballIncrements = 16;
 
   uint8_t xLowerBound = 0;
   uint8_t yLowerBound = 0;
@@ -30,7 +30,7 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
     unsigned long currentMillis = millis();
 
     if (digitalRead(BACK_BTN_PIN) == 0) {
-      // ACITVE_LOW (0,1) taken from Watchy github
+      // ACITVE_LOW (0 or 1) taken from Watchy github
       break;
     }
 
