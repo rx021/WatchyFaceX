@@ -50,7 +50,7 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
     uint8_t direction = sensor.getDirection();
 
     display.fillScreen(bgColor);
-    display.setCursor(0, 30);
+    display.setCursor(3, 3);
 
     if (!accelerationReadOk) {
       display.println("Acceleration read failed");
