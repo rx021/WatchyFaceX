@@ -78,6 +78,10 @@ class WatchyFaceX : public Watchy{
       bool enableDarkMode,
       bool enableInteractive
     );
+    void drawFacePinballX(
+      bool enableDarkMode,
+      bool enableInteractive
+    );
     // NOTE: Must be virtual in Watchy.h too
     virtual void handleButtonPress();
 
@@ -98,6 +102,7 @@ class WatchyFaceX : public Watchy{
 #include "Faces/northstar.h"
 #include "Faces/messages.h"
 #include "Faces/pinball.h"
+#include "Faces/pinballX.h"
 
 // ---- Added includes/flag for time sync ----
 /**
@@ -136,6 +141,7 @@ static constexpr size_t PLANNER_COUNT = sizeof(PLANNER_FACES) / sizeof(PLANNER_F
 
 static constexpr FaceFn TOY_FACES[] = {
   &WatchyFaceX::drawFacePinball,
+  &WatchyFaceX::drawFacePinballX,
 };
 static constexpr size_t TOY_COUNT = sizeof(TOY_FACES) / sizeof(TOY_FACES[0]);
 
