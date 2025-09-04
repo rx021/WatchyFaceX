@@ -155,10 +155,10 @@ void WatchyFaceX::handleButtonPress() {
   if (guiState == WATCHFACE_STATE) {
     uint64_t wakeupBit = esp_sleep_get_ext1_wakeup_status();
 
-    // NOTE:
-    // careful of this condition 
+    // NOTE: beware this condition 
     // for buttons to work
     if (wakeupBit & BACK_BTN_MASK) {
+      // NOTE: order should match FACE_TYPES
       if (faceTypeIndex == 0) {
         clockFacesIndex = (clockFacesIndex + 1) % CLOCK_COUNT;
       }
