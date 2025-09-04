@@ -165,6 +165,8 @@ void WatchyFaceX::handleButtonPress() {
         noteFacesIndex = (noteFacesIndex + 1) % NOTE_COUNT;
       }
       else if (faceTypeIndex == 2) {
+        // reset when changing face
+        enableInteractive = false;
         toyFacesIndex = (toyFacesIndex + 1) % TOY_COUNT;
       }
       else if (faceTypeIndex == 3) {
@@ -191,6 +193,8 @@ void WatchyFaceX::handleButtonPress() {
       faceTypeIndex = (faceTypeIndex-1 < 0)
         ? FACE_TYPE_COUNT-1
         : faceTypeIndex-1;
+      // reset when changing face type
+      enableInteractive = false;
       RTC.read(currentTime);
       showWatchFace(true);
       return;
@@ -198,6 +202,8 @@ void WatchyFaceX::handleButtonPress() {
 
     if (wakeupBit & DOWN_BTN_MASK) {
       faceTypeIndex = (faceTypeIndex + 1) % FACE_TYPE_COUNT;
+      // reset when changing face type
+      enableInteractive = false;
       RTC.read(currentTime);
       showWatchFace(true);
       return;

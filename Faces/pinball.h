@@ -122,6 +122,11 @@ void WatchyFaceX::drawFacePinball(
     );
 
     display.display(true); // full refresh
+
+    if (!enableInteractive) {
+      // only show initially so that we can switch between faces
+      break;
+    }
   }
 
 }
