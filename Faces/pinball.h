@@ -21,13 +21,13 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
   // NOTE: circle center is X,Y
   uint8_t ballX = centerX;
   uint8_t ballY = centerY;
-  uint8_t ballR = 4;
+  uint8_t ballRadius = 4;
   uint8_t ballIncrements = 16;
 
-  uint8_t xLowerBound = ballR;
-  uint8_t yLowerBound = ballR;
-  uint8_t xUpperBound = DISPLAY_WIDTH - ballR;
-  uint8_t yUpperBound = DISPLAY_HEIGHT - ballR;
+  uint8_t minBallX = ballRadius;
+  uint8_t maxBallX = DISPLAY_WIDTH - ballRadius;
+  uint8_t minBallY = ballRadius;
+  uint8_t maxBallY = DISPLAY_HEIGHT - ballRadius;
 
   while (1) {
     unsigned long currentMillis = millis();
@@ -58,7 +58,6 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
       continue;
     }
 
-
     switch (direction) {
     case DIRECTION_DISP_DOWN:
       display.println("FACE DOWN");
@@ -71,7 +70,7 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
       ballX = decrementCoordinate(
           ballX,
           ballIncrements,
-          xLowerBound
+          minBallX
       );
       break;
     case DIRECTION_LEFT_EDGE:
@@ -79,7 +78,7 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
       ballX = incrementCoordinate(
           ballX,
           ballIncrements,
-          xUpperBound
+          maxBallX
       );
       break;
     case DIRECTION_BOTTOM_EDGE:
@@ -87,7 +86,7 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
       ballY = decrementCoordinate(
           ballY,
           ballIncrements,
-          yLowerBound
+          minBallY
       );
       break;
     case DIRECTION_TOP_EDGE:
@@ -95,7 +94,7 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
       ballY = incrementCoordinate(
           ballY,
           ballIncrements,
-          yUpperBound
+          maxBallY
       );
       break;
     default:
@@ -106,7 +105,7 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
     display.fillCircle(
       ballX,
       ballY,
-      ballR,
+      ballRadius,
       textColor
     );
 
