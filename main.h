@@ -133,12 +133,12 @@ void WatchyFaceX::handleButtonPress() {
         isOutOfBounds = (clockFacesCount <= clockFacesIndex);
         if (isOutOfBounds) {clockFacesIndex = 0;}
       }
-      if (faceTypeIndex == 1) {
+      else if (faceTypeIndex == 1) {
         noteFacesIndex++;
         isOutOfBounds = (noteFacesCount <= noteFacesIndex);
         if (isOutOfBounds) {noteFacesIndex = 0;}
       }
-      if (faceTypeIndex == 2) {
+      else if (faceTypeIndex == 2) {
         datetimeFacesIndex++;
         // go to first if beyond list
         isOutOfBounds = (datetimeFacesCount <= datetimeFacesIndex);
