@@ -30,10 +30,7 @@ RTC_DATA_ATTR int faceTypeCount = 4;
 RTC_DATA_ATTR int clockFacesIndex = 0;
 RTC_DATA_ATTR int noteFacesIndex = 0;
 RTC_DATA_ATTR int plannerFacesIndex = 0;
-// pinball
 RTC_DATA_ATTR int toyFacesIndex = 0;
-RTC_DATA_ATTR int toyFacesCount = 1;
-
 
 class WatchyFaceX : public Watchy{
   using Watchy::Watchy;
@@ -114,6 +111,11 @@ static constexpr FaceFn PLANNER_FACES[] = {
   // calendar (WIP), event, alarms, timer, countdown
 };
 static constexpr size_t PLANNER_COUNT = sizeof(PLANNER_FACES) / sizeof(PLANNER_FACES[0]);
+
+static constexpr FaceFn TOY_FACES[] = {
+  &WatchyFaceX::drawFacePinball,
+};
+static constexpr size_t TOY_COUNT = sizeof(TOY_FACES) / sizeof(TOY_FACES[0]);
 
 void WatchyFaceX::drawWatchFace() {
   if (faceTypeIndex == 0) {
