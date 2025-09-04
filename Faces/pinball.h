@@ -12,8 +12,8 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
 
   Accel accelerationData;
 
-  long previousMillis = 0;
-  long intervalMillis = 100;
+  long lastUpdateTimeMs = 0;
+  long updateIntervalMs = 100;
 
   uint8_t centerX = DISPLAY_WIDTH / 2;
   uint8_t centerY = DISPLAY_HEIGHT / 2;
@@ -30,20 +30,20 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
   uint8_t maxBallY = DISPLAY_HEIGHT - ballRadius;
 
   while (1) {
-    unsigned long currentMillis = millis();
+    unsigned long currentTimeMs = millis();
 
     if (digitalRead(BACK_BTN_PIN) == 0) {
       // ACITVE_LOW (0 or 1) taken from Watchy github
       break;
     }
 
-    if ((currentMillis - previousMillis) <= intervalMillis) {
+    if ((currentTimeMs - lastUpdateTimeMs) <= updateIntervalMs) {
       continue;
     }
 
     // ACTION PER INTERVAL
     
-    previousMillis = currentMillis;
+    lastUpdateTimeMs = currentTimeMs;
 
     // Get acceleration data
     bool accelerationReadOk = sensor.getAccel(accelerationData);
