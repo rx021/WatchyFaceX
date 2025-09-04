@@ -47,7 +47,6 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
 
     // Get acceleration data
     bool accelerationReadOk = sensor.getAccel(accelerationData);
-    uint8_t direction = sensor.getDirection();
 
     display.fillScreen(bgColor);
     display.setCursor(3, 10);
@@ -58,6 +57,7 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
       continue;
     }
 
+    uint8_t direction = sensor.getDirection();
     switch (direction) {
     case DIRECTION_DISP_DOWN:
       display.println("FACE DOWN");
@@ -104,6 +104,12 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
     display.print("X:"); display.println(accelerationData.x);
     display.print("Y:"); display.println(accelerationData.y);
     display.print("Z:"); display.println(accelerationData.z);
+
+    const TiltScale ballTilt = {
+      .deadZone = 140,
+      .saturation = 900,
+      .maxPixelsPerFrame = 4
+    };
 
     display.fillCircle(
       ballX,

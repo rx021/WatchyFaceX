@@ -3,6 +3,12 @@
 
 namespace face_utils {
 
+struct TiltScale {
+  int deadZone; // no movement below this magnitude
+  int saturation; // full speed at or above this magnitude
+  int maxPixelsPerFrame; // max integer step per update
+};
+
 auto clampToRange = [](int value, int minValue, int maxValue) {
   if (value < minValue) return minValue;
   if (value > maxValue) return maxValue;
