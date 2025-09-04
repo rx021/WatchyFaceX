@@ -130,13 +130,12 @@ void WatchyFaceX::drawWatchFace() {
   FaceFn currFace;
 
   if (faceTypeIndex == 0) {
-    if (clockFacesIndex == 0) {drawFaceCustomBahn(isDarkMode);}
-    else if (clockFacesIndex == 1) {drawFaceAnalog(isDarkMode);}
+    currFace = CLOCK_FACES[clockFacesIndex];
+    (this->*currFace)(isDarkMode);
   }
   else if (faceTypeIndex == 1) {
-    if (noteFacesIndex == 0) {drawFaceWhy(isDarkMode);}
-    else if (noteFacesIndex == 1) {drawFaceNorthStar(isDarkMode);}
-    else if (noteFacesIndex == 2) {drawFaceMessages(isDarkMode);}
+    currFace = NOTE_FACES[noteFacesIndex];
+    (this->*currFace)(isDarkMode);
   }
   else if (faceTypeIndex == 2) {
     currFace = PLANNER_FACES[plannerFacesIndex];
