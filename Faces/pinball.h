@@ -1,3 +1,5 @@
+#include "face_utils.hpp" 
+using namespace face_utils;
 
 void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
   uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
@@ -113,28 +115,3 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
 
 }
 
-uint8_t decrementCoordinate(
-    uint8_t currentCoordinate,
-    uint8_t pixelChange,
-    uint8_t lowerBound
-) {
-    // new temp variable to prevent calculation underflows
-    int16_t newCoordinate = currentCoordinate - pixelChange;
-
-    return (newCoordinate < lowerBound)
-      ? lowerBound
-      : newCoordinate;
-}
-
-uint8_t incrementCoordinate(
-    uint8_t currentCoordinate,
-    uint8_t pixelChange,
-    uint8_t upperBound
-) {
-    // new temp variable to prevent calculation underflows
-    int16_t newCoordinate = currentCoordinate + pixelChange;
-
-    return (upperBound <= newCoordinate)
-      ? upperBound
-      : newCoordinate;
-}
