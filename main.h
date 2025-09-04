@@ -184,6 +184,7 @@ void WatchyFaceX::handleButtonPress() {
         return;
       }
 
+      enableInteractive = true;
       RTC.read(currentTime);
       showWatchFace(true);
       return;
