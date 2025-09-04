@@ -16,13 +16,14 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
   uint8_t centerX = DISPLAY_WIDTH / 2;
   uint8_t centerY = DISPLAY_HEIGHT / 2;
 
+  // NOTE: circle center is X,Y
+  uint8_t ballX = centerX;
+  uint8_t ballY = centerY;
   uint8_t ballR = 4;
-  uint8_t ballX = centerX - ballR;
-  uint8_t ballY = centerY - ballR;
   uint8_t ballIncrements = 16;
 
-  uint8_t xLowerBound = 0 + ballR;
-  uint8_t yLowerBound = 0 + ballR;
+  uint8_t xLowerBound = ballR;
+  uint8_t yLowerBound = ballR;
   uint8_t xUpperBound = DISPLAY_WIDTH - ballR;
   uint8_t yUpperBound = DISPLAY_HEIGHT - ballR;
 
