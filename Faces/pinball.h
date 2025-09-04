@@ -17,8 +17,8 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
   uint8_t centerY = DISPLAY_HEIGHT / 2;
 
   // NOTE: circle center is X,Y
-  int8_t ballX = centerX;
-  int8_t ballY = centerY;
+  uint8_t ballX = centerX;
+  uint8_t ballY = centerY;
   uint8_t ballR = 4;
   uint8_t ballIncrements = 16;
 
@@ -56,7 +56,8 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
       continue;
     }
 
-    bool isOutOfBounds = false;
+    // new temp variable to prevent calculation underflows
+    int8_t newCoordinate = 0;
 
     switch (direction) {
     case DIRECTION_DISP_DOWN:
@@ -67,23 +68,31 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
       break;
     case DIRECTION_RIGHT_EDGE:
       display.println("RIGHT EDGE");
-      ballX -= ballIncrements;
-      if (ballX < xLowerBound) {ballX = xLowerBound;}
+      newCoordinate = ballX - ballIncrements;
+      ballX = (newCoordinate < xLowerBound)
+        ? xLowerBound
+        : newCoordinate;
       break;
     case DIRECTION_LEFT_EDGE:
       display.println("LEFT EDGE");
-      ballX += ballIncrements;
-      if (xUpperBound <= ballX) {ballX = xUpperBound;}
+      newCoordinate = ballX + ballIncrements;
+      ballX = (xUpperBound <= newCoordinate)
+        ? xUpperBound
+        : newCoordinate;
       break;
     case DIRECTION_BOTTOM_EDGE:
       display.println("BOTTOM EDGE");
-      ballY -= ballIncrements;
-      if (ballY < yLowerBound) {ballY = yLowerBound;}
+      newCoordinate = ballY - ballIncrements;
+      ballY = (newCoordinate < yLowerBound)
+        ? yLowerBound
+        : newCoordinate;
       break;
     case DIRECTION_TOP_EDGE:
       display.println("TOP EDGE");
-      ballY += ballIncrements;
-      if (yUpperBound <= ballY) {ballY = yUpperBound;}
+      newCoordinate = ballY + ballIncrements;
+      ballY = (yUpperBound <= newCoordinate)
+        ? yUpperBound
+        : newCoordinate;
       break;
     default:
       display.println("ERROR!!!");
