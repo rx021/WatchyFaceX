@@ -10,7 +10,7 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
   display.setFont(&FreeSans9pt7b);
   display.setTextColor(textColor);
 
-  Accel acc;
+  Accel accelerationData;
 
   long previousMillis = 0;
   long intervalMillis = 100;
@@ -46,14 +46,14 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
     previousMillis = currentMillis;
 
     // Get acceleration data
-    bool res = sensor.getAccel(acc);
+    bool accelerationReadOk = sensor.getAccel(accelerationData);
     uint8_t direction = sensor.getDirection();
 
     display.fillScreen(bgColor);
     display.setCursor(0, 30);
 
-    if (res == false) {
-      display.println("getAccel FAIL");
+    if (!accelerationReadOk) {
+      display.println("Acceleration read failed");
       display.display(true); // full refresh
       continue;
     }
