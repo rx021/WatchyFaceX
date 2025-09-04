@@ -138,11 +138,11 @@ void WatchyFaceX::drawWatchFace() {
     (this->*currFace)(isDarkMode);
   }
   else if (faceTypeIndex == 2) {
-    currFace = PLANNER_FACES[plannerFacesIndex];
+    currFace = TOY_FACES[toyFacesIndex];
     (this->*currFace)(isDarkMode);
   }
   else if (faceTypeIndex == 3) {
-    currFace = TOY_FACES[toyFacesIndex];
+    currFace = PLANNER_FACES[plannerFacesIndex];
     (this->*currFace)(isDarkMode);
   }
 }                                         
@@ -163,6 +163,9 @@ void WatchyFaceX::handleButtonPress() {
         noteFacesIndex = (noteFacesIndex + 1) % NOTE_COUNT;
       }
       else if (faceTypeIndex == 2) {
+        toyFacesIndex = (toyFacesIndex + 1) % TOY_COUNT;
+      }
+      else if (faceTypeIndex == 3) {
         plannerFacesIndex = (plannerFacesIndex + 1) % PLANNER_COUNT;
       }
 
