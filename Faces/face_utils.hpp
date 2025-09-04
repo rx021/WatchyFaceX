@@ -1,5 +1,5 @@
 #pragma once
-#include <stdint>
+#include <cstdint>
 
 namespace face_utils {
 
@@ -8,12 +8,10 @@ constexpr uint8_t decrementCoordinate(
   uint8_t pixelChange,
   uint8_t lowerBound
 ) noexcept {
-  // new temp variable to prevent calculation underflows
-  int16_t newCoordinate = currentCoordinate - pixelChange;
-
-  return (newCoordinate < lowerBound)
+  // prevent calculation underflows
+  return (currentCoordinate - pixelChange) < lowerBound
     ? lowerBound
-    : newCoordinate;
+    : (currentCoordinate - pixelChange);
 }
 
 constexpr uint8_t incrementCoordinate(
@@ -21,12 +19,10 @@ constexpr uint8_t incrementCoordinate(
     uint8_t pixelChange,
     uint8_t upperBound
 ) noexcept {
-    // new temp variable to prevent calculation underflows
-    int16_t newCoordinate = currentCoordinate + pixelChange;
-
-    return (upperBound <= newCoordinate)
-      ? upperBound
-      : newCoordinate;
+  // new temp variable to prevent calculation underflows
+  return upperBound <= (currentCoordinate + pixelChange)
+    ? upperBound
+    : (currentCoordinate + pixelChange);
 }
 
 } // namespace face_utils
