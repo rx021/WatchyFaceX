@@ -101,6 +101,9 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
       display.println("ERROR!!!");
       break;
     }
+    display.print("X:"); display.println(accelerationData.x);
+    display.print("Y:"); display.println(accelerationData.y);
+    display.print("Z:"); display.println(accelerationData.z);
 
     display.fillCircle(
       ballX,
