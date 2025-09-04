@@ -29,9 +29,7 @@ RTC_DATA_ATTR int faceTypeCount = 4;
 
 RTC_DATA_ATTR int clockFacesIndex = 0;
 RTC_DATA_ATTR int noteFacesIndex = 0;
-// (WIP) calendar, event, alarms, timer, countdown
-RTC_DATA_ATTR int datetimeFacesIndex = 0;
-RTC_DATA_ATTR int datetimeFacesCount = 1;
+RTC_DATA_ATTR int plannerFacesIndex = 0;
 // pinball
 RTC_DATA_ATTR int toyFacesIndex = 0;
 RTC_DATA_ATTR int toyFacesCount = 1;
@@ -111,6 +109,12 @@ static constexpr FaceFn NOTE_FACES[] = {
 };
 static constexpr size_t NOTE_COUNT = sizeof(NOTE_FACES) / sizeof(NOTE_FACES[0]);
 
+static constexpr FaceFn PLANNER_FACES[] = {
+  &WatchyFaceX::drawFaceCalendar,
+  // calendar (WIP), event, alarms, timer, countdown
+};
+static constexpr size_t PLANNER_COUNT = sizeof(PLANNER_FACES) / sizeof(PLANNER_FACES[0]);
+
 void WatchyFaceX::drawWatchFace() {
   if (faceTypeIndex == 0) {
     if (clockFacesIndex == 0) {drawFaceCustomBahn(isDarkMode);}
@@ -122,7 +126,7 @@ void WatchyFaceX::drawWatchFace() {
     else if (noteFacesIndex == 2) {drawFaceMessages(isDarkMode);}
   }
   else if (faceTypeIndex == 2) {
-    if (datetimeFacesIndex == 0) {drawFaceCalendar(isDarkMode);}
+    if (plannerFacesIndex == 0) {drawFaceCalendar(isDarkMode);}
   }
   else if (faceTypeIndex == 3) {
     if (toyFacesIndex == 0) {drawFacePinball(isDarkMode);}
@@ -139,8 +143,6 @@ void WatchyFaceX::handleButtonPress() {
     // for buttons to work
     if (wakeupBit & BACK_BTN_MASK) {
       //isDarkMode = (isDarkMode ? false : true);
-      bool isOutOfBounds = false;
-
       if (faceTypeIndex == 0) {
         clockFacesIndex = (clockFacesIndex + 1) % CLOCK_COUNT;
       }
@@ -148,10 +150,7 @@ void WatchyFaceX::handleButtonPress() {
         noteFacesIndex = (noteFacesIndex + 1) % NOTE_COUNT;
       }
       else if (faceTypeIndex == 2) {
-        datetimeFacesIndex++;
-        // go to first if beyond list
-        isOutOfBounds = (datetimeFacesCount <= datetimeFacesIndex);
-        if (isOutOfBounds) {datetimeFacesIndex = 0;}
+        plannerFacesIndex = (plannerFacesIndex + 1) % PLANNER_COUNT;
       }
 
       RTC.read(currentTime);
