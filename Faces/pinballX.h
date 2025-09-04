@@ -13,7 +13,7 @@ inline int activeTiltMagnitude(
 
   int active = magnitude - scale.deadZone;
   // cap at saturation
-  if (activeRange < active) {active = activeRange}
+  if (activeRange < active) {active = activeRange;}
 
   return active; // between 0 and activeRange
 }
