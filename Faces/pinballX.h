@@ -63,12 +63,9 @@ void WatchyFaceX::drawFacePinballX(
   long lastUpdateTimeMs = 0;
   long updateIntervalMs = 100;
 
-  uint8_t centerX = DISPLAY_WIDTH / 2;
-  uint8_t centerY = DISPLAY_HEIGHT / 2;
-
   // NOTE: circle center is X,Y
-  uint8_t ballX = centerX;
-  uint8_t ballY = centerY;
+  uint8_t ballX = DISPLAY_WIDTH / 2;
+  uint8_t ballY = DISPLAY_HEIGHT / 2;
   uint8_t ballRadius = 4;
   uint8_t ballIncrements = 16;
 
