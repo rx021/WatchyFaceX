@@ -27,6 +27,16 @@ RTC_DATA_ATTR bool isDarkMode = false;
 RTC_DATA_ATTR int faceTypeIndex = 0;
 RTC_DATA_ATTR int faceTypeCount = 4;
 
+// Type alias for a WatchyFaceX member function: void f(bool)
+using FaceFn = void (WatchyFaceX::*)(bool);
+
+static constexpr FaceFn CLOCK_FACES[] = {
+  &WatchyFaceX::drawFaceCustomBahn,
+  &WatchyFaceX::drawFaceAnalog,
+};
+
+static constexpr size_t CLOCK_COUNT = sizeof(CLOCK_FACES) / sizeof(CLOCK_FACES[0]);
+
 // bahn, analog
 RTC_DATA_ATTR int clockFacesIndex = 0;
 RTC_DATA_ATTR int clockFacesCount = 2;
@@ -130,7 +140,7 @@ void WatchyFaceX::handleButtonPress() {
       //isDarkMode = (isDarkMode ? false : true);
       if (faceTypeIndex == 0) {
         clockFacesIndex++;
-        isOutOfBounds = (clockFacesCount <= clockFacesIndex);
+        isOutOfBounds = (CLOCK_COUNT <= clockFacesIndex);
         if (isOutOfBounds) {clockFacesIndex = 0;}
       }
       else if (faceTypeIndex == 1) {
