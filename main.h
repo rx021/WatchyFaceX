@@ -176,6 +176,7 @@ void WatchyFaceX::handleButtonPress() {
   return;
 }
 
+//-- triggered by showWatchFace() 
 void WatchyFaceX::drawWatchFace() {
   FaceFn currFace;
 
