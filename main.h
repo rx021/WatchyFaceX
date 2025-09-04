@@ -23,9 +23,7 @@
 
 RTC_DATA_ATTR bool isDarkMode = false;
 
-// FACE TYPES: clocks, notes, datetime, toys
 RTC_DATA_ATTR int faceTypeIndex = 0;
-//--
 RTC_DATA_ATTR int clockFacesIndex = 0;
 RTC_DATA_ATTR int noteFacesIndex = 0;
 RTC_DATA_ATTR int plannerFacesIndex = 0;
