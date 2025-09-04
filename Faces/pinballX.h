@@ -1,6 +1,51 @@
 #include "face_utils.hpp" 
 using namespace face_utils;
 
+inline int activeTiltMagnitude(
+  int16_t rawAcceleration,
+  const TiltScale& scale
+) {
+  int magnitude = std::abs(rawAcceleration);
+  if (magnitude <= scale.deadZone) {return 0;}
+
+  const int activeRange = scale.saturation - scale.deadZone;
+  if (activeRange <= 0) {return 0;}
+
+  int active = magnitude - scale.deadZone;
+  // cap at saturation
+  if (activeRange < active) {active = activeRange}
+
+  return active; // between 0 and activeRange
+}
+
+inline int normalizedStepFromActiveMagnitude(
+  int activeMagnitude,
+  const TiltScale& scale
+) {
+  if (activeMagnitude <= 0) {return 0;}
+
+  const int activeRange = scale.saturation - scale.deadZone;
+  if (activeRange <= 0) {return 0;}
+
+  int scaled = activeMagnitude * scale.maxPixelsPerFrame;
+  int rounded = (scaled + activeRange/2) / activeRange;
+  if (rounded < 1) {rounded = 1;}
+  if (scale.maxPixelsPerFrame < rounded) {rounded = scale.maxPixelsPerFrame;}
+
+  return rounded;
+}
+
+inline int tiltToSignedStep(
+  int16_t rawAcceleration,
+  const TiltScale& scale
+) {
+  int sign = (rawAcceleration < 0) ? -1 : 1;
+  int active = activeTiltMagnitude(rawAcceleration, scale);
+  int step = normalizedStepFromActiveMagnitude(active, scale);
+
+  return sign & step;
+}
+
 void WatchyFaceX::drawFacePinballX(
   bool enableDarkMode,
   bool enableInteractive
@@ -60,50 +105,6 @@ void WatchyFaceX::drawFacePinballX(
       continue;
     }
 
-    uint8_t direction = sensor.getDirection();
-    switch (direction) {
-    case DIRECTION_DISP_DOWN:
-      display.println("FACE DOWN");
-      break;
-    case DIRECTION_DISP_UP:
-      display.println("FACE UP");
-      break;
-    case DIRECTION_RIGHT_EDGE:
-      display.println("RIGHT EDGE");
-      ballX = decrementCoordinate(
-          ballX,
-          ballIncrements,
-          minBallX
-      );
-      break;
-    case DIRECTION_LEFT_EDGE:
-      display.println("LEFT EDGE");
-      ballX = incrementCoordinate(
-          ballX,
-          ballIncrements,
-          maxBallX
-      );
-      break;
-    case DIRECTION_BOTTOM_EDGE:
-      display.println("BOTTOM EDGE");
-      ballY = decrementCoordinate(
-          ballY,
-          ballIncrements,
-          minBallY
-      );
-      break;
-    case DIRECTION_TOP_EDGE:
-      display.println("TOP EDGE");
-      ballY = incrementCoordinate(
-          ballY,
-          ballIncrements,
-          maxBallY
-      );
-      break;
-    default:
-      display.println("ERROR!!!");
-      break;
-    }
     display.print("X:"); display.println(accelerationData.x);
     display.print("Y:"); display.println(accelerationData.y);
     display.print("Z:"); display.println(accelerationData.z);
@@ -113,6 +114,27 @@ void WatchyFaceX::drawFacePinballX(
       .saturation = 900,
       .maxPixelsPerFrame = 4
     };
+
+    int horizontalStep = tiltToSignedStep(
+      -accelerationData.x,
+      ballTilt
+    );
+    int verticalStep = tiltToSignedStep(
+      accelerationData.y,
+      ballTilt
+    );
+
+    // make sure ball is in bounds
+    ballX = clampToRange(
+      ballX + horizontalStep,
+      minBallX,
+      maxBallX
+    );
+    ballY = clampToRange(
+      ballY + verticalStep,
+      minBallY,
+      maxBallY
+    );
 
     display.fillCircle(
       ballX,
