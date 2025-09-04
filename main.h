@@ -141,9 +141,7 @@ void WatchyFaceX::handleButtonPress() {
       bool isOutOfBounds = false;
       //isDarkMode = (isDarkMode ? false : true);
       if (faceTypeIndex == 0) {
-        clockFacesIndex++;
-        isOutOfBounds = (CLOCK_COUNT <= clockFacesIndex);
-        if (isOutOfBounds) {clockFacesIndex = 0;}
+        clockFacesIndex = (clockFacesIndex + 1) % CLOCK_COUNT;
       }
       else if (faceTypeIndex == 1) {
         noteFacesIndex++;
