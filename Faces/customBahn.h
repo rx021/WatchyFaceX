@@ -2,7 +2,10 @@
 // NOTE: top left is X=0, Y=0
 // NOTE: bottom right is X=200, Y=200
 
-void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
+void WatchyFaceX::drawFaceCustomBahn(
+  bool enableDarkMode,
+  bool enableInteractive
+) {
   uint8_t PADDING_X = 5; // pixels
   uint8_t PADDING_Y = 5; // pixels
   uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 

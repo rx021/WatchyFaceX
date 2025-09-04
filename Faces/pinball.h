@@ -1,7 +1,10 @@
 #include "face_utils.hpp" 
 using namespace face_utils;
 
-void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
+void WatchyFaceX::drawFacePinball(
+  bool enableDarkMode,
+  bool enableInteractive
+) {
   uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
   uint16_t textColor = enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK; 
 

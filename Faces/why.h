@@ -1,5 +1,8 @@
 
-void WatchyFaceX::drawFaceWhy(bool enableDarkMode) {
+void WatchyFaceX::drawFaceWhy(
+  bool enableDarkMode,
+  bool enableInteractive
+) {
   uint8_t PADDING_X = 1; // pixels
   uint8_t PADDING_Y = 1; // pixels
   uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 

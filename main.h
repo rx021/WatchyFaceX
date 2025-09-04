@@ -22,6 +22,7 @@
 #include "Icons/wifi.h"
 
 RTC_DATA_ATTR bool isDarkMode = false;
+RTC_DATA_ATTR bool enableInteractive = false;
 
 RTC_DATA_ATTR int faceTypeIndex = 0;
 RTC_DATA_ATTR int clockFacesIndex = 0;
@@ -32,9 +33,7 @@ RTC_DATA_ATTR int toyFacesIndex = 0;
 class WatchyFaceX : public Watchy{
   using Watchy::Watchy;
   public: 
-    void drawWatchFace();
-    void drawFaceCalendar(bool enableDarkMode);
-    void drawFaceCustomBahn(bool enableDarkMode);
+    // HELPERS
     void drawBattery(
       bool enableDarkMode,
       uint8_t batteryXOffset,
@@ -42,7 +41,6 @@ class WatchyFaceX : public Watchy{
       uint8_t batteryWidth,
       uint8_t batteryHeight
     );
-    void drawFaceAnalog(bool enableDarkMode);
     String getBatteryPercent();
     void drawHandX(
       uint8_t handRadius,
@@ -50,11 +48,38 @@ class WatchyFaceX : public Watchy{
       uint8_t lineThickness,
       uint16_t handColor
     );
-    void drawFaceWhy(bool enableDarkMode);
-    void drawFaceNorthStar(bool enableDarkMode);
-    void drawFaceMessages(bool enableDarkMode);
-    void drawFacePinball(bool enableDarkMode);
-    virtual void handleButtonPress(); // Must be virtual in Watchy.h too
+    // FACES
+    void drawWatchFace();
+    void drawFaceCalendar(
+      bool enableDarkMode,
+      bool enableInteractive
+    );
+    void drawFaceCustomBahn(
+      bool enableDarkMode,
+      bool enableInteractive
+    );
+    void drawFaceAnalog(
+      bool enableDarkMode,
+      bool enableInteractive
+    );
+    void drawFaceWhy(
+      bool enableDarkMode,
+      bool enableInteractive
+    );
+    void drawFaceNorthStar(
+      bool enableDarkMode,
+      bool enableInteractive
+    );
+    void drawFaceMessages(
+      bool enableDarkMode,
+      bool enableInteractive
+    );
+    void drawFacePinball(
+      bool enableDarkMode,
+      bool enableInteractive
+    );
+    // NOTE: Must be virtual in Watchy.h too
+    virtual void handleButtonPress();
 
     // ---- Added: first-boot time setup helpers ----
     /**
@@ -88,7 +113,7 @@ static const char* TZ_VANCOUVER = "PST8PDT,M3.2.0,M11.1.0";
  */
 
 // Type alias for a WatchyFaceX member function: void f(bool)
-using FaceFn = void (WatchyFaceX::*)(bool);
+using FaceFn = void (WatchyFaceX::*)(bool, bool);
 
 static constexpr FaceFn CLOCK_FACES[] = {
   &WatchyFaceX::drawFaceCustomBahn,
@@ -152,7 +177,13 @@ void WatchyFaceX::handleButtonPress() {
     }
 
     if (wakeupBit & MENU_BTN_MASK) {
-      Watchy::handleButtonPress();
+      if (faceTypeIndex != 2) {
+        Watchy::handleButtonPress();
+        return;
+      }
+
+      RTC.read(currentTime);
+      showWatchFace(true);
       return;
     }
 
@@ -182,19 +213,19 @@ void WatchyFaceX::drawWatchFace() {
 
   if (faceTypeIndex == 0) {
     currFace = CLOCK_FACES[clockFacesIndex];
-    (this->*currFace)(isDarkMode);
+    (this->*currFace)(isDarkMode, enableInteractive);
   }
   else if (faceTypeIndex == 1) {
     currFace = NOTE_FACES[noteFacesIndex];
-    (this->*currFace)(isDarkMode);
+    (this->*currFace)(isDarkMode, enableInteractive);
   }
   else if (faceTypeIndex == 2) {
     currFace = TOY_FACES[toyFacesIndex];
-    (this->*currFace)(isDarkMode);
+    (this->*currFace)(isDarkMode, enableInteractive);
   }
   else if (faceTypeIndex == 3) {
     currFace = PLANNER_FACES[plannerFacesIndex];
-    (this->*currFace)(isDarkMode);
+    (this->*currFace)(isDarkMode, enableInteractive);
   }
 }                                         
 
