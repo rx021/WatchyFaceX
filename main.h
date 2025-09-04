@@ -123,8 +123,8 @@ struct FaceType{
 static FaceType FACE_TYPES[] = {
   {CLOCK_FACES},
   {NOTE_FACES},
-  {PLANNER_FACES},
   {TOY_FACES},
+  {PLANNER_FACES},
 };
 static constexpr size_t FACE_TYPE_COUNT = sizeof(FACE_TYPES) / sizeof(FACE_TYPES[0]);
 
