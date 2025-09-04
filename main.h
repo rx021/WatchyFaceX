@@ -154,7 +154,6 @@ void WatchyFaceX::handleButtonPress() {
     // careful of this condition 
     // for buttons to work
     if (wakeupBit & BACK_BTN_MASK) {
-      //isDarkMode = (isDarkMode ? false : true);
       if (faceTypeIndex == 0) {
         clockFacesIndex = (clockFacesIndex + 1) % CLOCK_COUNT;
       }
