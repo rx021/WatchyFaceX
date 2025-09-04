@@ -27,13 +27,8 @@ RTC_DATA_ATTR bool isDarkMode = false;
 RTC_DATA_ATTR int faceTypeIndex = 0;
 RTC_DATA_ATTR int faceTypeCount = 4;
 
-
-// bahn, analog
 RTC_DATA_ATTR int clockFacesIndex = 0;
-RTC_DATA_ATTR int clockFacesCount = 2;
-// why, northstar, messages
 RTC_DATA_ATTR int noteFacesIndex = 0;
-RTC_DATA_ATTR int noteFacesCount = 3;
 // (WIP) calendar, event, alarms, timer, countdown
 RTC_DATA_ATTR int datetimeFacesIndex = 0;
 RTC_DATA_ATTR int datetimeFacesCount = 1;
@@ -107,9 +102,14 @@ static constexpr FaceFn CLOCK_FACES[] = {
   &WatchyFaceX::drawFaceCustomBahn,
   &WatchyFaceX::drawFaceAnalog,
 };
-
 static constexpr size_t CLOCK_COUNT = sizeof(CLOCK_FACES) / sizeof(CLOCK_FACES[0]);
 
+static constexpr FaceFn NOTE_FACES[] = {
+  &WatchyFaceX::drawFaceWhy,
+  &WatchyFaceX::drawFaceNorthStar,
+  &WatchyFaceX::drawFaceMessages,
+};
+static constexpr size_t NOTE_COUNT = sizeof(NOTE_FACES) / sizeof(NOTE_FACES[0]);
 
 void WatchyFaceX::drawWatchFace() {
   if (faceTypeIndex == 0) {
@@ -138,15 +138,14 @@ void WatchyFaceX::handleButtonPress() {
     // careful of this condition 
     // for buttons to work
     if (wakeupBit & BACK_BTN_MASK) {
-      bool isOutOfBounds = false;
       //isDarkMode = (isDarkMode ? false : true);
+      bool isOutOfBounds = false;
+
       if (faceTypeIndex == 0) {
         clockFacesIndex = (clockFacesIndex + 1) % CLOCK_COUNT;
       }
       else if (faceTypeIndex == 1) {
-        noteFacesIndex++;
-        isOutOfBounds = (noteFacesCount <= noteFacesIndex);
-        if (isOutOfBounds) {noteFacesIndex = 0;}
+        noteFacesIndex = (noteFacesIndex + 1) % NOTE_COUNT;
       }
       else if (faceTypeIndex == 2) {
         datetimeFacesIndex++;
