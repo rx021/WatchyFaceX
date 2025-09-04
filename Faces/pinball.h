@@ -21,10 +21,10 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
   uint8_t ballY = centerY - ballR;
   uint8_t ballIncrements = 16;
 
-  uint8_t xLowerBound = 0;
-  uint8_t yLowerBound = 0;
-  uint8_t xUpperBound = DISPLAY_WIDTH - (2*ballR);
-  uint8_t yUpperBound = DISPLAY_HEIGHT - (2*ballR);
+  uint8_t xLowerBound = 0 + ballR;
+  uint8_t yLowerBound = 0 + ballR;
+  uint8_t xUpperBound = DISPLAY_WIDTH - ballR;
+  uint8_t yUpperBound = DISPLAY_HEIGHT - ballR;
 
   while (1) {
     unsigned long currentMillis = millis();
