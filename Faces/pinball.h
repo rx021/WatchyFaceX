@@ -11,7 +11,7 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
   Accel acc;
 
   long previousMillis = 0;
-  long interval = 200;
+  long intervalMillis = 100;
 
   uint8_t centerX = DISPLAY_WIDTH / 2;
   uint8_t centerY = DISPLAY_HEIGHT / 2;
@@ -21,6 +21,8 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
   uint8_t ballY = centerY - ballR;
   uint8_t ballIncrements = 8;
 
+  uint8_t xLowerBound = 0;
+  uint8_t yLowerBound = 0;
   uint8_t xUpperBound = DISPLAY_WIDTH - (2*ballR);
   uint8_t yUpperBound = DISPLAY_HEIGHT - (2*ballR);
 
@@ -32,7 +34,7 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
       break;
     }
 
-    if ((currentMillis - previousMillis) <= interval) {
+    if ((currentMillis - previousMillis) <= intervalMillis) {
       continue;
     }
 
@@ -60,25 +62,25 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
     case DIRECTION_DISP_UP:
       display.println("FACE UP");
       break;
-    case DIRECTION_BOTTOM_EDGE:
-      display.println("BOTTOM EDGE");
-      ballY -= ballIncrements;
-      if (ballY < 0) {ballY = 0;}
-      break;
-    case DIRECTION_TOP_EDGE:
-      display.println("TOP EDGE");
-      ballY += ballIncrements;
-      if (yUpperBound <= ballY) {ballY = yUpperBound;}
-      break;
     case DIRECTION_RIGHT_EDGE:
       display.println("RIGHT EDGE");
       ballX -= ballIncrements;
-      if (ballX < 0) {ballX = 0;}
+      if (ballX < xLowerBound) {ballX = xLowerBound;}
       break;
     case DIRECTION_LEFT_EDGE:
       display.println("LEFT EDGE");
       ballX += ballIncrements;
       if (xUpperBound <= ballX) {ballX = xUpperBound;}
+      break;
+    case DIRECTION_BOTTOM_EDGE:
+      display.println("BOTTOM EDGE");
+      ballY -= ballIncrements;
+      if (ballY < yLowerBound) {ballY = yLowerBound;}
+      break;
+    case DIRECTION_TOP_EDGE:
+      display.println("TOP EDGE");
+      ballY += ballIncrements;
+      if (yUpperBound <= ballY) {ballY = yUpperBound;}
       break;
     default:
       display.println("ERROR!!!");
