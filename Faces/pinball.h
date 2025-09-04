@@ -17,10 +17,8 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
   uint8_t centerY = DISPLAY_HEIGHT / 2;
 
   // NOTE: circle center is X,Y
-  uint8_t ballX = centerX;
-  uint8_t ballY = centerY;
-  //int8_t ballX = centerX;
-  //int8_t ballY = centerY;
+  int8_t ballX = centerX;
+  int8_t ballY = centerY;
   uint8_t ballR = 4;
   uint8_t ballIncrements = 16;
 
@@ -69,12 +67,8 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
       break;
     case DIRECTION_RIGHT_EDGE:
       display.println("RIGHT EDGE");
-      //ballX -= ballIncrements;
-      isOutOfBounds = (ballX - ballIncrements) < xLowerBound;
-      
-      ballX = isOutOfBounds
-        ? xLowerBound
-        : (ballX - ballIncrements);
+      ballX -= ballIncrements;
+      if (ballX < xLowerBound) {ballX = xLowerBound;}
       break;
     case DIRECTION_LEFT_EDGE:
       display.println("LEFT EDGE");
