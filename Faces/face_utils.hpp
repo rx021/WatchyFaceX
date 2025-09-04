@@ -3,6 +3,12 @@
 
 namespace face_utils {
 
+auto clampToRange = [](int value, int minValue, int maxValue) {
+  if (value < minValue) return minValue;
+  if (value > maxValue) return maxValue;
+  return value;
+};
+
 [[nodiscard]] inline uint8_t decrementCoordinate(
   uint8_t currentCoordinate,
   uint8_t pixelChange,
