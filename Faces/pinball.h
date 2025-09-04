@@ -57,7 +57,7 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
     }
 
     // new temp variable to prevent calculation underflows
-    int8_t newCoordinate = 0;
+    int16_t newCoordinate = 0;
 
     switch (direction) {
     case DIRECTION_DISP_DOWN:
