@@ -127,6 +127,8 @@ static FaceType FACE_TYPES[] = {
 static constexpr size_t FACE_TYPE_COUNT = sizeof(FACE_TYPES) / sizeof(FACE_TYPES[0]);
 
 void WatchyFaceX::drawWatchFace() {
+  FaceFn currFace;
+
   if (faceTypeIndex == 0) {
     if (clockFacesIndex == 0) {drawFaceCustomBahn(isDarkMode);}
     else if (clockFacesIndex == 1) {drawFaceAnalog(isDarkMode);}
@@ -137,12 +139,13 @@ void WatchyFaceX::drawWatchFace() {
     else if (noteFacesIndex == 2) {drawFaceMessages(isDarkMode);}
   }
   else if (faceTypeIndex == 2) {
-    if (plannerFacesIndex == 0) {drawFaceCalendar(isDarkMode);}
+    currFace = PLANNER_FACES[plannerFacesIndex];
+    currFace(isDarkMode);
   }
   else if (faceTypeIndex == 3) {
-    if (toyFacesIndex == 0) {drawFacePinball(isDarkMode);}
+    currFace = TOY_FACES[toyFacesIndex];
+    currFace(isDarkMode);
   }
-
 }                                         
 
 void WatchyFaceX::handleButtonPress() {
