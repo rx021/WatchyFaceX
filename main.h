@@ -25,8 +25,7 @@ RTC_DATA_ATTR bool isDarkMode = false;
 
 // FACE TYPES: clocks, notes, datetime, toys
 RTC_DATA_ATTR int faceTypeIndex = 0;
-RTC_DATA_ATTR int faceTypeCount = 4;
-
+//--
 RTC_DATA_ATTR int clockFacesIndex = 0;
 RTC_DATA_ATTR int noteFacesIndex = 0;
 RTC_DATA_ATTR int plannerFacesIndex = 0;
@@ -117,6 +116,18 @@ static constexpr FaceFn TOY_FACES[] = {
 };
 static constexpr size_t TOY_COUNT = sizeof(TOY_FACES) / sizeof(TOY_FACES[0]);
 
+struct FaceType{
+  const FaceFn& list;
+};
+
+static FaceType FACE_TYPES[] = {
+  {CLOCK_FACES},
+  {NOTE_FACES},
+  {PLANNER_FACES},
+  {TOY_FACES},
+};
+static constexpr size_t FACE_TYPE_COUNT = sizeof(FACE_TYPES) / sizeof(FACE_TYPES[0]);
+
 void WatchyFaceX::drawWatchFace() {
   if (faceTypeIndex == 0) {
     if (clockFacesIndex == 0) {drawFaceCustomBahn(isDarkMode);}
@@ -167,7 +178,7 @@ void WatchyFaceX::handleButtonPress() {
 
     if (wakeupBit & UP_BTN_MASK) {
       faceTypeIndex--;
-      if (faceTypeIndex < 0) {faceTypeIndex = faceTypeCount - 1;}
+      if (faceTypeIndex < 0) {faceTypeIndex = FACE_TYPE_COUNT - 1;}
       RTC.read(currentTime);
       showWatchFace(true);
       return;
@@ -176,7 +187,7 @@ void WatchyFaceX::handleButtonPress() {
     if (wakeupBit & DOWN_BTN_MASK) {
       faceTypeIndex++;
       // go to first if beyond list
-      if (faceTypeCount <= faceTypeIndex) {faceTypeIndex = 0;}
+      if (FACE_TYPE_COUNT <= faceTypeIndex) {faceTypeIndex = 0;}
       RTC.read(currentTime);
       showWatchFace(true);
       return;
