@@ -3,18 +3,20 @@
 
 namespace face_utils {
 
-constexpr uint8_t decrementCoordinate(
+[[nodiscard]] inline uint8_t decrementCoordinate(
   uint8_t currentCoordinate,
   uint8_t pixelChange,
   uint8_t lowerBound
 ) noexcept {
   // prevent calculation underflows
-  return (currentCoordinate - pixelChange) < lowerBound
+  int16_t newCoordinate = currentCoordinate - pixelChange;
+
+  return newCoordinate < lowerBound
     ? lowerBound
-    : (currentCoordinate - pixelChange);
+    : newCoordinate;
 }
 
-constexpr uint8_t incrementCoordinate(
+[[nodiscard]] constexpr uint8_t incrementCoordinate(
     uint8_t currentCoordinate,
     uint8_t pixelChange,
     uint8_t upperBound
