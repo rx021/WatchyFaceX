@@ -179,8 +179,9 @@ void WatchyFaceX::handleButtonPress() {
     }
 
     if (wakeupBit & UP_BTN_MASK) {
-      faceTypeIndex--;
-      if (faceTypeIndex < 0) {faceTypeIndex = FACE_TYPE_COUNT - 1;}
+      faceTypeIndex = (faceTypeIndex-1 < 0)
+        ? FACE_TYPE_COUNT-1
+        : faceTypeIndex-1;
       RTC.read(currentTime);
       showWatchFace(true);
       return;
