@@ -74,10 +74,11 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
       break;
     case DIRECTION_LEFT_EDGE:
       display.println("LEFT EDGE");
-      newCoordinate = ballX + ballIncrements;
-      ballX = (xUpperBound <= newCoordinate)
-        ? xUpperBound
-        : newCoordinate;
+      ballX = incrementCoordinate(
+          ballX,
+          ballIncrements,
+          xUpperBound
+      );
       break;
     case DIRECTION_BOTTOM_EDGE:
       display.println("BOTTOM EDGE");
@@ -89,10 +90,11 @@ void WatchyFaceX::drawFacePinball(bool enableDarkMode) {
       break;
     case DIRECTION_TOP_EDGE:
       display.println("TOP EDGE");
-      newCoordinate = ballY + ballIncrements;
-      ballY = (yUpperBound <= newCoordinate)
-        ? yUpperBound
-        : newCoordinate;
+      ballY = incrementCoordinate(
+          ballY,
+          ballIncrements,
+          yUpperBound
+      );
       break;
     default:
       display.println("ERROR!!!");
@@ -121,5 +123,18 @@ uint8_t decrementCoordinate(
 
     return (newCoordinate < lowerBound)
       ? lowerBound
+      : newCoordinate;
+}
+
+uint8_t incrementCoordinate(
+    uint8_t currentCoordinate,
+    uint8_t pixelChange,
+    uint8_t upperBound
+) {
+    // new temp variable to prevent calculation underflows
+    int16_t newCoordinate = currentCoordinate + pixelChange;
+
+    return (upperBound <= newCoordinate)
+      ? upperBound
       : newCoordinate;
 }
