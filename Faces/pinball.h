@@ -13,7 +13,6 @@ void WatchyFaceX::drawFacePinball(
   display.setFont(&FreeSans9pt7b);
   display.setTextColor(textColor);
 
-  Accel accelerationData;
 
   long lastUpdateTimeMs = 0;
   long updateIntervalMs = 100;
@@ -31,6 +30,25 @@ void WatchyFaceX::drawFacePinball(
   uint8_t maxBallX = DISPLAY_WIDTH - ballRadius;
   uint8_t minBallY = ballRadius;
   uint8_t maxBallY = DISPLAY_HEIGHT - ballRadius;
+
+  // NAVIGATION MODE: draw once; return
+
+  auto drawNavigationFrame = [&]() {
+    display.fillScreen(bgColor);
+    display.setCursor(3, 14);
+    display.println("Pinball");
+    display.fillCircle(ballX, ballY, ballRadius, textColor);
+    display.display(true); // full refresh
+  };
+
+  if (!enableInteractive) {
+    drawNavigationFrame();
+    return;
+  }
+
+  // GAME MODE: loop
+  
+  Accel accelerationData;
 
   while (1) {
     unsigned long currentTimeMs = millis();
@@ -117,5 +135,7 @@ void WatchyFaceX::drawFacePinball(
     }
   }
 
+  // After exiting game loop, show one navigation frame
+  drawNavigationFrame();
 }
 
