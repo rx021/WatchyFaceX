@@ -93,9 +93,7 @@ void WatchyFaceX::drawFacePinballX(
       break;
     }
 
-    if ((now - lastMs) <= updateIntervalMs) {
-      continue;
-    }
+    if ((now - lastMs) <= updateIntervalMs) { continue; }
 
     // ACTION PER INTERVAL
     
@@ -133,24 +131,10 @@ void WatchyFaceX::drawFacePinballX(
     );
 
     // make sure ball is in bounds
-    ballX = clampToRange(
-      ballX + horizontalStep,
-      minBallX,
-      maxBallX
-    );
-    ballY = clampToRange(
-      ballY + verticalStep,
-      minBallY,
-      maxBallY
-    );
+    ballX = clampToRange(ballX + horizontalStep, minBallX, maxBallX);
+    ballY = clampToRange(ballY + verticalStep, minBallY, maxBallY);
 
-    display.fillCircle(
-      ballX,
-      ballY,
-      ballRadius,
-      textColor
-    );
-
+    display.fillCircle(ballX, ballY, ballRadius, textColor);
     display.display(true); // full refresh
 
     if (!enableInteractive) {
