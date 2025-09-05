@@ -81,24 +81,25 @@ void WatchyFaceX::drawFacePinballX(
   const uint8_t minBallY = ballRadius;
   const uint8_t maxBallY = DISPLAY_HEIGHT - ballRadius;
 
-  long lastUpdateTimeMs = 0;
+  long lastMs = 0;
   long updateIntervalMs = 100;
 
   while (1) {
-    unsigned long currentTimeMs = millis();
+    unsigned long now = millis();
 
     if (digitalRead(BACK_BTN_PIN) == 0) {
       // ACITVE_LOW (0 or 1) taken from Watchy github
+      ::enableInteractive = false;
       break;
     }
 
-    if ((currentTimeMs - lastUpdateTimeMs) <= updateIntervalMs) {
+    if ((now - lastMs) <= updateIntervalMs) {
       continue;
     }
 
     // ACTION PER INTERVAL
     
-    lastUpdateTimeMs = currentTimeMs;
+    lastMs = now;
 
     // Get acceleration data
     bool accelerationReadOk = sensor.getAccel(accelerationData);
