@@ -2,9 +2,12 @@
 // NOTE: top left is X=0, Y=0
 // NOTE: bottom right is X=200, Y=200
 
-void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
-  uint8_t PADDING_X = 15; // pixels
-  uint8_t PADDING_Y = 15; // pixels
+void WatchyFaceX::drawFaceCustomBahn(
+  bool enableDarkMode,
+  bool enableInteractive
+) {
+  uint8_t PADDING_X = 5; // pixels
+  uint8_t PADDING_Y = 5; // pixels
   uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
   uint16_t textColor = enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK; 
   display.fillScreen(bgColor);
@@ -22,12 +25,43 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
     batteryHeight
   );
 
-  // CHARGE ICON
+  uint8_t halfBatteryHeight = batteryHeight / 2;
+
+  int16_t  x1, y1;
+  uint16_t w, h;
+
   uint8_t iconSpacing = 5;
-  uint8_t chargeX = PADDING_X + batteryWidth + iconSpacing;
-  uint8_t chargeY = PADDING_Y + 2;
+
+  // BATTERY PERCENT
+  uint8_t batteryPercent = 0;
+  float VBAT = getBatteryVoltage();
+
+  if (4.2 <= VBAT){
+    batteryPercent = 100.0;
+  }
+  else if (3.3 <= VBAT) {
+    batteryPercent = 100.0 * (VBAT - 3.3) / 0.9;
+  }
+  String percentString = "";
+  percentString += batteryPercent;
+  percentString += "% ";
+  display.getTextBounds(percentString, 0, 0, &x1, &y1, &w, &h);
+  uint8_t percentWidth = w;
+  uint8_t percentHeight = h;
+  uint8_t halfPercentHeight = percentHeight / 2;
+  uint8_t percentX = batteryX + batteryWidth + iconSpacing;
+  uint8_t percentY = batteryY + halfBatteryHeight + halfPercentHeight;
+  display.setCursor(percentX, percentY);
+  display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
+  display.setTextColor(textColor);
+  display.print(percentString);
+
+  // CHARGE ICON
   uint8_t chargeWidth = 16;
   uint8_t chargeHeight = 18;
+  uint8_t halfChargeHeight = chargeHeight / 2;
+  uint8_t chargeX = percentX + percentWidth + iconSpacing;
+  uint8_t chargeY = batteryY + halfBatteryHeight - halfChargeHeight;
   #ifdef ARDUINO_ESP32S3_DEV
   if(USB_PLUGGED_IN){
     display.drawBitmap(
@@ -42,8 +76,8 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
   #endif
 
   // WIFI ICON
-  uint8_t wifiX = PADDING_X;
-  uint8_t wifiY = PADDING_Y + batteryHeight + iconSpacing;
+  uint8_t wifiX = batteryX;
+  uint8_t wifiY = batteryY + batteryHeight + iconSpacing;
   uint8_t wifiWidth = 26;
   uint8_t wifiHeight = 18;
   display.drawBitmap(
@@ -73,9 +107,6 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
 
   // DATETIME SETUP:
   
-  int16_t  x1, y1;
-  uint16_t w, h;
-
   display.setTextColor(textColor);
 
   uint8_t centerX = 100;
@@ -133,7 +164,7 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
   dateString += currentTime.Day;
 
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
-  uint8_t dateX = PADDING_X;
+  uint8_t dateX = weekdayX;
   uint8_t dateY = weekdayY - weekdayHeight - dateSpacing;
   uint8_t dateWidth = w;
   uint8_t dateHeight = h;
@@ -145,7 +176,7 @@ void WatchyFaceX::drawFaceCustomBahn(bool enableDarkMode) {
   dateString = currentTime.Year + 1970;
 
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
-  uint8_t yearX = PADDING_X;
+  uint8_t yearX = dateX;
   uint8_t yearY = dateY - dateHeight - dateSpacing;
   uint8_t yearWidth = w;
   uint8_t yearHeight = h;
@@ -188,6 +219,7 @@ void WatchyFaceX::drawBattery(
 
   uint8_t batteryLevel = 0;
   float VBAT = getBatteryVoltage();
+
   if(VBAT > 4.0){
       batteryLevel = 3;
   }

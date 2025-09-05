@@ -7,7 +7,10 @@ const uint8_t CELL_X_GAP = 1; // pixels
 const uint8_t CELL_Y_HEIGHT = 18; // pixels
 const uint8_t CELL_Y_GAP = 6; // pixels
 
-void WatchyFaceX::drawFaceCalendar(bool enableDarkMode) {
+void WatchyFaceX::drawFaceCalendar(
+  bool enableDarkMode,
+  bool enableInteractive
+) {
   uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
   uint16_t textColor = enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK; 
   display.fillScreen(bgColor);
