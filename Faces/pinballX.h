@@ -64,7 +64,7 @@ void WatchyFaceX::drawFacePinballX(
     display.setCursor(3, 14);
     display.println("PinballX");
     display.display(true); // full refresh
-    continue;
+    return;
   }
 
   // GAME MODE: loop
