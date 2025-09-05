@@ -81,8 +81,8 @@ void WatchyFaceX::drawFacePinballX(
   const uint8_t minBallY = ballRadius;
   const uint8_t maxBallY = DISPLAY_HEIGHT - ballRadius;
 
-  long lastMs = 0;
-  long updateIntervalMs = 100;
+  unsigned long lastMs = 0;
+  const unsigned long updateIntervalMs = 100;
 
   while (1) {
     unsigned long now = millis();
