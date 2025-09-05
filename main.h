@@ -202,10 +202,10 @@ void WatchyFaceX::handleButtonPress() {
 
 //-- triggered by showWatchFace() 
 void WatchyFaceX::drawWatchFace() {
+  FaceFn currFace;
+
   FaceType currFaceType = FACE_TYPES[faceTypeIndex];
-
-  FaceFn currFace = currFaceType.list[*(currFaceType.index)];
-
+  currFace = currFaceType.list[*(currFaceType.index)];
   (this->*currFace)(isDarkMode, enableInteractive);
 }                                         
 
