@@ -127,12 +127,15 @@ void WatchyFaceX::drawFacePinballX(
       .maxPixelsPerFrame = 4
     };
 
+    // NOTE: X,Y appear to be switched for accelerometer
     int horizontalStep = tiltToSignedStep(
-      -accelerationData.x,
+      // Y: +ve right edge up & -ve left edge up
+      -accelerationData.y,
       ballTilt
     );
     int verticalStep = tiltToSignedStep(
-      accelerationData.y,
+      // X: +ve top edge up & -ve bottom edge up
+      accelerationData.x,
       ballTilt
     );
 
