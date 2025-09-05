@@ -14,15 +14,9 @@ void WatchyFaceX::drawFacePinball(
   display.setTextColor(textColor);
 
 
-  long lastUpdateTimeMs = 0;
-  long updateIntervalMs = 100;
-
-  uint8_t centerX = DISPLAY_WIDTH / 2;
-  uint8_t centerY = DISPLAY_HEIGHT / 2;
-
   // NOTE: circle center is X,Y
-  uint8_t ballX = centerX;
-  uint8_t ballY = centerY;
+  uint8_t ballX = DISPLAY_WIDTH / 2;
+  uint8_t ballY = DISPLAY_HEIGHT / 2;
   uint8_t ballRadius = 4;
   uint8_t ballIncrements = 16;
 
@@ -30,6 +24,9 @@ void WatchyFaceX::drawFacePinball(
   uint8_t maxBallX = DISPLAY_WIDTH - ballRadius;
   uint8_t minBallY = ballRadius;
   uint8_t maxBallY = DISPLAY_HEIGHT - ballRadius;
+
+  long lastMs = 0;
+  long updateIntervalMs = 100;
 
   // NAVIGATION MODE: draw once; return
 
@@ -51,20 +48,20 @@ void WatchyFaceX::drawFacePinball(
   Accel accelerationData;
 
   while (1) {
-    unsigned long currentTimeMs = millis();
+    unsigned long now = millis();
 
     if (digitalRead(BACK_BTN_PIN) == 0) {
       // ACITVE_LOW (0 or 1) taken from Watchy github
       break;
     }
 
-    if ((currentTimeMs - lastUpdateTimeMs) <= updateIntervalMs) {
+    if ((now - lastMs) <= updateIntervalMs) {
       continue;
     }
 
     // ACTION PER INTERVAL
     
-    lastUpdateTimeMs = currentTimeMs;
+    lastMs = now;
 
     // Get acceleration data
     bool accelerationReadOk = sensor.getAccel(accelerationData);
