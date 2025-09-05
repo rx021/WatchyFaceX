@@ -126,7 +126,6 @@ static constexpr size_t TOY_COUNT = sizeof(TOY_FACES) / sizeof(TOY_FACES[0]);
 
 struct FaceType {
   const FaceFn* list;
-  int* index; // pointer to face index
 };
 static FaceType FACE_TYPES[] = {
   {CLOCK_FACES},
@@ -202,11 +201,24 @@ void WatchyFaceX::handleButtonPress() {
 
 //-- triggered by showWatchFace() 
 void WatchyFaceX::drawWatchFace() {
-  FaceType currFaceType = FACE_TYPES[faceTypeIndex];
+  FaceFn currFace;
 
-  FaceFn currFace = currFaceType.list[*(currFaceType.index)];
-
-  (this->*currFace)(isDarkMode, enableInteractive);
+  if (faceTypeIndex == 0) {
+    currFace = CLOCK_FACES[clockFacesIndex];
+    (this->*currFace)(isDarkMode, enableInteractive);
+  }
+  else if (faceTypeIndex == 1) {
+    currFace = NOTE_FACES[noteFacesIndex];
+    (this->*currFace)(isDarkMode, enableInteractive);
+  }
+  else if (faceTypeIndex == 2) {
+    currFace = TOY_FACES[toyFacesIndex];
+    (this->*currFace)(isDarkMode, enableInteractive);
+  }
+  else if (faceTypeIndex == 3) {
+    currFace = PLANNER_FACES[plannerFacesIndex];
+    (this->*currFace)(isDarkMode, enableInteractive);
+  }
 }                                         
 
 #endif
