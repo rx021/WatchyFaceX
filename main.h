@@ -4,14 +4,14 @@
 #include <Watchy.h> // include Watchy library
 
 // used in faces
-#include <Fonts/FreeMonoOblique24pt7b.h>
+//#include <Fonts/FreeMonoOblique24pt7b.h>
 #include <Fonts/FreeSans9pt7b.h>
 #include <Fonts/FreeSansBold9pt7b.h>
 #include <Fonts/FreeSans12pt7b.h>
-#include <Fonts/FreeSansBold12pt7b.h>
-#include <Fonts/FreeSans18pt7b.h>
-#include <Fonts/FreeSans24pt7b.h>
-#include "Fonts/DSEG7_Classic_Bold_25.h"
+//#include <Fonts/FreeSansBold12pt7b.h>
+//#include <Fonts/FreeSans18pt7b.h>
+//#include <Fonts/FreeSans24pt7b.h>
+//#include "Fonts/DSEG7_Classic_Bold_25.h"
 #include "Fonts/DIN_1451_Engschrift_Regular12pt7b.h"
 #include "Fonts/DIN_1451_Engschrift_Regular64pt7b.h"
 #include "Fonts/Seven_Segment10pt7b.h"
