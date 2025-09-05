@@ -43,7 +43,7 @@ inline int tiltToSignedStep(
   int active = activeTiltMagnitude(rawAcceleration, scale);
   int step = normalizedStepFromActiveMagnitude(active, scale);
 
-  return sign & step;
+  return sign * step;
 }
 
 void WatchyFaceX::drawFacePinballX(
@@ -58,43 +58,58 @@ void WatchyFaceX::drawFacePinballX(
   display.setFont(&FreeSans9pt7b);
   display.setTextColor(textColor);
 
-  Accel accelerationData;
-
-  long lastUpdateTimeMs = 0;
-  long updateIntervalMs = 100;
-
   // NOTE: circle center is X,Y
   uint8_t ballX = DISPLAY_WIDTH / 2;
   uint8_t ballY = DISPLAY_HEIGHT / 2;
-  uint8_t ballRadius = 4;
-  uint8_t ballIncrements = 16;
+  const uint8_t ballRadius = 4;
 
-  uint8_t minBallX = ballRadius;
-  uint8_t maxBallX = DISPLAY_WIDTH - ballRadius;
-  uint8_t minBallY = ballRadius;
-  uint8_t maxBallY = DISPLAY_HEIGHT - ballRadius;
+  const uint8_t minBallX = ballRadius;
+  const uint8_t maxBallX = DISPLAY_WIDTH - ballRadius;
+  const uint8_t minBallY = ballRadius;
+  const uint8_t maxBallY = DISPLAY_HEIGHT - ballRadius;
+
+  unsigned long lastMs = 0;
+  const unsigned long updateIntervalMs = 100;
+
+  // NAVIGATION MODE: draw once; return
+
+  auto drawNavigationFrame = [&]() {
+    display.fillScreen(bgColor);
+    display.setCursor(3, 14);
+    display.println("PinballX");
+    display.fillCircle(ballX, ballY, ballRadius, textColor);
+    display.display(true); // full refresh
+  };
+
+  if (!enableInteractive) {
+    drawNavigationFrame();
+    return;
+  }
+
+  // GAME MODE: loop
+
+  Accel accelerationData;
 
   while (1) {
-    unsigned long currentTimeMs = millis();
+    unsigned long now = millis();
 
     if (digitalRead(BACK_BTN_PIN) == 0) {
       // ACITVE_LOW (0 or 1) taken from Watchy github
+      ::enableInteractive = false;
       break;
     }
 
-    if ((currentTimeMs - lastUpdateTimeMs) <= updateIntervalMs) {
-      continue;
-    }
+    if ((now - lastMs) <= updateIntervalMs) { continue; }
 
     // ACTION PER INTERVAL
     
-    lastUpdateTimeMs = currentTimeMs;
+    lastMs = now;
 
     // Get acceleration data
     bool accelerationReadOk = sensor.getAccel(accelerationData);
 
     display.fillScreen(bgColor);
-    display.setCursor(3, 10);
+    display.setCursor(3, 14);
 
     if (!accelerationReadOk) {
       display.println("Acceleration read failed");
@@ -109,37 +124,26 @@ void WatchyFaceX::drawFacePinballX(
     const TiltScale ballTilt = {
       .deadZone = 140,
       .saturation = 900,
-      .maxPixelsPerFrame = 4
+      .maxPixelsPerFrame = 12
     };
 
+    // NOTE: X,Y appear to be switched for accelerometer
     int horizontalStep = tiltToSignedStep(
-      -accelerationData.x,
+      // Y: +ve right edge up & -ve left edge up
+      -accelerationData.y,
       ballTilt
     );
     int verticalStep = tiltToSignedStep(
-      accelerationData.y,
+      // X: +ve top edge up & -ve bottom edge up
+      accelerationData.x,
       ballTilt
     );
 
     // make sure ball is in bounds
-    ballX = clampToRange(
-      ballX + horizontalStep,
-      minBallX,
-      maxBallX
-    );
-    ballY = clampToRange(
-      ballY + verticalStep,
-      minBallY,
-      maxBallY
-    );
+    ballX = clampToRange(ballX + horizontalStep, minBallX, maxBallX);
+    ballY = clampToRange(ballY + verticalStep, minBallY, maxBallY);
 
-    display.fillCircle(
-      ballX,
-      ballY,
-      ballRadius,
-      textColor
-    );
-
+    display.fillCircle(ballX, ballY, ballRadius, textColor);
     display.display(true); // full refresh
 
     if (!enableInteractive) {
@@ -148,6 +152,8 @@ void WatchyFaceX::drawFacePinballX(
     }
   }
 
+  // After exiting game loop, show one navigation frame
+  drawNavigationFrame();
 }
 
 

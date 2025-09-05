@@ -13,17 +13,9 @@ void WatchyFaceX::drawFacePinball(
   display.setFont(&FreeSans9pt7b);
   display.setTextColor(textColor);
 
-  Accel accelerationData;
-
-  long lastUpdateTimeMs = 0;
-  long updateIntervalMs = 100;
-
-  uint8_t centerX = DISPLAY_WIDTH / 2;
-  uint8_t centerY = DISPLAY_HEIGHT / 2;
-
   // NOTE: circle center is X,Y
-  uint8_t ballX = centerX;
-  uint8_t ballY = centerY;
+  uint8_t ballX = DISPLAY_WIDTH / 2;
+  uint8_t ballY = DISPLAY_HEIGHT / 2;
   uint8_t ballRadius = 4;
   uint8_t ballIncrements = 16;
 
@@ -32,21 +24,43 @@ void WatchyFaceX::drawFacePinball(
   uint8_t minBallY = ballRadius;
   uint8_t maxBallY = DISPLAY_HEIGHT - ballRadius;
 
+  long lastMs = 0;
+  long updateIntervalMs = 100;
+
+  // NAVIGATION MODE: draw once; return
+
+  auto drawNavigationFrame = [&]() {
+    display.fillScreen(bgColor);
+    display.setCursor(3, 14);
+    display.println("Pinball");
+    display.fillCircle(ballX, ballY, ballRadius, textColor);
+    display.display(true); // full refresh
+  };
+
+  if (!enableInteractive) {
+    drawNavigationFrame();
+    return;
+  }
+
+  // GAME MODE: loop
+  
+  Accel accelerationData;
+
   while (1) {
-    unsigned long currentTimeMs = millis();
+    unsigned long now = millis();
 
     if (digitalRead(BACK_BTN_PIN) == 0) {
       // ACITVE_LOW (0 or 1) taken from Watchy github
       break;
     }
 
-    if ((currentTimeMs - lastUpdateTimeMs) <= updateIntervalMs) {
+    if ((now - lastMs) <= updateIntervalMs) {
       continue;
     }
 
     // ACTION PER INTERVAL
     
-    lastUpdateTimeMs = currentTimeMs;
+    lastMs = now;
 
     // Get acceleration data
     bool accelerationReadOk = sensor.getAccel(accelerationData);
@@ -108,19 +122,7 @@ void WatchyFaceX::drawFacePinball(
     display.print("Y:"); display.println(accelerationData.y);
     display.print("Z:"); display.println(accelerationData.z);
 
-    const TiltScale ballTilt = {
-      .deadZone = 140,
-      .saturation = 900,
-      .maxPixelsPerFrame = 4
-    };
-
-    display.fillCircle(
-      ballX,
-      ballY,
-      ballRadius,
-      textColor
-    );
-
+    display.fillCircle(ballX, ballY, ballRadius, textColor);
     display.display(true); // full refresh
 
     if (!enableInteractive) {
@@ -129,5 +131,7 @@ void WatchyFaceX::drawFacePinball(
     }
   }
 
+  // After exiting game loop, show one navigation frame
+  drawNavigationFrame();
 }
 
