@@ -43,7 +43,7 @@ inline int tiltToSignedStep(
   int active = activeTiltMagnitude(rawAcceleration, scale);
   int step = normalizedStepFromActiveMagnitude(active, scale);
 
-  return sign & step;
+  return sign * step;
 }
 
 void WatchyFaceX::drawFacePinballX(
