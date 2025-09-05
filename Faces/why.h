@@ -18,14 +18,14 @@ void WatchyFaceX::drawFaceWhy(
 
   // WHY?:
   display.setFont(&FreeSans9pt7b);
-  message = "Start w WHY? vision?";
+  message = "WHY go on? VISION?";
   display.getTextBounds(message, 0, 0, &x1, &y1, &width, &height);
   uint8_t mX = PADDING_X;
   int8_t mY = PADDING_Y + (-1 *  y1);
   // y1 is better to use instead of height here if we want the height of the font
   display.setCursor(mX, mY);
   display.println(message);
-  display.println("why go on?");
+  display.println("Start w WHY?");
 
   display.setFont(&FreeSansBold9pt7b);
   display.println("to Explr Love Give");
