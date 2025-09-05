@@ -58,21 +58,31 @@ void WatchyFaceX::drawFacePinballX(
   display.setFont(&FreeSans9pt7b);
   display.setTextColor(textColor);
 
-  Accel accelerationData;
+  // NAVIGATION MODE: draw once; return
 
-  long lastUpdateTimeMs = 0;
-  long updateIntervalMs = 100;
+  if (!enableInteractive) {
+    display.setCursor(3, 14);
+    display.println("PinballX");
+    display.display(true); // full refresh
+    continue;
+  }
+
+  // GAME MODE: loop
+  
+  Accel accelerationData;
 
   // NOTE: circle center is X,Y
   uint8_t ballX = DISPLAY_WIDTH / 2;
   uint8_t ballY = DISPLAY_HEIGHT / 2;
-  uint8_t ballRadius = 4;
-  uint8_t ballIncrements = 16;
+  const uint8_t ballRadius = 4;
 
-  uint8_t minBallX = ballRadius;
-  uint8_t maxBallX = DISPLAY_WIDTH - ballRadius;
-  uint8_t minBallY = ballRadius;
-  uint8_t maxBallY = DISPLAY_HEIGHT - ballRadius;
+  const uint8_t minBallX = ballRadius;
+  const uint8_t maxBallX = DISPLAY_WIDTH - ballRadius;
+  const uint8_t minBallY = ballRadius;
+  const uint8_t maxBallY = DISPLAY_HEIGHT - ballRadius;
+
+  long lastUpdateTimeMs = 0;
+  long updateIntervalMs = 100;
 
   while (1) {
     unsigned long currentTimeMs = millis();
@@ -94,7 +104,7 @@ void WatchyFaceX::drawFacePinballX(
     bool accelerationReadOk = sensor.getAccel(accelerationData);
 
     display.fillScreen(bgColor);
-    display.setCursor(3, 10);
+    display.setCursor(3, 14);
 
     if (!accelerationReadOk) {
       display.println("Acceleration read failed");
