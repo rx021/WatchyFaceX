@@ -124,7 +124,7 @@ void WatchyFaceX::drawFacePinballX(
     const TiltScale ballTilt = {
       .deadZone = 140,
       .saturation = 900,
-      .maxPixelsPerFrame = 4
+      .maxPixelsPerFrame = 8
     };
 
     // NOTE: X,Y appear to be switched for accelerometer
