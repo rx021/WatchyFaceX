@@ -108,19 +108,7 @@ void WatchyFaceX::drawFacePinball(
     display.print("Y:"); display.println(accelerationData.y);
     display.print("Z:"); display.println(accelerationData.z);
 
-    const TiltScale ballTilt = {
-      .deadZone = 140,
-      .saturation = 900,
-      .maxPixelsPerFrame = 4
-    };
-
-    display.fillCircle(
-      ballX,
-      ballY,
-      ballRadius,
-      textColor
-    );
-
+    display.fillCircle(ballX, ballY, ballRadius, textColor);
     display.display(true); // full refresh
 
     if (!enableInteractive) {
