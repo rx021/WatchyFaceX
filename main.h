@@ -54,6 +54,10 @@ class WatchyFaceX : public Watchy{
       bool enableDarkMode,
       bool enableInteractive
     );
+    void drawFaceEvents(
+      bool enableDarkMode,
+      bool enableInteractive
+    );
     void drawFaceTimer(
       bool enableDarkMode,
       bool enableInteractive
@@ -96,6 +100,7 @@ class WatchyFaceX : public Watchy{
 
 // needs to be included after class declared
 #include "Faces/calendar.h"
+#include "Faces/events.h"
 #include "Faces/timer.h"
 #include "Faces/countdown.h"
 #include "Faces/customBahn.h"
@@ -124,6 +129,7 @@ static constexpr size_t NOTE_COUNT = sizeof(NOTE_FACES) / sizeof(NOTE_FACES[0]);
 
 static constexpr FaceFn PLANNER_FACES[] = {
   &WatchyFaceX::drawFaceCalendar,
+  &WatchyFaceX::drawFaceEvents,
   &WatchyFaceX::drawFaceTimer,
   &WatchyFaceX::drawFaceCountdowwn,
   // event, alarms 
