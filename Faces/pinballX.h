@@ -76,7 +76,7 @@ void WatchyFaceX::drawFacePinballX(
   auto drawNavigationFrame = [&]() {
     display.fillScreen(bgColor);
     display.setCursor(3, 14);
-    display.println("PinballX");
+    display.println("PINBALL X");
     display.fillCircle(ballX, ballY, ballRadius, textColor);
     display.display(true); // full refresh
   };
