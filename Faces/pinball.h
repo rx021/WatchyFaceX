@@ -10,7 +10,7 @@ void WatchyFaceX::drawFacePinball(
 
   display.setFullWindow();
   display.fillScreen(bgColor);
-  display.setFont(&FreeSans12pt7b);
+  display.setFont(&FreeSansBold12pt7b);
   display.setTextColor(textColor);
 
   // NOTE: circle center is X,Y

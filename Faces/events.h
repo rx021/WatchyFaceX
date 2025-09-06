@@ -9,7 +9,7 @@ void WatchyFaceX::drawFaceEvents(
 
   display.setFullWindow();
   display.fillScreen(bgColor);
-  display.setFont(&FreeSans12pt7b);
+  display.setFont(&FreeSansBold12pt7b);
   display.setTextColor(textColor);
 
   uint8_t PADDING_X = 1; // pixels
