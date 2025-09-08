@@ -23,7 +23,7 @@ void WatchyFaceX::drawFaceGlobe(
   }
 
   long lastMs = 0;
-  long updateIntervalMs = 100;
+  long updateIntervalMs = 400;
 
   const unsigned char* currGlobe;
 
