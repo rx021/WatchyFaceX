@@ -130,7 +130,7 @@ static constexpr FaceFn NOTE_FACES[] = {
 static constexpr size_t NOTE_COUNT = sizeof(NOTE_FACES) / sizeof(NOTE_FACES[0]);
 
 static constexpr FaceFn SPACE_FACES[] = {
-  //&WatchyFaceX::drawFaceGlobe,
+  &WatchyFaceX::drawFaceGlobe,
 };
 static constexpr size_t SPACE_COUNT = sizeof(SPACE_FACES) / sizeof(SPACE_FACES[0]);
 
