@@ -101,6 +101,7 @@ class WatchyFaceX : public Watchy{
 };
 
 // needs to be included after class declared
+#include "Faces/globe.h"
 #include "Faces/calendar.h"
 #include "Faces/alarms.h"
 #include "Faces/timer.h"
