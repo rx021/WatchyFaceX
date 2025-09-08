@@ -957,8 +957,11 @@ const unsigned char* globes[3] = {
   globe02,
   globe03,
 };
-//static constexpr FaceFn SPACE_FACES[] = {
-  //&WatchyFaceX::drawFaceGlobe,
+//static constexpr char* GLOBES[] = {
+  //globe01,
+  //globe02,
+  //globe03,
 //};
+//static constexpr size_t GLOBE_COUNT = sizeof(GLOBES) / sizeof(GLOBES[0]);
 
 
