@@ -1,6 +1,6 @@
 
 RTC_DATA_ATTR int globeIndex = 0;
-RTC_DATA_ATTR int globeCount = 3;
+RTC_DATA_ATTR int globeCount = 14;
 
 void WatchyFaceX::drawFaceGlobe(
   bool enableDarkMode,
