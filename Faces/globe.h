@@ -9,13 +9,6 @@ void WatchyFaceX::drawFaceGlobe(
   display.setFullWindow();
   display.fillScreen(bgColor);
 
-  display.drawBitmap(
-    0,
-    0,
-    globe01,
-    200,
-    200,
-    textColor
-  );
+  display.drawBitmap(0, 0, globe01, 200, 200, textColor);
 }
 
