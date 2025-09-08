@@ -12,7 +12,7 @@ void WatchyFaceX::drawFaceGlobe(
   display.drawBitmap(
     0,
     0,
-    8bg_01,
+    globe01,
     200,
     200,
     textColor
