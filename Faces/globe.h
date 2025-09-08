@@ -1,4 +1,7 @@
 
+RTC_DATA_ATTR int globeIndex = 0;
+RTC_DATA_ATTR int globeCount = 3;
+
 void WatchyFaceX::drawFaceGlobe(
   bool enableDarkMode,
   bool enableInteractive
@@ -22,6 +25,8 @@ void WatchyFaceX::drawFaceGlobe(
   long lastMs = 0;
   long updateIntervalMs = 100;
 
+  const unsigned char* currGlobe;
+
   while (1) {
     unsigned long now = millis();
 
@@ -32,7 +37,9 @@ void WatchyFaceX::drawFaceGlobe(
     // ACTION PER INTERVAL
     lastMs = now;
     display.fillScreen(bgColor);
-    display.drawBitmap(0, 0, globe02, 200, 200, textColor);
+    currGlobe = globes[globeIndex];
+    display.drawBitmap(0, 0, currGlobe, 200, 200, textColor);
+    globeIndex = (globeIndex + 1) % globeCount;
     //display.drawBitmap(0, 0, globe03, 200, 200, textColor);
     display.display(true); // full refresh
                            
