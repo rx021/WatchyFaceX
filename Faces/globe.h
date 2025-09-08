@@ -10,15 +10,15 @@ void WatchyFaceX::drawFaceGlobe(
   uint16_t textColor = enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK; 
 
   display.setFullWindow();
-  display.fillScreen(bgColor);
 
-  auto drawNavigationFrame = [&]() {
+  auto drawFrame = [&]() {
+    display.fillScreen(bgColor);
     display.drawBitmap(0, 0, globe01, 200, 200, textColor);
     display.display(true); // full refresh
   };
 
   if (!enableInteractive) {
-    drawNavigationFrame();
+    drawFrame();
     return;
   }
 
@@ -36,18 +36,19 @@ void WatchyFaceX::drawFaceGlobe(
 
     // ACTION PER INTERVAL
     lastMs = now;
-    display.fillScreen(bgColor);
     currGlobe = globes[globeIndex];
+
+    display.fillScreen(bgColor);
     display.drawBitmap(0, 0, currGlobe, 200, 200, textColor);
-    globeIndex = (globeIndex + 1) % globeCount;
-    //display.drawBitmap(0, 0, globe03, 200, 200, textColor);
     display.display(true); // full refresh
                            
+    globeIndex = (globeIndex + 1) % globeCount;
+
     // only show initially so that we can switch between faces
     if (!enableInteractive) { break; }
   }
 
   // After exiting game loop, show one navigation frame
-  drawNavigationFrame();
+  drawFrame();
 }
 
