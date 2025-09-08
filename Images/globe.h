@@ -952,4 +952,13 @@ const unsigned char globe03 [] PROGMEM = {
 
 
 
+const unsigned char* globes[3] = {
+  globe01,
+  globe02,
+  globe03,
+};
+//static constexpr FaceFn SPACE_FACES[] = {
+  //&WatchyFaceX::drawFaceGlobe,
+//};
+
 
