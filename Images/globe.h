@@ -4437,7 +4437,7 @@ const unsigned char globe16 [] PROGMEM = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
-const unsigned char* globes[3] = {
+const unsigned char* globes[14] = {
   globe01,
   globe02,
   globe03,
