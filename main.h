@@ -20,6 +20,7 @@
 #include "Icons/charge.h"
 #include "Icons/bluetooth.h"
 #include "Icons/wifi.h"
+#include "Images/globe.h"
 
 RTC_DATA_ATTR bool isDarkMode = false;
 RTC_DATA_ATTR bool enableInteractive = false;
