@@ -185,6 +185,8 @@ void WatchyFaceX::handleButtonPress() {
         toyFacesIndex = (toyFacesIndex + 1) % TOY_COUNT;
       }
       else if (faceTypeIndex == 3) {
+        // reset when changing face
+        enableInteractive = false;
         spaceFacesIndex = (spaceFacesIndex + 1) % SPACE_COUNT;
       }
       else if (faceTypeIndex == 4) {
@@ -197,14 +199,17 @@ void WatchyFaceX::handleButtonPress() {
     }
 
     if (wakeupBit & MENU_BTN_MASK) {
-      if (faceTypeIndex != 2) {
-        Watchy::handleButtonPress();
+      if (
+        faceTypeIndex == 2 // toys
+        || faceTypeIndex == 3 // globes
+      ) {
+        enableInteractive = true;
+        RTC.read(currentTime);
+        showWatchFace(true);
         return;
       }
 
-      enableInteractive = true;
-      RTC.read(currentTime);
-      showWatchFace(true);
+      Watchy::handleButtonPress();
       return;
     }
 
@@ -250,7 +255,7 @@ void WatchyFaceX::drawWatchFace() {
   }
   else if (faceTypeIndex == 3) {
     currFace = SPACE_FACES[spaceFacesIndex];
-    (this->*currFace)(isDarkMode, enableInteractive);
+    (this->*currFace)(!isDarkMode, enableInteractive);
   }
   else if (faceTypeIndex == 4) {
     currFace = PLANNER_FACES[plannerFacesIndex];
