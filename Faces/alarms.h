@@ -1,6 +1,6 @@
 
 //will also be alarms
-void WatchyFaceX::drawFaceEvents(
+void WatchyFaceX::drawFaceAlarms(
   bool enableDarkMode,
   bool enableInteractive
 ) {
@@ -17,7 +17,7 @@ void WatchyFaceX::drawFaceEvents(
   int16_t  x1, y1;
   uint16_t w, h;
 
-  String message = "EVENTS";
+  String message = "ALARMS";
   display.getTextBounds(message, 0, 0, &x1, &y1, &w, &h);
   uint8_t mX = PADDING_X;
   int8_t mY = PADDING_Y + (-1 *  y1);
