@@ -55,7 +55,7 @@ void WatchyFaceX::drawFacePinballX(
 
   display.setFullWindow();
   display.fillScreen(bgColor);
-  display.setFont(&FreeSans9pt7b);
+  display.setFont(&FreeSansBold12pt7b);
   display.setTextColor(textColor);
 
   // NOTE: circle center is X,Y
@@ -74,9 +74,19 @@ void WatchyFaceX::drawFacePinballX(
   // NAVIGATION MODE: draw once; return
 
   auto drawNavigationFrame = [&]() {
+    uint8_t PADDING_X = 1; // pixels
+    uint8_t PADDING_Y = 1; // pixels
+    int16_t  x1, y1;
+    uint16_t w, h;
+
+    String message = "PINBALL X";
+    display.getTextBounds(message, 0, 0, &x1, &y1, &w, &h);
+    uint8_t mX = PADDING_X;
+    int8_t mY = PADDING_Y + (-1 *  y1);
+
     display.fillScreen(bgColor);
-    display.setCursor(3, 14);
-    display.println("PinballX");
+    display.setCursor(mX, mY);
+    display.println(message);
     display.fillCircle(ballX, ballY, ballRadius, textColor);
     display.display(true); // full refresh
   };

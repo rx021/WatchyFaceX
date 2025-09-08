@@ -8,7 +8,7 @@
 #include <Fonts/FreeSans9pt7b.h>
 #include <Fonts/FreeSansBold9pt7b.h>
 #include <Fonts/FreeSans12pt7b.h>
-//#include <Fonts/FreeSansBold12pt7b.h>
+#include <Fonts/FreeSansBold12pt7b.h>
 //#include <Fonts/FreeSans18pt7b.h>
 //#include <Fonts/FreeSans24pt7b.h>
 //#include "Fonts/DSEG7_Classic_Bold_25.h"
@@ -20,6 +20,7 @@
 #include "Icons/charge.h"
 #include "Icons/bluetooth.h"
 #include "Icons/wifi.h"
+#include "Images/globe.h"
 
 RTC_DATA_ATTR bool isDarkMode = false;
 RTC_DATA_ATTR bool enableInteractive = false;
@@ -27,6 +28,7 @@ RTC_DATA_ATTR bool enableInteractive = false;
 RTC_DATA_ATTR int faceTypeIndex = 0;
 RTC_DATA_ATTR int clockFacesIndex = 0;
 RTC_DATA_ATTR int noteFacesIndex = 0;
+RTC_DATA_ATTR int spaceFacesIndex = 0;
 RTC_DATA_ATTR int plannerFacesIndex = 0;
 RTC_DATA_ATTR int toyFacesIndex = 0;
 
@@ -50,7 +52,23 @@ class WatchyFaceX : public Watchy{
     );
     // FACES
     void drawWatchFace();
+    void drawFaceGlobe(
+      bool enableDarkMode,
+      bool enableInteractive
+    );
     void drawFaceCalendar(
+      bool enableDarkMode,
+      bool enableInteractive
+    );
+    void drawFaceAlarms(
+      bool enableDarkMode,
+      bool enableInteractive
+    );
+    void drawFaceTimer(
+      bool enableDarkMode,
+      bool enableInteractive
+    );
+    void drawFaceCountdowwn(
       bool enableDarkMode,
       bool enableInteractive
     );
@@ -87,7 +105,11 @@ class WatchyFaceX : public Watchy{
 };
 
 // needs to be included after class declared
+#include "Faces/globe.h"
 #include "Faces/calendar.h"
+#include "Faces/alarms.h"
+#include "Faces/timer.h"
+#include "Faces/countdown.h"
 #include "Faces/customBahn.h"
 #include "Faces/analog.h"
 #include "Faces/why.h"
@@ -112,9 +134,16 @@ static constexpr FaceFn NOTE_FACES[] = {
 };
 static constexpr size_t NOTE_COUNT = sizeof(NOTE_FACES) / sizeof(NOTE_FACES[0]);
 
+static constexpr FaceFn SPACE_FACES[] = {
+  &WatchyFaceX::drawFaceGlobe,
+};
+static constexpr size_t SPACE_COUNT = sizeof(SPACE_FACES) / sizeof(SPACE_FACES[0]);
+
 static constexpr FaceFn PLANNER_FACES[] = {
   &WatchyFaceX::drawFaceCalendar,
-  // calendar (WIP), event, alarms, timer, countdown
+  &WatchyFaceX::drawFaceAlarms,
+  &WatchyFaceX::drawFaceTimer,
+  &WatchyFaceX::drawFaceCountdowwn,
 };
 static constexpr size_t PLANNER_COUNT = sizeof(PLANNER_FACES) / sizeof(PLANNER_FACES[0]);
 
@@ -131,6 +160,7 @@ static FaceType FACE_TYPES[] = {
   {CLOCK_FACES},
   {NOTE_FACES},
   {TOY_FACES},
+  {SPACE_FACES},
   {PLANNER_FACES},
 };
 static constexpr size_t FACE_TYPE_COUNT = sizeof(FACE_TYPES) / sizeof(FACE_TYPES[0]);
@@ -155,6 +185,9 @@ void WatchyFaceX::handleButtonPress() {
         toyFacesIndex = (toyFacesIndex + 1) % TOY_COUNT;
       }
       else if (faceTypeIndex == 3) {
+        spaceFacesIndex = (spaceFacesIndex + 1) % SPACE_COUNT;
+      }
+      else if (faceTypeIndex == 4) {
         plannerFacesIndex = (plannerFacesIndex + 1) % PLANNER_COUNT;
       }
 
@@ -216,6 +249,10 @@ void WatchyFaceX::drawWatchFace() {
     (this->*currFace)(isDarkMode, enableInteractive);
   }
   else if (faceTypeIndex == 3) {
+    currFace = SPACE_FACES[spaceFacesIndex];
+    (this->*currFace)(isDarkMode, enableInteractive);
+  }
+  else if (faceTypeIndex == 4) {
     currFace = PLANNER_FACES[plannerFacesIndex];
     (this->*currFace)(isDarkMode, enableInteractive);
   }
