@@ -52,6 +52,10 @@ class WatchyFaceX : public Watchy{
     );
     // FACES
     void drawWatchFace();
+    void drawFaceGlobe(
+      bool enableDarkMode,
+      bool enableInteractive
+    );
     void drawFaceCalendar(
       bool enableDarkMode,
       bool enableInteractive
