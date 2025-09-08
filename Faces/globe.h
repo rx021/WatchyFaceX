@@ -33,6 +33,7 @@ void WatchyFaceX::drawFaceGlobe(
     lastMs = now;
     display.fillScreen(bgColor);
     display.drawBitmap(0, 0, globe02, 200, 200, textColor);
+    //display.drawBitmap(0, 0, globe03, 200, 200, textColor);
     display.display(true); // full refresh
                            
     // only show initially so that we can switch between faces
