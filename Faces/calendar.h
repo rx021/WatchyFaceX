@@ -1,5 +1,5 @@
 
-namespace calendar_face {
+//namespace calendar_face {
 
 static const uint16_t WIDTH  = 200;
 static const uint16_t HEIGHT = 200;
@@ -94,6 +94,7 @@ inline void drawGrid(GFX &display, int uiYear, int uiMonth,
 }
 
 // Top-level renderer
+/*
 template<typename GFX>
 inline void render(GFX &display, int uiYear, int uiMonth,
                    int todayY, int todayM, int todayD){
@@ -102,6 +103,28 @@ inline void render(GFX &display, int uiYear, int uiMonth,
   drawWeekHeader(display);
   drawGrid(display, uiYear, uiMonth, todayY, todayM, todayD);
 }
+*/
 
-} // namespace calendar_face
+//} // namespace calendar_face
+
+void WatchyFaceX::drawFaceCalendar(
+  bool enableDarkMode,
+  bool enableInteractive
+) {
+  uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
+  //uint16_t textColor = enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK; 
+
+  display.fillScreen(bgColor);
+
+  drawTitle(display, uiYear, uiMonth);
+
+  drawWeekHeader(display);
+
+  tm t = currentTime;
+  int year  = t.tm_year + 1900;
+  int month = t.tm_mon + 1;
+  int day   = t.tm_mday;
+
+  drawGrid(display, uiYear, uiMonth, todayY, todayM, todayD);
+}
 

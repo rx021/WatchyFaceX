@@ -7,7 +7,7 @@ const uint8_t CELL_X_GAP = 1; // pixels
 const uint8_t CELL_Y_HEIGHT = 18; // pixels
 const uint8_t CELL_Y_GAP = 6; // pixels
 
-void WatchyFaceX::drawFaceCalendar(
+void WatchyFaceX::drawFaceCalendar0(
   bool enableDarkMode,
   bool enableInteractive
 ) {
