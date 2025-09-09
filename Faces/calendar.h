@@ -122,22 +122,23 @@ void WatchyFaceX::drawFaceCalendar(
 ) {
   uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
   //uint16_t textColor = enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK; 
-
   display.fillScreen(bgColor);
-
-  drawTitle(display, uiYear, uiMonth);
-
-  drawWeekHeader(display);
 
   tm t = currentTime;
   int year  = t.tm_year + 1900;
   int month = t.tm_mon + 1;
   int day   = t.tm_mday;
+  int uiYear  = year;
+  int uiMonth = month;
+
+  drawTitle(display, uiYear, uiMonth);
+
+  drawWeekHeader(display);
 
   drawGrid(
     display,
-    year, //state.calendarYear,
-    month, //state.calendarMonth,
+    uiYear, //state.calendarYear,
+    uiMonth, //state.calendarMonth,
     year,
     month,
     day
