@@ -44,7 +44,8 @@ inline void centerText(GFX &display, const String &s, int cx, int baselineY){
 
 template<typename GFX>
 inline void drawWeekHeader(GFX &display){
-  display.setFont(&FreeMonoBold9pt7b);
+  //display.setFont(&FreeMonoBold9pt7b);
+  display.setFont(&FreeSansBold9pt7b);
   display.setTextColor(GxEPD_BLACK);
   int x0 = (WIDTH - (7*CELL_W)) / 2;
   int y  = GRID_TOP - 16;
@@ -56,7 +57,8 @@ inline void drawWeekHeader(GFX &display){
 
 template<typename GFX>
 inline void drawTitle(GFX &display, int year, int month){
-  display.setFont(&FreeMonoBold12pt7b);
+  //display.setFont(&FreeMonoBold12pt7b);
+  display.setFont(&FreeSansBold12pt7b);
   display.setTextColor(GxEPD_BLACK);
   String title = String(MONTH_HDR[month-1]) + " " + String(year);
   centerText(display, title, WIDTH/2, 24);
@@ -71,7 +73,8 @@ inline void drawGrid(GFX &display, int uiYear, int uiMonth,
   int x0 = (WIDTH - (7*CELL_W)) / 2;
   int y0 = GRID_TOP;
 
-  display.setFont(&FreeMono9pt7b);
+  //display.setFont(&FreeMono9pt7b);
+  display.setFont(&FreeSans9pt7b);
   for(int day=1; day<=dim; ++day){
     int index = firstDow + (day-1);
     int row = index / 7, col = index % 7;
