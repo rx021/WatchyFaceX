@@ -65,8 +65,14 @@ inline void drawTitle(GFX &display, int year, int month){
 }
 
 template<typename GFX>
-inline void drawGrid(GFX &display, int uiYear, int uiMonth,
-                     int todayY, int todayM, int todayD){
+inline void drawGrid(
+  GFX &display,
+  int uiYear,
+  int uiMonth,
+  int todayY,
+  int todayM,
+  int todayD
+){
   int firstDow = dowZeller(uiYear, uiMonth, 1);
   int dim = daysInMonth(uiYear, uiMonth);
 
@@ -128,6 +134,13 @@ void WatchyFaceX::drawFaceCalendar(
   int month = t.tm_mon + 1;
   int day   = t.tm_mday;
 
-  drawGrid(display, state.calendarYear, state.calendarMonth, year, month, day);
+  drawGrid(
+    display,
+    state.calendarYear,
+    state.calendarMonth,
+    year,
+    month,
+    day
+  );
 }
 
