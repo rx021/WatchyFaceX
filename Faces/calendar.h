@@ -125,6 +125,6 @@ void WatchyFaceX::drawFaceCalendar(
   int month = t.tm_mon + 1;
   int day   = t.tm_mday;
 
-  drawGrid(display, uiYear, uiMonth, todayY, todayM, todayD);
+  drawGrid(display, state.calendarYear, state.calendarMonth, year, month, day);
 }
 
