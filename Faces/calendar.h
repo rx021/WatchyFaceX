@@ -1,3 +1,6 @@
+
+namespace calendar_face {
+
 static const uint16_t WIDTH  = 200;
 static const uint16_t HEIGHT = 200;
 static const uint8_t  MARGIN = 8;
@@ -100,4 +103,5 @@ inline void render(GFX &display, int uiYear, int uiMonth,
   drawGrid(display, uiYear, uiMonth, todayY, todayM, todayD);
 }
 
+} // namespace calendar_face
 
