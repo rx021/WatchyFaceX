@@ -136,8 +136,8 @@ void WatchyFaceX::drawFaceCalendar(
 
   drawGrid(
     display,
-    state.calendarYear,
-    state.calendarMonth,
+    year, //state.calendarYear,
+    month, //state.calendarMonth,
     year,
     month,
     day
