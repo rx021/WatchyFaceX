@@ -124,10 +124,10 @@ void WatchyFaceX::drawFaceCalendar(
   //uint16_t textColor = enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK; 
   display.fillScreen(bgColor);
 
-  tm t = currentTime;
-  int year  = t.tm_year + 1900;
-  int month = t.tm_mon + 1;
-  int day   = t.tm_mday;
+  tmElements_t t = currentTime;
+  int year  = tmYearToCalendar(t.Year); // or (1970 + t.Year)
+  int month = t.Month;
+  int day   = t.Day;
   int uiYear  = year;
   int uiMonth = month;
 
