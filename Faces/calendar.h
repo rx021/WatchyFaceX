@@ -8,14 +8,21 @@ static const uint8_t  GRID_TOP = 52;
 static const uint8_t  CELL_W = 26;
 static const uint8_t  CELL_H = 20;
 
+static const char *MONTH_HEADER[12] = {
+  "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"
+};
+
 // 0 = Sunday, 1 = Monday, 6 = Saturday, etc.
 //static int START_OF_WEEK = 0; // Sunday start
 static int START_OF_WEEK = 1; // Monday start
 //static int START_OF_WEEK = 6; // Saturday start
-static const char *WEEK_HEADER[7] = {"S","M","T","W","T","F","S"};
-static const char *MONTH_HEADER[12] = {
-  "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"
-};
+//static const char *WEEK_HEADER[7] = {"S","M","T","W","T","F","S"};
+static const char *WEEK_HEADER_BASE[7] = {"S","M","T","W","T","F","S"};
+
+inline const char* getWeekHeader(int i) {
+  return WEEK_HEADER_BASE[(i + START_OF_WEEK) % 7];
+}
+
 
 inline int dayOfWeekZeller(int year, int month, int day){
   if (month < 3) { month += 12; year -= 1; }
@@ -61,7 +68,7 @@ inline void drawWeekHeader(GFX &display, int textColor){
   int y  = GRID_TOP - 16;
   for(int col = 0; col < 7; col++){
     int cx = x0 + col*CELL_W + CELL_W/2;
-    centerText(display, WEEK_HEADER[col], cx, y);
+    centerText(display, getWeekHeader(col), cx, y);
   }
 }
 
@@ -99,7 +106,9 @@ inline void drawGrid(
   //display.setFont(&FreeMono9pt7b);
   display.setFont(&FreeSans9pt7b);
   for(int day=1; day<=dim; ++day){
-    int index = firstDayOfWeek + (day-1);
+    int index = (
+        (firstDayOfWeek - START_OF_WEEK + 7) % 7
+    ) + (day-1);
     int row = index / 7, col = index % 7;
 
     int cx = x0 + col*CELL_W + CELL_W/2;
