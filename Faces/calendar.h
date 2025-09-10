@@ -9,7 +9,7 @@ static const uint8_t  CELL_W = 26;
 static const uint8_t  CELL_H = 20;
 
 static const char *WEEK_HEADER[7] = {"S","M","T","W","T","F","S"};
-static const char *MONTH_HDR[12] = {
+static const char *MONTH_HEADER[12] = {
   "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"
 };
 
@@ -62,11 +62,16 @@ inline void drawWeekHeader(GFX &display){
 }
 
 template<typename GFX>
-inline void drawTitle(GFX &display, int year, int month){
+inline void drawTitle(
+    GFX &display,
+    int year,
+    int month,
+    int textColor
+){
   //display.setFont(&FreeMonoBold12pt7b);
   display.setFont(&FreeSansBold12pt7b);
-  display.setTextColor(GxEPD_BLACK);
-  String title = String(MONTH_HDR[month-1]) + " " + String(year);
+  display.setTextColor(textColor);
+  String title = String(MONTH_HEADER[month-1]) + " " + String(year);
   centerText(display, title, WIDTH/2, 24);
 }
 
@@ -140,7 +145,7 @@ void WatchyFaceX::drawFaceCalendar(
   int uiYear  = year;
   int uiMonth = month;
 
-  drawTitle(display, uiYear, uiMonth);
+  drawTitle(display, uiYear, uiMonth, textColor);
 
   drawWeekHeader(display);
 
