@@ -49,10 +49,10 @@ inline void centerText(GFX &display, const String &s, int cx, int baselineY){
 }
 
 template<typename GFX>
-inline void drawWeekHeader(GFX &display){
+inline void drawWeekHeader(GFX &display, int textColor){
   //display.setFont(&FreeMonoBold9pt7b);
   display.setFont(&FreeSansBold9pt7b);
-  display.setTextColor(GxEPD_BLACK);
+  display.setTextColor(textColor);
   int x0 = (WIDTH - (7*CELL_W)) / 2;
   int y  = GRID_TOP - 16;
   for(int col = 0; col < 7; col++){
@@ -147,7 +147,7 @@ void WatchyFaceX::drawFaceCalendar(
 
   drawTitle(display, uiYear, uiMonth, textColor);
 
-  drawWeekHeader(display);
+  drawWeekHeader(display, textColor);
 
   drawGrid(
     display,
