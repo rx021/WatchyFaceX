@@ -11,10 +11,15 @@ void WatchyFaceX::drawFaceMedia(
 
   display.setFullWindow();
 
+  // Ensure buttons are readable (active-low)
+  pinMode(UP_BTN_PIN, INPUT);
+  pinMode(DOWN_BTN_PIN, INPUT);
+  pinMode(BACK_BTN_PIN, INPUT);
+
   auto drawBitmapAtIndex = [&]() {
     const unsigned char *curr = medias[mediaIndex];
     display.fillScreen(bgColor);
-    display.drawBitmap(0, 0, cabin, 200, 200, textColor);
+    display.drawBitmap(0, 0, curr, 200, 200, textColor);
     display.display(true); // full refresh
   };
 
@@ -34,24 +39,22 @@ void WatchyFaceX::drawFaceMedia(
 
   while (1) {
     // ACITVE_LOW (0 or 1) taken from Watchy github
-    if (digitalRead(BACK_BTN_PIN) == 0) { break; }
+    if (digitalRead(BACK_BTN_PIN) == LOW) { break; }
 
-    if (digitalRead(UP_BTN_PIN) == 0) {
+    if (digitalRead(UP_BTN_PIN) == LOW) {
       // previous image (wrap)
       mediaIndex = (mediaIndex - 1 + mediaCount) % mediaCount;
       drawBitmapAtIndex();
-      // wait for release + debounce
-      while (digitalRead(UP_BTN_PIN) == 0) { delay(10); }
-      delay(120);
+      while (digitalRead(UP_BTN_PIN) == LOW) { delay(10); } // release
+      delay(120); // debounce
     }
 
-    if (digitalRead(DOWN_BTN_PIN) == 0) {
+    if (digitalRead(DOWN_BTN_PIN) == LOW) {
       // next image (wrap)
       mediaIndex = (mediaIndex + 1) % mediaCount;
       drawBitmapAtIndex();
-      // wait for release + debounce
-      while (digitalRead(DOWN_BTN_PIN) == 0) { delay(10); }
-      delay(120);
+      while (digitalRead(DOWN_BTN_PIN) == LOW) { delay(10); } // release
+      delay(120); // debounce
     }
 
     // small idle delay to reduce busy-wait power
