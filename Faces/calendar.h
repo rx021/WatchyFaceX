@@ -82,7 +82,9 @@ inline void drawTitle(
   display.setFont(&FreeSansBold12pt7b);
   display.setTextColor(textColor);
   String title = String(MONTH_HEADER[month-1]) + " " + String(year);
-  centerText(display, title, WIDTH/2, 24);
+  int16_t x1,y1; uint16_t w,h;
+  display.getTextBounds(title, 0, 0, &x1, &y1, &w, &h);
+  centerText(display, title, WIDTH/2, y1);
 }
 
 template<typename GFX>
