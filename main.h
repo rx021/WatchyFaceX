@@ -262,7 +262,7 @@ void WatchyFaceX::drawWatchFace() {
   }
   else if (faceTypeIndex == 3) {
     currFace = SPACE_FACES[spaceFacesIndex];
-    (this->*currFace)(isDarkMode, enableInteractive);
+    (this->*currFace)(!isDarkMode, enableInteractive);
   }
   else if (faceTypeIndex == 4) {
     currFace = PLANNER_FACES[plannerFacesIndex];
