@@ -8,6 +8,10 @@ static const uint8_t  GRID_TOP = 52;
 static const uint8_t  CELL_W = 26;
 static const uint8_t  CELL_H = 20;
 
+// 0 = Sunday, 1 = Monday, 6 = Saturday, etc.
+//static int START_OF_WEEK = 0; // Sunday start
+static int START_OF_WEEK = 1; // Monday start
+//static int START_OF_WEEK = 6; // Saturday start
 static const char *WEEK_HEADER[7] = {"S","M","T","W","T","F","S"};
 static const char *MONTH_HEADER[12] = {
   "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"
