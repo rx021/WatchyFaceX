@@ -77,9 +77,11 @@ inline void drawGrid(
   int uiMonth,
   int todayY,
   int todayM,
-  int todayD
+  int todayD,
+  int bgColor,
+  int textColor
 ){
-  int firstDow = dayOfWeekZeller(uiYear, uiMonth, 1);
+  int firstDayOfWeek = dayOfWeekZeller(uiYear, uiMonth, 1);
   int dim = daysInMonth(uiYear, uiMonth);
 
   int x0 = (WIDTH - (7*CELL_W)) / 2;
@@ -88,24 +90,25 @@ inline void drawGrid(
   //display.setFont(&FreeMono9pt7b);
   display.setFont(&FreeSans9pt7b);
   for(int day=1; day<=dim; ++day){
-    int index = firstDow + (day-1);
+    int index = firstDayOfWeek + (day-1);
     int row = index / 7, col = index % 7;
 
     int cx = x0 + col*CELL_W + CELL_W/2;
     int cy = y0 + row*CELL_H + 14;
 
     bool isToday = (uiYear==todayY && uiMonth==todayM && day==todayD);
+
     if(isToday){
       int rx = x0 + col*CELL_W + 2;
       int ry = y0 + row*CELL_H + 3;
       display.fillRoundRect(rx, ry, CELL_W-4, CELL_H-6, 4, GxEPD_BLACK);
-      display.setTextColor(GxEPD_WHITE);
+      display.setTextColor(bgColor);
     }else{
-      display.setTextColor(GxEPD_BLACK);
+      display.setTextColor(textColor);
     }
     centerText(display, String(day), cx, cy);
   }
-  display.drawRect(x0-1, y0-2, 7*CELL_W+2, 6*CELL_H+4, GxEPD_BLACK);
+  display.drawRect(x0-1, y0-2, 7*CELL_W+2, 6*CELL_H+4, textColor);
 }
 
 // Top-level renderer
@@ -127,7 +130,7 @@ void WatchyFaceX::drawFaceCalendar(
   bool enableInteractive
 ) {
   uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
-  //uint16_t textColor = enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK; 
+  uint16_t textColor = enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK; 
   display.fillScreen(bgColor);
 
   tmElements_t t = currentTime;
@@ -147,7 +150,9 @@ void WatchyFaceX::drawFaceCalendar(
     uiMonth, //state.calendarMonth,
     year,
     month,
-    day
+    day,
+    bgColor,
+    textColor
   );
 }
 
