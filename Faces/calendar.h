@@ -83,7 +83,9 @@ inline void drawTitle(
   String title = String(year) + " " + String(MONTH_HEADER[month-1]);
   int16_t x1,y1; uint16_t w,h;
   display.getTextBounds(title, 0, 0, &x1, &y1, &w, &h);
-  centerText(display, title, WIDTH/2, h);
+  //centerText(display, title, WIDTH/2, h);
+  display.setCursor(0, h);
+  display.print(title);
 }
 
 template<typename GFX>
