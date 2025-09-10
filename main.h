@@ -21,6 +21,7 @@
 #include "Icons/bluetooth.h"
 #include "Icons/wifi.h"
 #include "Images/globe.h"
+#include "Images/media.h"
 
 RTC_DATA_ATTR bool isDarkMode = false;
 RTC_DATA_ATTR bool enableInteractive = false;
@@ -53,6 +54,10 @@ class WatchyFaceX : public Watchy{
     // FACES
     void drawWatchFace();
     void drawFaceGlobe(
+      bool enableDarkMode,
+      bool enableInteractive
+    );
+    void drawFaceMedia(
       bool enableDarkMode,
       bool enableInteractive
     );
@@ -106,6 +111,7 @@ class WatchyFaceX : public Watchy{
 
 // needs to be included after class declared
 #include "Faces/globe.h"
+#include "Faces/media.h"
 #include "Faces/calendar.h"
 #include "Faces/alarms.h"
 #include "Faces/timer.h"
@@ -136,6 +142,7 @@ static constexpr size_t NOTE_COUNT = sizeof(NOTE_FACES) / sizeof(NOTE_FACES[0]);
 
 static constexpr FaceFn SPACE_FACES[] = {
   &WatchyFaceX::drawFaceGlobe,
+  &WatchyFaceX::drawFaceMedia,
 };
 static constexpr size_t SPACE_COUNT = sizeof(SPACE_FACES) / sizeof(SPACE_FACES[0]);
 
@@ -201,7 +208,7 @@ void WatchyFaceX::handleButtonPress() {
     if (wakeupBit & MENU_BTN_MASK) {
       if (
         faceTypeIndex == 2 // toys
-        || faceTypeIndex == 3 // globes
+        || faceTypeIndex == 3 // spaces
       ) {
         enableInteractive = true;
         RTC.read(currentTime);
@@ -255,7 +262,7 @@ void WatchyFaceX::drawWatchFace() {
   }
   else if (faceTypeIndex == 3) {
     currFace = SPACE_FACES[spaceFacesIndex];
-    (this->*currFace)(!isDarkMode, enableInteractive);
+    (this->*currFace)(isDarkMode, enableInteractive);
   }
   else if (faceTypeIndex == 4) {
     currFace = PLANNER_FACES[plannerFacesIndex];
