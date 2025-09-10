@@ -49,6 +49,11 @@ inline int daysInMonth(int year, int month){
     : days[month-1];
 }
 
+template<typename GFX>
+inline void leftText(GFX &display, const String &s, int x, int baselineY){
+  display.setCursor(x, baselineY);
+  display.print(s);
+}
 
 template<typename GFX>
 inline void centerText(GFX &display, const String &s, int cx, int baselineY){
@@ -66,8 +71,10 @@ inline void drawWeekHeader(GFX &display, int textColor){
   int X_0 = (WIDTH - (7*CELL_W)) / 2;
   int y  = GRID_TOP - 16;
   for(int col = 0; col < 7; col++){
-    int cx = X_0 + col*CELL_W + CELL_W/2;
-    centerText(display, getWeekHeader(col), cx, y);
+    //int cx = X_0 + col*CELL_W + CELL_W/2;
+    //centerText(display, getWeekHeader(col), cx, y);
+    int x = X_0 + col*CELL_W;
+    leftText(display, getWeekHeader(col), x, y);
   }
 }
 
@@ -85,8 +92,7 @@ inline void drawTitle(
   int16_t x1,y1; uint16_t w,h;
   display.getTextBounds(title, 0, 0, &x1, &y1, &w, &h);
   //centerText(display, title, WIDTH/2, h);
-  display.setCursor(X_0, h);
-  display.print(title);
+  leftText(display, title, X_0, h);
 }
 
 template<typename GFX>
@@ -114,8 +120,10 @@ inline void drawGrid(
     ) + (day-1);
     int row = index / 7, col = index % 7;
 
-    int cx = X_0 + col*CELL_W + CELL_W/2;
-    int cy = y0 + row*CELL_H + 14;
+    //int cx = X_0 + col*CELL_W + CELL_W/2;
+    //int cy = y0 + row*CELL_H + 14;
+    int dx = X_0 + col*CELL_W;
+    int dy = y0 + row*CELL_H + 14;
 
     bool isToday = (uiYear==todayY && uiMonth==todayM && day==todayD);
 
@@ -127,7 +135,8 @@ inline void drawGrid(
     }else{
       display.setTextColor(textColor);
     }
-    centerText(display, String(day), cx, cy);
+    //centerText(display, String(day), cx, cy);
+    leftText(display, String(day), dx, dy);
   }
   display.drawRect(X_0-1, y0-2, 7*CELL_W+2, 6*CELL_H+4, textColor);
 }
