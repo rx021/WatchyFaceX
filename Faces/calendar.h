@@ -8,7 +8,7 @@ static const uint8_t  GRID_TOP = 52;
 static const uint8_t  CELL_W = 26;
 static const uint8_t  CELL_H = 20;
 
-static const char *WEEK_HDR[7] = {"S","M","T","W","T","F","S"};
+static const char *WEEK_HEADER[7] = {"S","M","T","W","T","F","S"};
 static const char *MONTH_HDR[12] = {
   "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"
 };
@@ -55,9 +55,9 @@ inline void drawWeekHeader(GFX &display){
   display.setTextColor(GxEPD_BLACK);
   int x0 = (WIDTH - (7*CELL_W)) / 2;
   int y  = GRID_TOP - 16;
-  for(int i=0;i<7;i++){
-    int cx = x0 + i*CELL_W + CELL_W/2;
-    centerText(display, WEEK_HDR[i], cx, y);
+  for(int col = 0; col < 7; col++){
+    int cx = x0 + col*CELL_W + CELL_W/2;
+    centerText(display, WEEK_HEADER[col], cx, y);
   }
 }
 
