@@ -13,24 +13,28 @@ static const char *MONTH_HDR[12] = {
   "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"
 };
 
-// dayOfWeekZeller
-inline int dowZeller(int y, int m, int d){
-  if (m < 3) { m += 12; y -= 1; }
-  int K = y % 100, J = y / 100;
-  int h = (d + (13*(m + 1))/5 + K + (K/4) + (J/4) + 5*J) % 7;
+inline int dayOfWeekZeller(int year, int month, int day){
+  if (month < 3) { month += 12; year -= 1; }
+
+  // K = year of century; J = zero-based century
+  int K = year % 100, J = year / 100;
+  int h = (day + (13*(month + 1))/5 + K + (K/4) + (J/4) + 5*J) % 7;
+  // Saturday starts as 0
 
   return (h + 6) % 7; // Sunday=0
 }
 
-// isLeapYear
-inline bool isLeap(int y){
-  return ( (y%4==0 && y%100!=0) || (y%400==0) );
+inline bool isLeapYear(int year){
+  return (
+    (year % 4 == 0 && year % 100 != 0)
+    || (year % 400 == 0)
+  );
 }
 
 inline int daysInMonth(int y, int m){
   static const int d[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
 
-  return m==2 ? d[1]+(isLeap(y)?1:0) : d[m-1];
+  return m==2 ? d[1]+(isLeapYear(y)?1:0) : d[m-1];
 }
 
 
@@ -73,7 +77,7 @@ inline void drawGrid(
   int todayM,
   int todayD
 ){
-  int firstDow = dowZeller(uiYear, uiMonth, 1);
+  int firstDow = dayOfWeekZeller(uiYear, uiMonth, 1);
   int dim = daysInMonth(uiYear, uiMonth);
 
   int x0 = (WIDTH - (7*CELL_W)) / 2;
