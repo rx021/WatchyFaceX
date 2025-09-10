@@ -31,10 +31,12 @@ inline bool isLeapYear(int year){
   );
 }
 
-inline int daysInMonth(int y, int m){
-  static const int d[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
+inline int daysInMonth(int year, int month){
+  static const int days[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
 
-  return m==2 ? d[1]+(isLeapYear(y)?1:0) : d[m-1];
+  return month == 2
+    ? days[1] + (isLeapYear(year) ? 1 : 0)
+    : days[month-1];
 }
 
 
