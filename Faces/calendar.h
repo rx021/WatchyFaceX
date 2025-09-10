@@ -6,6 +6,7 @@ static const uint16_t HEIGHT = 200;
 static const uint8_t  GRID_TOP = 52;
 static const uint8_t  CELL_W = 26;
 static const uint8_t  CELL_H = 20;
+static const uint8_t  X_0 = (WIDTH - (7*CELL_W)) / 2;
 
 static const char *MONTH_HEADER[12] = {
   "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"
@@ -62,10 +63,10 @@ inline void drawWeekHeader(GFX &display, int textColor){
   //display.setFont(&FreeMonoBold9pt7b);
   display.setFont(&FreeSansBold9pt7b);
   display.setTextColor(textColor);
-  int x0 = (WIDTH - (7*CELL_W)) / 2;
+  int X_0 = (WIDTH - (7*CELL_W)) / 2;
   int y  = GRID_TOP - 16;
   for(int col = 0; col < 7; col++){
-    int cx = x0 + col*CELL_W + CELL_W/2;
+    int cx = X_0 + col*CELL_W + CELL_W/2;
     centerText(display, getWeekHeader(col), cx, y);
   }
 }
@@ -84,7 +85,7 @@ inline void drawTitle(
   int16_t x1,y1; uint16_t w,h;
   display.getTextBounds(title, 0, 0, &x1, &y1, &w, &h);
   //centerText(display, title, WIDTH/2, h);
-  display.setCursor(0, h);
+  display.setCursor(X_0, h);
   display.print(title);
 }
 
@@ -102,7 +103,7 @@ inline void drawGrid(
   int firstDayOfWeek = dayOfWeekZeller(uiYear, uiMonth, 1);
   int dim = daysInMonth(uiYear, uiMonth);
 
-  int x0 = (WIDTH - (7*CELL_W)) / 2;
+  //int x0 = (WIDTH - (7*CELL_W)) / 2;
   int y0 = GRID_TOP;
 
   //display.setFont(&FreeMono9pt7b);
@@ -113,13 +114,13 @@ inline void drawGrid(
     ) + (day-1);
     int row = index / 7, col = index % 7;
 
-    int cx = x0 + col*CELL_W + CELL_W/2;
+    int cx = X_0 + col*CELL_W + CELL_W/2;
     int cy = y0 + row*CELL_H + 14;
 
     bool isToday = (uiYear==todayY && uiMonth==todayM && day==todayD);
 
     if(isToday){
-      int rx = x0 + col*CELL_W + 2;
+      int rx = X_0 + col*CELL_W + 2;
       int ry = y0 + row*CELL_H + 3;
       display.fillRoundRect(rx, ry, CELL_W-4, CELL_H-6, 4, GxEPD_BLACK);
       display.setTextColor(bgColor);
@@ -128,7 +129,7 @@ inline void drawGrid(
     }
     centerText(display, String(day), cx, cy);
   }
-  display.drawRect(x0-1, y0-2, 7*CELL_W+2, 6*CELL_H+4, textColor);
+  display.drawRect(X_0-1, y0-2, 7*CELL_W+2, 6*CELL_H+4, textColor);
 }
 
 // Top-level renderer
