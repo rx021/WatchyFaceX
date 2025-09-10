@@ -23,7 +23,6 @@ inline const char* getWeekHeader(int i) {
   return WEEK_HEADER_BASE[(i + START_OF_WEEK) % 7];
 }
 
-
 inline int dayOfWeekZeller(int year, int month, int day){
   if (month < 3) { month += 12; year -= 1; }
 
