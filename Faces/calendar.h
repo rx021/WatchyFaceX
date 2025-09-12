@@ -3,7 +3,8 @@
 
 static const uint8_t WIDTH  = 200;
 static const uint8_t HEIGHT = 200;
-static const uint8_t GAP_Y = 2;
+static const uint8_t GAP_X = 2;
+static const uint8_t GAP_Y = 3;
 static const uint8_t GRID_TOP = 52;
 static const uint8_t CELL_W = 26;
 static const uint8_t CELL_H = 20;
@@ -136,8 +137,8 @@ inline void drawGrid(
     bool isToday = (uiYear==todayY && uiMonth==todayM && day==todayD);
 
     if(isToday){
-      int boxX = ORIGIN_X + col*CELL_W + 2;
-      int boxY = topY + row*CELL_H + 3;
+      int boxX = ORIGIN_X + col*CELL_W + GAP_X;
+      int boxY = topY + row*CELL_H + GAP_Y;
       int boxWidth = CELL_W-4;
       int boxHeight = CELL_H-6;
       display.fillRoundRect(boxX, boxY, boxWidth, boxHeight, 2, bgColor);
@@ -179,7 +180,7 @@ void WatchyFaceX::drawFaceCalendar(
   int uiMonth = month;
 
   int titleY = drawTitle(display, uiYear, uiMonth, textColor);
-  int headerY = drawWeekHeader(display, textColor, titleY+GAP_Y);
+  int headerY = drawWeekHeader(display, textColor, titleY + GAP_Y);
 
   drawGrid(
     display,
