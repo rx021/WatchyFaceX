@@ -114,7 +114,7 @@ inline void drawGrid(
   int textColor
 ){
   int firstDayOfWeek = dayOfWeekZeller(uiYear, uiMonth, 1);
-  int dim = daysInMonth(uiYear, uiMonth);
+  int totalDays = daysInMonth(uiYear, uiMonth);
 
   //int x0 = (WIDTH - (7*CELL_W)) / 2;
 
@@ -123,7 +123,7 @@ inline void drawGrid(
   display.fillRect(ORIGIN_X-1, topY-2, rectWidth, rectHeight, textColor);
 
   display.setFont(&FreeSansBold9pt7b);
-  for(int day=1; day<=dim; ++day){
+  for(int day=1; day<=totalDays; ++day){
     int index = (
         (firstDayOfWeek - START_OF_WEEK + 7) % 7
     ) + (day-1);
