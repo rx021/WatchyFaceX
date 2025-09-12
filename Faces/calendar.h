@@ -1,12 +1,13 @@
 
 //namespace calendar_face {
 
-static const uint16_t WIDTH  = 200;
-static const uint16_t HEIGHT = 200;
-static const uint8_t  GRID_TOP = 52;
-static const uint8_t  CELL_W = 26;
-static const uint8_t  CELL_H = 20;
-static const uint8_t  X_0 = (WIDTH - (7*CELL_W)) / 2;
+static const uint8_t WIDTH  = 200;
+static const uint8_t HEIGHT = 200;
+static const uint8_t GAP_Y = 2;
+static const uint8_t GRID_TOP = 52;
+static const uint8_t CELL_W = 26;
+static const uint8_t CELL_H = 20;
+static const uint8_t X_0 = (WIDTH - (7*CELL_W)) / 2;
 
 static const char *MONTH_HEADER[12] = {
   "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"
@@ -70,13 +71,17 @@ inline int drawWeekHeader(
 ){
   display.setFont(&FreeSansBold9pt7b);
   display.setTextColor(textColor);
-  int rowY  = GRID_TOP - 16;
+  int16_t x1,y1; uint16_t w,h;
+  String header;
+  int rowY  = topY + GAP_Y;
   for(int col = 0; col < 7; col++){
     int colX = X_0 + col*CELL_W;
-    leftText(display, getWeekHeader(col), colX, rowY);
+    header = getWeekHeader(col);
+    display.getTextBounds(header, 0, 0, &x1, &y1, &w, &h);
+    leftText(display, header, colX, rowY);
   }
 
-  return rowY;
+  return rowY + h;
 }
 
 template<typename GFX>
@@ -113,6 +118,8 @@ inline void drawGrid(
   //int x0 = (WIDTH - (7*CELL_W)) / 2;
   int y0 = GRID_TOP;
 
+  display.drawRect(X_0-1, y0-2, 7*CELL_W+2, 6*CELL_H+4, textColor);
+
   display.setFont(&FreeSans9pt7b);
   for(int day=1; day<=dim; ++day){
     int index = (
@@ -135,7 +142,6 @@ inline void drawGrid(
     }
     leftText(display, String(day), dx, dy);
   }
-  display.drawRect(X_0-1, y0-2, 7*CELL_W+2, 6*CELL_H+4, textColor);
 }
 
 // Top-level renderer
