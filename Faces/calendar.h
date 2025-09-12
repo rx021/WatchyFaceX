@@ -90,7 +90,7 @@ inline int drawWeekHeader(
   display.setTextColor(textColor);
   int16_t x1,y1; uint16_t w,h;
   String header;
-  int rowY  = topY;
+  int rowY  = topY + h;
   for(int col = 0; col < 7; col++){
     int colX = ORIGIN_X + col*CELL_W;
     header = getWeekHeader(col);
@@ -98,7 +98,7 @@ inline int drawWeekHeader(
     leftText(display, header, colX, rowY);
   }
 
-  return rowY + h;
+  return rowY;
 }
 
 template<typename GFX>
@@ -118,9 +118,11 @@ inline void drawGrid(
 
   //int x0 = (WIDTH - (7*CELL_W)) / 2;
 
-  int rectWidth = 7*CELL_W+2;
-  int rectHeight = 6*CELL_H+4;
-  display.fillRect(ORIGIN_X-1, topY-2, rectWidth, rectHeight, textColor);
+  int monthX = ORIGIN_X - 1;
+  int monthY = topY - 2;
+  int monthWidth = 7*CELL_W + 2;
+  int monthHeight = 6*CELL_H + 4;
+  display.fillRect(monthX, monthY, monthWidth, monthHeight, textColor);
 
   display.setFont(&FreeSansBold9pt7b);
   for(int day=1; day<=totalDays; ++day){
