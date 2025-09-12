@@ -63,28 +63,29 @@ inline void centerText(GFX &display, const String &s, int cx, int baselineY){
 }
 
 template<typename GFX>
-inline void drawWeekHeader(GFX &display, int textColor){
+inline int drawWeekHeader(
+  GFX &display,
+  int textColor,
+  int topY
+){
   display.setFont(&FreeSansBold9pt7b);
   display.setTextColor(textColor);
-  int y  = GRID_TOP - 16;
+  int rowY  = GRID_TOP - 16;
   for(int col = 0; col < 7; col++){
-    int x = X_0 + col*CELL_W;
-    leftText(display, getWeekHeader(col), x, y);
+    int colX = X_0 + col*CELL_W;
+    leftText(display, getWeekHeader(col), colX, rowY);
   }
+
+  return rowY;
 }
 
-struct Position {
-  int x1;
-  int y1;
-};
-
 template<typename GFX>
-inline Position drawTitle(
+inline int drawTitle(
     GFX &display,
     int year,
     int month,
     int textColor
-){
+) {
   display.setFont(&FreeSansBold12pt7b);
   display.setTextColor(textColor);
   String title = String(year) + " " + String(MONTH_HEADER[month-1]);
@@ -92,11 +93,7 @@ inline Position drawTitle(
   display.getTextBounds(title, 0, 0, &x1, &y1, &w, &h);
   leftText(display, title, X_0, h);
 
-  Position p1;
-  p1.x1 = X_0;
-  p1.y1 = h;
-
-  return p1;
+  return h; // new topY
 }
 
 template<typename GFX>
@@ -170,10 +167,8 @@ void WatchyFaceX::drawFaceCalendar(
   int uiYear  = year;
   int uiMonth = month;
 
-  Position titlePosn;
-  titlePosn = drawTitle(display, uiYear, uiMonth, textColor);
-
-  drawWeekHeader(display, textColor);
+  int titleY = drawTitle(display, uiYear, uiMonth, textColor);
+  int headerY = drawWeekHeader(display, textColor, titleY);
 
   drawGrid(
     display,
