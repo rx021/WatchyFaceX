@@ -6,8 +6,9 @@ void WatchyFaceX::drawFaceMedia(
   bool enableDarkMode,
   bool enableInteractive
 ) {
-  uint16_t bgColor = enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
-  uint16_t textColor = enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK; 
+  // need inverse so that images look better
+  uint16_t bgColor = !enableDarkMode ? GxEPD_BLACK : GxEPD_WHITE; 
+  uint16_t textColor = !enableDarkMode ? GxEPD_WHITE : GxEPD_BLACK; 
 
   display.setFullWindow();
 
