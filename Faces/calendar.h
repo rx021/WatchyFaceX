@@ -16,7 +16,6 @@ static const char *MONTH_HEADER[12] = {
 //static int START_OF_WEEK = 0; // Sunday start
 static int START_OF_WEEK = 1; // Monday start
 //static int START_OF_WEEK = 6; // Saturday start
-//static const char *WEEK_HEADER[7] = {"S","M","T","W","T","F","S"};
 static const char *WEEK_HEADER_BASE[7] = {"S","M","T","W","T","F","S"};
 
 inline const char* getWeekHeader(int i) {
@@ -65,14 +64,11 @@ inline void centerText(GFX &display, const String &s, int cx, int baselineY){
 
 template<typename GFX>
 inline void drawWeekHeader(GFX &display, int textColor){
-  //display.setFont(&FreeMonoBold9pt7b);
   display.setFont(&FreeSansBold9pt7b);
   display.setTextColor(textColor);
   int X_0 = (WIDTH - (7*CELL_W)) / 2;
   int y  = GRID_TOP - 16;
   for(int col = 0; col < 7; col++){
-    //int cx = X_0 + col*CELL_W + CELL_W/2;
-    //centerText(display, getWeekHeader(col), cx, y);
     int x = X_0 + col*CELL_W;
     leftText(display, getWeekHeader(col), x, y);
   }
@@ -85,13 +81,11 @@ inline void drawTitle(
     int month,
     int textColor
 ){
-  //display.setFont(&FreeMonoBold12pt7b);
   display.setFont(&FreeSansBold12pt7b);
   display.setTextColor(textColor);
   String title = String(year) + " " + String(MONTH_HEADER[month-1]);
   int16_t x1,y1; uint16_t w,h;
   display.getTextBounds(title, 0, 0, &x1, &y1, &w, &h);
-  //centerText(display, title, WIDTH/2, h);
   leftText(display, title, X_0, h);
 }
 
@@ -112,7 +106,6 @@ inline void drawGrid(
   //int x0 = (WIDTH - (7*CELL_W)) / 2;
   int y0 = GRID_TOP;
 
-  //display.setFont(&FreeMono9pt7b);
   display.setFont(&FreeSans9pt7b);
   for(int day=1; day<=dim; ++day){
     int index = (
@@ -120,8 +113,6 @@ inline void drawGrid(
     ) + (day-1);
     int row = index / 7, col = index % 7;
 
-    //int cx = X_0 + col*CELL_W + CELL_W/2;
-    //int cy = y0 + row*CELL_H + 14;
     int dx = X_0 + col*CELL_W;
     int dy = y0 + row*CELL_H + 14;
 
@@ -135,7 +126,6 @@ inline void drawGrid(
     }else{
       display.setTextColor(textColor);
     }
-    //centerText(display, String(day), cx, cy);
     leftText(display, String(day), dx, dy);
   }
   display.drawRect(X_0-1, y0-2, 7*CELL_W+2, 6*CELL_H+4, textColor);
