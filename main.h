@@ -27,11 +27,11 @@ RTC_DATA_ATTR bool isDarkMode = false;
 RTC_DATA_ATTR bool enableInteractive = false;
 
 RTC_DATA_ATTR int faceTypeIndex = 0;
+
 RTC_DATA_ATTR int clockFacesIndex = 0;
 RTC_DATA_ATTR int noteFacesIndex = 0;
-RTC_DATA_ATTR int spaceFacesIndex = 0;
-RTC_DATA_ATTR int plannerFacesIndex = 0;
 RTC_DATA_ATTR int toyFacesIndex = 0;
+RTC_DATA_ATTR int plannerFacesIndex = 0;
 
 class WatchyFaceX : public Watchy{
   using Watchy::Watchy;
@@ -140,10 +140,6 @@ static constexpr FaceFn NOTE_FACES[] = {
 };
 static constexpr size_t NOTE_COUNT = sizeof(NOTE_FACES) / sizeof(NOTE_FACES[0]);
 
-static constexpr FaceFn SPACE_FACES[] = {
-};
-static constexpr size_t SPACE_COUNT = sizeof(SPACE_FACES) / sizeof(SPACE_FACES[0]);
-
 static constexpr FaceFn PLANNER_FACES[] = {
   &WatchyFaceX::drawFaceCalendar,
   &WatchyFaceX::drawFaceAlarms,
@@ -167,7 +163,6 @@ static FaceType FACE_TYPES[] = {
   {CLOCK_FACES},
   {NOTE_FACES},
   {TOY_FACES},
-  //{SPACE_FACES},
   {PLANNER_FACES},
 };
 static constexpr size_t FACE_TYPE_COUNT = sizeof(FACE_TYPES) / sizeof(FACE_TYPES[0]);
@@ -192,11 +187,6 @@ void WatchyFaceX::handleButtonPress() {
         toyFacesIndex = (toyFacesIndex + 1) % TOY_COUNT;
       }
       else if (faceTypeIndex == 3) {
-        // reset when changing face
-        //enableInteractive = false;
-        //spaceFacesIndex = (spaceFacesIndex + 1) % SPACE_COUNT;
-      //}
-      //else if (faceTypeIndex == 4) {
         plannerFacesIndex = (plannerFacesIndex + 1) % PLANNER_COUNT;
       }
 
@@ -208,7 +198,6 @@ void WatchyFaceX::handleButtonPress() {
     if (wakeupBit & MENU_BTN_MASK) {
       if (
         faceTypeIndex == 2 // toys
-        //|| faceTypeIndex == 3 // spaces
       ) {
         enableInteractive = true;
         RTC.read(currentTime);
@@ -261,10 +250,6 @@ void WatchyFaceX::drawWatchFace() {
     (this->*currFace)(isDarkMode, enableInteractive);
   }
   else if (faceTypeIndex == 3) {
-    //currFace = SPACE_FACES[spaceFacesIndex];
-    //(this->*currFace)(!isDarkMode, enableInteractive);
-  //}
-  //else if (faceTypeIndex == 4) {
     currFace = PLANNER_FACES[plannerFacesIndex];
     (this->*currFace)(isDarkMode, enableInteractive);
   }
