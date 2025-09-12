@@ -139,8 +139,8 @@ inline void drawGrid(
     if(isToday){
       int boxX = ORIGIN_X + col*CELL_W + GAP_X;
       int boxY = topY + row*CELL_H + GAP_Y;
-      int boxWidth = CELL_W-4;
-      int boxHeight = CELL_H-6;
+      int boxWidth = CELL_W - 4;
+      int boxHeight = CELL_H - 6;
       display.fillRoundRect(boxX, boxY, boxWidth, boxHeight, 2, bgColor);
       display.setTextColor(textColor);
     }else{
