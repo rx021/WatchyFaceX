@@ -120,7 +120,7 @@ inline void drawGrid(
 
   display.drawRect(X_0-1, topY-2, 7*CELL_W+2, 6*CELL_H+4, textColor);
 
-  display.setFont(&FreeSans9pt7b);
+  display.setFont(&FreeSansBold9pt7b);
   for(int day=1; day<=dim; ++day){
     int index = (
         (firstDayOfWeek - START_OF_WEEK + 7) % 7
