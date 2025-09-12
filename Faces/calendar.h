@@ -117,31 +117,31 @@ inline void drawGrid(
   int dim = daysInMonth(uiYear, uiMonth);
 
   //int x0 = (WIDTH - (7*CELL_W)) / 2;
-  int y0 = topY;
 
-  display.drawRect(X_0-1, y0-2, 7*CELL_W+2, 6*CELL_H+4, textColor);
+  display.drawRect(X_0-1, topY-2, 7*CELL_W+2, 6*CELL_H+4, textColor);
 
   display.setFont(&FreeSans9pt7b);
   for(int day=1; day<=dim; ++day){
     int index = (
         (firstDayOfWeek - START_OF_WEEK + 7) % 7
     ) + (day-1);
-    int row = index / 7, col = index % 7;
+    int row = index / 7;
+    int col = index % 7;
 
-    int dx = X_0 + col*CELL_W;
-    int dy = y0 + row*CELL_H + 14;
+    int dayX = X_0 + col*CELL_W;
+    int dayY = topY + row*CELL_H + 14;
 
     bool isToday = (uiYear==todayY && uiMonth==todayM && day==todayD);
 
     if(isToday){
-      int rx = X_0 + col*CELL_W + 2;
-      int ry = y0 + row*CELL_H + 3;
-      display.fillRoundRect(rx, ry, CELL_W-4, CELL_H-6, 4, GxEPD_BLACK);
+      int rX = X_0 + col*CELL_W + 2;
+      int rY = topY + row*CELL_H + 3;
+      display.fillRoundRect(rX, rY, CELL_W-4, CELL_H-6, 2, textColor);
       display.setTextColor(bgColor);
     }else{
       display.setTextColor(textColor);
     }
-    leftText(display, String(day), dx, dy);
+    leftText(display, String(day), dayX, dayY);
   }
 }
 
