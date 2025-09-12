@@ -5,7 +5,6 @@ static const uint8_t WIDTH  = 200;
 static const uint8_t HEIGHT = 200;
 static const uint8_t GAP_X = 2;
 static const uint8_t GAP_Y = 3;
-static const uint8_t GRID_TOP = 52;
 static const uint8_t CELL_W = 26;
 static const uint8_t CELL_H = 20;
 static const uint8_t ORIGIN_X = (WIDTH - (7*CELL_W)) / 2;
