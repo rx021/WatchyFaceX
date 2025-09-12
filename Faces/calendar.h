@@ -64,20 +64,16 @@ inline void centerText(GFX &display, const String &s, int cx, int baselineY){
 }
 
 template<typename GFX>
-inline int drawTitle(
-    GFX &display,
-    int year,
-    int month,
-    int textColor
-) {
+inline int drawTitle(GFX &display, int year, int month, int textColor) {
   display.setFont(&FreeSansBold12pt7b);
   display.setTextColor(textColor);
   String title = String(year) + " " + String(MONTH_HEADER[month-1]);
   int16_t x1,y1; uint16_t w,h;
   display.getTextBounds(title, 0, 0, &x1, &y1, &w, &h);
-  leftText(display, title, ORIGIN_X, h);
+  int baselineY = h;
+  leftText(display, title, ORIGIN_X, baselineY);
 
-  return h; // new topY
+  return baselineY; // new topY
 }
 
 template<typename GFX>
@@ -88,13 +84,16 @@ inline int drawWeekHeader(
 ){
   display.setFont(&FreeSansBold9pt7b);
   display.setTextColor(textColor);
+
   int16_t x1,y1; uint16_t w,h;
   String header;
-  int rowY  = topY + h;
+  int rowY = 0;
+
   for(int col = 0; col < 7; col++){
     int colX = ORIGIN_X + col*CELL_W;
     header = getWeekHeader(col);
     display.getTextBounds(header, 0, 0, &x1, &y1, &w, &h);
+    if (rowY == 0) { rowY = topY + h; }
     leftText(display, header, colX, rowY);
   }
 
