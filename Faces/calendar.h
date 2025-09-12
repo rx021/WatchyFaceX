@@ -7,7 +7,10 @@ static const uint8_t GAP_X = 2;
 static const uint8_t GAP_Y = 3;
 static const uint8_t CELL_W = 26;
 static const uint8_t CELL_H = 20;
-static const uint8_t ORIGIN_X = (WIDTH - (7*CELL_W)) / 2;
+static const uint8_t MONTH_WIDTH = 7 * CELL_W;
+static const uint8_t MONTH_HEIGHT = 6 * CELL_H;
+static const uint8_t ORIGIN_X = (WIDTH - MONTH_WIDTH) / 2;
+static const uint8_t PADDING_X = ORIGIN_X / 2;
 
 static const char *MONTH_HEADER[12] = {
   "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"
@@ -115,10 +118,10 @@ inline void drawGrid(
   int firstDayOfWeek = dayOfWeekZeller(uiYear, uiMonth, 1);
   int totalDays = daysInMonth(uiYear, uiMonth);
 
-  int monthX = ORIGIN_X - 1;
-  int monthY = topY - 2;
-  int monthWidth = 7*CELL_W + 2;
-  int monthHeight = 6*CELL_H + 4;
+  int monthX = ORIGIN_X - PADDING_X;
+  int monthY = topY - (GAP_Y / 2);
+  int monthWidth = MONTH_WIDTH + PADDING_X;
+  int monthHeight = MONTH_HEIGHT + 4;
   display.fillRect(monthX, monthY, monthWidth, monthHeight, textColor);
 
   display.setFont(&FreeSansBold9pt7b);
