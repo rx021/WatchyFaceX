@@ -116,8 +116,6 @@ inline void drawGrid(
   int firstDayOfWeek = dayOfWeekZeller(uiYear, uiMonth, 1);
   int totalDays = daysInMonth(uiYear, uiMonth);
 
-  //int x0 = (WIDTH - (7*CELL_W)) / 2;
-
   int monthX = ORIGIN_X - 1;
   int monthY = topY - 2;
   int monthWidth = 7*CELL_W + 2;
@@ -140,8 +138,8 @@ inline void drawGrid(
     if(isToday){
       int boxX = ORIGIN_X + col*CELL_W + GAP_X;
       int boxY = topY + row*CELL_H + GAP_Y;
-      int boxWidth = CELL_W - 4;
-      int boxHeight = CELL_H - 6;
+      int boxWidth = CELL_W - GAP_X;
+      int boxHeight = CELL_H - GAP_Y;
       display.fillRoundRect(boxX, boxY, boxWidth, boxHeight, 2, bgColor);
       display.setTextColor(textColor);
     }else{
