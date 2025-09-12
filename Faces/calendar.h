@@ -73,7 +73,7 @@ inline int drawWeekHeader(
   display.setTextColor(textColor);
   int16_t x1,y1; uint16_t w,h;
   String header;
-  int rowY  = topY + GAP_Y;
+  int rowY  = topY;
   for(int col = 0; col < 7; col++){
     int colX = X_0 + col*CELL_W;
     header = getWeekHeader(col);
@@ -104,6 +104,7 @@ inline int drawTitle(
 template<typename GFX>
 inline void drawGrid(
   GFX &display,
+  int topY,
   int uiYear,
   int uiMonth,
   int todayY,
@@ -116,7 +117,7 @@ inline void drawGrid(
   int dim = daysInMonth(uiYear, uiMonth);
 
   //int x0 = (WIDTH - (7*CELL_W)) / 2;
-  int y0 = GRID_TOP;
+  int y0 = topY;
 
   display.drawRect(X_0-1, y0-2, 7*CELL_W+2, 6*CELL_H+4, textColor);
 
@@ -174,10 +175,11 @@ void WatchyFaceX::drawFaceCalendar(
   int uiMonth = month;
 
   int titleY = drawTitle(display, uiYear, uiMonth, textColor);
-  int headerY = drawWeekHeader(display, textColor, titleY);
+  int headerY = drawWeekHeader(display, textColor, titleY+GAP_Y);
 
   drawGrid(
     display,
+    headerY + GAP_Y,
     uiYear, //state.calendarYear,
     uiMonth, //state.calendarMonth,
     year,
