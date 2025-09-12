@@ -7,7 +7,7 @@ static const uint8_t GAP_Y = 2;
 static const uint8_t GRID_TOP = 52;
 static const uint8_t CELL_W = 26;
 static const uint8_t CELL_H = 20;
-static const uint8_t X_0 = (WIDTH - (7*CELL_W)) / 2;
+static const uint8_t ORIGIN_X = (WIDTH - (7*CELL_W)) / 2;
 
 static const char *MONTH_HEADER[12] = {
   "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"
@@ -75,7 +75,7 @@ inline int drawWeekHeader(
   String header;
   int rowY  = topY;
   for(int col = 0; col < 7; col++){
-    int colX = X_0 + col*CELL_W;
+    int colX = ORIGIN_X + col*CELL_W;
     header = getWeekHeader(col);
     display.getTextBounds(header, 0, 0, &x1, &y1, &w, &h);
     leftText(display, header, colX, rowY);
@@ -96,7 +96,7 @@ inline int drawTitle(
   String title = String(year) + " " + String(MONTH_HEADER[month-1]);
   int16_t x1,y1; uint16_t w,h;
   display.getTextBounds(title, 0, 0, &x1, &y1, &w, &h);
-  leftText(display, title, X_0, h);
+  leftText(display, title, ORIGIN_X, h);
 
   return h; // new topY
 }
@@ -118,7 +118,9 @@ inline void drawGrid(
 
   //int x0 = (WIDTH - (7*CELL_W)) / 2;
 
-  display.drawRect(X_0-1, topY-2, 7*CELL_W+2, 6*CELL_H+4, textColor);
+  int rectWidth = 7*CELL_W+2;
+  int rectHeight = 6*CELL_H+4;
+  display.fillRect(ORIGIN_X-1, topY-2, rectWidth, rectHeight, textColor);
 
   display.setFont(&FreeSansBold9pt7b);
   for(int day=1; day<=dim; ++day){
@@ -128,18 +130,20 @@ inline void drawGrid(
     int row = index / 7;
     int col = index % 7;
 
-    int dayX = X_0 + col*CELL_W;
+    int dayX = ORIGIN_X + col*CELL_W;
     int dayY = topY + row*CELL_H + 14;
 
     bool isToday = (uiYear==todayY && uiMonth==todayM && day==todayD);
 
     if(isToday){
-      int rX = X_0 + col*CELL_W + 2;
+      int rX = ORIGIN_X + col*CELL_W + 2;
       int rY = topY + row*CELL_H + 3;
-      display.fillRoundRect(rX, rY, CELL_W-4, CELL_H-6, 2, textColor);
-      display.setTextColor(bgColor);
-    }else{
+      int boxWidth = CELL_W-4;
+      int boxHeight = CELL_H-6;
+      display.fillRoundRect(rX, rY, boxWidth, boxHeight, 2, bgColor);
       display.setTextColor(textColor);
+    }else{
+      display.setTextColor(bgColor);
     }
     leftText(display, String(day), dayX, dayY);
   }
