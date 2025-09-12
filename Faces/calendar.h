@@ -136,10 +136,12 @@ inline void drawGrid(
     bool isToday = (uiYear==todayY && uiMonth==todayM && day==todayD);
 
     if(isToday){
-      int boxX = ORIGIN_X + col*CELL_W + GAP_X;
-      int boxY = topY + row*CELL_H + GAP_Y;
-      int boxWidth = CELL_W - GAP_X;
-      int boxHeight = CELL_H - GAP_Y;
+      int paddingX = GAP_X / 2;
+      int paddingY = GAP_Y / 2;
+      int boxX = ORIGIN_X + col*CELL_W + paddingX;
+      int boxY = topY + row*CELL_H + paddingY;
+      int boxWidth = CELL_W - paddingX;
+      int boxHeight = CELL_H - paddingY;
       display.fillRoundRect(boxX, boxY, boxWidth, boxHeight, 2, bgColor);
       display.setTextColor(textColor);
     }else{
