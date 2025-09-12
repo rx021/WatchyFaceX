@@ -66,7 +66,6 @@ template<typename GFX>
 inline void drawWeekHeader(GFX &display, int textColor){
   display.setFont(&FreeSansBold9pt7b);
   display.setTextColor(textColor);
-  int X_0 = (WIDTH - (7*CELL_W)) / 2;
   int y  = GRID_TOP - 16;
   for(int col = 0; col < 7; col++){
     int x = X_0 + col*CELL_W;
@@ -74,8 +73,13 @@ inline void drawWeekHeader(GFX &display, int textColor){
   }
 }
 
+struct Position {
+  int x1;
+  int y1;
+};
+
 template<typename GFX>
-inline void drawTitle(
+inline Position drawTitle(
     GFX &display,
     int year,
     int month,
@@ -87,6 +91,12 @@ inline void drawTitle(
   int16_t x1,y1; uint16_t w,h;
   display.getTextBounds(title, 0, 0, &x1, &y1, &w, &h);
   leftText(display, title, X_0, h);
+
+  Position p1;
+  p1.x1 = X_0;
+  p1.y1 = h;
+
+  return p1;
 }
 
 template<typename GFX>
