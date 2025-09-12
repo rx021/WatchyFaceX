@@ -170,7 +170,8 @@ void WatchyFaceX::drawFaceCalendar(
   int uiYear  = year;
   int uiMonth = month;
 
-  drawTitle(display, uiYear, uiMonth, textColor);
+  Position titlePosn;
+  titlePosn = drawTitle(display, uiYear, uiMonth, textColor);
 
   drawWeekHeader(display, textColor);
 
