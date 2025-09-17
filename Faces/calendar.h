@@ -263,7 +263,7 @@ void WatchyFaceX::drawFaceCalendar(
   display.getTextBounds(timeString, 0, 0, &x1, &y1, &w, &h);
 
   uint8_t positionX = DISPLAY_WIDTH - ORIGIN_X - w;
-  uint8_t positionY = y1;
+  uint8_t positionY = h;
   display.setCursor(positionX, positionY);
   display.setFont(&FreeSansBold12pt7b);
   display.setTextColor(textColor);
