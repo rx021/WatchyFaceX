@@ -11,7 +11,6 @@ static const uint8_t MONTH_WIDTH = 7 * CELL_W;
 static const uint8_t MONTH_HEIGHT = 6 * CELL_H;
 static const uint8_t ORIGIN_X = (WIDTH - MONTH_WIDTH) / 2;
 static const uint8_t PADDING_X = ORIGIN_X / 2;
-static const uint8_t PADDING_Y = 1;
 
 static const char *MONTH_HEADER[12] = {
   "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"
@@ -264,7 +263,7 @@ void WatchyFaceX::drawFaceCalendar(
   display.getTextBounds(timeString, 0, 0, &x1, &y1, &w, &h);
 
   uint8_t positionX = DISPLAY_WIDTH - PADDING_X - w;
-  uint8_t positionY = PADDING_Y + h;
+  uint8_t positionY = h;
   display.setCursor(positionX, positionY);
   display.setFont(&FreeSansBold12pt7b);
   display.setTextColor(textColor);
