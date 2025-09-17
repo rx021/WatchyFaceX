@@ -1,4 +1,21 @@
 
+template<typename GFX>
+inline void bottomCenterText(
+    GFX &display,
+    const String &s,
+    int centerX,
+    int originY,
+    int textColor
+){
+  int16_t x1,y1; uint16_t w,h;
+  display.getTextBounds(s, 0, originY, &x1, &y1, &w, &h);
+
+  display.setCursor(centerX - (w/2), originY);
+  display.setFont(&Seven_Segment10pt7b);
+  display.setTextColor(textColor);
+  display.print(s);
+}
+
 void WatchyFaceX::drawFaceWhy(
   bool enableDarkMode,
   bool enableInteractive
