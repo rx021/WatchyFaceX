@@ -66,7 +66,7 @@ inline int centerText(
   int topY
 ){
   int16_t x1,y1; uint16_t w,h;
-  display.getTextBounds(s, 0, topY, &x1, &y1, &w, &h);
+  display.getTextBounds(s, 0, 0, &x1, &y1, &w, &h);
   int bottomY = topY + h;
 
   display.setCursor(cx - (int)w/2, bottomY);
