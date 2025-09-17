@@ -18,15 +18,16 @@ void WatchyFaceX::drawFaceMedia(
   pinMode(BACK_BTN_PIN, INPUT);
 
   auto drawBitmapAtIndex = [&]() {
-    const unsigned char *curr = medias[mediaIndex];
     display.fillScreen(bgColor);
+    const unsigned char *curr = medias[mediaIndex];
     display.drawBitmap(0, 0, curr, 200, 200, textColor);
     display.display(true); // full refresh
   };
 
   auto drawNavFrame = [&]() {
     display.fillScreen(bgColor);
-    display.drawBitmap(0, 0, cabin, 200, 200, textColor);
+    const unsigned char *curr = medias[mediaIndex];
+    display.drawBitmap(0, 0, curr, 200, 200, textColor);
     display.display(true); // full refresh
   };
 
