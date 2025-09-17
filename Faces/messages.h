@@ -41,33 +41,30 @@ void WatchyFaceX::drawFaceMessages(
   uint8_t dateX = PADDING_X;
   uint8_t dateY = DISPLAY_HEIGHT - PADDING_Y;
   display.setCursor(dateX, dateY);
+  display.setFont(&Seven_Segment10pt7b);
   String dateString = "";
 
-  display.setFont(&Seven_Segment10pt7b);
-
   dateString += currentTime.Year + 1970; 
-  dateString += "-";
+  dateString += monthShortStr(currentTime.Month);
 
-  uint8_t currMonth = currentTime.Month;
-  if (currMonth < 10) { dateString += "0"; }
-  dateString += currMonth;
+  dateString += "-";
 
   uint8_t currDay = currentTime.Day;
   if (currDay < 10) { dateString += "0"; }
   dateString += currDay;
-  dateString += "-";
-
   dateString += dayShortStr(currentTime.Wday);
 
   display.print(dateString);
 
   display.setFont(&FreeSans12pt7b);
+
   String timeString = ""; // must declare first to concat numbers
   if (currentTime.Hour < 10) {timeString += "0";}
   timeString += currentTime.Hour; // can add number to string
   timeString += ":";
   if (currentTime.Minute < 10) {timeString += "0";}
   timeString += currentTime.Minute;
+
   display.print(timeString);
 }
 
