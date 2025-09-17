@@ -250,6 +250,8 @@ void WatchyFaceX::drawFaceCalendar(
   String subCalText = "96k/y 1850/w 370/d";
   int subCalY = drawSubCal(display, gridY + GAP_Y, subCalText, textColor);
 
+  // TIME ON TOP RIGHT
+
   String timeString = "";
   if (currentTime.Hour < 10) {timeString += "0";}
   timeString += currentTime.Hour;
@@ -257,6 +259,15 @@ void WatchyFaceX::drawFaceCalendar(
   if (currentTime.Minute < 10) {timeString += "0";}
   timeString += currentTime.Minute;
 
-  drawFooter(display, subCalY + GAP_Y, timeString, textColor);
+  int16_t x1,y1; uint16_t w,h;
+  display.getTextBounds(timeString, 0, 0, &x1, &y1, &w, &h);
+
+  uint8_t positionX = DISPLAY_WIDTH - PADDING_X - w;
+  uint8_t positionY = PADDING_Y + h;
+  display.setCursor(positionX, positionY);
+  display.setFont(&FreeSansBold12pt7b);
+  display.setTextColor(textColor);
+  display.print(timeString);
+
 }
 
