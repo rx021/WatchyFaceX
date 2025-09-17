@@ -94,7 +94,7 @@ inline int drawTitle(
 }
 
 template<typename GFX>
-inline int drawWeekHeader(
+inline int drawWeekdays(
   GFX &display,
   int textColor,
   int topY
@@ -210,7 +210,7 @@ inline void render(GFX &display, int uiYear, int uiMonth,
                    int todayY, int todayM, int todayD){
   display.fillScreen(GxEPD_WHITE);
   drawTitle(display, uiYear, uiMonth);
-  drawWeekHeader(display);
+  drawWeekdays(display);
   drawGrid(display, uiYear, uiMonth, todayY, todayM, todayD);
 }
 */
@@ -233,7 +233,7 @@ void WatchyFaceX::drawFaceCalendar(
   int uiMonth = month;
 
   int titleY = drawTitle(display, uiYear, uiMonth, textColor);
-  int headerY = drawWeekHeader(display, textColor, titleY + GAP_Y);
+  int headerY = drawWeekdays(display, textColor, titleY + GAP_Y);
 
   int gridY = drawGrid(
     display,
