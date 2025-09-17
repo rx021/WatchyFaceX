@@ -219,29 +219,33 @@ void WatchyFaceX::drawFaceAnalog(
   // DRAW YEAR
   String yearString = "";
   yearString += currentTime.Year + 1970;
+  /*
   display.getTextBounds(yearString, 0, 0, &x1, &y1, &w, &h);
   uint8_t yearHalfWidth = w / 2;
   uint8_t yearX = centerX - yearHalfWidth; // to center
   uint8_t yearY = centerY - dateHalfHeight - dateSpacing; // to center above date
   display.setCursor(yearX, yearY);
   display.print(yearString);
+  */
 
   // DRAW WEEKDAY
-  String dayString = dayStr(currentTime.Wday);
+  String dayString = dayShortStr(currentTime.Wday);
+  /*
   display.getTextBounds(dayString, 0, 0, &x1, &y1, &w, &h);
   uint8_t weekdayHalfWidth = w / 2;
   uint8_t weekdayX = centerX - weekdayHalfWidth; // to center
   uint8_t weekdayY = centerY + dateHalfHeight + dateSpacing + h; // to center below date
   display.setCursor(weekdayX, weekdayY);
   display.print(dayString);
+  */
 
   // DRAW BATTERY PERCENT
   uint8_t PADDING_X = 1; // pixels
   uint8_t PADDING_Y = 1; // pixels
   String percentString = getBatteryPercent();
 
-  topLeftText(display, percentString, PADDING_X, PADDING_Y, textColor);
-  topRightText(display, percentString, DISPLAY_WIDTH - PADDING_X, PADDING_Y, textColor);
+  topLeftText(display, yearString, PADDING_X, PADDING_Y, textColor);
+  topRightText(display, dayString, DISPLAY_WIDTH - PADDING_X, PADDING_Y, textColor);
   bottomLeftText(display, percentString, PADDING_X, DISPLAY_HEIGHT - PADDING_Y, textColor);
   bottomRightText(display, percentString, DISPLAY_WIDTH - PADDING_X, DISPLAY_HEIGHT - PADDING_Y, textColor);
 }
