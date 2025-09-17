@@ -21,7 +21,7 @@ inline void topLeftText(
 }
 
 template<typename GFX>
-inline void topText(
+inline void topRightText(
     GFX &display,
     const String &s,
     int originX,
@@ -31,7 +31,7 @@ inline void topText(
   int16_t x1,y1; uint16_t w,h;
   display.getTextBounds(s, 0, originY, &x1, &y1, &w, &h);
 
-  uint8_t positionX = originX;
+  uint8_t positionX = originX - w;
   uint8_t positionY = originY + h;
   display.setCursor(positionX, positionY);
 
@@ -202,6 +202,7 @@ void WatchyFaceX::drawFaceAnalog(
   String percentString = getBatteryPercent();
 
   topLeftText(display, percentString, PADDING_X, PADDING_Y, textColor);
+  topRightText(display, percentString, DISPLAY_WIDTH - PADDING_X, PADDING_Y, textColor);
 }
 
 String WatchyFaceX::getBatteryPercent() {
