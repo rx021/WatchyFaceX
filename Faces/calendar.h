@@ -104,12 +104,13 @@ inline int drawWeekHeader(
 
   int16_t x1,y1; uint16_t w,h;
   String header;
-  int rowY = topY + h;
+  int rowY = 0;
 
   for(int col = 0; col < 7; col++){
     int colX = ORIGIN_X + col*CELL_W;
     header = getWeekHeader(col);
     display.getTextBounds(header, 0, 0, &x1, &y1, &w, &h);
+    if (rowY == 0) { rowY = topY + h; }
     leftText(display, header, colX, rowY);
   }
 
