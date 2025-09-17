@@ -59,15 +59,29 @@ inline void leftText(GFX &display, const String &s, int x, int baselineY){
 }
 
 template<typename GFX>
-inline void centerText(GFX &display, const String &s, int cx, int baselineY){
+inline int centerText(
+  GFX &display,
+  const String &s,
+  int cx,
+  int topY
+){
   int16_t x1,y1; uint16_t w,h;
-  display.getTextBounds(s, 0, baselineY, &x1, &y1, &w, &h);
-  display.setCursor(cx - (int)w/2, baselineY);
+  display.getTextBounds(s, 0, topY, &x1, &y1, &w, &h);
+  int bottomY = topY + h;
+
+  display.setCursor(cx - (int)w/2, bottomY);
   display.print(s);
+
+  return bottomY;
 }
 
 template<typename GFX>
-inline int drawTitle(GFX &display, int year, int month, int textColor) {
+inline int drawTitle(
+  GFX &display,
+  int year,
+  int month,
+  int textColor
+) {
   display.setFont(&FreeSansBold12pt7b);
   display.setTextColor(textColor);
   String title = String(year) + " " + String(MONTH_HEADER[month-1]);
@@ -123,6 +137,8 @@ inline int drawGrid(
   int calHeight = MONTH_HEIGHT + 4;
   display.fillRect(calX, calY, calWidth, calHeight, textColor);
 
+  int bottomY = calY + calHeight;
+
   display.setFont(&FreeSansBold9pt7b);
   for(int day=1; day<=totalDays; ++day){
     int index = (
@@ -156,14 +172,35 @@ inline int drawGrid(
 }
 
 template<typename GFX>
-inline void drawFooter(GFX &display, String footerString, int textColor) {
+inline void drawSubCal(
+  GFX &display,
+  int topY,
+  String subCalString,
+  int textColor
+) {
   display.setFont(&FreeSansBold12pt7b);
   display.setTextColor(textColor);
 
   int centerX = WIDTH / 2;
-  int baselineY = HEIGHT;
 
-  centerText(display, footerString, centerX, baselineY);
+  centerText(display, subCalString, centerX, topY);
+
+  return ;
+}
+
+template<typename GFX>
+inline void drawFooter(
+  GFX &display,
+  int topY,
+  String footerString,
+  int textColor
+) {
+  display.setFont(&FreeSansBold12pt7b);
+  display.setTextColor(textColor);
+
+  int centerX = WIDTH / 2;
+
+  centerText(display, footerString, centerX, topY);
 }
 
 // Top-level renderer
@@ -210,12 +247,16 @@ void WatchyFaceX::drawFaceCalendar(
     textColor
   );
 
+  String subCalText = "tyi96k twi1850 tdi370";
+  int subCalY = drawSubCal(display, gridY + GAP_Y, subCalText, textColor);
+
   String timeString = "";
   if (currentTime.Hour < 10) {timeString += "0";}
   timeString += currentTime.Hour;
   timeString += ":";
   if (currentTime.Minute < 10) {timeString += "0";}
   timeString += currentTime.Minute;
-  drawFooter(display, timeString, textColor);
+
+  drawFooter(display, subCalY + GAP_Y, timeString, textColor);
 }
 
