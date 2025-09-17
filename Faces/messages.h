@@ -1,13 +1,16 @@
 
 template<typename GFX>
-inline void bottomLeftText(
+inline void bottomCenterText(
     GFX &display,
     const String &s,
-    int originX,
+    int centerX,
     int originY,
     int textColor
 ){
-  display.setCursor(originX, originY);
+  int16_t x1,y1; uint16_t w,h;
+  display.getTextBounds(s, 0, originY, &x1, &y1, &w, &h);
+
+  display.setCursor(centerX - w, originY);
   display.setFont(&Seven_Segment10pt7b);
   display.setTextColor(textColor);
   display.print(s);
@@ -69,6 +72,12 @@ void WatchyFaceX::drawFaceMessages(
   timeString += currentTime.Minute;
 
   String datetimeString = dateString + timeString;
-  bottomLeftText(display, datetimeString, PADDING_X, DISPLAY_HEIGHT - PADDING_Y, textColor);
+  bottomLeftText(
+      display, 
+      datetimeString, 
+      DISPLAY_WIDTH / 2, 
+      DISPLAY_HEIGHT - PADDING_Y, 
+      textColor
+  );
 }
 
