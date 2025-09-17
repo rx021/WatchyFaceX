@@ -60,10 +60,9 @@ void WatchyFaceX::drawFaceWhy(
   int centerX = DISPLAY_WIDTH / 2;
   int originY = DISPLAY_HEIGHT - PADDING_Y;
 
-  int16_t x1,y1; uint16_t w,h;
-  display.getTextBounds(datetimeString, 0, originY, &x1, &y1, &w, &h);
+  display.getTextBounds(datetimeString, 0, originY, &x1, &y1, &width, &height);
 
-  display.setCursor(centerX - (w/2), originY);
+  display.setCursor(centerX - (width/2), originY);
   display.setFont(&Seven_Segment10pt7b);
   display.setTextColor(textColor);
   display.print(datetimeString);
