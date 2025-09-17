@@ -1,5 +1,4 @@
 
-
 template<typename GFX>
 inline void topLeftText(
     GFX &display,
@@ -33,6 +32,46 @@ inline void topRightText(
 
   uint8_t positionX = originX - w;
   uint8_t positionY = originY + h;
+  display.setCursor(positionX, positionY);
+
+  display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
+  display.setTextColor(textColor);
+  display.print(s);
+}
+
+template<typename GFX>
+inline void bottomLeftText(
+    GFX &display,
+    const String &s,
+    int originX,
+    int originY,
+    int textColor
+){
+  int16_t x1,y1; uint16_t w,h;
+  display.getTextBounds(s, 0, originY, &x1, &y1, &w, &h);
+
+  uint8_t positionX = originX;
+  uint8_t positionY = originY - h;
+  display.setCursor(positionX, positionY);
+
+  display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
+  display.setTextColor(textColor);
+  display.print(s);
+}
+
+template<typename GFX>
+inline void bottomRightText(
+    GFX &display,
+    const String &s,
+    int originX,
+    int originY,
+    int textColor
+){
+  int16_t x1,y1; uint16_t w,h;
+  display.getTextBounds(s, 0, originY, &x1, &y1, &w, &h);
+
+  uint8_t positionX = originX - w;
+  uint8_t positionY = originY - h;
   display.setCursor(positionX, positionY);
 
   display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
@@ -203,6 +242,8 @@ void WatchyFaceX::drawFaceAnalog(
 
   topLeftText(display, percentString, PADDING_X, PADDING_Y, textColor);
   topRightText(display, percentString, DISPLAY_WIDTH - PADDING_X, PADDING_Y, textColor);
+  bottomLeftText(display, percentString, PADDING_X, DISPLAY_HEIGHT - PADDING_Y, textColor);
+  bottomRightText(display, percentString, DISPLAY_WIDTH - PADDING_X, DISPLAY_HEIGHT - PADDING_Y, textColor);
 }
 
 String WatchyFaceX::getBatteryPercent() {
