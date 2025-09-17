@@ -72,7 +72,7 @@ void WatchyFaceX::drawFaceMessages(
   timeString += currentTime.Minute;
 
   String datetimeString = dateString + timeString;
-  bottomLeftText(
+  bottomCenterText(
       display, 
       datetimeString, 
       DISPLAY_WIDTH / 2, 
