@@ -65,6 +65,7 @@ void WatchyFaceX::drawFaceMessages(
   String timeString = ""; // must declare first to concat numbers
   if (currentTime.Hour < 10) {timeString += "0";}
   timeString += currentTime.Hour; // can add number to string
+  timeString += ":";
   if (currentTime.Minute < 10) {timeString += "0";}
   timeString += currentTime.Minute;
   display.print(timeString);
