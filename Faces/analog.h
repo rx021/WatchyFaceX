@@ -10,9 +10,9 @@ inline void topLeftText(
   int16_t x1,y1; uint16_t w,h;
   display.getTextBounds(s, 0, originY, &x1, &y1, &w, &h);
 
-  uint8_t topLeftX = originX;
-  uint8_t topLeftY = originY + h;
-  display.setCursor(topLeftX, topLeftY);
+  uint8_t positionX = originX;
+  uint8_t positionY = originY + h;
+  display.setCursor(positionX, positionY);
 
   display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
   display.setTextColor(textColor);
@@ -51,7 +51,7 @@ inline void bottomLeftText(
   display.getTextBounds(s, 0, originY, &x1, &y1, &w, &h);
 
   uint8_t positionX = originX;
-  uint8_t positionY = originY - h;
+  uint8_t positionY = originY;
   display.setCursor(positionX, positionY);
 
   display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
@@ -71,7 +71,7 @@ inline void bottomRightText(
   display.getTextBounds(s, 0, originY, &x1, &y1, &w, &h);
 
   uint8_t positionX = originX - w;
-  uint8_t positionY = originY - h;
+  uint8_t positionY = originY;
   display.setCursor(positionX, positionY);
 
   display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
