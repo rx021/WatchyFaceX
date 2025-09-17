@@ -172,7 +172,7 @@ inline int drawGrid(
 }
 
 template<typename GFX>
-inline void drawSubCal(
+inline int drawSubCal(
   GFX &display,
   int topY,
   String subCalString,
@@ -182,10 +182,9 @@ inline void drawSubCal(
   display.setTextColor(textColor);
 
   int centerX = WIDTH / 2;
+  int bottomY = centerText(display, subCalString, centerX, topY);
 
-  centerText(display, subCalString, centerX, topY);
-
-  return ;
+  return bottomY;
 }
 
 template<typename GFX>
