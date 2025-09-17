@@ -179,7 +179,7 @@ inline int drawSubCal(
   String subCalString,
   int textColor
 ) {
-  display.setFont(&FreeSansBold12pt7b);
+  display.setFont(&FreeSansBold9pt7b);
   display.setTextColor(textColor);
 
   int centerX = WIDTH / 2;
