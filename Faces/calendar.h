@@ -247,7 +247,7 @@ void WatchyFaceX::drawFaceCalendar(
     textColor
   );
 
-  String subCalText = "tyi96k twi1850 tdi370";
+  String subCalText = "96k/y 1850/w 370/d";
   int subCalY = drawSubCal(display, gridY + GAP_Y, subCalText, textColor);
 
   String timeString = "";
