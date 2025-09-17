@@ -1,4 +1,17 @@
 
+template<typename GFX>
+inline void bottomLeftText(
+    GFX &display,
+    const String &s,
+    int originX,
+    int originY,
+    int textColor
+){
+  display.setCursor(originX, originY);
+  display.setFont(&Seven_Segment10pt7b);
+  display.setTextColor(textColor);
+  display.print(s);
+}
 
 void WatchyFaceX::drawFaceMessages(
   bool enableDarkMode,
@@ -38,25 +51,15 @@ void WatchyFaceX::drawFaceMessages(
 
   // DRAW DATE from bottom-up: 
 
-  uint8_t dateX = PADDING_X;
-  uint8_t dateY = DISPLAY_HEIGHT - PADDING_Y;
-  display.setCursor(dateX, dateY);
-  display.setFont(&Seven_Segment10pt7b);
   String dateString = "";
-
   dateString += currentTime.Year + 1970; 
   dateString += monthShortStr(currentTime.Month);
-
   dateString += "-";
 
   uint8_t currDay = currentTime.Day;
   if (currDay < 10) { dateString += "0"; }
   dateString += currDay;
   dateString += dayShortStr(currentTime.Wday);
-
-  display.print(dateString);
-
-  display.setFont(&FreeSans12pt7b);
 
   String timeString = ""; // must declare first to concat numbers
   if (currentTime.Hour < 10) {timeString += "0";}
@@ -65,6 +68,7 @@ void WatchyFaceX::drawFaceMessages(
   if (currentTime.Minute < 10) {timeString += "0";}
   timeString += currentTime.Minute;
 
-  display.print(timeString);
+  String datetimeString = dateString + timeString;
+  bottomLeftText(display, datetimeString, PADDING_X, DISPLAY_HEIGHT - PADDING_Y, textColor);
 }
 
