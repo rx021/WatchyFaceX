@@ -44,16 +44,21 @@ void WatchyFaceX::drawFaceMessages(
   String dateString = "";
 
   display.setFont(&Seven_Segment10pt7b);
+
   dateString += currentTime.Year + 1970; 
   dateString += "-";
+
   uint8_t currMonth = currentTime.Month;
   if (currMonth < 10) { dateString += "0"; }
   dateString += currMonth;
+
   uint8_t currDay = currentTime.Day;
   if (currDay < 10) { dateString += "0"; }
   dateString += currDay;
   dateString += "-";
-  dateString = dayShortStr(currentTime.Wday);
+
+  dateString += dayShortStr(currentTime.Wday);
+
   display.print(dateString);
 
   display.setFont(&FreeSans12pt7b);
