@@ -8,7 +8,7 @@ inline void topLeftText(
     int textColor
 ){
   int16_t x1,y1; uint16_t w,h;
-  display.getTextBounds(s, 0, baselineY, &x1, &y1, &w, &h);
+  display.getTextBounds(s, 0, originY, &x1, &y1, &w, &h);
 
   uint8_t topLeftX = originX;
   uint8_t topLeftY = originY + h;
@@ -157,7 +157,8 @@ void WatchyFaceX::drawFaceAnalog(
   display.setFont(&Seven_Segment10pt7b);
 
   // DRAW YEAR
-  String yearString = currentTime.Year + 1970;
+  String yearString = "";
+  yearString += currentTime.Year + 1970;
   display.getTextBounds(yearString, 0, 0, &x1, &y1, &w, &h);
   uint8_t yearHalfWidth = w / 2;
   uint8_t yearX = centerX - yearHalfWidth; // to center
