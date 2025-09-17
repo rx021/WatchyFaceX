@@ -71,7 +71,7 @@ void WatchyFaceX::drawFaceMessages(
   if (currentTime.Minute < 10) {timeString += "0";}
   timeString += currentTime.Minute;
 
-  String datetimeString = dateString + timeString;
+  String datetimeString = dateString + "-" + timeString;
   bottomCenterText(
       display, 
       datetimeString, 
