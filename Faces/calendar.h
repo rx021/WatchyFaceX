@@ -153,6 +153,17 @@ inline void drawGrid(
   }
 }
 
+template<typename GFX>
+inline void drawFooter(GFX &display, String footerString, int textColor) {
+  display.setFont(&FreeSansBold12pt7b);
+  display.setTextColor(textColor);
+
+  int centerX = WIDTH / 2;
+  int baselineY = HEIGHT;
+
+  centerText(display, footerString, centerX, baselineY);
+}
+
 // Top-level renderer
 /*
 template<typename GFX>
@@ -196,5 +207,12 @@ void WatchyFaceX::drawFaceCalendar(
     bgColor,
     textColor
   );
+
+  String timeString = "";
+  if (currentTime.Hour < 10) {timeString += "0";}
+  timeString += currentTime.Hour;
+  if (currentTime.Minute < 10) {timeString += "0";}
+  timeString += currentTime.Minute;
+  drawFooter(display, timeString, textColor);
 }
 
