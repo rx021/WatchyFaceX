@@ -69,7 +69,7 @@ inline int centerText(
   display.getTextBounds(s, 0, 0, &x1, &y1, &w, &h);
   int bottomY = topY + h;
 
-  display.setCursor(cx - (int)w/2, bottomY);
+  display.setCursor(cx - (w/2), bottomY);
   display.print(s);
 
   return bottomY;
