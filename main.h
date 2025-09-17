@@ -126,13 +126,6 @@ class WatchyFaceX : public Watchy{
 // Type alias for a WatchyFaceX member function: void f(bool)
 using FaceFn = void (WatchyFaceX::*)(bool, bool);
 
-static constexpr FaceFn NOTE_FACES[] = {
-  &WatchyFaceX::drawFaceWhy,
-  &WatchyFaceX::drawFaceNorthStar,
-  &WatchyFaceX::drawFaceMessages,
-};
-static constexpr size_t NOTE_COUNT = sizeof(NOTE_FACES) / sizeof(NOTE_FACES[0]);
-
 static constexpr FaceFn PLANNER_FACES[] = {
   &WatchyFaceX::drawFaceCalendar,
   &WatchyFaceX::drawFaceCustomBahn,
@@ -142,6 +135,13 @@ static constexpr FaceFn PLANNER_FACES[] = {
   &WatchyFaceX::drawFaceCountdowwn,
 };
 static constexpr size_t PLANNER_COUNT = sizeof(PLANNER_FACES) / sizeof(PLANNER_FACES[0]);
+
+static constexpr FaceFn NOTE_FACES[] = {
+  &WatchyFaceX::drawFaceWhy,
+  &WatchyFaceX::drawFaceNorthStar,
+  &WatchyFaceX::drawFaceMessages,
+};
+static constexpr size_t NOTE_COUNT = sizeof(NOTE_FACES) / sizeof(NOTE_FACES[0]);
 
 static constexpr FaceFn TOY_FACES[] = {
   &WatchyFaceX::drawFaceGlobe,
