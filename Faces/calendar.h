@@ -211,6 +211,7 @@ void WatchyFaceX::drawFaceCalendar(
   String timeString = "";
   if (currentTime.Hour < 10) {timeString += "0";}
   timeString += currentTime.Hour;
+  timeString += ":";
   if (currentTime.Minute < 10) {timeString += "0";}
   timeString += currentTime.Minute;
   drawFooter(display, timeString, textColor);
