@@ -252,6 +252,8 @@ void WatchyFaceX::drawFaceCalendar(
 
   // TIME ON TOP RIGHT
 
+  display.setFont(&FreeSansBold12pt7b);
+
   String timeString = "";
   if (currentTime.Hour < 10) {timeString += "0";}
   timeString += currentTime.Hour;
@@ -262,10 +264,9 @@ void WatchyFaceX::drawFaceCalendar(
   int16_t x1,y1; uint16_t w,h;
   display.getTextBounds(timeString, 0, 0, &x1, &y1, &w, &h);
 
-  uint8_t positionX = DISPLAY_WIDTH - ORIGIN_X - w;
+  uint8_t positionX = (DISPLAY_WIDTH - ORIGIN_X) - w;
   uint8_t positionY = h;
   display.setCursor(positionX, positionY);
-  display.setFont(&FreeSansBold12pt7b);
   display.setTextColor(textColor);
   display.print(timeString);
 
