@@ -1,4 +1,84 @@
 
+template<typename GFX>
+inline void topLeftText(
+    GFX &display,
+    const String &s,
+    int originX,
+    int originY,
+    int textColor
+){
+  int16_t x1,y1; uint16_t w,h;
+  display.getTextBounds(s, 0, originY, &x1, &y1, &w, &h);
+
+  uint8_t positionX = originX;
+  uint8_t positionY = originY + h;
+  display.setCursor(positionX, positionY);
+
+  display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
+  display.setTextColor(textColor);
+  display.print(s);
+}
+
+template<typename GFX>
+inline void topRightText(
+    GFX &display,
+    const String &s,
+    int originX,
+    int originY,
+    int textColor
+){
+  int16_t x1,y1; uint16_t w,h;
+  display.getTextBounds(s, 0, originY, &x1, &y1, &w, &h);
+
+  uint8_t positionX = originX - w;
+  uint8_t positionY = originY + h;
+  display.setCursor(positionX, positionY);
+
+  display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
+  display.setTextColor(textColor);
+  display.print(s);
+}
+
+template<typename GFX>
+inline void bottomLeftText(
+    GFX &display,
+    const String &s,
+    int originX,
+    int originY,
+    int textColor
+){
+  int16_t x1,y1; uint16_t w,h;
+  display.getTextBounds(s, 0, originY, &x1, &y1, &w, &h);
+
+  uint8_t positionX = originX;
+  uint8_t positionY = originY;
+  display.setCursor(positionX, positionY);
+
+  display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
+  display.setTextColor(textColor);
+  display.print(s);
+}
+
+template<typename GFX>
+inline void bottomRightText(
+    GFX &display,
+    const String &s,
+    int originX,
+    int originY,
+    int textColor
+){
+  int16_t x1,y1; uint16_t w,h;
+  display.getTextBounds(s, 0, originY, &x1, &y1, &w, &h);
+
+  uint8_t positionX = originX - w;
+  uint8_t positionY = originY;
+  display.setCursor(positionX, positionY);
+
+  display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
+  display.setTextColor(textColor);
+  display.print(s);
+}
+
 void WatchyFaceX::drawFaceAnalog(
   bool enableDarkMode,
   bool enableInteractive
@@ -117,6 +197,7 @@ void WatchyFaceX::drawFaceAnalog(
   String dateString = "";
   uint8_t dateSpacing = 5;
 
+  // CENTER
   // DRAW DATE
   char* currMonth = monthShortStr(currentTime.Month);
   dateString += currMonth;
@@ -136,38 +217,52 @@ void WatchyFaceX::drawFaceAnalog(
   display.setFont(&Seven_Segment10pt7b);
 
   // DRAW YEAR
-  dateString = currentTime.Year + 1970;
-  display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
+  String yearString = "";
+  yearString += currentTime.Year + 1970;
+  /*
+  display.getTextBounds(yearString, 0, 0, &x1, &y1, &w, &h);
   uint8_t yearHalfWidth = w / 2;
   uint8_t yearX = centerX - yearHalfWidth; // to center
   uint8_t yearY = centerY - dateHalfHeight - dateSpacing; // to center above date
   display.setCursor(yearX, yearY);
-  display.print(dateString);
+  display.print(yearString);
+  */
 
   // DRAW WEEKDAY
-  dateString = dayStr(currentTime.Wday);
-  display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
+  String dayString = dayShortStr(currentTime.Wday);
+  /*
+  display.getTextBounds(dayString, 0, 0, &x1, &y1, &w, &h);
   uint8_t weekdayHalfWidth = w / 2;
   uint8_t weekdayX = centerX - weekdayHalfWidth; // to center
   uint8_t weekdayY = centerY + dateHalfHeight + dateSpacing + h; // to center below date
   display.setCursor(weekdayX, weekdayY);
-  display.print(dateString);
+  display.print(dayString);
+  */
 
   // DRAW BATTERY PERCENT
   uint8_t PADDING_X = 1; // pixels
   uint8_t PADDING_Y = 1; // pixels
   String percentString = getBatteryPercent();
 
-  display.getTextBounds(percentString, 0, 0, &x1, &y1, &w, &h);
-  uint8_t percentWidth = w;
-  uint8_t percentHeight = h;
+  topLeftText(display, yearString, PADDING_X, PADDING_Y, textColor);
 
-  uint8_t percentX = PADDING_X;
-  uint8_t percentY = PADDING_Y + percentHeight;
-  display.setCursor(percentX, percentY);
-  display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
-  display.setTextColor(textColor);
-  display.print(percentString);
+  topRightText(display, dayString, DISPLAY_WIDTH - PADDING_X, PADDING_Y, textColor);
+
+  bottomLeftText(display, percentString, PADDING_X, DISPLAY_HEIGHT - PADDING_Y, textColor);
+
+  uint8_t wifiWidth = 26;
+  uint8_t wifiHeight = 18;
+  uint8_t wifiX = DISPLAY_WIDTH - PADDING_X - wifiWidth;
+  uint8_t wifiY = DISPLAY_HEIGHT - PADDING_Y - wifiHeight;
+  display.drawBitmap(
+    wifiX,
+    wifiY,
+    WIFI_CONFIGURED ? wifi : wifioff,
+    wifiWidth,
+    wifiHeight,
+    textColor
+  );
+  //bottomRightText(display, percentString, DISPLAY_WIDTH - PADDING_X, DISPLAY_HEIGHT - PADDING_Y, textColor);
 }
 
 String WatchyFaceX::getBatteryPercent() {

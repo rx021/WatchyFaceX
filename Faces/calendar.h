@@ -59,15 +59,29 @@ inline void leftText(GFX &display, const String &s, int x, int baselineY){
 }
 
 template<typename GFX>
-inline void centerText(GFX &display, const String &s, int cx, int baselineY){
+inline int centerText(
+  GFX &display,
+  const String &s,
+  int cx,
+  int topY
+){
   int16_t x1,y1; uint16_t w,h;
-  display.getTextBounds(s, 0, baselineY, &x1, &y1, &w, &h);
-  display.setCursor(cx - (int)w/2, baselineY);
+  display.getTextBounds(s, 0, 0, &x1, &y1, &w, &h);
+  int bottomY = topY + h;
+
+  display.setCursor(cx - (w/2), bottomY);
   display.print(s);
+
+  return bottomY;
 }
 
 template<typename GFX>
-inline int drawTitle(GFX &display, int year, int month, int textColor) {
+inline int drawTitle(
+  GFX &display,
+  int year,
+  int month,
+  int textColor
+) {
   display.setFont(&FreeSansBold12pt7b);
   display.setTextColor(textColor);
   String title = String(year) + " " + String(MONTH_HEADER[month-1]);
@@ -80,7 +94,7 @@ inline int drawTitle(GFX &display, int year, int month, int textColor) {
 }
 
 template<typename GFX>
-inline int drawWeekHeader(
+inline int drawWeekdays(
   GFX &display,
   int textColor,
   int topY
@@ -104,7 +118,7 @@ inline int drawWeekHeader(
 }
 
 template<typename GFX>
-inline void drawGrid(
+inline int drawGrid(
   GFX &display,
   int topY,
   int uiYear,
@@ -118,11 +132,13 @@ inline void drawGrid(
   int firstDayOfWeek = dayOfWeekZeller(uiYear, uiMonth, 1);
   int totalDays = daysInMonth(uiYear, uiMonth);
 
-  int monthX = ORIGIN_X - PADDING_X;
-  int monthY = topY - (GAP_Y / 2);
-  int monthWidth = MONTH_WIDTH + PADDING_X;
-  int monthHeight = MONTH_HEIGHT + 4;
-  display.fillRect(monthX, monthY, monthWidth, monthHeight, textColor);
+  int calX = ORIGIN_X - PADDING_X;
+  int calY = topY - (GAP_Y / 2);
+  int calWidth = MONTH_WIDTH + PADDING_X;
+  int calHeight = MONTH_HEIGHT + 4;
+  display.fillRect(calX, calY, calWidth, calHeight, textColor);
+
+  int bottomY = calY + calHeight;
 
   display.setFont(&FreeSansBold9pt7b);
   for(int day=1; day<=totalDays; ++day){
@@ -149,8 +165,42 @@ inline void drawGrid(
     }else{
       display.setTextColor(bgColor);
     }
+
     leftText(display, String(day), dayX, dayY);
   }
+
+  return bottomY;
+}
+
+template<typename GFX>
+inline int drawSubCal(
+  GFX &display,
+  int topY,
+  String subCalString,
+  int textColor
+) {
+  display.setFont(&FreeSansBold9pt7b);
+  display.setTextColor(textColor);
+
+  int centerX = WIDTH / 2;
+  int bottomY = centerText(display, subCalString, centerX, topY);
+
+  return bottomY;
+}
+
+template<typename GFX>
+inline void drawFooter(
+  GFX &display,
+  int topY,
+  String footerString,
+  int textColor
+) {
+  display.setFont(&FreeSansBold12pt7b);
+  display.setTextColor(textColor);
+
+  int centerX = WIDTH / 2;
+
+  centerText(display, footerString, centerX, topY);
 }
 
 // Top-level renderer
@@ -160,7 +210,7 @@ inline void render(GFX &display, int uiYear, int uiMonth,
                    int todayY, int todayM, int todayD){
   display.fillScreen(GxEPD_WHITE);
   drawTitle(display, uiYear, uiMonth);
-  drawWeekHeader(display);
+  drawWeekdays(display);
   drawGrid(display, uiYear, uiMonth, todayY, todayM, todayD);
 }
 */
@@ -183,9 +233,9 @@ void WatchyFaceX::drawFaceCalendar(
   int uiMonth = month;
 
   int titleY = drawTitle(display, uiYear, uiMonth, textColor);
-  int headerY = drawWeekHeader(display, textColor, titleY + GAP_Y);
+  int headerY = drawWeekdays(display, textColor, titleY + GAP_Y);
 
-  drawGrid(
+  int gridY = drawGrid(
     display,
     headerY + GAP_Y,
     uiYear, //state.calendarYear,
@@ -196,5 +246,29 @@ void WatchyFaceX::drawFaceCalendar(
     bgColor,
     textColor
   );
+
+  String subCalText = "96k/y 1850/w 370/d";
+  int subCalY = drawSubCal(display, gridY + GAP_Y, subCalText, textColor);
+
+  // TIME ON TOP RIGHT
+
+  display.setFont(&FreeSansBold12pt7b);
+
+  String timeString = "";
+  if (currentTime.Hour < 10) {timeString += "0";}
+  timeString += currentTime.Hour;
+  timeString += ":";
+  if (currentTime.Minute < 10) {timeString += "0";}
+  timeString += currentTime.Minute;
+
+  int16_t x1,y1; uint16_t w,h;
+  display.getTextBounds(timeString, 0, 0, &x1, &y1, &w, &h);
+
+  uint8_t positionX = (DISPLAY_WIDTH - ORIGIN_X) - w;
+  uint8_t positionY = h;
+  display.setCursor(positionX, positionY);
+  display.setTextColor(textColor);
+  display.print(timeString);
+
 }
 

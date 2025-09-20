@@ -28,10 +28,9 @@ RTC_DATA_ATTR bool enableInteractive = false;
 
 RTC_DATA_ATTR int faceTypeIndex = 0;
 
-RTC_DATA_ATTR int clockFacesIndex = 0;
+RTC_DATA_ATTR int plannerFacesIndex = 0;
 RTC_DATA_ATTR int noteFacesIndex = 0;
 RTC_DATA_ATTR int toyFacesIndex = 0;
-RTC_DATA_ATTR int plannerFacesIndex = 0;
 
 class WatchyFaceX : public Watchy{
   using Watchy::Watchy;
@@ -127,11 +126,15 @@ class WatchyFaceX : public Watchy{
 // Type alias for a WatchyFaceX member function: void f(bool)
 using FaceFn = void (WatchyFaceX::*)(bool, bool);
 
-static constexpr FaceFn CLOCK_FACES[] = {
+static constexpr FaceFn PLANNER_FACES[] = {
+  &WatchyFaceX::drawFaceCalendar,
   &WatchyFaceX::drawFaceCustomBahn,
   &WatchyFaceX::drawFaceAnalog,
+  //&WatchyFaceX::drawFaceAlarms,
+  &WatchyFaceX::drawFaceTimer,
+  &WatchyFaceX::drawFaceCountdowwn,
 };
-static constexpr size_t CLOCK_COUNT = sizeof(CLOCK_FACES) / sizeof(CLOCK_FACES[0]);
+static constexpr size_t PLANNER_COUNT = sizeof(PLANNER_FACES) / sizeof(PLANNER_FACES[0]);
 
 static constexpr FaceFn NOTE_FACES[] = {
   &WatchyFaceX::drawFaceWhy,
@@ -139,14 +142,6 @@ static constexpr FaceFn NOTE_FACES[] = {
   &WatchyFaceX::drawFaceMessages,
 };
 static constexpr size_t NOTE_COUNT = sizeof(NOTE_FACES) / sizeof(NOTE_FACES[0]);
-
-static constexpr FaceFn PLANNER_FACES[] = {
-  &WatchyFaceX::drawFaceCalendar,
-  &WatchyFaceX::drawFaceAlarms,
-  &WatchyFaceX::drawFaceTimer,
-  &WatchyFaceX::drawFaceCountdowwn,
-};
-static constexpr size_t PLANNER_COUNT = sizeof(PLANNER_FACES) / sizeof(PLANNER_FACES[0]);
 
 static constexpr FaceFn TOY_FACES[] = {
   &WatchyFaceX::drawFaceGlobe,
@@ -160,10 +155,9 @@ struct FaceType {
   const FaceFn* list;
 };
 static FaceType FACE_TYPES[] = {
-  {CLOCK_FACES},
+  {PLANNER_FACES},
   {NOTE_FACES},
   {TOY_FACES},
-  {PLANNER_FACES},
 };
 static constexpr size_t FACE_TYPE_COUNT = sizeof(FACE_TYPES) / sizeof(FACE_TYPES[0]);
 
@@ -176,7 +170,7 @@ void WatchyFaceX::handleButtonPress() {
     if (wakeupBit & BACK_BTN_MASK) {
       // NOTE: order should match FACE_TYPES
       if (faceTypeIndex == 0) {
-        clockFacesIndex = (clockFacesIndex + 1) % CLOCK_COUNT;
+        plannerFacesIndex = (plannerFacesIndex + 1) % PLANNER_COUNT;
       }
       else if (faceTypeIndex == 1) {
         noteFacesIndex = (noteFacesIndex + 1) % NOTE_COUNT;
@@ -185,9 +179,6 @@ void WatchyFaceX::handleButtonPress() {
         // reset when changing face
         enableInteractive = false;
         toyFacesIndex = (toyFacesIndex + 1) % TOY_COUNT;
-      }
-      else if (faceTypeIndex == 3) {
-        plannerFacesIndex = (plannerFacesIndex + 1) % PLANNER_COUNT;
       }
 
       RTC.read(currentTime);
@@ -238,7 +229,7 @@ void WatchyFaceX::drawWatchFace() {
   FaceFn currFace;
 
   if (faceTypeIndex == 0) {
-    currFace = CLOCK_FACES[clockFacesIndex];
+    currFace = PLANNER_FACES[plannerFacesIndex];
     (this->*currFace)(isDarkMode, enableInteractive);
   }
   else if (faceTypeIndex == 1) {
@@ -247,10 +238,6 @@ void WatchyFaceX::drawWatchFace() {
   }
   else if (faceTypeIndex == 2) {
     currFace = TOY_FACES[toyFacesIndex];
-    (this->*currFace)(isDarkMode, enableInteractive);
-  }
-  else if (faceTypeIndex == 3) {
-    currFace = PLANNER_FACES[plannerFacesIndex];
     (this->*currFace)(isDarkMode, enableInteractive);
   }
 }                                         

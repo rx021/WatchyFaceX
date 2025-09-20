@@ -1,4 +1,20 @@
 
+template<typename GFX>
+inline void bottomCenterText(
+    GFX &display,
+    const String &s,
+    int centerX,
+    int originY,
+    int textColor
+){
+  int16_t x1,y1; uint16_t w,h;
+  display.getTextBounds(s, 0, originY, &x1, &y1, &w, &h);
+
+  display.setCursor(centerX - (w/2), originY);
+  display.setFont(&Seven_Segment10pt7b);
+  display.setTextColor(textColor);
+  display.print(s);
+}
 
 void WatchyFaceX::drawFaceMessages(
   bool enableDarkMode,
@@ -38,31 +54,30 @@ void WatchyFaceX::drawFaceMessages(
 
   // DRAW DATE from bottom-up: 
 
-  uint8_t dateX = PADDING_X;
-  uint8_t dateY = DISPLAY_HEIGHT - PADDING_Y;
-  display.setCursor(dateX, dateY);
   String dateString = "";
-
-  display.setFont(&Seven_Segment10pt7b);
   dateString += currentTime.Year + 1970; 
-  display.print(dateString);
+  dateString += monthShortStr(currentTime.Month);
+  dateString += "-";
 
-  display.setFont(&FreeSans12pt7b);
-  dateString = monthShortStr(currentTime.Month);
-  dateString += ".";
-  dateString += currentTime.Day;
-  display.print(dateString);
+  uint8_t currDay = currentTime.Day;
+  if (currDay < 10) { dateString += "0"; }
+  dateString += currDay;
+  dateString += dayShortStr(currentTime.Wday);
 
-  display.setFont(&Seven_Segment10pt7b);
-  dateString = dayShortStr(currentTime.Wday);
-  display.print(dateString);
-
-  display.setFont(&FreeSans12pt7b);
   String timeString = ""; // must declare first to concat numbers
   if (currentTime.Hour < 10) {timeString += "0";}
   timeString += currentTime.Hour; // can add number to string
+  timeString += ":";
   if (currentTime.Minute < 10) {timeString += "0";}
   timeString += currentTime.Minute;
-  display.print(timeString);
+
+  String datetimeString = dateString + "-" + timeString;
+  bottomCenterText(
+      display, 
+      datetimeString, 
+      DISPLAY_WIDTH / 2, 
+      DISPLAY_HEIGHT - PADDING_Y, 
+      textColor
+  );
 }
 
