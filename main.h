@@ -170,6 +170,8 @@ void WatchyFaceX::handleButtonPress() {
     if (wakeupBit & BACK_BTN_MASK) {
       // NOTE: order should match FACE_TYPES
       if (faceTypeIndex == 0) {
+        // reset when changing face
+        enableInteractive = false;
         plannerFacesIndex = (plannerFacesIndex + 1) % PLANNER_COUNT;
       }
       else if (faceTypeIndex == 1) {
@@ -188,6 +190,7 @@ void WatchyFaceX::handleButtonPress() {
 
     if (wakeupBit & MENU_BTN_MASK) {
       if (
+        faceTypeIndex == 0 // planner
         faceTypeIndex == 2 // toys
       ) {
         enableInteractive = true;
