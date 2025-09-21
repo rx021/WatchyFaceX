@@ -265,6 +265,7 @@ void WatchyFaceX::drawFaceAnalog(
   //bottomRightText(display, percentString, DISPLAY_WIDTH - PADDING_X, DISPLAY_HEIGHT - PADDING_Y, textColor);
 }
 
+
 // HELPER FUNCTION FOR HANDS DRAWING
 //     99 100 101
 //  99  .   .   .        

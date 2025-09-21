@@ -103,7 +103,9 @@ auto clampToRange = [](int value, int minValue, int maxValue) {
     : (currentCoordinate + pixelChange);
 }
 
-inline String getBatteryPercent(){
+} // namespace face_utils
+
+String WatchyFaceX::getBatteryPercent() {
   String percentString = "";
 
   uint8_t batteryPercent = 0;
@@ -121,5 +123,3 @@ inline String getBatteryPercent(){
 
   return percentString;
 }
-
-} // namespace face_utils
