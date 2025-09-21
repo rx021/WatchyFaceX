@@ -109,7 +109,7 @@ class WatchyFaceX : public Watchy{
 };
 
 // needs to be included after class declared
-#include "face_utils.hpp" 
+#include "Faces/face_utils.hpp"
 using namespace face_utils;
 
 #include "Faces/globe.h"
