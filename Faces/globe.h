@@ -11,14 +11,15 @@ void WatchyFaceX::drawFaceGlobe(
 
   display.setFullWindow();
 
-  auto drawFrame = [&]() {
+  auto drawImageAtIndex = [&]() {
     display.fillScreen(bgColor);
-    display.drawBitmap(0, 0, globe01, 200, 200, textColor);
+    const unsigned char *curr = globes[globeIndex];
+    display.drawBitmap(0, 0, curr, 200, 200, textColor);
     display.display(true); // full refresh
   };
 
   if (!enableInteractive) {
-    drawFrame();
+    drawImageAtIndex();
     return;
   }
 
@@ -36,11 +37,8 @@ void WatchyFaceX::drawFaceGlobe(
 
     // ACTION PER INTERVAL
     lastMs = now;
-    currGlobe = globes[globeIndex];
 
-    display.fillScreen(bgColor);
-    display.drawBitmap(0, 0, currGlobe, 200, 200, textColor);
-    display.display(true); // full refresh
+    drawImageAtIndex();
                            
     globeIndex = (globeIndex + 1) % globeCount;
 
@@ -49,6 +47,6 @@ void WatchyFaceX::drawFaceGlobe(
   }
 
   // After exiting game loop, show one navigation frame
-  drawFrame();
+  drawImageAtIndex();
 }
 
