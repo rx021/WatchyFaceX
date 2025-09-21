@@ -52,7 +52,6 @@ inline int daysInMonth(int year, int month){
     : days[month-1];
 }
 
-
 template<typename GFX>
 inline int drawTitle(
   GFX &display,
