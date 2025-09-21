@@ -16,12 +16,21 @@ void WatchyFaceX::drawFaceTimer(
   int16_t  x1, y1;
   uint16_t w, h;
 
-  String message = "TIMER";
-  display.getTextBounds(message, 0, 0, &x1, &y1, &w, &h);
+  String title = "TIMER";
+  display.getTextBounds(title, 0, 0, &x1, &y1, &w, &h);
   uint8_t mX = PADDING_X;
   int8_t mY = PADDING_Y + (-1 *  y1);
   // y1 is better to use instead of height here if we want the height of the font
 
   display.setCursor(mX, mY);
-  display.println(message);
+  display.println(title);
+
+  // DRAW TIMER NUMBERS
+  String timeString = "00:00:00";
+  display.getTextBounds(timeString, 0, 0, &x1, &y1, &w, &h);
+  uint8_t timeX = (DISPLAY_WIDTH / 2) - (w/2);
+  uint8_t timeY = (DISPLAY_HEIGHT / 2) + (h/2);
+  display.setFont(&DSEG7_Classic_Bold_25);
+  display.setCursor(timeX, timeY);
+  display.println(timeString);
 }
