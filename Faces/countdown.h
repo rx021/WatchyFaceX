@@ -9,9 +9,7 @@ void WatchyFaceX::drawFaceCountdowwn(
   display.setFullWindow();
   display.fillScreen(bgColor);
 
-  String message = "COUNTDOWN";
-
-  drawFaceTitle(display, title, textColor);
+  drawFaceTitle(display, "COUNTDOWN", textColor);
 
   String timeString = "00:00:00";
 

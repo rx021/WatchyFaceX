@@ -9,9 +9,7 @@ void WatchyFaceX::drawFaceTimer(
   display.setFullWindow();
   display.fillScreen(bgColor);
 
-  String title = "TIMER";
-
-  drawFaceTitle(display, title, textColor);
+  drawFaceTitle(display, "TIMER", textColor);
 
   String timeString = "00:00:00";
 
