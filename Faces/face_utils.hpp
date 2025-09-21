@@ -141,7 +141,7 @@ void WatchyFaceX::drawThinBattery(
   // 18,18
   int innerX = leftX+border;
   int innerY = topY+border;
-  int innerWidth = width-(border*2); 24-(2*2)
+  int innerWidth = width-(border*2); // 24-(2*2)
   int innerHeight = height-(border*2); // 12-(2*2)
   display.fillRoundRect(innerX, innerY, innerWidth, innerHeight, 3, bgColor);
 
