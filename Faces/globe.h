@@ -20,6 +20,7 @@ void WatchyFaceX::drawFaceGlobe(
 
   if (!enableInteractive) {
     drawImageAtIndex();
+    drawFaceTitle(display, "GLOBE", textColor);
     return;
   }
 

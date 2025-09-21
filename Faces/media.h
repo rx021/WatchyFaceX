@@ -26,6 +26,7 @@ void WatchyFaceX::drawFaceMedia(
 
   if (!enableInteractive) {
     drawBitmapAtIndex();
+    drawFaceTitle(display, "IMAGES", textColor);
     return;
   }
 
