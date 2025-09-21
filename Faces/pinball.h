@@ -1,6 +1,3 @@
-#include "face_utils.hpp" 
-using namespace face_utils;
-
 void WatchyFaceX::drawFacePinball(
   bool enableDarkMode,
   bool enableInteractive

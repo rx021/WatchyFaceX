@@ -1,5 +1,3 @@
-#include "face_utils.hpp" 
-using namespace face_utils;
 
 inline int activeTiltMagnitude(
   int16_t rawAcceleration,

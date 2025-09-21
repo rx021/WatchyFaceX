@@ -52,11 +52,6 @@ inline int daysInMonth(int year, int month){
     : days[month-1];
 }
 
-template<typename GFX>
-inline void leftText(GFX &display, const String &s, int x, int baselineY){
-  display.setCursor(x, baselineY);
-  display.print(s);
-}
 
 template<typename GFX>
 inline int centerText(

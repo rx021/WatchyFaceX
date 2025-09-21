@@ -3,6 +3,32 @@
 
 namespace face_utils {
 
+template<typename GFX>
+inline void leftText(GFX &display, const String &s, int leftX, int bottomY){
+  display.setCursor(leftX, bottomY);
+  display.print(s);
+}
+
+template<typename GFX>
+inline int drawFaceTitle(
+  GFX &display,
+  String faceTitle,
+  int textColor
+) {
+  display.setFont(&FreeSansBold12pt7b);
+  display.setTextColor(textColor);
+
+  uint8_t PADDING_X = 1; // pixels
+  uint8_t PADDING_Y = 1; // pixels
+
+  int16_t x1,y1; uint16_t width,height;
+  display.getTextBounds(faceTitle, 0, 0, &x1, &y1, &width, &height);
+  int bottomY = PADDING_Y + height;
+  leftText(display, faceTitle, PADDING_X, bottomY);
+
+  return bottomY; // new topY
+}
+
 struct TiltScale {
   int deadZone; // no movement below this magnitude
   int saturation; // full speed at or above this magnitude
