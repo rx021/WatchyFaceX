@@ -15,6 +15,6 @@ void WatchyFaceX::drawFaceTimer(
 
   drawCenterTime(display, timeString, textColor);
 
-  drawThinBatter(bgColor, textColor, 1, DISPLAY_HEIGHT-12);
+  drawThinBattery(bgColor, textColor, 1, DISPLAY_HEIGHT-12);
 
 }
