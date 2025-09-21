@@ -24,15 +24,8 @@ void WatchyFaceX::drawFaceMedia(
     display.display(true); // full refresh
   };
 
-  auto drawNavFrame = [&]() {
-    display.fillScreen(bgColor);
-    const unsigned char *curr = medias[mediaIndex];
-    display.drawBitmap(0, 0, curr, 200, 200, textColor);
-    display.display(true); // full refresh
-  };
-
   if (!enableInteractive) {
-    drawNavFrame();
+    drawBitmapAtIndex();
     return;
   }
 
@@ -64,7 +57,7 @@ void WatchyFaceX::drawFaceMedia(
   }
 
   // After exiting game loop, show one navigation frame
-  drawNavFrame();
+  drawBitmapAtIndex();
 }
 
 
