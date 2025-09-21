@@ -191,7 +191,7 @@ void WatchyFaceX::handleButtonPress() {
     if (wakeupBit & MENU_BTN_MASK) {
       if (
         faceTypeIndex == 0 // planner
-        faceTypeIndex == 2 // toys
+        || faceTypeIndex == 2 // toys
       ) {
         enableInteractive = true;
         RTC.read(currentTime);
