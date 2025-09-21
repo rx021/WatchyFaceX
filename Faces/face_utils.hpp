@@ -103,4 +103,23 @@ auto clampToRange = [](int value, int minValue, int maxValue) {
     : (currentCoordinate + pixelChange);
 }
 
+inline String getBatteryPercent(){
+  String percentString = "";
+
+  uint8_t batteryPercent = 0;
+  float VBAT = getBatteryVoltage();
+
+  if (4.2 <= VBAT){
+    batteryPercent = 100.0;
+  }
+  else if (3.3 <= VBAT) {
+    batteryPercent = 100.0 * (VBAT - 3.3) / 0.9;
+  }
+
+  percentString += batteryPercent;
+  percentString += "% ";
+
+  return percentString;
+}
+
 } // namespace face_utils
