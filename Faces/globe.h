@@ -49,5 +49,6 @@ void WatchyFaceX::drawFaceGlobe(
 
   // After exiting game loop, show one navigation frame
   drawImageAtIndex();
+  drawFaceTitle(display, "GLOBE", textColor);
 }
 

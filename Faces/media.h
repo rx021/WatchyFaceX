@@ -59,6 +59,7 @@ void WatchyFaceX::drawFaceMedia(
 
   // After exiting game loop, show one navigation frame
   drawBitmapAtIndex();
+  drawFaceTitle(display, "IMAGES", textColor);
 }
 
 
