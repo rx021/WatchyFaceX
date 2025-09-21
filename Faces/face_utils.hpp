@@ -4,6 +4,41 @@
 namespace face_utils {
 
 template<typename GFX>
+inline void drawBattery(
+    GFX &display,
+    int bgColor,
+    int textColor,
+    float &batt,
+    int leftX,
+    int topY
+){
+  // x,y - w,h - r
+  // 16,16 - 34,12 - 4  // pixels
+  uint8_t border = 2;
+  uint8_t width = 34;
+  uint8_t height = 12;
+  uint8_t radius = 4;
+  // OUTER
+  display.fillRoundRect(leftX, topY, width, height, radius, textColor);
+
+  //display.fillRoundRect(49,20,3,4,2,textColor);
+  
+  // INNER
+  // 18,18
+  int innerX = leftX+border;
+  int innerY = topY+border;
+  int innerWidth = width-(border*2);
+  int innerHeight = height-(border*2);
+  display.fillRoundRect(innerX, innerY, innerWidth, innerHeight, 3, bgColor);
+
+  float batt = (getBatteryVoltage()-3.3)/0.9;
+  if (batt > 0) {
+   display.fillRoundRect(20,20,26*batt,4,2,textColor);
+  }
+}
+
+
+template<typename GFX>
 inline void leftText(GFX &display, const String &s, int leftX, int bottomY){
   display.setCursor(leftX, bottomY);
   display.print(s);
