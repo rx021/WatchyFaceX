@@ -24,5 +24,14 @@ void WatchyFaceX::drawFaceCountdowwn(
 
   display.setCursor(mX, mY);
   display.println(message);
+
+  // DRAW TIMER NUMBERS
+  String timeString = "00:00:00";
+  display.getTextBounds(timeString, 0, 0, &x1, &y1, &w, &h);
+  uint8_t timeX = (DISPLAY_WIDTH / 2) - (w/2);
+  uint8_t timeY = (DISPLAY_HEIGHT / 2) + (h/2);
+  display.setFont(&DSEG7_Classic_Bold_25);
+  display.setCursor(timeX, timeY);
+  display.println(timeString);
 }
 
