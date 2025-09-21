@@ -10,8 +10,8 @@ void WatchyFaceX::drawFaceTimer(
   display.fillScreen(bgColor);
 
   String title = "TIMER";
-  drawFaceTitle(display, title, textColor);
 
+  drawFaceTitle(display, title, textColor);
 
   // DRAW TIMER NUMBERS
   display.setFont(&DSEG7_Classic_Bold_25);
