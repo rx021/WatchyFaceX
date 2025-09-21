@@ -120,13 +120,13 @@ int WatchyFaceX::getBatteryPercent() {
   return batteryPercent;
 }
 
-void WatchyFaceX::drawThinBattery() {
+void WatchyFaceX::drawThinBattery(
     int bgColor,
     int textColor,
     float &batt,
     int leftX,
     int topY
-){
+) {
   // x,y - w,h - r
   // 16,16 - 34,12 - 4  // pixels
   uint8_t border = 2;
