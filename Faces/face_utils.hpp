@@ -123,7 +123,6 @@ int WatchyFaceX::getBatteryPercent() {
 void WatchyFaceX::drawThinBattery(
     int bgColor,
     int textColor,
-    float &batt,
     int leftX,
     int topY
 ) {

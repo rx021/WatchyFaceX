@@ -36,6 +36,7 @@ class WatchyFaceX : public Watchy{
   using Watchy::Watchy;
   public: 
     // HELPERS
+    int getBatteryPercent();
     void drawBattery(
       bool enableDarkMode,
       uint8_t batteryXOffset,
@@ -43,8 +44,12 @@ class WatchyFaceX : public Watchy{
       uint8_t batteryWidth,
       uint8_t batteryHeight
     );
-    int getBatteryPercent();
-    void drawThinBattery();
+    void drawThinBattery(
+      int bgColor,
+      int textColor,
+      int leftX,
+      int topY
+    );
     void drawHandX(
       uint8_t handRadius,
       float angle,
