@@ -10,6 +10,23 @@ inline void leftText(GFX &display, const String &s, int leftX, int bottomY){
 }
 
 template<typename GFX>
+inline int centerText(
+  GFX &display,
+  const String &message,
+  int centerX,
+  int topY
+){
+  int16_t x1,y1; uint16_t width,height;
+  display.getTextBounds(message, 0, 0, &x1, &y1, &width, &height);
+  int bottomY = topY + height;
+
+  display.setCursor(centerX - (width/2), bottomY);
+  display.print(message);
+
+  return bottomY;
+}
+
+template<typename GFX>
 inline int drawFaceTitle(
   GFX &display,
   String faceTitle,

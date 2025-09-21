@@ -54,23 +54,6 @@ inline int daysInMonth(int year, int month){
 
 
 template<typename GFX>
-inline int centerText(
-  GFX &display,
-  const String &s,
-  int cx,
-  int topY
-){
-  int16_t x1,y1; uint16_t w,h;
-  display.getTextBounds(s, 0, 0, &x1, &y1, &w, &h);
-  int bottomY = topY + h;
-
-  display.setCursor(cx - (w/2), bottomY);
-  display.print(s);
-
-  return bottomY;
-}
-
-template<typename GFX>
 inline int drawTitle(
   GFX &display,
   int year,
