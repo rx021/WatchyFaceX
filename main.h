@@ -43,7 +43,7 @@ class WatchyFaceX : public Watchy{
       uint8_t batteryWidth,
       uint8_t batteryHeight
     );
-    String getBatteryPercent();
+    int getBatteryPercent();
     void drawHandX(
       uint8_t handRadius,
       float angle,

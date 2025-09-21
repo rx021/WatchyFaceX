@@ -227,7 +227,9 @@ void WatchyFaceX::drawFaceCalendar(
   String subCalText = "96k/y 1850/w 370/d";
   int subCalY = drawSubCal(display, gridY + GAP_Y, subCalText, textColor);
 
-  String percentString = getBatteryPercent();
+  String percentString = "";
+  percentString += getBatteryPercent();
+  percentString += "%";
   int subCal2Y = drawSubCal(display, subCalY + GAP_Y, percentString, textColor);
 
   // TIME ON TOP RIGHT

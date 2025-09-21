@@ -27,11 +27,11 @@ inline void drawBattery(
   // 18,18
   int innerX = leftX+border;
   int innerY = topY+border;
-  int innerWidth = width-(border*2);
+  int innerWidth = width-(border*2); 24-(2*2)
   int innerHeight = height-(border*2); // 12-(2*2)
   display.fillRoundRect(innerX, innerY, innerWidth, innerHeight, 3, bgColor);
 
-  float batt = (getBatteryVoltage()-3.3)/0.9;
+  float batt = getBatteryPercent() / 100.0;
   if (batt > 0) {
     // 20,20
     int fillX = innerX+border;
@@ -145,9 +145,7 @@ auto clampToRange = [](int value, int minValue, int maxValue) {
 
 } // namespace face_utils
 
-String WatchyFaceX::getBatteryPercent() {
-  String percentString = "";
-
+int WatchyFaceX::getBatteryPercent() {
   uint8_t batteryPercent = 0;
   float VBAT = getBatteryVoltage();
 
@@ -158,8 +156,5 @@ String WatchyFaceX::getBatteryPercent() {
     batteryPercent = 100.0 * (VBAT - 3.3) / 0.9;
   }
 
-  percentString += batteryPercent;
-  percentString += "% ";
-
-  return percentString;
+  return batteryPercent;
 }

@@ -242,7 +242,9 @@ void WatchyFaceX::drawFaceAnalog(
   // DRAW BATTERY PERCENT
   uint8_t PADDING_X = 1; // pixels
   uint8_t PADDING_Y = 1; // pixels
-  String percentString = getBatteryPercent();
+  String percentString = "";
+  percentString += getBatteryPercent();
+  percentString += "%";
 
   topLeftText(display, yearString, PADDING_X, PADDING_Y, textColor);
 
