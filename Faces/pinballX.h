@@ -79,7 +79,7 @@ void WatchyFaceX::drawFacePinballX(
     int16_t  x1, y1;
     uint16_t w, h;
 
-    String message = "PINBALL X";
+    String message = "BALANCE BALL";
     display.getTextBounds(message, 0, 0, &x1, &y1, &w, &h);
     uint8_t mX = PADDING_X;
     int8_t mY = PADDING_Y + (-1 *  y1);
