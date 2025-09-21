@@ -28,12 +28,17 @@ inline void drawBattery(
   int innerX = leftX+border;
   int innerY = topY+border;
   int innerWidth = width-(border*2);
-  int innerHeight = height-(border*2);
+  int innerHeight = height-(border*2); // 12-(2*2)
   display.fillRoundRect(innerX, innerY, innerWidth, innerHeight, 3, bgColor);
 
   float batt = (getBatteryVoltage()-3.3)/0.9;
   if (batt > 0) {
-   display.fillRoundRect(20,20,26*batt,4,2,textColor);
+    // 20,20
+    int fillX = innerX+border;
+    int fillY = innerY+border;
+    int fillWidth = 26*batt;
+    int fillHeight = innerHeight-(border*2);
+    display.fillRoundRect(fillX, fillY, fillWidth, fillHeight, 2, textColor);
   }
 }
 
