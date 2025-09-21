@@ -3,45 +3,6 @@
 
 namespace face_utils {
 
-template<typename GFX>
-inline void drawBattery(
-    GFX &display,
-    int bgColor,
-    int textColor,
-    float &batt,
-    int leftX,
-    int topY
-){
-  // x,y - w,h - r
-  // 16,16 - 34,12 - 4  // pixels
-  uint8_t border = 2;
-  uint8_t width = 34;
-  uint8_t height = 12;
-  uint8_t radius = 4;
-  // OUTER
-  display.fillRoundRect(leftX, topY, width, height, radius, textColor);
-
-  //display.fillRoundRect(49,20,3,4,2,textColor);
-  
-  // INNER
-  // 18,18
-  int innerX = leftX+border;
-  int innerY = topY+border;
-  int innerWidth = width-(border*2); 24-(2*2)
-  int innerHeight = height-(border*2); // 12-(2*2)
-  display.fillRoundRect(innerX, innerY, innerWidth, innerHeight, 3, bgColor);
-
-  float batt = getBatteryPercent() / 100.0;
-  if (batt > 0) {
-    // 20,20
-    int fillX = innerX+border;
-    int fillY = innerY+border;
-    int fillWidth = 26*batt;
-    int fillHeight = innerHeight-(border*2);
-    display.fillRoundRect(fillX, fillY, fillWidth, fillHeight, 2, textColor);
-  }
-}
-
 
 template<typename GFX>
 inline void leftText(GFX &display, const String &s, int leftX, int bottomY){
@@ -158,3 +119,41 @@ int WatchyFaceX::getBatteryPercent() {
 
   return batteryPercent;
 }
+
+void WatchyFaceX::drawThinBattery() {
+    int bgColor,
+    int textColor,
+    float &batt,
+    int leftX,
+    int topY
+){
+  // x,y - w,h - r
+  // 16,16 - 34,12 - 4  // pixels
+  uint8_t border = 2;
+  uint8_t width = 34;
+  uint8_t height = 12;
+  uint8_t radius = 4;
+  // OUTER
+  display.fillRoundRect(leftX, topY, width, height, radius, textColor);
+
+  //display.fillRoundRect(49,20,3,4,2,textColor);
+  
+  // INNER
+  // 18,18
+  int innerX = leftX+border;
+  int innerY = topY+border;
+  int innerWidth = width-(border*2); 24-(2*2)
+  int innerHeight = height-(border*2); // 12-(2*2)
+  display.fillRoundRect(innerX, innerY, innerWidth, innerHeight, 3, bgColor);
+
+  float batt = getBatteryPercent() / 100.0;
+  if (batt > 0) {
+    // 20,20
+    int fillX = innerX+border;
+    int fillY = innerY+border;
+    int fillWidth = 26*batt;
+    int fillHeight = innerHeight-(border*2);
+    display.fillRoundRect(fillX, fillY, fillWidth, fillHeight, 2, textColor);
+  }
+}
+
