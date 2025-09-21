@@ -14,4 +14,7 @@ void WatchyFaceX::drawFaceTimer(
   String timeString = "00:00:00";
 
   drawCenterTime(display, timeString, textColor);
+
+  drawThinBatter(bgColor, textColor, 1, DISPLAY_HEIGHT-12);
+
 }
