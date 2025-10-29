@@ -11,15 +11,13 @@ void WatchyFaceX::drawFaceTimer(
   display.setFont(&FreeSansBold12pt7b);
   display.setTextColor(textColor);
 
-  uint8_t PADDING_X = 1; // pixels
-  uint8_t PADDING_Y = 1; // pixels
   int16_t  x1, y1;
   uint16_t w, h;
 
   String message = "TIMER";
   display.getTextBounds(message, 0, 0, &x1, &y1, &w, &h);
-  uint8_t mX = PADDING_X;
-  int8_t mY = PADDING_Y + (-1 *  y1);
+  uint8_t mX = 1; // PADDING_X;
+  int8_t mY = 1 + (-1 *  y1); // PADDING_Y + (-1 *  y1);
   // y1 is better to use instead of height here if we want the height of the font
 
   display.setCursor(mX, mY);
