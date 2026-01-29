@@ -5,6 +5,7 @@ so I am picking this up again so that I can solve this later
 - need to simplify the code
 - [ ] comment out everything
 - [ ] try to compile
+    - [ ] get the arduino CLI stuff you need to run this 
 - [ ] then add back only what you want
     - [ ] 1) calendar
     - [ ] clock + settings
