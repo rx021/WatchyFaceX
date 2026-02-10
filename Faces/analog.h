@@ -202,14 +202,14 @@ void WatchyFaceX::drawFaceAnalog(
   display.fillCircle(centerX, centerY, hourHandOverlayRadius, bgColor);
 
 
-  // CENTER DATETIME DISPLAY:
+  // CENTER
+  // DATETIME DISPLAY:
   int16_t  x1, y1;
   uint16_t w, h;
 
   String dateString = "";
 
-  // CENTER
-  // DRAW DATE
+  // show DATE; ex: "JAN 17"
   char* currMonth = monthShortStr(currentTime.Month);
   dateString += currMonth;
   dateString += " ";
@@ -220,18 +220,19 @@ void WatchyFaceX::drawFaceAnalog(
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
   uint8_t dateHalfWidth = w / 2;
   uint8_t dateHalfHeight = h / 2;
-  uint8_t dateX = centerX - dateHalfWidth; // to center
-  uint8_t dateY = centerY + dateHalfHeight; // to center
-  display.setCursor(dateX, dateY);
+  display.setCursor(
+    centerX - dateHalfWidth, // dateX,
+    centerY + dateHalfHeight // dateY
+  );
   display.print(dateString);
 
   display.setFont(&Seven_Segment10pt7b);
 
-
+  // CORNERS
   uint8_t PADDING_X = 1; // pixels
   uint8_t PADDING_Y = 1; // pixels
                          
-  // DRAW YEAR
+  // show YEAR
   topLeftText(
     display,
     currentTime.Year + 1970 + "", // yearString,
@@ -240,7 +241,7 @@ void WatchyFaceX::drawFaceAnalog(
     textColor
   );
 
-  // DRAW WEEKDAY
+  // show WEEKDAY
   topRightText(
     display,
     dayShortStr(currentTime.Wday), // dayString,
@@ -249,7 +250,7 @@ void WatchyFaceX::drawFaceAnalog(
     textColor
   );
 
-  // DRAW BATTERY PERCENT
+  // show BATTERY PERCENT
   String percentString = getBatteryPercent();
   bottomLeftText(
     display,
@@ -259,7 +260,7 @@ void WatchyFaceX::drawFaceAnalog(
     textColor
   );
 
-  // DRAW WIFI ICON
+  // show WIFI ICON
   uint8_t wifiWidth = 26;
   uint8_t wifiHeight = 18;
   display.drawBitmap(
