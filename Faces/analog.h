@@ -81,9 +81,10 @@ inline void bottomRightText(
   int16_t x1,y1; uint16_t w,h;
   display.getTextBounds(s, 0, originY, &x1, &y1, &w, &h);
 
-  uint8_t positionX = originX - w;
-  uint8_t positionY = originY;
-  display.setCursor(positionX, positionY);
+  display.setCursor(
+    originX - w, // positionX,
+    originY // positionY
+  );
 
   display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
   display.setTextColor(textColor);
