@@ -1,3 +1,6 @@
+#ifndef TECHNOLOGY_18PT7B_H
+#define TECHNOLOGY_18PT7B_H
+
 // From Brainwork: REDUB face
 const uint8_t Technology18pt7bBitmaps[] PROGMEM = {
   0x00, 0x2F, 0xFF, 0xFF, 0xFD, 0x92, 0xFF, 0xFF, 0xB1, 0xFF, 0xEF, 0xDF,
@@ -326,3 +329,4 @@ const GFXfont Technology18pt7b PROGMEM = {
   (GFXglyph *)Technology18pt7bGlyphs,
   0x20, 0x7E, 35 };
 
+#endif

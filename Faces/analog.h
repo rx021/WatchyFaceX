@@ -1,3 +1,8 @@
+#ifndef ANALOG_H
+#define ANALOG_H
+
+#include "Fonts/DIN_1451_Engschrift_Regular12pt7b.h"
+#include "Fonts/Technology18pt7b.h"
 
 template<typename GFX>
 inline void topLeftText(
@@ -324,3 +329,4 @@ void WatchyFaceX::drawHandX(
 }
 
 
+#endif 

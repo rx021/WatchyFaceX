@@ -3,9 +3,6 @@
 
 #include <Watchy.h> // include Watchy library
 
-// used in faces
-#include "Fonts/DIN_1451_Engschrift_Regular12pt7b.h"
-
 RTC_DATA_ATTR bool isDarkMode = false;
 RTC_DATA_ATTR bool enableInteractive = false;
 
