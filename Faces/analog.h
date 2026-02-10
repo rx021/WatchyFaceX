@@ -18,9 +18,10 @@ inline void topLeftText(
   int16_t x1,y1; uint16_t w,h;
   display.getTextBounds(s, 0, originY, &x1, &y1, &w, &h);
 
-  uint8_t positionX = originX;
-  uint8_t positionY = originY + h;
-  display.setCursor(positionX, positionY);
+  display.setCursor(
+    originX, // positionX,
+    originY + h //positionY
+  );
 
   display.setFont(&DIN_1451_Engschrift_Regular12pt7b);
   display.setTextColor(textColor);
