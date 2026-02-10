@@ -278,8 +278,6 @@ void WatchyFaceX::drawFaceAnalog(
 }
 
 String WatchyFaceX::getBatteryPercent() {
-  String percentString = "";
-
   uint8_t batteryPercent = 0;
   float VBAT = getBatteryVoltage();
 
@@ -290,10 +288,7 @@ String WatchyFaceX::getBatteryPercent() {
     batteryPercent = 100.0 * (VBAT - 3.3) / 0.9;
   }
 
-  percentString += batteryPercent;
-  percentString += "% ";
-
-  return percentString;
+  return batteryPercent + "% "; // percentString;
 }
 
 // HELPER FUNCTION FOR HANDS DRAWING
