@@ -3,6 +3,8 @@
 
 #include <Watchy.h> // include Watchy library
 
+// used in faces
+#include "Fonts/DIN_1451_Engschrift_Regular12pt7b.h"
 
 RTC_DATA_ATTR bool isDarkMode = false;
 RTC_DATA_ATTR bool enableInteractive = false;
@@ -10,8 +12,13 @@ RTC_DATA_ATTR bool enableInteractive = false;
 class WatchyFaceX : public Watchy{
   using Watchy::Watchy;
   public: 
-    // FACES
     void drawWatchFace();
+
+    // HELPERS
+    void drawFaceAnalog(
+      bool enableDarkMode,
+      bool enableInteractive
+    );
 };
 
 // needs to be included after class declared
