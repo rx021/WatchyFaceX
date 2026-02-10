@@ -9,9 +9,17 @@ RTC_DATA_ATTR bool enableInteractive = false;
 class WatchyFaceX : public Watchy{
   using Watchy::Watchy;
   public: 
+    // HELPERS
+    void drawHandX(
+      uint8_t handRadius,
+      float angle,
+      uint8_t lineThickness,
+      uint16_t handColor
+    );
+
+    // FACES
     void drawWatchFace();
 
-    // HELPERS
     void drawFaceAnalog(
       bool enableDarkMode,
       bool enableInteractive
