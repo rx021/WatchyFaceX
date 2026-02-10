@@ -262,19 +262,16 @@ void WatchyFaceX::drawFaceAnalog(
 
   bottomLeftText(display, percentString, PADDING_X, DISPLAY_HEIGHT - PADDING_Y, textColor);
 
-  uint8_t wifiWidth = 26;
-  uint8_t wifiHeight = 18;
-  uint8_t wifiX = DISPLAY_WIDTH - PADDING_X - wifiWidth;
-  uint8_t wifiY = DISPLAY_HEIGHT - PADDING_Y - wifiHeight;
   display.drawBitmap(
-    wifiX,
-    wifiY,
-    WIFI_CONFIGURED ? wifi : wifioff,
-    wifiWidth,
-    wifiHeight,
+    // wifiX,
+    DISPLAY_WIDTH - PADDING_X - 26, // wifiWidth;
+    // wifiY,
+    DISPLAY_HEIGHT - PADDING_Y - 18, // wifiHeight;
+    WIFI_CONFIGURED ? wifi : wifioff, // icon
+    26, // wifiWidth, icon
+    18, // wifiHeight, icon
     textColor
   );
-  //bottomRightText(display, percentString, DISPLAY_WIDTH - PADDING_X, DISPLAY_HEIGHT - PADDING_Y, textColor);
 }
 
 String WatchyFaceX::getBatteryPercent() {
