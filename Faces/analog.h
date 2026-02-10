@@ -228,21 +228,29 @@ void WatchyFaceX::drawFaceAnalog(
 
   display.setFont(&Seven_Segment10pt7b);
 
-  // DRAW YEAR
-  String yearString = "";
-  yearString += currentTime.Year + 1970;
-
-  // DRAW WEEKDAY
-  String dayString = dayShortStr(currentTime.Wday);
 
   // DRAW BATTERY PERCENT
   uint8_t PADDING_X = 1; // pixels
   uint8_t PADDING_Y = 1; // pixels
   String percentString = getBatteryPercent();
 
-  topLeftText(display, yearString, PADDING_X, PADDING_Y, textColor);
+  // DRAW YEAR
+  topLeftText(
+    display,
+    currentTime.Year + 1970 + "", // yearString,
+    PADDING_X,
+    PADDING_Y,
+    textColor
+  );
 
-  topRightText(display, dayString, DISPLAY_WIDTH - PADDING_X, PADDING_Y, textColor);
+  // DRAW WEEKDAY
+  topRightText(
+    display,
+    dayShortStr(currentTime.Wday), // dayString,
+    DISPLAY_WIDTH - PADDING_X,
+    PADDING_Y,
+    textColor
+  );
 
   bottomLeftText(display, percentString, PADDING_X, DISPLAY_HEIGHT - PADDING_Y, textColor);
 
