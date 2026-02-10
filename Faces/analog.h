@@ -207,7 +207,6 @@ void WatchyFaceX::drawFaceAnalog(
   uint16_t w, h;
 
   String dateString = "";
-  uint8_t dateSpacing = 5;
 
   // CENTER
   // DRAW DATE
@@ -231,6 +230,7 @@ void WatchyFaceX::drawFaceAnalog(
 
   uint8_t PADDING_X = 1; // pixels
   uint8_t PADDING_Y = 1; // pixels
+                         
   // DRAW YEAR
   topLeftText(
     display,
