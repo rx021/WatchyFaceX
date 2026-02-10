@@ -203,20 +203,16 @@ void WatchyFaceX::drawFaceAnalog(
 
 
   // CENTER
-  // DATETIME DISPLAY:
-  int16_t  x1, y1;
-  uint16_t w, h;
-
-  String dateString = "";
-
   // show DATE; ex: "JAN 17"
-  char* currMonth = monthShortStr(currentTime.Month);
-  dateString += currMonth;
+  String dateString = "";
+  dateString += monthShortStr(currentTime.Month); // currMonth;
   dateString += " ";
   uint8_t currDay = currentTime.Day;
   if (currDay < 10) {dateString += "0";}
   dateString += currDay;
 
+  int16_t  x1, y1;
+  uint16_t w, h;
   display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
   uint8_t dateHalfWidth = w / 2;
   uint8_t dateHalfHeight = h / 2;
