@@ -50,6 +50,27 @@ inline void topRightText(
 }
 
 template<typename GFX>
+inline void centerText(
+    GFX &display,
+    const String &textString,
+    int originX,
+    int originY,
+    int textColor
+){
+  int16_t  x1, y1; uint16_t w, h;
+  display.getTextBounds(textString, 0, 0, &x1, &y1, &w, &h);
+  uint8_t dateHalfWidth = w / 2;
+  uint8_t dateHalfHeight = h / 2;
+
+  display.setCursor(
+    originX - dateHalfWidth, // dateX,
+    originY + dateHalfHeight // dateY
+  );
+
+  display.print(textString);
+}
+
+template<typename GFX>
 inline void bottomLeftText(
     GFX &display,
     const String &s,
@@ -211,16 +232,13 @@ void WatchyFaceX::drawFaceAnalog(
   if (currDay < 10) {dateString += "0";}
   dateString += currDay;
 
-  int16_t  x1, y1;
-  uint16_t w, h;
-  display.getTextBounds(dateString, 0, 0, &x1, &y1, &w, &h);
-  uint8_t dateHalfWidth = w / 2;
-  uint8_t dateHalfHeight = h / 2;
-  display.setCursor(
-    centerX - dateHalfWidth, // dateX,
-    centerY + dateHalfHeight // dateY
+  centerText(
+      display,
+      dateString,
+      centerX,
+      centerY,
+      textColor
   );
-  display.print(dateString);
 
   display.setFont(&Seven_Segment10pt7b);
 
