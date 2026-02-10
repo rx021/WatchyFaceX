@@ -21,7 +21,7 @@
 #include "Icons/bluetooth.h"
 #include "Icons/wifi.h"
 #include "Images/globe.h"
-#include "Images/media.h"
+//#include "Images/media.h"
 
 RTC_DATA_ATTR bool isDarkMode = false;
 RTC_DATA_ATTR bool enableInteractive = false;
@@ -56,10 +56,10 @@ class WatchyFaceX : public Watchy{
       bool enableDarkMode,
       bool enableInteractive
     );
-    void drawFaceMedia(
-      bool enableDarkMode,
-      bool enableInteractive
-    );
+    //void drawFaceMedia(
+      //bool enableDarkMode,
+      //bool enableInteractive
+    //);
     void drawFaceCalendar(
       bool enableDarkMode,
       bool enableInteractive
@@ -110,7 +110,7 @@ class WatchyFaceX : public Watchy{
 
 // needs to be included after class declared
 #include "Faces/globe.h"
-#include "Faces/media.h"
+//#include "Faces/media.h"
 #include "Faces/calendar.h"
 #include "Faces/alarms.h"
 #include "Faces/timer.h"
@@ -145,7 +145,7 @@ static constexpr size_t NOTE_COUNT = sizeof(NOTE_FACES) / sizeof(NOTE_FACES[0]);
 
 static constexpr FaceFn TOY_FACES[] = {
   &WatchyFaceX::drawFaceGlobe,
-  &WatchyFaceX::drawFaceMedia,
+  //&WatchyFaceX::drawFaceMedia,
   &WatchyFaceX::drawFacePinballX,
   //&WatchyFaceX::drawFacePinball,
 };
