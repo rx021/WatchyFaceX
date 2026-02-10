@@ -259,13 +259,15 @@ void WatchyFaceX::drawFaceAnalog(
     textColor
   );
 
+  // DRAW WIFI ICON
+  uint8_t wifiWidth = 26;
   display.drawBitmap(
     // wifiX,
-    DISPLAY_WIDTH - PADDING_X - 26, // wifiWidth;
+    DISPLAY_WIDTH - PADDING_X - wifiWidth, // wifiWidth;
     // wifiY,
     DISPLAY_HEIGHT - PADDING_Y - 18, // wifiHeight;
     WIFI_CONFIGURED ? wifi : wifioff, // icon
-    26, // wifiWidth, icon
+    wifiWidth, // wifiWidth, icon
     18, // wifiHeight, icon
     textColor
   );
