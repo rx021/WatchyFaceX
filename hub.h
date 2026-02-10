@@ -16,6 +16,7 @@ class WatchyFaceX : public Watchy{
       uint8_t lineThickness,
       uint16_t handColor
     );
+    String getBatteryPercent();
 
     // FACES
     void drawWatchFace();
