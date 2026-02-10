@@ -21,6 +21,10 @@ class WatchyFaceX : public Watchy{
     // FACES
     void drawWatchFace();
 
+    //void drawFaceCalendar(
+      //bool enableDarkMode,
+      //bool enableInteractive
+    //);
     void drawFaceAnalog(
       bool enableDarkMode,
       bool enableInteractive
@@ -28,11 +32,13 @@ class WatchyFaceX : public Watchy{
 };
 
 // needs to be included after class declared
+//#include "Faces/calendar.h"
 #include "Faces/analog.h"
 
 //-- triggered by showWatchFace() 
 void WatchyFaceX::drawWatchFace() {
   WatchyFaceX::drawFaceAnalog(isDarkMode, enableInteractive);
+  //&WatchyFaceX::drawFaceCalendar,
 }                                         
 
 
