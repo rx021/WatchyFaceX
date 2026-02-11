@@ -3,10 +3,23 @@
 ## 2026-0210 TUE
 well I got the thing working for a second
 - now it seems to be slow and breaking
-- I really seem to be breaking my shit more recently
-- this is kind of annoying
-- but good lessons I suppose
-- 
+    - I really seem to be breaking my shit more recently
+    - this is kind of annoying
+    - but good lessons I suppose
+- well it seems like the eink display is starting to fail on me
+    - the main display has trouble changing 
+    - I can sometimes access the menu
+    - but going from the menu back to the watchface is not cooperating
+- or something to do with the firmware not refreshing the screen
+    - I might have to leave the hardware business to focus on software
+    - funny how I can get into software easily as it depends on reliable hardware
+    - and I was also good at conceptual things before like math
+    - perhaps that is my strong suit?
+    - I think it will take much more time to figure out what is going on here
+    - and time is not what I have right now 
+    - not enough time to learn hardware
+    - but enough time to focus on my strengths for starting a business
+
 
 ## 2026-0129 THU
 so I am picking this up again so that I can solve this later

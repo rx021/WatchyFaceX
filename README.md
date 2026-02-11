@@ -74,7 +74,7 @@ Watchy comes pre-loaded with firmware that demonstrates all the basic features. 
 ## SETUP ISSUES FIXED:
 
 ### ISSUE: Arduino IDE / system unable to recognize the Watchy in bootloader mode
-- because of Linux Fedor 42
+- because of Linux Fedora 42
 - SOLUTION:
     - need to load the kernel modules to enable USB-to-serial adapters 
         - cp210x
