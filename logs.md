@@ -1,5 +1,13 @@
 # LOGS
 
+## 2026-0210 TUE
+well I got the thing working for a second
+- now it seems to be slow and breaking
+- I really seem to be breaking my shit more recently
+- this is kind of annoying
+- but good lessons I suppose
+- 
+
 ## 2026-0129 THU
 so I am picking this up again so that I can solve this later
 - need to simplify the code
