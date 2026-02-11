@@ -20,6 +20,9 @@ well I got the thing working for a second
     - not enough time to learn hardware
     - but enough time to focus on my strengths for starting a business
 
+- for now let's rely on good hardware like TRMNL or PEBBLE
+    - that allows you to customize the software
+
 
 ## 2026-0129 THU
 so I am picking this up again so that I can solve this later
